@@ -1,0 +1,20 @@
+## Title: Raid Leader
+## Version: 0.0.1
+## Author: Sunmudang
+## Interface: 30300
+## Notes: "Use /RLD to toggle the addon"
+## SavedVariablesPerCharacter: RCMD
+
+libs.xml
+
+localization.en.lua
+localization.kr.lua
+Messages.lua
+
+RaidLeader.lua
+Buff.lua
+ButtonAction.lua
+MIN.lua
+
+MIN.xml
+RaidLeader.xml

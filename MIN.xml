@@ -1,0 +1,65 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">	
+	<Button name="RCMD_MinimapButton" parent="Minimap" enableMouse="true" movable="true" hidden="false">
+		<Size>
+			<AbsDimension x="33" y="33"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT"/>
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="RCMD_MinimapButton_Icon" file="Interface\AddOns\RaidLeader\texture\Icon.tga">
+					<Size>
+						<AbsDimension x="21" y="21"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="7" y="-6"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture file="Interface\Minimap\MiniMap-TrackingBorder">
+					<Size>
+						<AbsDimension x="56" y="56"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="RCMD_MinimapButton_DraggingFrame" hidden="true">
+				<Scripts>
+					<OnUpdate>
+						RCMD_MinimapButton_DraggingFrame_OnUpdate()
+					</OnUpdate>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<HighlightTexture alphaMode="ADD" file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight"/>
+		<Scripts>
+					<OnEnter> RCMD_MinimapButton_OnEnter() </OnEnter>
+                    <OnLeave> RCMD_MinimapButton_OnLeave() </OnLeave>
+			<OnLoad>
+				this:RegisterForClicks("LeftButtonUp","RightButtonUp")
+				this:RegisterForDrag("LeftButton","RightButton")
+			</OnLoad>
+			<OnDragStart>
+				this:LockHighlight()
+				RCMD_MinimapButton_DraggingFrame:Show()
+			</OnDragStart>
+			<OnDragStop>
+				this:UnlockHighlight()
+				RCMD_MinimapButton_DraggingFrame:Hide()
+			</OnDragStop>
+			<OnClick>
+				RCMD_MinimapButton_OnClick() -- do your thing in here, arg1 is mouse button clicked
+			</OnClick>
+		</Scripts>
+	</Button>
+</Ui>
