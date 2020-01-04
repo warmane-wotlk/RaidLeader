@@ -1,4 +1,5 @@
-﻿
+﻿local L = LibStub("AceLocale-3.0"):GetLocale("RaidLeader", true)
+
 -- Button Action -------------------------------------------------------------------------------------------
 --
 function RLF_Button_Close_OnClick()
@@ -29,13 +30,17 @@ function RLF_Button_SetLootMethod_OnClick(id)
   end
 end
 
-function RLF_Button_SetLootMethod_OnLeave()
-  GameTooltip:Hide()
-end
-
 function RLF_Button_LootThreshold_OnClick(id)
   local level = { RL_BUTTON_LOOT_THRESHOLD2=2, RL_BUTTON_LOOT_THRESHOLD3=3, RL_BUTTON_LOOT_THRESHOLD4=4 }
   SetLootThreshold(level[id]);
+end
+
+-- say raid warning message
+function RLF_Button_Combat_Msg_OnClick(param)
+  if param then
+  	local combatMsgId = param .. "_MSG"
+	SendChatMessage(L[combatMsgId], "RAID_WARNING");  
+  end
 end
 
 function RLF_Button_SetLeader_OnClick()
@@ -46,46 +51,19 @@ function RLF_Button_Invite_OnClick()
   InviteUnit("target")
 end
 
-function RLF_Button_FloodOn_OnClick()
-  Buff_Get_Paladin_Orders()
+function RLF_Button_AutoFlood_OnClick(param)
+  if param == "RL_BUTTON_FLOOD_ON" then
+    Buff_Get_Paladin_Orders()
+  else
+  end
 end
 
-toggle = true
-function RLF_Button_FloodOff_OnClick()
-  print("set toggle - " .. tostring(toggle))
-  Buff_SetLanguageKorean(toggle)
-  toggle =  not toggle  
-end
-
+-- show tooltip
 function RLF_Button_Show_ToolTip(param)
-  local strToolTips = { 
-      RL_BUTTON_BLOODLUST = "";
-      RL_BUTTON_CLEAR_ICONS = "";
-      RL_BUTTON_CLOSE  = "Close";
-      RL_BUTTON_COMBAT_RESS = "";
-      RL_BUTTON_CURE  = "";
-      RL_BUTTON_DISPELL = "";
-      RL_BUTTON_DPS_ADD  = "";
-      RL_BUTTON_FLOOD_OFF = "turn off finding people";
-      RL_BUTTON_FLOOD_ON = "find the raiders";
-      RL_BUTTON_GROUP_LOOT = "Set to group loot";
-      RL_BUTTON_FREEFORALL_LOOT = "Set to free for all";
-      RL_BUTTON_INVITE = "Invite target player";
-      RL_BUTTON_KICK = "Kick target from raid or group";
-      RL_BUTTON_LOOT_THRESHOLD2 = "Set loot threshold to uncommon";
-      RL_BUTTON_LOOT_THRESHOLD3 = "Set loot threshold to rare";
-      RL_BUTTON_LOOT_THRESHOLD4 = "Set loot threshold to epic";
-      RL_BUTTON_MASTER_LOOT = "Set to master loot";
-      RL_BUTTON_MOVE_UR_ASS = "";
-      RL_BUTTON_RC = "";
-      RL_BUTTON_SET_LEADER = "Promote target to leader";
-      RL_BUTTON_STOP_DPS = "";
-      RL_BUTTON_TRANSPARENCY = "Change Transperency - use left/right mouse click";
-  };
-
-  if strToolTips[param] then
+  if param then
+  	local toolTipId = param .. "_TOOLTIP"
     GameTooltip_SetDefaultAnchor( GameTooltip, UIParent )
-    GameTooltip:SetText( strToolTips[param] )
+    GameTooltip:SetText( L[toolTipId] )
     GameTooltip:Show()
   end
 end
@@ -93,3 +71,9 @@ end
 function RLF_Button_Hide_ToolTip()
   GameTooltip:Hide()
 end
+
+-- change button text
+function RLF_Button_SetText_OnLoad(self, param)
+  self:SetText(L[param])
+end
+

@@ -22,7 +22,7 @@
 		</Backdrop>
 		<Layers>
 			<Layer level="OVERLAY">
-				<FontString name="FontString2" inherits="GameFontNormal" text="Raid Warnings">
+				<FontString name="RL_TEXT_RAID_WARNINGS" inherits="GameFontNormal" text="Raid Warnings">
 					<Size>
 						<AbsDimension x="95" y="32" />
 					</Size>
@@ -31,6 +31,11 @@
 							<Offset x="39" y="-254" />
 						</Anchor>
 					</Anchors>
+					<Scripts>
+						<OnLoad>
+							RLF_Button_SetText_OnLoad(self, self:GetName())
+						</OnLoad>
+					</Scripts>					
 				</FontString>
 				<FontString name="FontString3" inherits="GameFontNormal" text="Use /rld to Toggle">
 					<Size>
@@ -70,6 +75,9 @@
 					<OnClick>
 						SetRaidTarget("target", 0);
 					</OnClick>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>
 				</Scripts>
 			</Button>
 			<Button name="RL_BUTTON6" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="">
@@ -235,8 +243,17 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						SendChatMessage("Buff up!", "RAID_WARNING");
+						RLF_Button_Combat_Msg_OnClick(self:GetName());
 					</OnClick>
+					<OnEnter>
+						 RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						 RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>
 				</Scripts>
 			</Button>
 			<Button name="RL_BUTTON_BLOODLUST" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="Bloodlust">
@@ -250,11 +267,20 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						SendChatMessage("Attack %t!", "RAID_WARNING");
+						RLF_Button_Combat_Msg_OnClick(self:GetName());
 					</OnClick>
+					<OnEnter>
+						 RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						 RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>				
 				</Scripts>
 			</Button>
-			<Button name="RL_BUTTON_DISPELL" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="DISPELL">
+			<Button name="RL_BUTTON_DISPELL" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="Dispell">
 				<Size>
 					<AbsDimension x="71" y="23" />
 				</Size>
@@ -265,8 +291,17 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						SendChatMessage("Slow DPS on %t!", "RAID_WARNING");
+						RLF_Button_Combat_Msg_OnClick(self:GetName());
 					</OnClick>
+					<OnEnter>
+						 RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						 RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>	
 				</Scripts>
 			</Button>
 			<Button name="RL_BUTTON_MOVE_UR_ASS" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="Move ur Ass">
@@ -280,8 +315,17 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						SendChatMessage("Nuke %t NOW!", "RAID_WARNING");
+						RLF_Button_Combat_Msg_OnClick(self:GetName());
 					</OnClick>
+					<OnEnter>
+						 RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						 RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>					
 				</Scripts>
 			</Button>
 			<Button name="RL_BUTTON16" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="Bloodlust\Heroism">
@@ -295,8 +339,17 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						SendChatMessage("Pop Heroism/Bloodlust!", "RAID_WARNING");
+						RLF_Button_Combat_Msg_OnClick(self:GetName());
 					</OnClick>
+					<OnEnter>
+						 RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						 RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>				
 				</Scripts>
 			</Button>
 			<Button name="RL_BUTTON_TRANSPARENCY" inherits="UIPanelButtonTemplate" text="-">
@@ -323,38 +376,44 @@
 					</OnLoad>
 				</Scripts>
 			</Button>
-			<Button name="RL_BUTTON_FLOOD_ON" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="Buff">
+			<Button name="RL_BUTTON_FLOOD_ON" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="Find ppl">
 				<Size x="55" y="19" />
 				<Anchors>
 					<Anchor point="TOPLEFT" x="26" y="-13" />
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_FloodOn_OnClick();
+						RLF_Button_AutoFlood_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						 RLF_Button_Show_ToolTip(self:GetName());
 					</OnEnter>
 					<OnLeave>
 						 RLF_Button_Hide_ToolTip();
-					</OnLeave>					
-				</Scripts>				
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>
+				</Scripts>
 			</Button>
-			<Button name="RL_BUTTON_FLOOD_OFF" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="Button1">
+			<Button name="RL_BUTTON_FLOOD_OFF" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="Stop Ppl">
 				<Size x="60" y="19" />
 				<Anchors>
 					<Anchor point="TOPLEFT" x="87" y="-13" />
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_FloodOff_OnClick();
+						RLF_Button_AutoFlood_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						 RLF_Button_Show_ToolTip(self:GetName());
 					</OnEnter>
 					<OnLeave>
 						 RLF_Button_Hide_ToolTip();
-					</OnLeave>					
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>									
 				</Scripts>
 			</Button>
 			<Button name="RL_BUTTON_ADDON" inherits="UIPanelButtonTemplate" frameStrata="HIGH" text="&gt;">
@@ -667,7 +726,7 @@
 					</OnLeave>
 				</Scripts>
 			</Button>
-			<Button name="RL_BUTTON_RC" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="Ready check">
+			<Button name="RL_BUTTON_READYCHECK" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="Ready check">
 				<Size>
 					<AbsDimension x="71" y="23" />
 				</Size>
@@ -678,8 +737,18 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						DoReadyCheck();
+						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						DoReadyCheck();						
 					</OnClick>
+					<OnEnter>
+						 RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						 RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>
 				</Scripts>
 			</Button>
 			<Button name="RL_BUTTON_COMBAT_RESS" inherits="UIPanelButtonTemplate" text="Combat Ress">
@@ -687,12 +756,38 @@
 				<Anchors>
 					<Anchor point="TOPLEFT" x="99" y="-321" />
 				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_Combat_Msg_OnClick(self:GetName());
+					</OnClick>
+					<OnEnter>
+						 RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						 RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>					
+				</Scripts>				
 			</Button>
-			<Button name="RL_BUTTON_CURE" inherits="UIPanelButtonTemplate" text="Cure">
+			<Button name="RL_BUTTON_CURE_DISEASE" inherits="UIPanelButtonTemplate" text="Disease">
 				<Size x="71" y="23" />
 				<Anchors>
 					<Anchor point="TOPLEFT" x="99" y="-350" />
 				</Anchors>
+				<OnClick>
+					RLF_Button_Combat_Msg_OnClick(self:GetName());
+				</OnClick>
+				<OnEnter>
+					 RLF_Button_Show_ToolTip(self:GetName());
+				</OnEnter>
+				<OnLeave>
+					 RLF_Button_Hide_ToolTip();
+				</OnLeave>
+				<OnLoad>
+					RLF_Button_SetText_OnLoad(self, self:GetName())
+				</OnLoad>					
 			</Button>
 			<Button name="RL_BUTTON_DPS_ADD" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="Adds">
 				<Size>
@@ -705,8 +800,17 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						SendChatMessage("Adds! Handle IT!", "RAID_WARNING");
+						RLF_Button_Combat_Msg_OnClick(self:GetName());
 					</OnClick>
+					<OnEnter>
+						 RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						 RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>					
 				</Scripts>
 			</Button>
 		</Frames>

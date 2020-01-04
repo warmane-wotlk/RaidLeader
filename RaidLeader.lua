@@ -1,3 +1,4 @@
+
 RaidLeader = {
 	useKorean = true;
 };
