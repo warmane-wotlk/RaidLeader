@@ -1,7 +1,7 @@
 
 -- add this to your SavedVariables or as a separate SavedVariable to store its position
 RCMD_Settings = {
-	MinimapPos = 90 -- default position of the minimap icon in degrees
+	MinimapPos = 20 -- default position of the minimap icon in degrees
 }
 
 -- Call this in a mod's initialization to move the minimap button to its saved position (also used in its movement)

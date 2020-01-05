@@ -38,6 +38,9 @@
 					<OnUpdate>
 						RCMD_MinimapButton_DraggingFrame_OnUpdate()
 					</OnUpdate>
+					<OnLoad>
+						RCMD_MinimapButton_DraggingFrame_OnUpdate()
+					</OnLoad>
 				</Scripts>
 			</Frame>
 		</Frames>
