@@ -1,4 +1,5 @@
-﻿local L = LibStub("AceLocale-3.0"):GetLocale("RaidLeader", true)
+﻿local L  = LibStub("AceLocale-3.0"):GetLocale("RaidLeader", true)
+local TL = LibStub("AceLocale-3.0"):GetLocale("RaidLeaderToolTip", true)
 
 -- Button Action -------------------------------------------------------------------------------------------
 --
@@ -22,11 +23,15 @@ function RLF_Button_Kick_OnClick()
 end
 
 function RLF_Button_SetLootMethod_OnClick(id)
-  local loot = {RL_BUTTON_MASTER_LOOT="master", RL_BUTTON_GROUP_LOOT="group", RL_BUTTON_FREEFORALL_LOOT="freeforall"}
+  local loot = {RL_BUTTON_MASTER_LOOT="master", RL_BUTTON_GROUP_LOOT="needbeforegreed", RL_BUTTON_FREEFORALL_LOOT="freeforall"}
   if loot[id] == "master" then
-    SetLootMethod("master", "target")
+    if UnitName("target") == nil then
+      SetLootMethod("master", "player")
+    else
+      SetLootMethod("master", "target")
+    end
   else
-    SetLootMethod(strLoot[id])
+    SetLootMethod(loot[id])
   end
 end
 
@@ -39,12 +44,16 @@ end
 function RLF_Button_Combat_Msg_OnClick(param)
   if param then
   	local combatMsgId = param .. "_MSG"
-	SendChatMessage(L[combatMsgId], "RAID_WARNING");  
+	   SendChatMessage(L[combatMsgId], "RAID_WARNING");
   end
 end
 
 function RLF_Button_SetLeader_OnClick()
-  PromoteToLeader("target");
+  if UnitInRaid("target") == nil then
+    print(L["RL_BUTTON_SET_LEADER_MSG"]);
+  else
+    PromoteToLeader("target");
+  end
 end
 
 function RLF_Button_Invite_OnClick()
@@ -61,9 +70,9 @@ end
 -- show tooltip
 function RLF_Button_Show_ToolTip(param)
   if param then
-  	local toolTipId = param .. "_TOOLTIP"
+    local toolTipId = param .. "_TOOLTIP"
     GameTooltip_SetDefaultAnchor( GameTooltip, UIParent )
-    GameTooltip:SetText( L[toolTipId] )
+    GameTooltip:SetText( TL[toolTipId] )
     GameTooltip:Show()
   end
 end
