@@ -2,7 +2,7 @@
 	<Script file="Child.lua" />
 	<Frame name="Addon_Frame" parent="RaidLeader_Frame" movable="true" id="2" enableMouse="true">
 		<Size>
-			<AbsDimension x="328" y="254" />
+			<AbsDimension x="328" y="292" />
 		</Size>
 		<Anchors>
 			<Anchor point="TOPLEFT" relativeTo="RaidLeader_Frame" relativePoint="TOPRIGHT" />
@@ -453,6 +453,22 @@
 						<Offset x="241" y="-216" />
 					</Anchor>
 				</Anchors>
+			</Button>
+			<Button name="RL_BUTTON_SELECT_RAID" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="Select Raid">
+				<Size x="147" y="23" />
+				<Anchors>
+					<Anchor point="CENTER" relativePoint="TOP">
+						<Offset x="-78" y="-266" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						UIDropDownMenu_Initialize(self, RLF_Button_SelectRaid_OnLoad);
+					</OnLoad>
+					<OnClick>
+						RLF_Button_SelectRaid_OnClick();
+					</OnClick>
+				</Scripts>
 			</Button>
 		</Frames>
 		<Scripts>
