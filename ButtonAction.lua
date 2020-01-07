@@ -35,16 +35,12 @@ function RLF_Button_SetLootMethod_OnClick(id)
   end
 end
 
-function RLF_Button_LootThreshold_OnClick(id)
-  local level = { RL_BUTTON_LOOT_THRESHOLD2=2, RL_BUTTON_LOOT_THRESHOLD3=3, RL_BUTTON_LOOT_THRESHOLD4=4 }
-  SetLootThreshold(level[id]);
-end
-
 -- say raid warning message
 function RLF_Button_Combat_Msg_OnClick(param)
   if param then
   	local combatMsgId = param .. "_MSG"
-	   SendChatMessage(L[combatMsgId], "RAID_WARNING");
+    print("combatMsgId: " .. combatMsgId)
+    SendChatMessage(L[combatMsgId], "RAID_WARNING");
   end
 end
 
@@ -62,8 +58,9 @@ end
 
 function RLF_Button_AutoFlood_OnClick(param)
   if param == "RL_BUTTON_FLOOD_ON" then
-    Buff_Get_Paladin_Orders()
+	print("autoflood on")
   else
+	print("autoflood off")
   end
 end
 
@@ -86,3 +83,49 @@ function RLF_Button_SetText_OnLoad(self, param)
   self:SetText(L[param])
 end
 
+
+
+  -- Northrend Raids
+local raidZoneInfos = {
+	{ name = L["TOC10"], zoneId = 543, shortName = "TOC", num = 10 },
+	{ name = L["TOC25"], zoneId = 543, shortName = "TOC", num = 25 },
+	{ name = L["ICC10"], zoneId = 604, shortName = "ICC", num = 10 },
+	{ name = L["ICC25"], zoneId = 604, shortName = "ICC", num = 25 },
+	{ name = L["RS10"], zoneId = 609, shortName = "RS", num = 10 },
+	{ name = L["RS25"], zoneId = 609, shortName = "RS", num = 25 },
+	{ name = L["VOA10"], zoneId = 532, shortName = "VOA", num = 10 },
+	{ name = L["VOA25"], zoneId = 532, shortName = "VOA", num = 25 },
+	{ name = L["NAXX10"], zoneId = 535, shortName = "NAXX", num = 10 },
+	{ name = L["NAXX25"], zoneId = 535, shortName = "NAXX", num = 25 },
+	{ name = L["OS10"], zoneId = 531, shortName = "OS", num = 10 },
+	{ name = L["OS25"], zoneId = 531, shortName = "OS", num = 25 },
+	{ name = L["UL10"], zoneId = 529, shortName = "Ulduar", num = 10 },
+	{ name = L["UL25"], zoneId = 529, shortName = "Ulduar", num = 25 },
+	{ name = L["EE10"], zoneId = 527, shortName = "EOE", num = 10 },
+	{ name = L["EE25"], zoneId = 527, shortName = "EOE", num = 25 },
+};
+
+-- frame:GetID() == arg1
+function RL_RaidZoneButton_OnClick(frame, arg1, arg2, checked)
+	UIDropDownMenu_SetSelectedID(RaidLeader_DropDownMenu, frame:GetID())
+end
+
+local function RL_LoadRaidZones()
+  local info = UIDropDownMenu_CreateInfo()
+  for i = 1, table.getn(raidZoneInfos) do
+    info.text = raidZoneInfos[i].shortName .. raidZoneInfos[i].num
+    info.func = RL_RaidZoneButton_OnClick
+    info.checked = nil
+    info.arg1 = i
+    UIDropDownMenu_AddButton(info)
+  end
+end
+
+function RLF_Button_SelectRaid_OnClick()
+	ToggleDropDownMenu(1, nil, RaidLeader_DropDownMenu, self, 0, 0);
+end
+
+function RLF_Button_SelectRaid_OnLoad()
+	UIDropDownMenu_SetText(RaidLeader_DropDownMenu, "select instance")
+	RL_LoadRaidZones()
+end
