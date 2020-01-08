@@ -1,5 +1,4 @@
 ﻿local L  = LibStub("AceLocale-3.0"):GetLocale("RaidLeader", true)
-local TL = LibStub("AceLocale-3.0"):GetLocale("RaidLeaderToolTip", true)
 
 -- Button Action -------------------------------------------------------------------------------------------
 --
@@ -36,17 +35,19 @@ function RLF_Button_SetLootMethod_OnClick(id)
 end
 
 -- say raid warning message
-function RLF_Button_Combat_Msg_OnClick(param)
+function RLF_Button_RaidWarning_OnClick(param)
   if param then
   	local combatMsgId = param .. "_MSG"
+    local RLL = RL_LoadRaidWarningData()
     print("combatMsgId: " .. combatMsgId)
-    SendChatMessage(L[combatMsgId], "RAID_WARNING");
+    SendChatMessage(RLL[combatMsgId], "RAID_WARNING");
   end
 end
 
 function RLF_Button_SetLeader_OnClick()
   if UnitInRaid("target") == nil then
-    print(L["RL_BUTTON_SET_LEADER_MSG"]);
+    local RLL = RL_LoadRaidWarningData()
+    print(RLL["RL_BUTTON_SET_LEADER_MSG"]);
   else
     PromoteToLeader("target");
   end
@@ -56,20 +57,14 @@ function RLF_Button_Invite_OnClick()
   InviteUnit("target")
 end
 
-function RLF_Button_AutoFlood_OnClick(param)
-  if param == "RL_BUTTON_FLOOD_ON" then
-	print("autoflood on")
-  else
-	print("autoflood off")
-  end
-end
 
 -- show tooltip
 function RLF_Button_Show_ToolTip(param)
   if param then
     local toolTipId = param .. "_TOOLTIP"
+    local RLL = RL_LoadRaidWarningTooltipData()
     GameTooltip_SetDefaultAnchor( GameTooltip, UIParent )
-    GameTooltip:SetText( TL[toolTipId] )
+    GameTooltip:SetText( RLL[toolTipId] )
     GameTooltip:Show()
   end
 end
@@ -85,7 +80,7 @@ end
 
 
 
-  -- Northrend Raids
+-- Northrend Raids
 local raidZoneInfos = {
 	{ name = L["TOC10"], zoneId = 543, shortName = "TOC", num = 10 },
 	{ name = L["TOC25"], zoneId = 543, shortName = "TOC", num = 25 },
@@ -126,6 +121,27 @@ function RLF_Button_SelectRaid_OnClick()
 end
 
 function RLF_Button_SelectRaid_OnLoad()
+  UIDropDownMenu_SetWidth(RaidLeader_DropDownMenu,110)
 	UIDropDownMenu_SetText(RaidLeader_DropDownMenu, "select instance")
 	RL_LoadRaidZones()
+end
+
+
+-- JoinChannelByName does not work
+function RLF_Button_AutoFlood_OnClick(param)
+  if param == "RL_BUTTON_FLOOD_ON" then
+    
+    local globalChannelNum = RL_GetGlobalChannelNumber()
+    if globalChannelNum == 0 then
+      print("Please join global channel and then try again")
+    else
+      local raidfindMsg = "LFM ICC25 Need All 6.3k+"
+      SlashCmdList["AUTOFLOODSETCHANNEL"](globalChannelNum)
+      SlashCmdList["AUTOFLOODSETRATE"](20)
+      SlashCmdList["AUTOFLOODSETMESSAGE"](raidfindMsg)
+      SlashCmdList["AUTOFLOOD"]("on")
+    end
+  else
+    SlashCmdList["AUTOFLOOD"]("off")
+  end
 end

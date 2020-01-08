@@ -17,18 +17,6 @@ local g_druidInfo   = { totalNum=0, numTanker=0, numHealer=0, numDps=0, data={} 
 local g_priestInfo  = { totalNum=0, numTanker=0, numHealer=0, numDps=0, data={} }
 local g_warriorInfo = { totalNum=0, numTanker=0, numHealer=0, numDps=0, data={} }
 
-local _RL = RL_PALADIN_BUFFS_KOR
-
-function Buff_SetLanguageKorean(isKorean)
-  -- choose raid warning language
-  if isKorean then
-    _RL = RL_PALADIN_BUFFS_KOR
-  else
-    _RL = RL_PALADIN_BUFFS_ENG
-  end
-end
-
-
 -- return Orders -- TANKER1, TANKER2, ... , HEALER1, HEALER2, ..., DPS1, DPS2 ...
 local function Buff_GetIdxOrder(playerInfo)
   local idxOrders = {}
@@ -129,6 +117,7 @@ end
 function Buff_Get_Paladin_Orders()
   local buffMsg = "Paladin Buff Order : "
   local buffOrder
+  local _RL = RL_LoadPaladinBuffData()
 
   -- Update raid info
   Buff_UpdateRaidRosterInfo()

@@ -538,7 +538,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -562,7 +562,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -586,7 +586,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -610,7 +610,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -658,7 +658,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -682,7 +682,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -706,7 +706,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -730,7 +730,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -754,7 +754,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -778,7 +778,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -802,7 +802,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -826,7 +826,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -850,7 +850,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -874,7 +874,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -898,7 +898,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -922,7 +922,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -946,7 +946,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -970,7 +970,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -994,7 +994,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -1018,7 +1018,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -1042,7 +1042,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -1066,7 +1066,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -1090,7 +1090,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -1114,7 +1114,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -1138,7 +1138,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -1162,7 +1162,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -1186,7 +1186,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_Combat_Msg_OnClick(self:GetName());
+						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -1230,7 +1230,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						Buff_SetLanguageKorean(self:GetChecked());
+						RL_SetLanguageKorean(self:GetChecked());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());

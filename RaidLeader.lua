@@ -1,6 +1,7 @@
 
-RaidLeader = {
-	useKorean = true;
+RaidLeaderData = {
+	useKorean = true
+  zoneInfo = { name = "", person = 10, hc = false }
 };
 
 function RLF_OnLoad(frame)
@@ -39,35 +40,12 @@ function RLF_Toggle()
   end
 end 
 
-
---------------- RaidLeaderAddon -------------------------
-function RLF_Child_OnLoad(frame)
-  if frame:IsVisible() then
-    frame:Hide()
-  end
-  frame:SetMovable(true)
-  frame:EnableMouse(true)
-  frame:SetScript("OnMouseDown",function()frame:StartMoving()end)
-  frame:SetScript("OnMouseUp",function()frame:StopMovingOrSizing()end)
+function RL_GetGlobalChannelNumber()
+    local chanList = { GetChannelList() }
+    for i=1, #chanList, 2 do
+        if chanList[i+1] == "global" then
+            return chanList[i]
+        end
+    end 
+    return 0
 end
-
---[
-function RLF_Child_OnClick()
-  if not Addon_Frame:IsVisible() then
-    Addon_Frame:Show();
-  else
-    Addon_Frame:Hide();
-  end
-end
---]]
-
-function RLF_Child_OnEnter()
-  GameTooltip_SetDefaultAnchor( GameTooltip, UIParent )
-  GameTooltip:SetText( "More options" )
-  GameTooltip:Show()
-end
-
-function RLF_Child_OnLeave()
-  GameTooltip:Hide()
-end
-
