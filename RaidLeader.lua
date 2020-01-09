@@ -1,7 +1,7 @@
 
 RaidLeaderData = {
 	useKorean = false;
-  zoneInfo = { name = "", person = 10, hc = false };
+  recruitInfo = { zone = "", sub = "", gear = ""};
 };
 
 function RLF_OnLoad(frame)

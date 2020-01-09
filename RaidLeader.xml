@@ -155,7 +155,7 @@
 						RLF_Button_SelectRaid_OnClick();
 					</OnClick>
 					<OnLoad>
-						UIDropDownMenu_Initialize(self, RLF_Button_SelectRaid_OnLoad, nil)
+						UIDropDownMenu_Initialize(self, RLF_Button_SelectRaid_Initialize, nil)
 					</OnLoad>
 				</Scripts>
 			</Frame>

@@ -5,12 +5,8 @@
 function RLF_Button_Close_OnClick()
   if RaidLeader_Frame:IsVisible() then
     RaidLeader_Frame:Hide()
-    if Addon_Frame:IsVisible() then
-      Addon_Frame:Hide();
-    end
   end
 end
-
 
 function RLF_Button_Transparency_OnClick()
   RL_BUTTON_TRANSPARENCY:HookScript ("OnClick", function(self, button) if button == "RightButton" then RaidLeader_Frame:SetAlpha(1) end end)
@@ -39,7 +35,7 @@ function RLF_Button_RaidWarning_OnClick(param)
   if param then
   	local combatMsgId = param .. "_MSG"
     local RLL = RL_LoadRaidWarningData()
-    print("combatMsgId: " .. combatMsgId)
+
     SendChatMessage(RLL[combatMsgId], "RAID_WARNING");
   end
 end
@@ -56,7 +52,6 @@ end
 function RLF_Button_Invite_OnClick()
   InviteUnit("target")
 end
-
 
 -- show tooltip
 function RLF_Button_Show_ToolTip(param)
@@ -78,54 +73,75 @@ function RLF_Button_SetText_OnLoad(self, param)
   self:SetText(L[param])
 end
 
-
-
 -- Northrend Raids
 local raidZoneInfos = {
-	{ name = L["TOC10"], zoneId = 543, shortName = "TOC", num = 10 },
-	{ name = L["TOC25"], zoneId = 543, shortName = "TOC", num = 25 },
-	{ name = L["ICC10"], zoneId = 604, shortName = "ICC", num = 10 },
-	{ name = L["ICC25"], zoneId = 604, shortName = "ICC", num = 25 },
-	{ name = L["RS10"], zoneId = 609, shortName = "RS", num = 10 },
-	{ name = L["RS25"], zoneId = 609, shortName = "RS", num = 25 },
-	{ name = L["VOA10"], zoneId = 532, shortName = "VOA", num = 10 },
-	{ name = L["VOA25"], zoneId = 532, shortName = "VOA", num = 25 },
-	{ name = L["NAXX10"], zoneId = 535, shortName = "NAXX", num = 10 },
-	{ name = L["NAXX25"], zoneId = 535, shortName = "NAXX", num = 25 },
-	{ name = L["OS10"], zoneId = 531, shortName = "OS", num = 10 },
-	{ name = L["OS25"], zoneId = 531, shortName = "OS", num = 25 },
-	{ name = L["UL10"], zoneId = 529, shortName = "Ulduar", num = 10 },
-	{ name = L["UL25"], zoneId = 529, shortName = "Ulduar", num = 25 },
-	{ name = L["EE10"], zoneId = 527, shortName = "EOE", num = 10 },
-	{ name = L["EE25"], zoneId = 527, shortName = "EOE", num = 25 },
+  { name = "TOC",    zoneId = 543, sub = {"10nm", "10hc", "25nm", "25hc"}},
+  { name = "ICC",    zoneId = 604, sub = {"10nm", "10nm/hc", "10hc", "25nm", "25nm/hc", "25hc"}},
+  { name = "RS",     zoneId = 609, sub = {"10nm", "10hc", "25nm", "25hc"}},
+  { name = "VOA",    zoneId = 532, sub = {"10", "25"}},
+  { name = "NAXX",   zoneId = 535, sub = {"10", "25", "10 weekly", "25 weekly"}},
+  { name = "OS",     zoneId = 531, sub = {"10", "25"}},
+  { name = "Ulduar", zoneId = 529, sub = {"10", "25"}},
+  { name = "EE",     zoneId = 527, sub = {"10", "25"}},
 };
 
 -- frame:GetID() == arg1
 function RL_RaidZoneButton_OnClick(frame, arg1, arg2, checked)
-	UIDropDownMenu_SetSelectedID(RaidLeader_DropDownMenu, frame:GetID())
-end
-
-local function RL_LoadRaidZones()
-  local info = UIDropDownMenu_CreateInfo()
-  for i = 1, table.getn(raidZoneInfos) do
-    info.text = raidZoneInfos[i].shortName .. raidZoneInfos[i].num
-    info.func = RL_RaidZoneButton_OnClick
-    info.checked = nil
-    info.arg1 = i
-    UIDropDownMenu_AddButton(info)
-  end
+  -- can't hanle check mark at level 2
+	--UIDropDownMenu_SetSelectedID(RaidLeader_DropDownMenu, frame:GetID())
+  RaidLeaderData.recruitInfo.zone = arg1
+  RaidLeaderData.recruitInfo.sub  = arg2
+  UIDropDownMenu_SetText(RaidLeader_DropDownMenu, arg1 .. arg2)
 end
 
 function RLF_Button_SelectRaid_OnClick()
 	ToggleDropDownMenu(1, nil, RaidLeader_DropDownMenu, self, 0, 0);
 end
 
-function RLF_Button_SelectRaid_OnLoad()
+function RLF_Button_SelectRaid_Initialize(frame, level, menuList)
   UIDropDownMenu_SetWidth(RaidLeader_DropDownMenu,110)
-	UIDropDownMenu_SetText(RaidLeader_DropDownMenu, "select instance")
-	RL_LoadRaidZones()
+
+  if level == 1 then
+    local info = UIDropDownMenu_CreateInfo()
+    for i = 1, #raidZoneInfos do
+      info.text     = raidZoneInfos[i].name
+      info.hasArrow = true
+      info.notCheckable = true
+      info.checked  = nil
+      info.value    = raidZoneInfos[i].name
+      UIDropDownMenu_AddButton(info, 1)
+    end
+  elseif level == 2 then
+    local subItems = {}
+    for i = 1, #raidZoneInfos do
+     if raidZoneInfos[i].name == UIDROPDOWNMENU_MENU_VALUE then
+        subItems = raidZoneInfos[i].sub
+        break
+     end
+    end
+
+    local info = UIDropDownMenu_CreateInfo()
+    for _, sub in pairs(subItems) do
+      info.text     = sub
+      info.hasArrow = false
+      info.notCheckable = false
+      info.checked  = nil
+      info.func     = RL_RaidZoneButton_OnClick
+      info.arg1     = UIDROPDOWNMENU_MENU_VALUE
+      info.arg2     = sub
+      UIDropDownMenu_AddButton(info, 2)
+    end
+  end
 end
 
+local function _GetRaidFindMessage()
+  local reqMembers = "(3/10)"
+
+  local r = RaidLeaderData.recruitInfo
+  r.gear = "5.5k+"
+  local msg = "LFM " .. r.zone .. r.sub .. " Need " .. r.gear .. " " .. reqMembers
+  return msg
+end
 
 -- JoinChannelByName does not work
 function RLF_Button_AutoFlood_OnClick(param)
@@ -135,7 +151,7 @@ function RLF_Button_AutoFlood_OnClick(param)
     if globalChannelNum == 0 then
       print("Please join global channel and then try again")
     else
-      local raidfindMsg = "LFM ICC25 Need All 6.3k+"
+      local raidfindMsg = _GetRaidFindMessage()
       SlashCmdList["AUTOFLOODSETCHANNEL"](globalChannelNum)
       SlashCmdList["AUTOFLOODSETRATE"](20)
       SlashCmdList["AUTOFLOODSETMESSAGE"](raidfindMsg)

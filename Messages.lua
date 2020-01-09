@@ -232,7 +232,6 @@ function RL_LoadPaladinBuffData()
 end
 
 function RL_LoadRaidWarningData()
-	print("RL_LoadRaidWarningData")
   if RaidLeaderData.useKorean then
     return RL_MESSAGE_KOR
   else
