@@ -75,6 +75,10 @@ RL_MESSAGE_ENG = {
 	RL_BUTTON_FREEFORALL_LOOT_MSG = "";
 	RL_BUTTON_SET_LEADER_MSG = "target is missing or not in raid";
 	RL_BUTTON_TRANSPARENCY_MSG = "";
+
+	RL_BUTTON_SET_MT_MSG = "Set target to Main tanker";
+	RL_BUTTON_SET_OT_MSG = "Set target to Assist tanker";
+	RL_BUTTON_SET_HC_NM_MSG = "toggle HC and NM difficulty"
 };
 
 local L = RL_MESSAGE_ENG
@@ -122,6 +126,10 @@ RL_MESSAGE_TOOLTIP_ENG = {
 	RL_BUTTON_FREEFORALL_LOOT_TOOLTIP = "Set to free for all";
 	RL_BUTTON_SET_LEADER_TOOLTIP = "Promote target to leader";
 	RL_BUTTON_TRANSPARENCY_TOOLTIP = "Change Transperency - use left/right mouse click";
+
+	RL_BUTTON_SET_MT_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_SET_MT_MSG"] .. "\'";
+	RL_BUTTON_SET_OT_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_SET_OT_MSG"] .. "\'";
+	RL_BUTTON_SET_HC_NM_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_SET_HC_NM_MSG"] .. "\'";
 };
 
 	-- combat msg
@@ -168,6 +176,10 @@ RL_MESSAGE_KOR = {
 	RL_BUTTON_FREEFORALL_LOOT_MSG = "";
 	RL_BUTTON_SET_LEADER_MSG = "레이드에 있는 타겟을 지정하고 설정해주세요.";
 	RL_BUTTON_TRANSPARENCY_MSG = "";
+
+	RL_BUTTON_SET_MT_MSG = "목표를 맨탱으로 지정합니다.";
+	RL_BUTTON_SET_OT_MSG = "목표를 부탱으로 지정합니다.";
+	RL_BUTTON_SET_HC_NM_MSG = "난이도를 영웅/일반 토글한다."
 };
 
 L = RL_MESSAGE_KOR
@@ -204,7 +216,7 @@ RL_MESSAGE_TOOLTIP_KOR = {
 	RL_BUTTON_TANK_AGGRO_TOOLTIP = "\'" .. L["RL_BUTTON_TANK_AGGRO_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_BUTTON_HOP_TOOLTIP = "\'" .. L["RL_BUTTON_HOP_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_BUTTON_HOF_TOOLTIP = "\'" .. L["RL_BUTTON_HOF_MSG"] .. "\' 를 공격대 경보한다.";
-	RL_BUTTON_DPS_BOSS_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_DPS_BOSS_MSG"] .. "\'";
+	RL_BUTTON_DPS_BOSS_TOOLTIP = "\'" .. L["RL_BUTTON_DPS_BOSS_MSG"] .. "\' 를 공격대 경보한다.";
 
 	RL_BUTTON_CLEAR_ICONS_TOOLTIP = "전투 마크를 없앤다.";
 	RL_BUTTON_CLOSE_TOOLTIP = "해당 애드온을 닫는다.";
@@ -215,6 +227,10 @@ RL_MESSAGE_TOOLTIP_KOR = {
 	RL_BUTTON_FREEFORALL_LOOT_TOOLTIP = "자유 획득으로 변경";
 	RL_BUTTON_SET_LEADER_TOOLTIP = "해당 목표를 공장으로 지정합니다.";
 	RL_BUTTON_TRANSPARENCY_TOOLTIP = "애드온창을 투명하게 합니다. (왼/오른 마우스 클릭)";
+
+	RL_BUTTON_SET_MT_TOOLTIP = "\'" .. L["RL_BUTTON_SET_MT_MSG"] .. "\' 를 공격대 경보한다.";
+	RL_BUTTON_SET_OT_TOOLTIP = "\'" .. L["RL_BUTTON_SET_OT_MSG"] .. "\' 를 공격대 경보한다.";
+	RL_BUTTON_SET_HC_NM_TOOLTIP = "\'" .. L["RL_BUTTON_SET_HC_NM_MSG"] .. "\' 를 공격대 경보한다.";
 };
 
 

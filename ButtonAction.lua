@@ -13,9 +13,59 @@ function RLF_Button_Transparency_OnClick()
   RL_BUTTON_TRANSPARENCY:HookScript ("OnClick", function(self, button) if button == "LeftButton" then RaidLeader_Frame:SetAlpha(0.5) end end);  
 end
 
-function RLF_Button_Kick_OnClick()
-  UninviteUnit("target")
+local toggle_hc_nm = 0
+function RLF_Button_SetHC_NM_OnClick(id)
+  local enDiff = { nm10 = 1, nm25 = 2, hc10 = 3, hc25 = 4}
+  local r = RaidLeaderData.recruitInfo
+
+  if r.zone == "" then
+    print(L["Choose instance first"])
+    return
+  end
+
+  local isInstance, _ = IsInInstance();
+  if isInstance then
+    local difficulty=GetInstanceDifficulty()
+    if difficulty == enDiff.nm10 then
+      SetRaidDifficulty(enDiff.hc10)
+    elseif difficulty == enDiff.nm25 then
+      SetRaidDifficulty(enDiff.hc25)
+    elseif difficulty == enDiff.hc10 then
+      SetRaidDifficulty(enDiff.nm10)
+    elseif difficulty == enDiff.hc25 then
+      SetRaidDifficulty(enDiff.nm25)
+    end
+  else
+    print(L["Not In Instance, so just toggle"])
+    local raid_size= tonumber(string.sub(r.sub, 1, 2))
+    if raid_size == 10 then
+      if toggle_hc_nm == 1 then 
+        SetRaidDifficulty(enDiff.nm10)
+      else
+        SetRaidDifficulty(enDiff.hc10)
+      end
+    else
+      if toggle_hc_nm == 1 then 
+        SetRaidDifficulty(enDiff.nm25)
+      else
+        SetRaidDifficulty(enDiff.hc25)
+      end
+    end
+    toggle_hc_nm = (toggle_hc_nm + 1) % 2
+  end
 end
+
+
+function RLF_Button_SetMT_OT_OnClick(id)
+
+  RLF_Button_RaidWarning_OnClick(id)
+  if id == RL_BUTTON_SET_MT then
+
+  else
+
+  end
+end
+
 
 function RLF_Button_SetLootMethod_OnClick(id)
   local loot = {RL_BUTTON_MASTER_LOOT="master", RL_BUTTON_GROUP_LOOT="needbeforegreed", RL_BUTTON_FREEFORALL_LOOT="freeforall"}
@@ -75,14 +125,14 @@ end
 
 -- Northrend Raids
 local raidZoneInfos = {
-  { name = "TOC",    zoneId = 543, sub = {"10nm", "10hc", "25nm", "25hc"}},
-  { name = "ICC",    zoneId = 604, sub = {"10nm", "10nm/hc", "10hc", "25nm", "25nm/hc", "25hc"}},
-  { name = "RS",     zoneId = 609, sub = {"10nm", "10hc", "25nm", "25hc"}},
-  { name = "VOA",    zoneId = 532, sub = {"10", "25"}},
-  { name = "NAXX",   zoneId = 535, sub = {"10", "25", "10 weekly", "25 weekly"}},
-  { name = "OS",     zoneId = 531, sub = {"10", "25"}},
-  { name = "Ulduar", zoneId = 529, sub = {"10", "25"}},
-  { name = "EE",     zoneId = 527, sub = {"10", "25"}},
+  { name = "TOC",    zoneId = 543, sub = {"10nm", "10hc", "25nm", "25hc"}, resv = "<B+P+O Resv>"},
+  { name = "ICC",    zoneId = 604, sub = {"10nm", "10nm/hc", "10hc", "25nm", "25nm/hc", "25hc"}, resv = "<B+P Resv>"},
+  { name = "RS",     zoneId = 609, sub = {"10nm", "10hc", "25nm", "25hc"}, resv = "NO Resv"},
+  { name = "VOA",    zoneId = 532, sub = {"10", "25"}, resv = ""},
+  { name = "NAXX",   zoneId = 535, sub = {"10", "25", "10 weekly", "25 weekly"}, resv = ""},
+  { name = "OS",     zoneId = 531, sub = {"10", "25"}, resv = "<Satchel Resv>" },
+  { name = "Ulduar", zoneId = 529, sub = {"10", "25"}, resv = ""},
+  { name = "EE",     zoneId = 527, sub = {"10", "25"}, resv = ""},
 };
 
 -- frame:GetID() == arg1
@@ -135,11 +185,30 @@ function RLF_Button_SelectRaid_Initialize(frame, level, menuList)
 end
 
 local function _GetRaidFindMessage()
-  local reqMembers = "(3/10)"
-
   local r = RaidLeaderData.recruitInfo
+  local isRaid  = UnitInRaid("player")
+  local curr_size = isRaid and GetNumRaidMembers() or GetNumPartyMembers() + 1
+  local raid_size= tonumber(string.sub(r.sub, 1, 2))
+  local reqMembers = ""
+  local reqRoles = ""
+  if raid_size <= 2 * curr_size then
+    reqRoles = "DPS"
+    reqMembers = " (" .. curr_size .. "/" .. string.sub(r.sub, 1, 2) .. ")"
+  else
+    reqRoles = "ALL"
+    reqMembers = ""
+  end
+
+  local resv = ""
+  for i = 1, #raidZoneInfos do
+   if raidZoneInfos[i].name == r.zone then
+      resv = raidZoneInfos[i].resv
+      break
+   end
+  end
+
   r.gear = "5.5k+"
-  local msg = "LFM " .. r.zone .. r.sub .. " Need " .. r.gear .. " " .. reqMembers
+  local msg = "LFM " .. r.zone .. r.sub .. " Need " .. r.gear .. " " .. reqRoles .. reqMembers .. " " .. resv
   return msg
 end
 

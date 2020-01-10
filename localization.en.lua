@@ -50,10 +50,12 @@ if L then
 	L["RL_BUTTON_SET_LEADER"] = ""
 	L["RL_BUTTON_GROUP_LOOT"] = ""
 	L["RL_BUTTON_FREEFORALL_LOOT"] = ""
-
+	L["RL_BUTTON_SET_MT"] = "MT"
+	L["RL_BUTTON_SET_OT"] = "OT"
 
 	L["RL_BUTTON_TRANSPARENCY"] = "-"
 	L["RL_BUTTON_CLOSE"]  = "Close"
+	L["RL_BUTTON_SET_HC_NM"] = "HC/NM"
 
 	-- zone name
 	L["EE10"] = "The Eye of Eternity - 10"
@@ -72,5 +74,10 @@ if L then
 	L["TOC25"] = "Trial of the Crusader - 25"
 	L["ICC25"] = "Icecrown Citadel - 25"
 	L["RS25"] = "The Ruby Sanctum - 25"
+
+
+	-- print
+	L["Choose instance first"] = "Choose instance first"
+	L["Not In Instance, so just toggle"] = "Not In Instance, so just toggle"
 end
 

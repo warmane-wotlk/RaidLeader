@@ -186,6 +186,20 @@
 						<Offset x="200" y="-144" />
 					</Anchor>
 				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_SetHC_NM_OnClick(self:GetName());
+					</OnClick>
+					<OnEnter>
+						 RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						 RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>
+				</Scripts>				
 			</Button>
 			<Button name="RL_BUTTON6" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="">
 				<Size>
@@ -454,6 +468,20 @@
 						<Offset x="242" y="-168" />
 					</Anchor>
 				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_SetMT_OT_OnClick(self:GetName());
+					</OnClick>
+					<OnEnter>
+						 RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						 RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>
+				</Scripts>
 			</Button>
 			<Button name="RL_BUTTON_SET_MT" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="MT">
 				<Size>
@@ -464,6 +492,20 @@
 						<Offset x="200" y="-168" />
 					</Anchor>
 				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_SetMT_OT_OnClick(self:GetName());
+					</OnClick>
+					<OnEnter>
+						 RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						 RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>
+				</Scripts>
 			</Button>
 			<Button name="RL_BUTTON_CLEAR_ICONS" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="Clear Mark">
 				<Size>
@@ -478,6 +520,12 @@
 					<OnClick>
 						SetRaidTarget("target", 0);
 					</OnClick>
+					<OnEnter>
+						RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						RLF_Button_Hide_ToolTip();
+					</OnLeave>
 					<OnLoad>
 						RLF_Button_SetText_OnLoad(self, self:GetName())
 					</OnLoad>

@@ -50,10 +50,12 @@ if L then
 	L["RL_BUTTON_SET_LEADER"] = ""
 	L["RL_BUTTON_GROUP_LOOT"] = ""
 	L["RL_BUTTON_FREEFORALL_LOOT"] = ""
-
+	L["RL_BUTTON_SET_MT"] = "맨탱"
+	L["RL_BUTTON_SET_OT"] = "부탱"
 
 	L["RL_BUTTON_TRANSPARENCY"] = "-"
 	L["RL_BUTTON_CLOSE"]  = "닫기"
+	L["RL_BUTTON_SET_HC_NM"] = "영웅/일반"
 
 	-- zone name
 	L["EE10"] = "영원의 눈 - 10인"
@@ -72,6 +74,10 @@ if L then
 	L["TOC25"] = "십자군 - 25"
 	L["ICC25"] = "얼음왕관 - 25"
 	L["RS25"] = "루비성소 - 25"
+
+	-- print
+	L["Choose instance first"] = "레이드 지역명을 선택해주세요."
+	L["Not In Instance, so just toggle"] = "레이드 인스턴스가 아님으로 그냥 토글합니다."
 end
 
 

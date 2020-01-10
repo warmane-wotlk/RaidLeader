@@ -15,6 +15,7 @@ function RLF_OnLoad(frame)
   frame:SetScript("OnMouseDown",function()frame:StartMoving()end)
   frame:SetScript("OnMouseUp",function()frame:StopMovingOrSizing()end)
 
+  RaidLeaderData.recruitInfo = { zone = "", sub = "", gear = ""}
 
   -- slash commands
   --
