@@ -59,10 +59,12 @@ end
 function RLF_Button_SetMT_OT_OnClick(id)
 
   RLF_Button_RaidWarning_OnClick(id)
-  if id == RL_BUTTON_SET_MT then
-
-  else
-
+  if id == "RL_BUTTON_SET_MT" then
+    SetRaidTarget("target", 7);
+    print(L["Please type /mt to assign MT"])
+  elseif id == "RL_BUTTON_SET_OT" then
+    SetRaidTarget("target", 6);
+    print(L["Please type /ma to assign OT"])
   end
 end
 
@@ -86,7 +88,19 @@ function RLF_Button_RaidWarning_OnClick(param)
   	local combatMsgId = param .. "_MSG"
     local RLL = RL_LoadRaidWarningData()
 
-    SendChatMessage(RLL[combatMsgId], "RAID_WARNING");
+    if UnitInRaid("player") == nil then
+      msgChannel = "PARTY"
+    else 
+      local rank = select(2, GetRaidRosterInfo(GetNumRaidMembers()))
+
+      if rank == nil or rank ~= 0 then
+        msgChannel = "RAID_WARNING"
+      else
+        msgChannel = "RAID"
+      end
+    end
+
+    SendChatMessage(RLL[combatMsgId], msgChannel);
   end
 end
 
@@ -125,31 +139,42 @@ end
 
 -- Northrend Raids
 local raidZoneInfos = {
-  { name = "TOC",    zoneId = 543, sub = {"10nm", "10hc", "25nm", "25hc"}, resv = "<B+P+O Resv>"},
-  { name = "ICC",    zoneId = 604, sub = {"10nm", "10nm/hc", "10hc", "25nm", "25nm/hc", "25hc"}, resv = "<B+P Resv>"},
-  { name = "RS",     zoneId = 609, sub = {"10nm", "10hc", "25nm", "25hc"}, resv = "NO Resv"},
-  { name = "VOA",    zoneId = 532, sub = {"10", "25"}, resv = ""},
-  { name = "NAXX",   zoneId = 535, sub = {"10", "25", "10 weekly", "25 weekly"}, resv = ""},
-  { name = "OS",     zoneId = 531, sub = {"10", "25"}, resv = "<Satchel Resv>" },
-  { name = "Ulduar", zoneId = 529, sub = {"10", "25"}, resv = ""},
-  { name = "EE",     zoneId = 527, sub = {"10", "25"}, resv = ""},
+  { name = "TOC",    zoneId = 543, sub = {"10nm", "10hc", "25nm", "25hc"}, resv = "<B+P+O Resv>", 
+    weekly = "", achieve = "|cffffff00|Hachievement:3812:0700000000194F14:1:01:01:20:4294967295:0:0:0|h[십자군 사령관의 부름 (25인)]|h|r"},
+  { name = "ICC",    zoneId = 604, sub = {"10nm", "10nm/hc", "10hc", "25nm", "25nm/hc", "25hc"}, resv = "<B+P Resv>",
+    weekly = "", achieve = "|cffffff00|Hachievement:4637:0700000000194F14:1:01:04:20:4294967295:0:0:0|h[영웅: 리치 왕의 몰락 (25인)]|h|r"},
+  { name = "RS",     zoneId = 609, sub = {"10nm", "10hc", "25nm", "25hc"}, resv = "Nothing Resv",
+    weekly = "", achieve = "|cffffff00|Hachievement:4816:0700000000194F14:1:12:30:19:4294967295:0:0:0|h[영웅: 황혼의 파괴자 (25인)]|h|r"},
+  { name = "VOA",    zoneId = 532, sub = {"10", "25"}, resv = "", weekly = "", achieve = ""},
+  { name = "NAXX",   zoneId = 535, sub = {"10", "25", "10 weekly", "25 weekly"}, resv = "",
+    weekly = "|cffffff00|Hquest:24580:80|h[Anub'Rekhan Must Die!]|h|r", 
+    achieve = "|cffffff00|Hachievement:577:07000000003E75A3:1:12:31:19:4294967295:0:0:0|h[낙스라마스의 몰락 (25인)]|h|r"},
+  { name = "OS",     zoneId = 531, sub = {"10", "25", "10 weekly", "25 weekly"}, resv = "<Satchel Resv>" ,
+    weekly = "|cffffff00|Hquest:24579:80|h[Sartharion Must Die!]|h|r", 
+    achieve = "|cffffff00|Hachievement:2054:0700000000194F14:1:01:02:20:4294967295:0:0:0|h[황혼 지대 (25인)]|h|r"},
+  { name = "Onyxia", zoneId = 0,   sub = {"10", "25"}, resv = "", weekly = "", 
+    achieve = "|cffffff00|Hachievement:4397:07000000003E75A3:1:01:05:20:4294967295:0:0:0|h[오닉시아의 둥지 (25인)]|h|r"},
+  { name = "Ulduar", zoneId = 529, sub = {"10", "25"}, resv = "", weekly = "", 
+    achieve = "|cffffff00|Hachievement:2895:07000000003E75A3:1:01:05:20:4294967295:0:0:0|h[울두아르의 비밀 (25인)]|h|r"},
 };
 
 -- frame:GetID() == arg1
 function RL_RaidZoneButton_OnClick(frame, arg1, arg2, checked)
   -- can't hanle check mark at level 2
-	--UIDropDownMenu_SetSelectedID(RaidLeader_DropDownMenu, frame:GetID())
+	--UIDropDownMenu_SetSelectedID(RaidLeader_Zone_DropDownMenu, frame:GetID())
+  UIDROPDOWNMENU_SHOW_TIME = 1
   RaidLeaderData.recruitInfo.zone = arg1
   RaidLeaderData.recruitInfo.sub  = arg2
-  UIDropDownMenu_SetText(RaidLeader_DropDownMenu, arg1 .. arg2)
+  UIDropDownMenu_SetText(RaidLeader_Zone_DropDownMenu, arg1 .. arg2)
 end
 
 function RLF_Button_SelectRaid_OnClick()
-	ToggleDropDownMenu(1, nil, RaidLeader_DropDownMenu, self, 0, 0);
+  UIDROPDOWNMENU_SHOW_TIME = 1
+	ToggleDropDownMenu(1, nil, RaidLeader_Zone_DropDownMenu, self, 0, 0);
 end
 
 function RLF_Button_SelectRaid_Initialize(frame, level, menuList)
-  UIDropDownMenu_SetWidth(RaidLeader_DropDownMenu,110)
+  UIDropDownMenu_SetWidth(RaidLeader_Zone_DropDownMenu, 110)  
 
   if level == 1 then
     local info = UIDropDownMenu_CreateInfo()
@@ -191,24 +216,40 @@ local function _GetRaidFindMessage()
   local raid_size= tonumber(string.sub(r.sub, 1, 2))
   local reqMembers = ""
   local reqRoles = ""
+
+  if r.needHealer and r.needTanker then
+	reqRoles = "ALL"
+  elseif r.needHealer then
+	reqRoles = "HEAL/DPS"
+  elseif r.needTanker then
+	reqRoles = "TANK/DPS"
+  else
+	reqRoles = "DPS"
+  end
+
   if raid_size <= 2 * curr_size then
-    reqRoles = "DPS"
     reqMembers = " (" .. curr_size .. "/" .. string.sub(r.sub, 1, 2) .. ")"
   else
-    reqRoles = "ALL"
     reqMembers = ""
   end
 
-  local resv = ""
+  local resv    = ""
+  local weekly  = ""
+  local achieve = ""
   for i = 1, #raidZoneInfos do
    if raidZoneInfos[i].name == r.zone then
-      resv = raidZoneInfos[i].resv
+      resv    = raidZoneInfos[i].resv
+      weekly  = raidZoneInfos[i].weekly
+      achieve = raidZoneInfos[i].achieve
       break
    end
   end
 
-  r.gear = "5.5k+"
-  local msg = "LFM " .. r.zone .. r.sub .. " Need " .. r.gear .. " " .. reqRoles .. reqMembers .. " " .. resv
+  local quest = ""
+  if select(2, string.find(r.sub, "weekly")) ~= nil then     quest = weekly
+  else                                                       quest = achieve  end
+  
+  local msg = "LFM " .. r.zone .. r.sub .. " " .. quest .. " Need " .. r.gear .. " " .. reqRoles .. reqMembers .. " " .. resv
   return msg
 end
 
@@ -218,7 +259,9 @@ function RLF_Button_AutoFlood_OnClick(param)
     
     local globalChannelNum = RL_GetGlobalChannelNumber()
     if globalChannelNum == 0 then
-      print("Please join global channel and then try again")
+      print(L["Please join global channel and then try again"])
+	elseif RaidLeaderData.recruitInfo.zone == "" then
+	  print(L["Please choose the raid instance"])
     else
       local raidfindMsg = _GetRaidFindMessage()
       SlashCmdList["AUTOFLOODSETCHANNEL"](globalChannelNum)
@@ -229,4 +272,41 @@ function RLF_Button_AutoFlood_OnClick(param)
   else
     SlashCmdList["AUTOFLOOD"]("off")
   end
+end
+
+-- Gear Dropdown menu
+function RL_RaidGearButton_OnClick(frame, arg1, arg2, checked)
+  RaidLeaderData.recruitInfo.gear = arg1
+  UIDropDownMenu_SetText(RaidLeader_Gear_DropDownMenu, arg1)
+  UIDROPDOWNMENU_SHOW_TIME = 1
+end
+
+function RLF_Button_SelectGear_OnClick()
+  UIDROPDOWNMENU_SHOW_TIME = 1
+  ToggleDropDownMenu(1, nil, RaidLeader_Gear_DropDownMenu, self, 0, 0);
+end
+
+function RLF_Button_SelectGear_Initialize(frame, level, menuList)
+  UIDropDownMenu_SetText(RaidLeader_Gear_DropDownMenu, RaidLeaderData.recruitInfo.gear)
+  UIDropDownMenu_SetWidth(RaidLeader_Gear_DropDownMenu, 60)  
+
+  local raidGearInfos = { "4.0k+", "4.5k+", "4.7k+", "5.0k+", "5.3k+", "5.5k+", "5.6k+", "5.7k+", "5.8k+", "5.9k+", 
+                          "6.0k+", "6.1k+", "6.2k+", "6.3k+" }
+  local info = UIDropDownMenu_CreateInfo()
+  for i = 1, #raidGearInfos do
+    info.text     = raidGearInfos[i]
+    info.checked  = false
+    info.arg1     = raidGearInfos[i]
+    info.func     = RL_RaidGearButton_OnClick
+    UIDropDownMenu_AddButton(info, 1)
+  end
+end
+
+-- Autoflood option
+function RLF_Button_AutoFlood_option_OnClick(id, checked)
+	if id == "RL_CHECKBUTTON_NEED_HEALER" then
+		RaidLeaderData.recruitInfo.needHealer = (checked ~= nil)
+	elseif id == "RL_CHECKBUTTON_NEED_TANKER" then
+		RaidLeaderData.recruitInfo.needTanker = (checked ~= nil)
+	end
 end

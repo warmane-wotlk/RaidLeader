@@ -38,6 +38,10 @@ if L then
 	L["RL_BUTTON_ROLL_NOW"] = "Roll"
 	L["RL_BUTTON_HERO_MODE"] = "HC"
 	L["RL_BUTTON_SOULSTONE"] = "Stone"
+	L["RL_BUTTON_PORTAL"] = "Portal"
+	L["RL_BUTTON_SHARE_QUEST"] = "Quest"
+	L["RL_BUTTON_CUSTOM1"] = "Custom1"
+	L["RL_BUTTON_CUSTOM2"] = "Custom2"
 
     -- marks
 	L["RL_BUTTON_CLEAR_ICONS"] = "Clear Marks"
@@ -56,6 +60,8 @@ if L then
 	L["RL_BUTTON_TRANSPARENCY"] = "-"
 	L["RL_BUTTON_CLOSE"]  = "Close"
 	L["RL_BUTTON_SET_HC_NM"] = "HC/NM"
+	L["RL_CHECKBUTTON_NEED_HEALER"] = "Healer"
+	L["RL_CHECKBUTTON_NEED_TANKER"] = "Tanker"
 
 	-- zone name
 	L["EE10"] = "The Eye of Eternity - 10"
@@ -79,5 +85,10 @@ if L then
 	-- print
 	L["Choose instance first"] = "Choose instance first"
 	L["Not In Instance, so just toggle"] = "Not In Instance, so just toggle"
+	L["No Pally here"] = "No Pally here"
+	L["Please join global channel and then try again"] = "Please join global channel and then try again"
+	L["Please choose the raid instance"] = "Please choose the raid instance"
+	L["Please type /mt to assign MT"] = "Please type /mt to assign MT"
+	L["Please type /ma to assign OT"] = "Please type /ma to assign OT"
 end
 

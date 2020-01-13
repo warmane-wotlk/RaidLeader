@@ -108,7 +108,7 @@ local function Buff_UpdateRaidRosterInfo()
         Buff_UpdateRoleType(unitId, name, role, g_warriorInfo)
       end
 
-      print("unitId: " .. unitId .. ", name:" .. name .. ", role:" .. role .. ", class: " .. fileName)      
+      --print("unitId: " .. unitId .. ", name:" .. name .. ", role:" .. role .. ", class: " .. fileName)      
     end
   end
 end
@@ -228,7 +228,7 @@ function Buff_Get_Paladin_Orders()
     buffMsg = buffMsg .. buffOrder
     SendChatMessage(buffMsg, chatType)
   else
-    print("why BuffOrder is nil")
+    print(L["No Pally here"])
   end
 end
 

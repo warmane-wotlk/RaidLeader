@@ -73,7 +73,7 @@
 					</Size>
 					<Anchors>
 						<Anchor point="TOP">
-							<Offset x="49" y="-221" />
+							<Offset x="49" y="-213" />
 						</Anchor>
 					</Anchors>
 				</Texture>
@@ -89,7 +89,7 @@
 				</Texture>
 			</Layer>
 			<Layer>
-				<FontString name="RL_Title_txt" font="Fonts\ARIALN.ttf" text="Raid Leader by Sunmudang">
+				<FontString name="RL_Title_txt" inherits="GameFontHighlight" text="Raid Leader - Sunmudang v0.1">
 					<Anchors>
 						<Anchor point="TOP" relativePoint="TOP">
 							<Offset>
@@ -97,22 +97,18 @@
 							</Offset>
 						</Anchor>
 					</Anchors>
-					<FontHeight>
-						<AbsValue val="12" />
-					</FontHeight>
-					<Color r="1" g="1" b="1" />
 					<Shadow>
 						<offset>
 							<AbsDimension x="2" y="-2" />
 						</offset>
 						<color r="0" g="0" b="0" />
-					</Shadow>
+					</Shadow>				
 				</FontString>
 				<FontString name="RL_RaidSetup_txt" inherits="GameFontHighlight" text="Raid Setup">
 					<Anchors>
 						<Anchor point="TOP" relativePoint="TOP">
 							<Offset>
-								<AbsDimension x="12" y="-76" />
+								<AbsDimension x="13" y="-76" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -121,7 +117,7 @@
 					<Anchors>
 						<Anchor point="TOP" relativePoint="TOP">
 							<Offset>
-								<AbsDimension x="12" y="-228" />
+								<AbsDimension x="12" y="-220" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -130,7 +126,7 @@
 					<Anchors>
 						<Anchor point="TOP" relativePoint="TOP">
 							<Offset>
-								<AbsDimension x="12" y="-340" />
+								<AbsDimension x="12" y="-338" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -140,15 +136,27 @@
 				<FontString name="RL_TEXT_SET_LANGUAGE" inherits="GameFontNormal" text="Use Korean">
 					<Size x="80" y="20" />
 					<Anchors>
-						<Anchor point="TOPLEFT" x="68" y="-54" />
+						<Anchor point="TOPLEFT" x="214" y="-85" />
+					</Anchors>
+				</FontString>
+				<FontString name="RL_TEXT_NEED_HEALER" inherits="GameFontNormal" text="Healer">
+					<Size x="51" y="20" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="109" y="-107" />
+					</Anchors>
+				</FontString>
+				<FontString name="RL_TEXT_NEED_TANKER" inherits="GameFontNormal" text="Tanker">
+					<Size x="53" y="20" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="172" y="-107" />
 					</Anchors>
 				</FontString>
 			</Layer>
 		</Layers>
 		<Frames>
-			<Frame name="RaidLeader_DropDownMenu" inherits="UIDropDownMenuTemplate" id="1">
+			<Frame name="RaidLeader_Zone_DropDownMenu" inherits="UIDropDownMenuTemplate" id="1">
 				<Anchors>
-					<Anchor point="TOPLEFT" x="146" y="-38" />
+					<Anchor point="TOPLEFT" x="66" y="-38" />
 				</Anchors>
 				<Scripts>
 					<OnClick>
@@ -156,6 +164,19 @@
 					</OnClick>
 					<OnLoad>
 						UIDropDownMenu_Initialize(self, RLF_Button_SelectRaid_Initialize, nil)
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame name="RaidLeader_Gear_DropDownMenu" inherits="UIDropDownMenuTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="198" y="-38" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_SelectGear_OnClick();
+					</OnClick>
+					<OnLoad>
+						UIDropDownMenu_Initialize(self, RLF_Button_SelectGear_Initialize, nil)
 					</OnLoad>
 				</Scripts>
 			</Frame>
@@ -177,37 +198,13 @@
 					</OnLeave>
 				</Scripts>
 			</Button>
-			<Button name="RL_BUTTON_SET_HC_NM" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="HC/NM">
-				<Size>
-					<AbsDimension x="81" y="23" />
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="200" y="-144" />
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						RLF_Button_SetHC_NM_OnClick(self:GetName());
-					</OnClick>
-					<OnEnter>
-						 RLF_Button_Show_ToolTip(self:GetName());
-					</OnEnter>
-					<OnLeave>
-						 RLF_Button_Hide_ToolTip();
-					</OnLeave>
-					<OnLoad>
-						RLF_Button_SetText_OnLoad(self, self:GetName())
-					</OnLoad>
-				</Scripts>				
-			</Button>
 			<Button name="RL_BUTTON6" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="">
 				<Size>
 					<AbsDimension x="32" y="32" />
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="77" y="-180" />
+						<Offset x="62" y="-176" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -226,7 +223,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="116" y="-180" />
+						<Offset x="98" y="-176" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -245,7 +242,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="40" y="-180" />
+						<Offset x="26" y="-176" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -264,7 +261,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="154" y="-180" />
+						<Offset x="134" y="-176" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -283,7 +280,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="153" y="-141" />
+						<Offset x="133" y="-132" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -302,7 +299,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="115" y="-141" />
+						<Offset x="97" y="-132" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -321,7 +318,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="77" y="-141" />
+						<Offset x="61" y="-132" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -340,7 +337,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="39" y="-141" />
+						<Offset x="25" y="-132" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -359,7 +356,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="39" y="-98" />
+						<Offset x="173" y="-132" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -378,40 +375,13 @@
 				<DisabledTexture file="Interface\ICONS\INV_Misc_Bag_10" />
 				<HighlightTexture file="Interface\ICONS\INV_Misc_Bag_10" />
 			</Button>
-			<Button name="RL_BUTTON_SET_LEADER" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" text="">
-				<Size>
-					<AbsDimension x="32" y="32" />
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="153" y="-98" />
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						RLF_Button_SetLeader_OnClick();
-					</OnClick>
-					<OnEnter>
-						 RLF_Button_Show_ToolTip(self:GetName());
-					</OnEnter>
-					<OnLeave>
-						 RLF_Button_Hide_ToolTip();
-					</OnLeave>
-				</Scripts>
-				<NormalTexture file="Interface\ICONS\Achievement_Dungeon_HEROIC_GloryoftheRaider" />
-				<PushedTexture file="Interface\ICONS\Achievement_Dungeon_HEROIC_GloryoftheRaider" />
-				<DisabledTexture inherits="UIPanelButtonDisabledTexture" file="Interface\ICONS\Achievement_Dungeon_HEROIC_GloryoftheRaider">
-					<TexCoords left="0" right="0.625" top="0" bottom="0.6875" />
-				</DisabledTexture>
-				<HighlightTexture file="Interface\ICONS\Achievement_Dungeon_HEROIC_GloryoftheRaider" />
-			</Button>
 			<Button name="RL_BUTTON_GROUP_LOOT" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" text="">
 				<Size>
 					<AbsDimension x="32" y="32" />
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="77" y="-98" />
+						<Offset x="214" y="-132" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -438,7 +408,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="115" y="-98" />
+						<Offset x="255" y="-132" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -459,61 +429,13 @@
 				</DisabledTexture>
 				<HighlightTexture file="Interface\Icons\INV_Misc_Coin_16" />
 			</Button>
-			<Button name="RL_BUTTON_SET_OT" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="OT">
-				<Size>
-					<AbsDimension x="39" y="23" />
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="242" y="-168" />
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						RLF_Button_SetMT_OT_OnClick(self:GetName());
-					</OnClick>
-					<OnEnter>
-						 RLF_Button_Show_ToolTip(self:GetName());
-					</OnEnter>
-					<OnLeave>
-						 RLF_Button_Hide_ToolTip();
-					</OnLeave>
-					<OnLoad>
-						RLF_Button_SetText_OnLoad(self, self:GetName())
-					</OnLoad>
-				</Scripts>
-			</Button>
-			<Button name="RL_BUTTON_SET_MT" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="MT">
-				<Size>
-					<AbsDimension x="39" y="23" />
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="200" y="-168" />
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						RLF_Button_SetMT_OT_OnClick(self:GetName());
-					</OnClick>
-					<OnEnter>
-						 RLF_Button_Show_ToolTip(self:GetName());
-					</OnEnter>
-					<OnLeave>
-						 RLF_Button_Hide_ToolTip();
-					</OnLeave>
-					<OnLoad>
-						RLF_Button_SetText_OnLoad(self, self:GetName())
-					</OnLoad>
-				</Scripts>
-			</Button>
 			<Button name="RL_BUTTON_CLEAR_ICONS" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="Clear Mark">
 				<Size>
-					<AbsDimension x="81" y="23" />
+					<AbsDimension x="75" y="23" />
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="200" y="-192" />
+						<Offset x="173" y="-187" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -532,10 +454,10 @@
 				</Scripts>
 			</Button>
 			<Button name="RL_BUTTON_FLOOD_ON" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="Find ppl">
-				<Size x="81" y="23" />
+				<Size x="68" y="23" />
 				<Anchors>
 					<Anchor point="CENTER" relativePoint="TOP">
-						<Offset x="95" y="-107" />
+						<Offset x="-86" y="-117" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -554,10 +476,10 @@
 				</Scripts>
 			</Button>
 			<Button name="RL_BUTTON_FLOOD_OFF" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="Stop Ppl">
-				<Size x="81" y="23" />
+				<Size x="68" y="23" />
 				<Anchors>
 					<Anchor point="CENTER" relativePoint="TOP">
-						<Offset x="95" y="-131" />
+						<Offset x="110" y="-117" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -581,7 +503,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="25" y="-246" />
+						<Offset x="25" y="-237" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -605,7 +527,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="91" y="-246" />
+						<Offset x="91" y="-237" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -629,7 +551,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="157" y="-246" />
+						<Offset x="157" y="-237" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -653,7 +575,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="223" y="-246" />
+						<Offset x="223" y="-237" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -677,7 +599,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="25" y="-274" />
+						<Offset x="25" y="-260" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -701,7 +623,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="91" y="-274" />
+						<Offset x="91" y="-260" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -725,7 +647,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="157" y="-274" />
+						<Offset x="157" y="-260" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -749,7 +671,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="223" y="-274" />
+						<Offset x="223" y="-260" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -773,7 +695,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="25" y="-301" />
+						<Offset x="25" y="-283" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -797,7 +719,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="91" y="-300" />
+						<Offset x="91" y="-282" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -821,7 +743,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="157" y="-301" />
+						<Offset x="157" y="-283" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -845,7 +767,103 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="223" y="-301" />
+						<Offset x="223" y="-283" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_RaidWarning_OnClick(self:GetName());
+					</OnClick>
+					<OnEnter>
+						RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<Button name="RL_BUTTON_PORTAL" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="Portal">
+				<Size>
+					<AbsDimension x="68" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="25" y="-306" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_RaidWarning_OnClick(self:GetName());
+					</OnClick>
+					<OnEnter>
+						RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<Button name="RL_BUTTON_SHARE_QUEST" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="Quest">
+				<Size>
+					<AbsDimension x="68" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="91" y="-306" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_RaidWarning_OnClick(self:GetName());
+					</OnClick>
+					<OnEnter>
+						RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<Button name="RL_BUTTON_CUSTOM1" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="Custom1">
+				<Size>
+					<AbsDimension x="68" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="157" y="-307" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_RaidWarning_OnClick(self:GetName());
+					</OnClick>
+					<OnEnter>
+						RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<Button name="RL_BUTTON_CUSTOM2" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="Custom2">
+				<Size>
+					<AbsDimension x="68" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="223" y="-307" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -1274,7 +1292,7 @@
 			<CheckButton name="RL_CHECKBUTTON_LANGUAGE" inherits="UICheckButtonTemplate">
 				<Size x="26" y="27" />
 				<Anchors>
-					<Anchor point="TOPLEFT" x="94" y="-35" />
+					<Anchor point="TOPLEFT" x="195" y="-82" />
 				</Anchors>
 				<Scripts>
 					<OnClick>
@@ -1286,6 +1304,118 @@
 					<OnLeave>
 						RLF_Button_Hide_ToolTip();
 					</OnLeave>
+				</Scripts>
+			</CheckButton>
+			<Button name="RL_BUTTON_SET_HC_NM" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="HC/NM">
+				<Size>
+					<AbsDimension x="75" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="173" y="-165" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_SetHC_NM_OnClick(self:GetName());
+					</OnClick>
+					<OnEnter>
+						 RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						 RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<Button name="RL_BUTTON_SET_MT" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="MT">
+				<Size>
+					<AbsDimension x="39" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="250" y="-165" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_SetMT_OT_OnClick(self:GetName());
+					</OnClick>
+					<OnEnter>
+						 RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						 RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<Button name="RL_BUTTON_SET_OT" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="OT">
+				<Size>
+					<AbsDimension x="39" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="250" y="-187" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_SetMT_OT_OnClick(self:GetName());
+					</OnClick>
+					<OnEnter>
+						 RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						 RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<CheckButton name="RL_CHECKBUTTON_NEED_HEALER" inherits="UICheckButtonTemplate">
+				<Size x="24" y="24" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="92" y="-106" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_AutoFlood_option_OnClick(self:GetName(), self:GetChecked());
+					</OnClick>
+					<OnEnter>
+						RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						self:SetChecked(RaidLeaderData.recruitInfo.needHealer);
+					</OnLoad>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="RL_CHECKBUTTON_NEED_TANKER" inherits="UICheckButtonTemplate">
+				<Size x="24" y="24" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="155" y="-106" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_AutoFlood_option_OnClick(self:GetName(), self:GetChecked());
+					</OnClick>
+					<OnEnter>
+						RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						self:SetChecked(RaidLeaderData.recruitInfo.needTanker);
+					</OnLoad>
 				</Scripts>
 			</CheckButton>
 		</Frames>

@@ -1,7 +1,7 @@
 
 RaidLeaderData = {
-	useKorean = false;
-  recruitInfo = { zone = "", sub = "", gear = ""};
+	useKorean   = false;
+	recruitInfo = { zone = "", sub = "", gear = "5.0k+", needHealer = true, needTanker = true };
 };
 
 function RLF_OnLoad(frame)
@@ -15,7 +15,7 @@ function RLF_OnLoad(frame)
   frame:SetScript("OnMouseDown",function()frame:StartMoving()end)
   frame:SetScript("OnMouseUp",function()frame:StopMovingOrSizing()end)
 
-  RaidLeaderData.recruitInfo = { zone = "", sub = "", gear = ""}
+  RaidLeaderData.recruitInfo = { zone = "", sub = "", gear = "5.0k+", needHealer = true, needTanker = true}
 
   -- slash commands
   --
@@ -50,3 +50,4 @@ function RL_GetGlobalChannelNumber()
     end 
     return 0
 end
+

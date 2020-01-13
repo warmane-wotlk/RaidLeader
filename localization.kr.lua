@@ -38,6 +38,10 @@ if L then
 	L["RL_BUTTON_ROLL_NOW"] = "전리품분배"
 	L["RL_BUTTON_HERO_MODE"] = "영웅모드"
 	L["RL_BUTTON_SOULSTONE"] = "영석"
+	L["RL_BUTTON_PORTAL"] = "Portal"
+	L["RL_BUTTON_SHARE_QUEST"] = "Quest"
+	L["RL_BUTTON_CUSTOM1"] = "Custom1"
+	L["RL_BUTTON_CUSTOM2"] = "Custom2"
 
     -- marks
 	L["RL_BUTTON_CLEAR_ICONS"] = "마크해제"
@@ -56,6 +60,8 @@ if L then
 	L["RL_BUTTON_TRANSPARENCY"] = "-"
 	L["RL_BUTTON_CLOSE"]  = "닫기"
 	L["RL_BUTTON_SET_HC_NM"] = "영웅/일반"
+	L["RL_CHECKBUTTON_NEED_HEALER"] = "Healer"
+	L["RL_CHECKBUTTON_NEED_TANKER"] = "Tanker"
 
 	-- zone name
 	L["EE10"] = "영원의 눈 - 10인"
@@ -78,6 +84,11 @@ if L then
 	-- print
 	L["Choose instance first"] = "레이드 지역명을 선택해주세요."
 	L["Not In Instance, so just toggle"] = "레이드 인스턴스가 아님으로 그냥 토글합니다."
+	L["No Pally here"] = "성기사가 없습니다."
+	L["Please join global channel and then try again"] = "global 채널에 참여 후 공대 모집해주세요."
+	L["Please choose the raid instance"] = "레이드 인스턴스를 선택 후 공대 모집해주세요."
+	L["Please type /mt to assign MT"] = "맨탱 지정을 위해서 /mt를 입력하세요."
+	L["Please type /ma to assign OT"] = "부탱 지정을 위해서 /ma를 입력하세요."	
 end
 
 
