@@ -3,7 +3,8 @@
 ## Author: Sunmudang
 ## Interface: 30300
 ## Notes: "Use /RLD to toggle the addon"
-## SavedVariablesPerCharacter: RCMD
+## OptionalDeps: LibBabble-TalentTree, autoflood
+## SavedVariablesPerCharacter: RaidLeaderData
 
 libs.xml
 
