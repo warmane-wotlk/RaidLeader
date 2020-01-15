@@ -38,9 +38,9 @@ if L then
 	L["RL_BUTTON_ROLL_NOW"] = "전리품분배"
 	L["RL_BUTTON_HERO_MODE"] = "영웅모드"
 	L["RL_BUTTON_SOULSTONE"] = "영석"
-	L["RL_BUTTON_PORTAL"] = "Portal"
-	L["RL_BUTTON_SHARE_QUEST"] = "Quest"
-	L["RL_BUTTON_CUSTOM1"] = "Custom1"
+	L["RL_BUTTON_PORTAL"] = "포탈"
+	L["RL_BUTTON_SHARE_QUEST"] = "퀘스트"
+	L["RL_BUTTON_DBM_PULL"] = "DBM Pull"
 	L["RL_BUTTON_CUSTOM2"] = "Custom2"
 
     -- marks
@@ -87,8 +87,11 @@ if L then
 	L["No Pally here"] = "성기사가 없습니다."
 	L["Please join global channel and then try again"] = "global 채널에 참여 후 공대 모집해주세요."
 	L["Please choose the raid instance"] = "레이드 인스턴스를 선택 후 공대 모집해주세요."
-	L["Please type /mt to assign MT"] = "맨탱 지정을 위해서 /mt를 입력하세요."
-	L["Please type /ma to assign OT"] = "부탱 지정을 위해서 /ma를 입력하세요."	
+	L["Please type /mt to assign MT"] = "맨탱 지정을 위해서 /mt를 입력하세요. (취소는 /clearmt)"
+	L["Please type /ma to assign OT"] = "부탱 지정을 위해서 /ma를 입력하세요. (취소는 /clearma)"
+	L["Click to toggle RaidLeader"] = "RaidLeader 화면을 on/off 합니다."
+	L["Error failed to load LibGroupTalents"] = "LibGroupTalents가 libs퐅더밑에 없습니다."
+	L["Please choose the target"] = "목표를 먼저 설정해주세요."
 end
 
 

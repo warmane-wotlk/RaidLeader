@@ -89,11 +89,11 @@
 				</Texture>
 			</Layer>
 			<Layer>
-				<FontString name="RL_Title_txt" inherits="GameFontHighlight" text="Raid Leader - Sunmudang v0.1">
+				<FontString name="RL_Title_txt" inherits="GameFontHighlight" text="RaidLeader-Sunmudang v0.2">
 					<Anchors>
 						<Anchor point="TOP" relativePoint="TOP">
 							<Offset>
-								<AbsDimension x="32" y="-18" />
+								<AbsDimension x="25" y="-18" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -108,7 +108,7 @@
 					<Anchors>
 						<Anchor point="TOP" relativePoint="TOP">
 							<Offset>
-								<AbsDimension x="13" y="-76" />
+								<AbsDimension x="13" y="-78" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -198,6 +198,30 @@
 					</OnLeave>
 				</Scripts>
 			</Button>
+			<Button name="RL_BUTTON_TRANSPARENCY" inherits="UIPanelButtonTemplate" text="-">
+				<Size>
+					<AbsDimension x="21" y="21" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset x="-8" y="-13" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_Transparency_OnClick();
+					</OnClick>
+					<OnEnter>
+						RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						self:RegisterForClicks("LeftButtonUp", "RightButtonup");
+					</OnLoad>
+				</Scripts>
+			</Button>			
 			<Button name="RL_BUTTON6" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="">
 				<Size>
 					<AbsDimension x="32" y="32" />
@@ -791,7 +815,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="25" y="-306" />
+						<Offset x="157" y="-307" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -833,18 +857,18 @@
 					</OnLoad>
 				</Scripts>
 			</Button>
-			<Button name="RL_BUTTON_CUSTOM1" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="Custom1">
+			<Button name="RL_BUTTON_DBM_PULL" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="DBM Pull">
 				<Size>
 					<AbsDimension x="68" y="23" />
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="157" y="-307" />
+						<Offset x="25" y="-306" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_RaidWarning_OnClick(self:GetName());
+						RLF_Button_DBM_Pull_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -1265,30 +1289,6 @@
 					</OnLoad>
 				</Scripts>
 			</Button>
-			<Button name="RL_BUTTON_TRANSPARENCY" inherits="UIPanelButtonTemplate" text="-">
-				<Size>
-					<AbsDimension x="23" y="23" />
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="271" y="-452" />
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						RLF_Button_Transparency_OnClick();
-					</OnClick>
-					<OnEnter>
-						RLF_Button_Show_ToolTip(self:GetName());
-					</OnEnter>
-					<OnLeave>
-						RLF_Button_Hide_ToolTip();
-					</OnLeave>
-					<OnLoad>
-						self:RegisterForClicks("LeftButtonUp", "RightButtonup");
-					</OnLoad>
-				</Scripts>
-			</Button>
 			<CheckButton name="RL_CHECKBUTTON_LANGUAGE" inherits="UICheckButtonTemplate">
 				<Size x="26" y="27" />
 				<Anchors>
@@ -1422,7 +1422,7 @@
 		<Scripts>
 			<OnLoad>
 				RLF_OnLoad(self);
-			</OnLoad>
+			</OnLoad>	
 		</Scripts>
 	</Frame>
 </Ui>

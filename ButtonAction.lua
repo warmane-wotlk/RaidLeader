@@ -57,13 +57,22 @@ end
 
 
 function RLF_Button_SetMT_OT_OnClick(id)
+  if UnitInRaid("target") == nil then
+    print(L["Please choose the target"])
+    return
+  end
 
   RLF_Button_RaidWarning_OnClick(id)
+
+  local RLL = RL_LoadRaidWarningData()
+  local playerName = UnitName("player")
   if id == "RL_BUTTON_SET_MT" then
     SetRaidTarget("target", 7);
+    SendChatMessage(L["Please type /mt to assign MT"], "WHISPER", GetDefaultLanguage("player"), playerName)
     print(L["Please type /mt to assign MT"])
   elseif id == "RL_BUTTON_SET_OT" then
     SetRaidTarget("target", 6);
+    SendChatMessage(L["Please type /ma to assign OT"], "WHISPER", GetDefaultLanguage("player"), playerName)
     print(L["Please type /ma to assign OT"])
   end
 end
@@ -309,4 +318,9 @@ function RLF_Button_AutoFlood_option_OnClick(id, checked)
 	elseif id == "RL_CHECKBUTTON_NEED_TANKER" then
 		RaidLeaderData.recruitInfo.needTanker = (checked ~= nil)
 	end
+end
+
+function RLF_Button_DBM_Pull_OnClick(param)
+  SlashCmdList["DEADLYBOSSMODS"]("pull 10")
+  RLF_Button_RaidWarning_OnClick(param)
 end

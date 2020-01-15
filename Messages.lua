@@ -76,13 +76,13 @@ RL_MESSAGE_ENG = {
 	RL_BUTTON_SET_LEADER_MSG = "target is missing or not in raid";
 	RL_BUTTON_TRANSPARENCY_MSG = "";
 
-	RL_BUTTON_SET_MT_MSG = "Set target to Main tanker";
-	RL_BUTTON_SET_OT_MSG = "Set target to Assist tanker";
+	RL_BUTTON_SET_MT_MSG = "Mark RED X mark on Main tanker";
+	RL_BUTTON_SET_OT_MSG = "Mark Blue Square mark on Assist tanker";
 	RL_BUTTON_SET_HC_NM_MSG = "toggle HC and NM difficulty";
 
 	RL_BUTTON_PORTAL_MSG = "Mage, please open the Portal to Dalaran";
 	RL_BUTTON_SHARE_QUEST_MSG = "I've shared Weekly Quest, if you dont get it, check whether you have other MUST DIE quest or you've done for this week.";
-	RL_BUTTON_CUSTOM1_MSG = "Custom1";
+	RL_BUTTON_DBM_PULL_MSG = "Everyone be ready. We are going to nuke the Boss!!! RESPECT THE TIMER!!";
 	RL_BUTTON_CUSTOM2_MSG = "Custom2";
 
 	RL_CHECKBUTTON_NEED_HEALER_MSG = "Check if Healer is needed in Raid";
@@ -142,7 +142,7 @@ RL_MESSAGE_TOOLTIP_ENG = {
 
 	RL_BUTTON_PORTAL_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_PORTAL_MSG"] .. "\'";
 	RL_BUTTON_SHARE_QUEST_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_SHARE_QUEST_MSG"] .. "\'";
-	RL_BUTTON_CUSTOM1_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_CUSTOM1_MSG"] .. "\'";
+	RL_BUTTON_DBM_PULL_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_DBM_PULL_MSG"] .. "\'";
 	RL_BUTTON_CUSTOM2_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_CUSTOM2_MSG"] .. "\'";
 
 	RL_CHECKBUTTON_NEED_HEALER_TOOLTIP = "Set the value of - \'" .. L["RL_CHECKBUTTON_NEED_HEALER_MSG"] .. "\'";
@@ -195,13 +195,13 @@ RL_MESSAGE_KOR = {
 	RL_BUTTON_SET_LEADER_MSG = "레이드에 있는 타겟을 지정하고 설정해주세요.";
 	RL_BUTTON_TRANSPARENCY_MSG = "";
 
-	RL_BUTTON_SET_MT_MSG = "목표를 맨탱으로 지정합니다.";
-	RL_BUTTON_SET_OT_MSG = "목표를 부탱으로 지정합니다.";
+	RL_BUTTON_SET_MT_MSG = "맨탱에게 빨간색 X 마크했습니다.";
+	RL_BUTTON_SET_OT_MSG = "부탱에게 파란색 사각형 마크했습니다.";
 	RL_BUTTON_SET_HC_NM_MSG = "난이도를 영웅/일반 토글한다.";
 
-	RL_BUTTON_PORTAL_MSG = "Mage, please open the Portal to Dalaran";
-	RL_BUTTON_SHARE_QUEST_MSG = "I've shared Weekly Quest, if you dont get it, check whether you have other MUST DIE quest or you've done for this week.";
-	RL_BUTTON_CUSTOM1_MSG = "Custom1";
+	RL_BUTTON_PORTAL_MSG = "법사님, 달라란 포탈 열어주세요.";
+	RL_BUTTON_SHARE_QUEST_MSG = "주간퀘스트 공유했습니다. 받지 못하신분은 이미하셨거나, 퀘스트 목록에 MUST DIE를 지워주세요.";
+	RL_BUTTON_DBM_PULL_MSG = "공격 시작합니다!!!!. 타이머를 준수해주세요.";
 	RL_BUTTON_CUSTOM2_MSG = "Custom2";
 
 	RL_CHECKBUTTON_NEED_HEALER_MSG = "힐러가 레이드에 필요하면 체크해주세요.";
@@ -261,7 +261,7 @@ RL_MESSAGE_TOOLTIP_KOR = {
 
 	RL_BUTTON_PORTAL_TOOLTIP = "\'" .. L["RL_BUTTON_PORTAL_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_BUTTON_SHARE_QUEST_TOOLTIP = "\'" .. L["RL_BUTTON_SHARE_QUEST_MSG"] .. "\' 를 공격대 경보한다.";
-	RL_BUTTON_CUSTOM1_TOOLTIP = "\'" .. L["RL_BUTTON_CUSTOM1_MSG"] .. "\' 를 공격대 경보한다.";
+	RL_BUTTON_DBM_PULL_TOOLTIP = "\'" .. L["RL_BUTTON_DBM_PULL_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_BUTTON_CUSTOM2_TOOLTIP = "\'" .. L["RL_BUTTON_CUSTOM2_MSG"] .. "\' 를 공격대 경보한다.";
 
 	RL_CHECKBUTTON_NEED_HEALER_TOOLTIP = "\'" .. L["RL_CHECKBUTTON_NEED_HEALER_MSG"] .. "\' 를 의미한다.";

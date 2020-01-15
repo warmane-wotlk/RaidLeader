@@ -1,3 +1,4 @@
+local L  = LibStub("AceLocale-3.0"):GetLocale("RaidLeader", true)
 
 -- add this to your SavedVariables or as a separate SavedVariable to store its position
 RCMD_Settings = {
@@ -30,7 +31,7 @@ end
 
 function RCMD_MinimapButton_OnEnter()
   GameTooltip_SetDefaultAnchor( GameTooltip, UIParent )
-  GameTooltip:SetText( "Click to toggle RaidLeader" )
+  GameTooltip:SetText( L["Click to toggle RaidLeader"] )
   GameTooltip:Show()
 end
 

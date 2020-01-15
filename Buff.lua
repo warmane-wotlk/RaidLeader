@@ -1,8 +1,9 @@
+local L  = LibStub("AceLocale-3.0"):GetLocale("RaidLeader", true)
 
 local LibGT = LibStub("LibGroupTalents-1.0")
 
 if not LibGT then 
-  print("Error failed to load LibGroupTalents") 
+  print(L["Error failed to load LibGroupTalents"]) 
   return 
 end
 

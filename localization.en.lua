@@ -40,7 +40,7 @@ if L then
 	L["RL_BUTTON_SOULSTONE"] = "Stone"
 	L["RL_BUTTON_PORTAL"] = "Portal"
 	L["RL_BUTTON_SHARE_QUEST"] = "Quest"
-	L["RL_BUTTON_CUSTOM1"] = "Custom1"
+	L["RL_BUTTON_DBM_PULL"] = "DBM Pull"
 	L["RL_BUTTON_CUSTOM2"] = "Custom2"
 
     -- marks
@@ -81,14 +81,16 @@ if L then
 	L["ICC25"] = "Icecrown Citadel - 25"
 	L["RS25"] = "The Ruby Sanctum - 25"
 
-
 	-- print
 	L["Choose instance first"] = "Choose instance first"
 	L["Not In Instance, so just toggle"] = "Not In Instance, so just toggle"
 	L["No Pally here"] = "No Pally here"
 	L["Please join global channel and then try again"] = "Please join global channel and then try again"
 	L["Please choose the raid instance"] = "Please choose the raid instance"
-	L["Please type /mt to assign MT"] = "Please type /mt to assign MT"
-	L["Please type /ma to assign OT"] = "Please type /ma to assign OT"
+	L["Please type /mt to assign MT"] = "Please type /mt to assign MT (/clearmt for clear)"
+	L["Please type /ma to assign OT"] = "Please type /ma to assign OT (/clearma for clear)"
+	L["Click to toggle RaidLeader"] = "Click to toggle RaidLeader"
+	L["Error failed to load LibGroupTalents"] = "failed to load LibGroupTalents from libs folder."
+	L["Please choose the target"] = "Please choose the target"
 end
 

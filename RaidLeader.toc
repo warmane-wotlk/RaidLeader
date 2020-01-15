@@ -4,7 +4,7 @@
 ## Interface: 30300
 ## Notes: "Use /RLD to toggle the addon"
 ## OptionalDeps: LibBabble-TalentTree, autoflood
-## SavedVariablesPerCharacter: RaidLeaderData
+## SavedVariablesPerCharacter: RaidLeaderData, RCMD_Settings
 
 libs.xml
 
