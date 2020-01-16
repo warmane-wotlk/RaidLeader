@@ -41,7 +41,7 @@ if L then
 	L["RL_BUTTON_PORTAL"] = "포탈"
 	L["RL_BUTTON_SHARE_QUEST"] = "퀘스트"
 	L["RL_BUTTON_DBM_PULL"] = "DBM Pull"
-	L["RL_BUTTON_CUSTOM2"] = "Custom2"
+	L["RL_BUTTON_MS_CHANGE_NOTIFY"] = "현재 주특"
 
     -- marks
 	L["RL_BUTTON_CLEAR_ICONS"] = "마크해제"
@@ -92,6 +92,7 @@ if L then
 	L["Click to toggle RaidLeader"] = "RaidLeader 화면을 on/off 합니다."
 	L["Error failed to load LibGroupTalents"] = "LibGroupTalents가 libs퐅더밑에 없습니다."
 	L["Please choose the target"] = "목표를 먼저 설정해주세요."
+	L["Reset MS Change Informations"] = "주특 변경정보를 초기화했습니다."
 end
 
 

@@ -41,7 +41,7 @@ if L then
 	L["RL_BUTTON_PORTAL"] = "Portal"
 	L["RL_BUTTON_SHARE_QUEST"] = "Quest"
 	L["RL_BUTTON_DBM_PULL"] = "DBM Pull"
-	L["RL_BUTTON_CUSTOM2"] = "Custom2"
+	L["RL_BUTTON_MS_CHANGE_NOTIFY"] = "Tell MS"
 
     -- marks
 	L["RL_BUTTON_CLEAR_ICONS"] = "Clear Marks"
@@ -92,5 +92,6 @@ if L then
 	L["Click to toggle RaidLeader"] = "Click to toggle RaidLeader"
 	L["Error failed to load LibGroupTalents"] = "failed to load LibGroupTalents from libs folder."
 	L["Please choose the target"] = "Please choose the target"
+	L["Reset MS Change Informations"] = "Reset MS Change Informations"
 end
 

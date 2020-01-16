@@ -557,6 +557,7 @@
 				<Scripts>
 					<OnClick>
 						RLF_Button_RaidWarning_OnClick(self:GetName());
+						RL_Enable_MSChange_Listen();
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -575,7 +576,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="157" y="-237" />
+						<Offset x="223" y="-307" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -881,18 +882,18 @@
 					</OnLoad>
 				</Scripts>
 			</Button>
-			<Button name="RL_BUTTON_CUSTOM2" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="Custom2">
+			<Button name="RL_BUTTON_MS_CHANGE_NOTIFY" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="Tell MS">
 				<Size>
 					<AbsDimension x="68" y="23" />
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="223" y="-307" />
-					</Anchor>
+						<Offset x="157" y="-237" />
+					</Anchor>					
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_RaidWarning_OnClick(self:GetName());
+						RLF_Button_MS_Change_Notify_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());

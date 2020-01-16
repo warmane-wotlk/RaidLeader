@@ -1,7 +1,97 @@
 ﻿local L  = LibStub("AceLocale-3.0"):GetLocale("RaidLeader", true)
+local function printf(...) DEFAULT_CHAT_FRAME:AddMessage('|cff0061ff[RaidLeader]: '..format(...)) end
+
+-- MS Change
+local sep = '[%s-_,.]';
+
+local mschange_message_patterns = {
+  'i roll'..sep,
+  'roll'..sep,
+  'my ms is'..sep,
+  'my ms'..sep,
+  'ms'..sep,
+  'ms change'..sep,
+  'mschange'..sep,
+};
+
+
+local function find_mschange(message, pattern_table)
+  local found = false;
+  for _, pattern in ipairs(mschange_message_patterns) do
+
+    message = string.lower(message)
+    local result = string.find(message, pattern)
+
+    -- If a raid was found then save it to our list of roles and continue.
+    if result == 1 then
+      found = true;
+      
+      -- Remove the substring from the message
+      message = string.gsub(message, pattern, '')
+      break  
+    end
+  end
+  
+  if not found then
+    return nil;
+  end
+  
+  return message;
+end
+
+mschange_channel_listeners = {
+  ['CHAT_MSG_RAID'] = {},
+  ['CHAT_MSG_WHISPER'] = {},
+};
+
+mschange_messages = {}
+
+local function is_mschange_channel(channel)
+  return channel == 'CHAT_MSG_RAID' or channel == 'CHAT_MSG_WHISPER';
+end
+
+local function RL_event_handler(self, event, message, sender)
+  if is_mschange_channel(event) then
+      local foundMsg = find_mschange(message)
+      if foundMsg then
+        mschange_messages[sender] = foundMsg
+      end
+  end
+end
+
+function RL_Enable_MSChange_Listen()  
+  for channel, listener in pairs(mschange_channel_listeners) do
+    mschange_channel_listeners[channel] = RL_add_event_listener(channel, RL_event_handler)
+  end
+end
+
+function RL_Disable_MSChange_Listen()
+  printf(L["Reset MS Change Informations"])
+  for channel, listener in pairs(mschange_channel_listeners) do
+    RL_remove_event_listener(channel, listener)
+  end
+
+  wipe(mschange_messages)
+end
 
 -- Button Action -------------------------------------------------------------------------------------------
 --
+--
+function RLF_Button_MS_Change_Notify_OnClick(id)
+  local msg = ""
+  for name, ms in pairs(mschange_messages) do
+    msg = msg .. name .. "(" .. ms .. ")" .. "//"
+  end
+
+  if msg == "" then
+    msg = "NO MS Change"
+    RLF_Button_RaidWarning_OnClick(msg)
+  else
+    RLF_Button_RaidWarning_OnClick(id)
+    RLF_Button_RaidWarning_OnClick(string.sub(msg,1,-3))
+  end
+end
+
 function RLF_Button_Close_OnClick()
   if RaidLeader_Frame:IsVisible() then
     RaidLeader_Frame:Hide()
@@ -19,7 +109,7 @@ function RLF_Button_SetHC_NM_OnClick(id)
   local r = RaidLeaderData.recruitInfo
 
   if r.zone == "" then
-    print(L["Choose instance first"])
+    printf(L["Choose instance first"])
     return
   end
 
@@ -36,7 +126,7 @@ function RLF_Button_SetHC_NM_OnClick(id)
       SetRaidDifficulty(enDiff.nm25)
     end
   else
-    print(L["Not In Instance, so just toggle"])
+    printf(L["Not In Instance, so just toggle"])
     local raid_size= tonumber(string.sub(r.sub, 1, 2))
     if raid_size == 10 then
       if toggle_hc_nm == 1 then 
@@ -58,7 +148,7 @@ end
 
 function RLF_Button_SetMT_OT_OnClick(id)
   if UnitInRaid("target") == nil then
-    print(L["Please choose the target"])
+    printf(L["Please choose the target"])
     return
   end
 
@@ -69,11 +159,11 @@ function RLF_Button_SetMT_OT_OnClick(id)
   if id == "RL_BUTTON_SET_MT" then
     SetRaidTarget("target", 7);
     SendChatMessage(L["Please type /mt to assign MT"], "WHISPER", GetDefaultLanguage("player"), playerName)
-    print(L["Please type /mt to assign MT"])
+    printf(L["Please type /mt to assign MT"])
   elseif id == "RL_BUTTON_SET_OT" then
     SetRaidTarget("target", 6);
     SendChatMessage(L["Please type /ma to assign OT"], "WHISPER", GetDefaultLanguage("player"), playerName)
-    print(L["Please type /ma to assign OT"])
+    printf(L["Please type /ma to assign OT"])
   end
 end
 
@@ -109,14 +199,19 @@ function RLF_Button_RaidWarning_OnClick(param)
       end
     end
 
-    SendChatMessage(RLL[combatMsgId], msgChannel);
+    local msg = RLL[combatMsgId]
+    if msg ~= nil then
+      SendChatMessage(msg, msgChannel);
+    else
+      SendChatMessage(param, msgChannel);
+    end
   end
 end
 
 function RLF_Button_SetLeader_OnClick()
   if UnitInRaid("target") == nil then
     local RLL = RL_LoadRaidWarningData()
-    print(RLL["RL_BUTTON_SET_LEADER_MSG"]);
+    printf(RLL["RL_BUTTON_SET_LEADER_MSG"]);
   else
     PromoteToLeader("target");
   end
@@ -172,9 +267,12 @@ function RL_RaidZoneButton_OnClick(frame, arg1, arg2, checked)
   -- can't hanle check mark at level 2
 	--UIDropDownMenu_SetSelectedID(RaidLeader_Zone_DropDownMenu, frame:GetID())
   UIDROPDOWNMENU_SHOW_TIME = 1
+  if RaidLeaderData.recruitInfo.zone ~= arg1 or RaidLeaderData.recruitInfo.sub ~= arg2 then    
+    RL_Disable_MSChange_Listen()
+  end
   RaidLeaderData.recruitInfo.zone = arg1
   RaidLeaderData.recruitInfo.sub  = arg2
-  UIDropDownMenu_SetText(RaidLeader_Zone_DropDownMenu, arg1 .. arg2)
+  UIDropDownMenu_SetText(RaidLeader_Zone_DropDownMenu, arg1 .. arg2)  
 end
 
 function RLF_Button_SelectRaid_OnClick()
@@ -268,9 +366,9 @@ function RLF_Button_AutoFlood_OnClick(param)
     
     local globalChannelNum = RL_GetGlobalChannelNumber()
     if globalChannelNum == 0 then
-      print(L["Please join global channel and then try again"])
+      printf(L["Please join global channel and then try again"])
 	elseif RaidLeaderData.recruitInfo.zone == "" then
-	  print(L["Please choose the raid instance"])
+	  printf(L["Please choose the raid instance"])
     else
       local raidfindMsg = _GetRaidFindMessage()
       SlashCmdList["AUTOFLOODSETCHANNEL"](globalChannelNum)
