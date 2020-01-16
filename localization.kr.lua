@@ -27,29 +27,29 @@ if L then
 
 	-- before raid
 	L["RL_BUTTON_READYCHECK"] = "전준"
-	L["RL_BUTTON_PONY_OFF"] = "포니오라"
-	L["RL_BUTTON_DISARM_TRAP"]  = "트랩해제"
+	L["RL_BUTTON_PONY_OFF"] = "포니 오라"
+	L["RL_BUTTON_DISARM_TRAP"]  = "트랩 해제"
 	L["RL_BUTTON_SUMMON"] = "소환"
-	L["RL_BUTTON_PALADIN_BUFF"] = "기사버프"
+	L["RL_BUTTON_PALADIN_BUFF"] = "기사 버프"
 	L["RL_BUTTON_ETC_BUFF"] = "기타 버프"
 	L["RL_BUTTON_FOOD"] = "음식"
-	L["RL_BUTTON_MS_CHANGE"] = "주특변경"
+	L["RL_BUTTON_MS_CHANGE"] = "주특 변경"
 	L["RL_BUTTON_RAID_START"] = "레이드시작"
 	L["RL_BUTTON_ROLL_NOW"] = "전리품분배"
-	L["RL_BUTTON_HERO_MODE"] = "영웅모드"
+	L["RL_BUTTON_HERO_MODE"] = "영웅 모드"
 	L["RL_BUTTON_SOULSTONE"] = "영석"
 	L["RL_BUTTON_PORTAL"] = "포탈"
 	L["RL_BUTTON_SHARE_QUEST"] = "퀘스트"
 	L["RL_BUTTON_DBM_PULL"] = "DBM Pull"
-	L["RL_BUTTON_MS_CHANGE_NOTIFY"] = "현재 주특"
+	L["RL_BUTTON_MS_CHANGE_NOTIFY"] = "주특 공지"
 
     -- marks
-	L["RL_BUTTON_CLEAR_ICONS"] = "마크해제"
+	L["RL_BUTTON_CLEAR_ICONS"] = "마크 해제"
 
 
 	-- general
-	L["RL_BUTTON_FLOOD_OFF"] = "광고중단"
-	L["RL_BUTTON_FLOOD_ON"] = "공대광고"
+	L["RL_BUTTON_FLOOD_OFF"] = "광고 중단"
+	L["RL_BUTTON_FLOOD_ON"] = "공대 광고"
 	L["RL_BUTTON_MASTER_LOOT"] = ""
 	L["RL_BUTTON_SET_LEADER"] = ""
 	L["RL_BUTTON_GROUP_LOOT"] = ""
@@ -93,6 +93,9 @@ if L then
 	L["Error failed to load LibGroupTalents"] = "LibGroupTalents가 libs퐅더밑에 없습니다."
 	L["Please choose the target"] = "목표를 먼저 설정해주세요."
 	L["Reset MS Change Informations"] = "주특 변경정보를 초기화했습니다."
+
+	L["Type my MS Change if you want"] = "변경하고자 하는 당신의 주특정보를 넣으세요."
+	L["My MS Change"] = "주특 변경"
 end
 
 

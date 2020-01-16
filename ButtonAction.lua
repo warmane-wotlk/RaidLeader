@@ -1,7 +1,8 @@
 ﻿local L  = LibStub("AceLocale-3.0"):GetLocale("RaidLeader", true)
 local function printf(...) DEFAULT_CHAT_FRAME:AddMessage('|cff0061ff[RaidLeader]: '..format(...)) end
 
--- MS Change
+--------------------------------------------------------
+-- ms change variable
 local sep = '[%s-_,.]';
 
 local mschange_message_patterns = {
@@ -16,7 +17,28 @@ local mschange_message_patterns = {
   '주특변경'..sep,
 };
 
+mschange_channel_listeners = {
+  ['CHAT_MSG_RAID'] = {},
+  ['CHAT_MSG_WHISPER'] = {},
+};
 
+mschange_messages = {}
+
+
+-- My MS Change Popup
+function RL_Callback_Update_MyMS(...)
+  local data = ...
+  if data ~= nil then
+    mschange_messages[UnitName("player")] = data
+  end
+end
+
+function RL_GetMyMSChange()
+  RLF_OpenInputBox(L["My MS Change"], L["Type my MS Change if you want"], RL_Callback_Update_MyMS)
+end
+
+-----------------------------------
+-- MS Change
 local function find_mschange(message, pattern_table)
   local found = false;
   for _, pattern in ipairs(mschange_message_patterns) do
@@ -41,13 +63,6 @@ local function find_mschange(message, pattern_table)
   return message;
 end
 
-mschange_channel_listeners = {
-  ['CHAT_MSG_RAID'] = {},
-  ['CHAT_MSG_WHISPER'] = {},
-};
-
-mschange_messages = {}
-
 local function is_mschange_channel(channel)
   return channel == 'CHAT_MSG_RAID' or channel == 'CHAT_MSG_WHISPER';
 end
@@ -61,7 +76,8 @@ local function RL_event_handler(self, event, message, sender)
   end
 end
 
-function RL_Enable_MSChange_Listen()  
+function RL_Enable_MSChange_Listen()
+  RL_GetMyMSChange()
   for channel, listener in pairs(mschange_channel_listeners) do
     if table.getn(listener) == 0 then
       mschange_channel_listeners[channel] = RL_add_event_listener(channel, RL_event_handler)

@@ -93,5 +93,8 @@ if L then
 	L["Error failed to load LibGroupTalents"] = "failed to load LibGroupTalents from libs folder."
 	L["Please choose the target"] = "Please choose the target"
 	L["Reset MS Change Informations"] = "Reset MS Change Informations"
+
+	L["Type my MS Change if you want"] = "Type my MS Change if you want"
+	L["My MS Change"] = "My MS Change"
 end
 

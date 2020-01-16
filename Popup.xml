@@ -1,0 +1,190 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="RLFPopUp" hidden="true" virtual="true" toplevel="true" enableMouse="true" movable="true" frameStrata="TOOLTIP" parent="UIParent">
+    <Backdrop name="RLFBack" bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+      <BackgroundInsets>
+        <AbsInset left="4" right="4" top="4" bottom="4"/>
+      </BackgroundInsets>
+      <TileSize>
+        <AbsValue val="16"/>
+      </TileSize>
+      <EdgeSize>
+        <AbsValue val="16"/>
+      </EdgeSize>
+    </Backdrop>
+    <Layers>
+      <Layer level="BACKGROUND">
+        <Texture name="$parent_Background" setAllPoints="true" >
+          <Anchors>
+            <Anchor point="TOPLEFT">
+              <Offset>
+                <AbsDimension x="4" y="-4"/>
+              </Offset>
+            </Anchor>
+            <Anchor point="BOTTOMRIGHT">
+              <Offset>
+                <AbsDimension x="-4" y="4"/>
+              </Offset>
+            </Anchor>
+          </Anchors>
+          <Color r="0" g="0" b="0.0" a="0.8" />
+        </Texture>
+      </Layer>
+      <Layer level="BORDER">
+        <Texture name="$parent_TitleBG" setAllPoints="true" >
+          <Size>
+            <AbsDimension y="26"/>
+          </Size>
+          <Anchors>
+            <Anchor point="TOPLEFT">
+              <Offset>
+                <AbsDimension x="4" y="-4"/>
+              </Offset>
+            </Anchor>
+            <Anchor point="TOPRIGHT">
+              <Offset>
+                <AbsDimension x="-4"/>
+              </Offset>
+            </Anchor>
+          </Anchors>
+          <Color r="1.0" g="1.0" b="0.0" a="0.6" />
+          <Gradient orientation="VERTICAL">
+            <MaxColor r="1.0" g="0.7" b="0.0" a="1" />
+            <MinColor r="1.0" g="0.5" b="0.0" a="0" />
+          </Gradient>
+        </Texture>
+      </Layer>
+      <Layer level="ARTWORK">
+        <FontString name="$parent_titlet" inherits="SystemFont_Large"  justifyH="CENTER" justifyV="TOP" text="My MS Change">
+          <Color r="10" g="10" b="10" a="1"/>
+          <FontHeight>
+            <AbsValue val="15"/>
+          </FontHeight>
+          <Anchors>
+            <Anchor relativePoint="TOP" point="TOP" >
+              <Offset>
+                <AbsDimension x="0" y="-5"/>
+              </Offset>
+            </Anchor>
+          </Anchors>
+          <Shadow>
+            <offset>
+              <AbsDimension x="2" y="-2"/>
+            </offset>
+            <color r="0" g="0" b="0"/>
+          </Shadow>
+        </FontString>
+        <FontString name="$parent_text" inherits="Tooltip_Med" justifyH="LEFT" text="Input Box">
+          <Anchors>
+            <Anchor relativePoint="TOPLEFT" point="TOPLEFT" >
+              <Offset>
+                <AbsDimension x="10" y="-32"/>
+              </Offset>
+            </Anchor>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Button name="$parent_ButtonClose" inherits="UIPanelCloseButton">
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset>
+              <AbsDimension x="2" y="2"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnClick>
+              (this:GetParent()):Hide()
+            </OnClick>
+        </Scripts>
+      </Button>
+    </Frames>
+    <Scripts>
+      <OnLoad>
+          this:RegisterForDrag("LeftButton");
+        </OnLoad>
+      <OnDragStart>
+          this:StartMoving()
+        </OnDragStart>
+      <OnDragStop>
+          this:StopMovingOrSizing();
+        </OnDragStop>
+      <OnEnterPressed>
+          this:Hide()
+        </OnEnterPressed>
+      <OnEscapePressed>
+          this:Hide()
+        </OnEscapePressed>
+    </Scripts>
+  </Frame>
+
+  <Frame name="RLF_InputBox" inherits="RLFPopUp">
+    <Size>
+      <AbsDimension x="280" y="300"/>
+    </Size>
+    <Anchors>
+      <Anchor relativePoint="CENTER" point="CENTER" >
+        <offset>
+          <AbsDimension x="0" y="30" />
+        </offset>
+      </Anchor>
+    </Anchors>
+    <Frames>
+      <EditBox name="$parent_Data" inherits="InputBoxTemplate" id="15">
+        <Size>
+          <AbsDimension x="190" y="25"/>
+        </Size>
+        <Anchors>
+          <Anchor relativePoint="BOTTOM" point="BOTTOM">
+            <Offset>
+              <AbsDimension x="0" y="36"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnEnterPressed>
+            RLF_InputBox_OnEnter()
+          </OnEnterPressed>
+          <OnEscapePressed>
+            RLF_InputBox:Hide()
+          </OnEscapePressed>
+        </Scripts>
+      </EditBox>
+      <Button name="$parent_Cancel" inherits="UIPanelButtonTemplate" text="Cancel" id="12">
+        <Size>
+          <AbsDimension x="75" y="25"/>
+        </Size>
+        <Anchors>
+          <Anchor point="BOTTOM" relativePoint="BOTTOM">
+            <Offset>
+              <AbsDimension x="-50" y="6"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnClick>
+              RLF_InputBox:Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_OK" inherits="UIPanelButtonTemplate" text="Apply" id="12">
+        <Size>
+          <AbsDimension x="75" y="25"/>
+        </Size>
+        <Anchors>
+          <Anchor point="BOTTOM" relativePoint="BOTTOM">
+            <Offset>
+              <AbsDimension x="50" y="6"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnClick>
+              RLF_InputBox_OnEnter()
+          </OnClick>
+        </Scripts>
+      </Button>
+    </Frames>
+  </Frame>
+</Ui>

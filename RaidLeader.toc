@@ -14,9 +14,11 @@ event.lua
 Messages.lua
 
 RaidLeader.lua
+Popup.lua
 Buff.lua
 ButtonAction.lua
 MIN.lua
 
 MIN.xml
+Popup.xml
 RaidLeader.xml
