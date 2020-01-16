@@ -12,6 +12,8 @@ local mschange_message_patterns = {
   'ms'..sep,
   'ms change'..sep,
   'mschange'..sep,
+  '주특'..sep,
+  '주특변경'..sep,
 };
 
 
@@ -61,7 +63,10 @@ end
 
 function RL_Enable_MSChange_Listen()  
   for channel, listener in pairs(mschange_channel_listeners) do
-    mschange_channel_listeners[channel] = RL_add_event_listener(channel, RL_event_handler)
+    if table.getn(listener) == 0 then
+      mschange_channel_listeners[channel] = RL_add_event_listener(channel, RL_event_handler)
+    else
+    end
   end
 end
 
@@ -69,6 +74,7 @@ function RL_Disable_MSChange_Listen()
   printf(L["Reset MS Change Informations"])
   for channel, listener in pairs(mschange_channel_listeners) do
     RL_remove_event_listener(channel, listener)
+    wipe(mschange_channel_listeners[channel])
   end
 
   wipe(mschange_messages)
@@ -84,7 +90,8 @@ function RLF_Button_MS_Change_Notify_OnClick(id)
   end
 
   if msg == "" then
-    msg = "NO MS Change"
+    local RLL = RL_LoadRaidWarningData()
+    msg = RLL["NO MS Change"]
     RLF_Button_RaidWarning_OnClick(msg)
   else
     RLF_Button_RaidWarning_OnClick(id)

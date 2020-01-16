@@ -88,6 +88,9 @@ RL_MESSAGE_ENG = {
 	RL_CHECKBUTTON_NEED_HEALER_MSG = "Check if Healer is needed in Raid";
 	RL_CHECKBUTTON_NEED_TANKER_MSG = "Check if Tanker is needed in Raid";
 	RL_CHECKBUTTON_LANGUAGE_MSG = "Check if Korean is used";
+
+	-- print
+	["NO MS Change"] = "NO MS Change";
 };
 
 local L = RL_MESSAGE_ENG
@@ -166,7 +169,7 @@ RL_MESSAGE_KOR = {
 	RL_BUTTON_PALADIN_BUFF_MSG = "";
 	RL_BUTTON_ETC_BUFF_MSG = "사제님/드루님/법사님, 버프해주세요. 도적님 독바르시고, 낭꾼님 독사상 확인하시고, 전사님 외침해주세요.";
 	RL_BUTTON_FOOD_MSG = "법사님 - 물빵, 흑마님 - 사탕, 생선통구이 부탁드립니다.";
-	RL_BUTTON_MS_CHANGE_MSG = "주특 변경하실 분 귓말/공대말로 주세요. \'ms 힐/healer\'형태로 주시면 고맙겠습니다.";
+	RL_BUTTON_MS_CHANGE_MSG = "주특 변경하실 분 귓말/공대말로 주세요. \'ms healer\' 또는 \'주특 탱커\' 형태로 주시면 고맙겠습니다.";
 	RL_BUTTON_RAID_START_MSG = "레이드 시작합니다. 다들 영약 및 버프 확인해주시고, dbm 타이머에 맞춰서 공격해주세요.";
 	RL_BUTTON_ROLL_NOW_MSG = "아이템 분배시작합니다.";
 	RL_BUTTON_HERO_MODE_MSG = "영웅모드로 변경가능하신 분??";
@@ -207,6 +210,9 @@ RL_MESSAGE_KOR = {
 	RL_CHECKBUTTON_NEED_HEALER_MSG = "힐러가 레이드에 필요하면 체크해주세요.";
 	RL_CHECKBUTTON_NEED_TANKER_MSG = "탱커가 레이드에 필요하면 체크해주세요.";
 	RL_CHECKBUTTON_LANGUAGE_MSG = "한글로 공대 명령을 사용할 경우 체크해주세요.";
+
+	-- print
+	["NO MS Change"] = "주특 변경한 사람이 없습니다.";
 };
 
 L = RL_MESSAGE_KOR
