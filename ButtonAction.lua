@@ -1,5 +1,4 @@
 ﻿local L  = LibStub("AceLocale-3.0"):GetLocale("RaidLeader", true)
-local function printf(...) DEFAULT_CHAT_FRAME:AddMessage('|cff0061ff[RaidLeader]: '..format(...)) end
 
 --------------------------------------------------------
 -- ms change variable
@@ -169,6 +168,26 @@ function RLF_Button_SetHC_NM_OnClick(id)
 end
 
 
+function RLF_Button_Notify_MT_OT_OnClick(id)
+  RRI_InitializeRaidRosterInfo()
+  
+  if RRI_AreTankersInRaid() == false then
+    printf(L["Please assign tanker with /mt /ma"])
+    return
+  end
+  
+  local mt = RRI_GetTankerInfo("MT")
+  local ot = RRI_GetTankerInfo("OT")
+
+  SetRaidTarget(mt.name, 7);
+  SetRaidTarget(ot.name, 6);
+
+  local msg = "MT(" .. mt.name .. ") // OT (" .. ot.name .. ")"
+  RLF_Button_RaidWarning_OnClick(id)
+  RLF_Button_RaidWarning_OnClick(msg)
+end
+
+
 function RLF_Button_SetMT_OT_OnClick(id)
   if UnitInRaid("target") == nil then
     printf(L["Please choose the target"])
@@ -231,6 +250,7 @@ function RLF_Button_RaidWarning_OnClick(param)
   end
 end
 
+-- not use
 function RLF_Button_SetLeader_OnClick()
   if UnitInRaid("target") == nil then
     local RLL = RL_LoadRaidWarningData()
@@ -441,7 +461,21 @@ function RLF_Button_AutoFlood_option_OnClick(id, checked)
 	end
 end
 
-function RLF_Button_DBM_Pull_OnClick(param)
+function RLF_Button_DBM_Pull_OnClick(id)
   SlashCmdList["DEADLYBOSSMODS"]("pull 10")
-  RLF_Button_RaidWarning_OnClick(param)
+  RLF_Button_RaidWarning_OnClick(id)
+end
+
+function RLF_Button_Paladin_Buff_OnClick(id)
+  RRI_InitializeRaidRosterInfo()
+  
+  if RRI_AreTankersInRaid() == false then
+    printf(L["Please assign tanker with /mt /ma"])
+    return
+  end
+
+  -- Get raid info
+  RRI_GetRaidRosterInfo()
+  local buffMsg = Buff_Get_Paladin_Orders()
+  RLF_Button_RaidWarning_OnClick(buffMsg)
 end

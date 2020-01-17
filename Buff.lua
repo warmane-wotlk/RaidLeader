@@ -1,23 +1,5 @@
 local L  = LibStub("AceLocale-3.0"):GetLocale("RaidLeader", true)
 
-local LibGT = LibStub("LibGroupTalents-1.0")
-
-if not LibGT then 
-  print(L["Error failed to load LibGroupTalents"]) 
-  return 
-end
-
-
-local g_bUseDrumOfKing = false
-local g_raid_tanker_mt
-local g_raid_tanker_ot
-local g_raid_has_disc = false
-
-local g_paladinInfo = { totalNum=0, numTanker=0, numHealer=0, numDps=0, data={} }
-local g_druidInfo   = { totalNum=0, numTanker=0, numHealer=0, numDps=0, data={} }
-local g_priestInfo  = { totalNum=0, numTanker=0, numHealer=0, numDps=0, data={} }
-local g_warriorInfo = { totalNum=0, numTanker=0, numHealer=0, numDps=0, data={} }
-
 -- return Orders -- TANKER1, TANKER2, ... , HEALER1, HEALER2, ..., DPS1, DPS2 ...
 local function Buff_GetIdxOrder(playerInfo)
   local idxOrders = {}
@@ -41,92 +23,18 @@ local function Buff_GetIdxOrder(playerInfo)
   return idxOrders
 end
 
-
-local function Buff_UpdateRoleType(unitId, name, role, playerInfo)
-  local roleType = "DPS"
-  local roleTypeIdx = ""
-  if role == "MAINTANK" or role == "MAINASSIST" then
-    if role == "MAINTANK" then
-      g_raid_tanker_mt = name
-    else
-      g_raid_tanker_ot = name
-    end
-    roleType = "TANKER"
-    playerInfo.numTanker = playerInfo.numTanker + 1
-    roleTypeIdx = roleType .. playerInfo.numTanker
-  elseif role == "HEALER" then
-    roleType = "HEALER"
-    playerInfo.numHealer = playerInfo.numHealer + 1
-    roleTypeIdx = roleType .. playerInfo.numHealer
-  else
-    roleType = "DPS"
-    playerInfo.numDps = playerInfo.numDps + 1
-    roleTypeIdx = roleType .. playerInfo.numDps
-  end
-
-  playerInfo.totalNum = playerInfo.totalNum + 1
-  
-  playerInfo.data[roleTypeIdx] = { name = name, id = unitId, role = roleType}
-end
-
-
-local function Buff_UpdateRaidRosterInfo()
-  g_paladinInfo = { totalNum=0, numTanker=0, numHealer=0, numDps=0, data={} }
-  g_druidInfo   = { totalNum=0, numTanker=0, numHealer=0, numDps=0, data={} }
-  g_priestInfo  = { totalNum=0, numTanker=0, numHealer=0, numDps=0, data={} }
-  g_warriorInfo = { totalNum=0, numTanker=0, numHealer=0, numDps=0, data={} }  
-
-  local isParty = UnitInParty("player")
-  local isRaid  = UnitInRaid("player")
-
-  local raid_size = isRaid and GetNumRaidMembers() or GetNumPartyMembers() + 1
-  local prefix_unitId = isRaid and "raid" or "party"
-
-  for i = 1, raid_size do
-    local unitId = prefix_unitId .. i
-    local name, _, subgroup, _, _, fileName, _, _, _, role, _ = GetRaidRosterInfo(i)
-
-    if i == raid_size then unitId = "player" end
-
-    if name then
-      if not role then role = "DPS" end
-
-      if fileName == "PALADIN" then
-        local talent = select(3, LibGT:GetTalentTabInfo(unitId, 1))
-        if subgroup == 5 or ( talent and talent >= 51 ) then role = "HEALER" end
-        Buff_UpdateRoleType(unitId, name, role, g_paladinInfo)
-      elseif fileName == "DRUID" then
-        local talent = select(3, LibGT:GetTalentTabInfo(unitId, 3))
-        if subgroup == 5 or ( talent and talent >= 51 ) then role = "HEALER" end
-        Buff_UpdateRoleType(unitId, name, role, g_druidInfo)
-      elseif fileName == "PRIEST" then
-        local talent = select(3, LibGT:GetTalentTabInfo(unitId, 3))
-        if subgroup == 5 or ( talent and talent < 51 ) then role = "HEALER" end
-        talent = select(3, LibGT:GetTalentTabInfo(unitId, 1))
-        if talent and talent >= 51 then  g_raid_has_disc = true end
-        Buff_UpdateRoleType(unitId, name, role, g_priestInfo)
-      elseif fileName == "WARRIOR" then
-        Buff_UpdateRoleType(unitId, name, role, g_warriorInfo)
-      end
-
-      --print("unitId: " .. unitId .. ", name:" .. name .. ", role:" .. role .. ", class: " .. fileName)      
-    end
-  end
-end
-
 -- Paladin Buffer/Auroa order
 function Buff_Get_Paladin_Orders()
-  local buffMsg = "Paladin Buff Order : "
-  local buffOrder
+  local buffOrder = ""
   local _RL = RL_LoadPaladinBuffData()
+  local buffMsg = _RL["Paladin Buff Order : "]
 
-  -- Update raid info
-  Buff_UpdateRaidRosterInfo()
+  local paladinInfo = RRI_GetPaladinInfo()
 
-  local roleOrders = Buff_GetIdxOrder(g_paladinInfo)
+  local roleOrders = Buff_GetIdxOrder(paladinInfo)
 
-  if g_paladinInfo.totalNum == 1 then
-    local data = g_paladinInfo.data[ roleOrders[1] ]
+  if paladinInfo.totalNum == 1 then
+    local data = paladinInfo.data[ roleOrders[1] ]
     if data then
       if g_bUseDrumOfKing then
         buffOrder = data.name .. " - " .. _RL["RL_PALADIN_BLESS_CLASS"] .. "/" .. _RL["RL_PALADIN_AURORA_DEVO"]
@@ -134,103 +42,103 @@ function Buff_Get_Paladin_Orders()
         buffOrder = data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOK"] .. "/" .. _RL["RL_PALADIN_AURORA_DEVO"]
       end
     end
-  elseif g_paladinInfo.totalNum == 2 then
-    if g_paladinInfo.numTanker == 0 then
-      local data = g_paladinInfo.data[ roleOrders[1] ]
+  elseif paladinInfo.totalNum == 2 then
+    if paladinInfo.numTanker == 0 then
+      local data = paladinInfo.data[ roleOrders[1] ]
       if data then buffOrder = data.name .. " - " .. _RL["RL_PALADIN_BLESS_CLASS"] .. "/" .. _RL["RL_PALADIN_AURORA_CONC"] end
-      data = g_paladinInfo.data[ roleOrders[2] ]
+      data = paladinInfo.data[ roleOrders[2] ]
       if data then buffOrder = buffOrder .. ", " .. data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOK"] .. "/" .. _RL["RL_PALADIN_AURORA_DEVO"] end
     else
-      local data = g_paladinInfo.data[ roleOrders[1] ]
+      local data = paladinInfo.data[ roleOrders[1] ]
       if g_bUseDrumOfKing and not g_raid_has_disc then
         if data then buffOrder = data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOS"] .. "/" .. _RL["RL_PALADIN_AURORA_DEVO"] end
       else
         if data then buffOrder = data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOK"] .. "/" .. _RL["RL_PALADIN_AURORA_DEVO"] end
       end        
-      data = g_paladinInfo.data[ roleOrders[2] ]
+      data = paladinInfo.data[ roleOrders[2] ]
       if data then buffOrder = buffOrder .. ", " .. data.name .. " - " .. _RL["RL_PALADIN_BLESS_CLASS"] .. "/" .. _RL["RL_PALADIN_AURORA_CONC"] end
     end
-  elseif g_paladinInfo.totalNum == 3 then
-    if g_paladinInfo.numTanker == 0 then
-      local data = g_paladinInfo.data[ roleOrders[1] ]
+  elseif paladinInfo.totalNum == 3 then
+    if paladinInfo.numTanker == 0 then
+      local data = paladinInfo.data[ roleOrders[1] ]
       if data then buffOrder = data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOW"] .. "/" .. _RL["RL_PALADIN_AURORA_CONC"] end
-      data = g_paladinInfo.data[ roleOrders[2] ]
+      data = paladinInfo.data[ roleOrders[2] ]
       if data then buffOrder = buffOrder .. ", " .. data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOK"] .. "/" .. _RL["RL_PALADIN_AURORA_DEVO"] end
-      data = g_paladinInfo.data[ roleOrders[3] ]
+      data = paladinInfo.data[ roleOrders[3] ]
       if data then buffOrder = buffOrder .. ", " .. data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOM"] .. "/" .. _RL["RL_PALADIN_AURORA_RESIST"] end
     else
       if g_raid_has_disc then
-        if g_paladinInfo.numTanker == 2 and g_paladinInfo.numHealer == 1 then
-          local data = g_paladinInfo.data[ roleOrders[1] ]
+        if paladinInfo.numTanker == 2 and paladinInfo.numHealer == 1 then
+          local data = paladinInfo.data[ roleOrders[1] ]
           if data then buffOrder = data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOK"] .. "/" .. _RL["RL_PALADIN_AURORA_DEVO"] end
-          data = g_paladinInfo.data[ roleOrders[2] ]
+          data = paladinInfo.data[ roleOrders[2] ]
           if data then buffOrder = buffOrder .. ", " .. data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOM"] .. "/" .. _RL["RL_PALADIN_AURORA_RESIST"] end
-          data = g_paladinInfo.data[ roleOrders[3] ]
+          data = paladinInfo.data[ roleOrders[3] ]
           if data then buffOrder = buffOrder .. ", " .. data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOW"] .. "/" .. _RL["RL_PALADIN_AURORA_CONC"] end
         else
-          local data = g_paladinInfo.data[ roleOrders[1] ]
+          local data = paladinInfo.data[ roleOrders[1] ]
           if data then buffOrder = data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOK"] .. "/" .. _RL["RL_PALADIN_AURORA_DEVO"] end
-          data = g_paladinInfo.data[ roleOrders[2] ]
+          data = paladinInfo.data[ roleOrders[2] ]
           if data then buffOrder = buffOrder .. ", " .. data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOW"] .. "/" .. _RL["RL_PALADIN_AURORA_CONC"] end
-          data = g_paladinInfo.data[ roleOrders[3] ]
+          data = paladinInfo.data[ roleOrders[3] ]
           if data then buffOrder = buffOrder .. ", " .. data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOM"] .. "/" .. _RL["RL_PALADIN_AURORA_RESIST"] end
         end
       else
-        if g_paladinInfo.numTanker == 2 and g_paladinInfo.numHealer == 1 then
-          local data = g_paladinInfo.data[ roleOrders[1] ]
+        if paladinInfo.numTanker == 2 and paladinInfo.numHealer == 1 then
+          local data = paladinInfo.data[ roleOrders[1] ]
           if data then buffOrder = data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOS"] .. "/" .. _RL["RL_PALADIN_AURORA_DEVO"] end
-          data = g_paladinInfo.data[ roleOrders[2] ]
+          data = paladinInfo.data[ roleOrders[2] ]
           if data then buffOrder = buffOrder .. ", " .. data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOK"] .. "/" .. _RL["RL_PALADIN_AURORA_CONC"] end
-          data = g_paladinInfo.data[ roleOrders[3] ]
+          data = paladinInfo.data[ roleOrders[3] ]
           if data then buffOrder = buffOrder .. ", " .. data.name .. " - " .. _RL["RL_PALADIN_BLESS_CLASS"] .. "/" .. _RL["RL_PALADIN_AURORA_RESIST"] end
         else
-          local data = g_paladinInfo.data[ roleOrders[1] ]
+          local data = paladinInfo.data[ roleOrders[1] ]
           if data then buffOrder = data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOS"] .. "/" .. _RL["RL_PALADIN_AURORA_DEVO"] end
-          data = g_paladinInfo.data[ roleOrders[2] ]
+          data = paladinInfo.data[ roleOrders[2] ]
           if data then buffOrder = buffOrder .. ", " .. data.name .. " - " .. _RL["RL_PALADIN_BLESS_CLASS"] .. "/" .. _RL["RL_PALADIN_AURORA_CONC"] end
-          data = g_paladinInfo.data[ roleOrders[3] ]
+          data = paladinInfo.data[ roleOrders[3] ]
           if data then buffOrder = buffOrder .. ", " .. data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOK"] .. "/" .. _RL["RL_PALADIN_AURORA_RESIST"] end
         end        
       end
     end
-  elseif g_paladinInfo.totalNum >= 4 then
-    if g_paladinInfo.numTanker == 0 then
-      local data = g_paladinInfo.data[ roleOrders[1] ]
+  elseif paladinInfo.totalNum >= 4 then
+    if paladinInfo.numTanker == 0 then
+      local data = paladinInfo.data[ roleOrders[1] ]
       if data then buffOrder = data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOW"] .. "/" .. _RL["RL_PALADIN_AURORA_CONC"] end
-      data = g_paladinInfo.data[ roleOrders[2] ]
+      data = paladinInfo.data[ roleOrders[2] ]
       if data then buffOrder = buffOrder .. ", " .. data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOK"] .. "/" .. _RL["RL_PALADIN_AURORA_DEVO"] end
-      data = g_paladinInfo.data[ roleOrders[3] ]
+      data = paladinInfo.data[ roleOrders[3] ]
       if data then buffOrder = buffOrder .. ", " .. data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOM"] .. "/" .. _RL["RL_PALADIN_AURORA_RESIST"] end
     else
-      if g_paladinInfo.numTanker == 1 and g_paladinInfo.numHealer == 1 then
-        local data = g_paladinInfo.data[ roleOrders[1] ]
+      if paladinInfo.numTanker == 1 and paladinInfo.numHealer == 1 then
+        local data = paladinInfo.data[ roleOrders[1] ]
         if data then buffOrder = data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOS"] .. "/" .. _RL["RL_PALADIN_AURORA_DEVO"] end
-        data = g_paladinInfo.data[ roleOrders[2] ]
+        data = paladinInfo.data[ roleOrders[2] ]
         if data then buffOrder = buffOrder .. ", " .. data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOW"] .. "/" .. _RL["RL_PALADIN_AURORA_CONC"] end
-        data = g_paladinInfo.data[ roleOrders[3] ]
+        data = paladinInfo.data[ roleOrders[3] ]
         if data then buffOrder = buffOrder .. ", " .. data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOK"] .. "/" .. _RL["RL_PALADIN_AURORA_FIRE"] end
-        data = g_paladinInfo.data[ roleOrders[4] ]
+        data = paladinInfo.data[ roleOrders[4] ]
         if data then buffOrder = buffOrder .. ", " .. data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOM"] .. "/" .. _RL["RL_PALADIN_AURORA_FROST"] end
       else
-        local data = g_paladinInfo.data[ roleOrders[1] ]
+        local data = paladinInfo.data[ roleOrders[1] ]
         if data then buffOrder = data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOS"] .. "/" .. _RL["RL_PALADIN_AURORA_DEVO"] end
-        data = g_paladinInfo.data[ roleOrders[2] ]
+        data = paladinInfo.data[ roleOrders[2] ]
         if data then buffOrder = buffOrder .. ", " .. data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOK"] .. "/" .. _RL["RL_PALADIN_AURORA_FIRE"] end
-        data = g_paladinInfo.data[ roleOrders[3] ]
+        data = paladinInfo.data[ roleOrders[3] ]
         if data then buffOrder = buffOrder .. ", " .. data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOW"] .. "/" .. _RL["RL_PALADIN_AURORA_CONC"] end
-        data = g_paladinInfo.data[ roleOrders[4] ]
+        data = paladinInfo.data[ roleOrders[4] ]
         if data then buffOrder = buffOrder .. ", " .. data.name .. " - " .. _RL["RL_PALADIN_BLESS_GBOM"] .. "/" .. _RL["RL_PALADIN_AURORA_FROST"] end
       end        
     end
   end
 
   if buffOrder then
-    local chatType = "RAID_WARNING"
     buffMsg = buffMsg .. buffOrder
-    SendChatMessage(buffMsg, chatType)
   else
-    print(L["No Pally here"])
+    buffMsg = L["No Pally here"]
   end
+
+  return buffMsg
 end
 
 
@@ -241,7 +149,7 @@ end
 -- testCase format : xMxTxHxDxKxC   
 -- (M -- total, T -- tanker, H -- healer, D -- DPS, K -- drum of King, C -- DISC )
 function Buff_Test_UpdateRaidRosterInfo(testCase)
-  g_paladinInfo =  { totalNum=0, numTanker=0, numHealer=0, numDps=0, data={} }
+  paladinInfo =  { totalNum=0, numTanker=0, numHealer=0, numDps=0, data={} }
   
   local totalNum = testCase:sub(1,1)
   local numTanker = testCase:sub(3,3)
@@ -250,30 +158,30 @@ function Buff_Test_UpdateRaidRosterInfo(testCase)
   g_bUseDrumOfKing = testCase:sub(9,9) == "1"
   g_raid_has_disc = testCase:sub(11,11) == "1"
 
-  print("total:" .. g_paladinInfo.totalNum .. ", Tanker:" .. numTanker .. " ,Healer:" .. numHealer .. ", DPS:" .. numDps .. ", Drum:" .. tostring(g_bUseDrumOfKing) .. ", disc:" .. tostring(g_raid_has_disc) )
+  print("total:" .. paladinInfo.totalNum .. ", Tanker:" .. numTanker .. " ,Healer:" .. numHealer .. ", DPS:" .. numDps .. ", Drum:" .. tostring(g_bUseDrumOfKing) .. ", disc:" .. tostring(g_raid_has_disc) )
 
   for i = 1, numTanker do
     local unitId = "raid" .. i
     local name = "TANKER" .. i
     local role = "MAINTANK"
-    Buff_UpdateRoleType(unitId, name, role, g_paladinInfo)
+    Buff_UpdateRoleType(unitId, name, role, paladinInfo)
   end
 
   for i = 1, numHealer do
     local unitId = "raid" .. i
     local name = "HEALER" .. i
     local role = "HEALER"
-    Buff_UpdateRoleType(unitId, name, role, g_paladinInfo)
+    Buff_UpdateRoleType(unitId, name, role, paladinInfo)
   end
 
   for i = 1, numDps do
     local unitId = "raid" .. i
     local name = "DPS" .. i
     local role = "DPS"
-    Buff_UpdateRoleType(unitId, name, role, g_paladinInfo)
+    Buff_UpdateRoleType(unitId, name, role, paladinInfo)
   end  
 
-  --print("g_paladinInfo.totalNum: " .. g_paladinInfo.totalNum)
+  --print("paladinInfo.totalNum: " .. paladinInfo.totalNum)
 end
 
 

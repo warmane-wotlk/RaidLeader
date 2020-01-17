@@ -56,6 +56,7 @@ if L then
 	L["RL_BUTTON_FREEFORALL_LOOT"] = ""
 	L["RL_BUTTON_SET_MT"] = "맨탱"
 	L["RL_BUTTON_SET_OT"] = "부탱"
+	L["RL_BUTTON_NOTIFY_MT_OT"] = "탱 공지"
 
 	L["RL_BUTTON_TRANSPARENCY"] = "-"
 	L["RL_BUTTON_CLOSE"]  = "닫기"
@@ -96,6 +97,8 @@ if L then
 
 	L["Type my MS Change if you want"] = "변경하고자 하는 당신의 주특정보를 넣으세요."
 	L["My MS Change"] = "주특 변경"
+	L["Fatal - Failed to load roster info"] = "에러 - 공격대 정보를 읽어오는데 실패."
+	L["Please assign tanker with /mt /ma"] = "/mt /ma를 이용해서 탱커를 지정해주세요."
 end
 
 

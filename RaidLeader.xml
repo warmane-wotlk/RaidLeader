@@ -89,7 +89,7 @@
 				</Texture>
 			</Layer>
 			<Layer>
-				<FontString name="RL_Title_txt" inherits="GameFontHighlight" text="RaidLeader-Sunmudang v0.2">
+				<FontString name="RL_Title_txt" inherits="GameFontHighlight" text="RaidLeader-Sunmudang v0.3">
 					<Anchors>
 						<Anchor point="TOP" relativePoint="TOP">
 							<Offset>
@@ -629,7 +629,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						Buff_Get_Paladin_Orders();
+						RLF_Button_Paladin_Buff_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());
@@ -1331,7 +1331,7 @@
 					</OnLoad>
 				</Scripts>
 			</Button>
-			<Button name="RL_BUTTON_SET_MT" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="MT">
+			<Button name="RL_BUTTON_NOTIFY_MT_OT" inherits="UIPanelButtonTemplate" parent="RaidLeader_Frame" frameStrata="HIGH" text="MT/OT">
 				<Size>
 					<AbsDimension x="39" y="23" />
 				</Size>
@@ -1342,7 +1342,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_SetMT_OT_OnClick(self:GetName());
+						RLF_Button_Notify_MT_OT_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						 RLF_Button_Show_ToolTip(self:GetName());

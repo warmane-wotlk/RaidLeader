@@ -56,6 +56,7 @@ if L then
 	L["RL_BUTTON_FREEFORALL_LOOT"] = ""
 	L["RL_BUTTON_SET_MT"] = "MT"
 	L["RL_BUTTON_SET_OT"] = "OT"
+	L["RL_BUTTON_NOTIFY_MT_OT"] = "MT/OT"
 
 	L["RL_BUTTON_TRANSPARENCY"] = "-"
 	L["RL_BUTTON_CLOSE"]  = "Close"
@@ -96,5 +97,7 @@ if L then
 
 	L["Type my MS Change if you want"] = "Type my MS Change if you want"
 	L["My MS Change"] = "My MS Change"
+	L["Fatal - Failed to load roster info"] = "Fatal - Failed to load roster info"
+	L["Please assign tanker with /mt /ma"] = "Please assign tanker with /mt /ma"
 end
 

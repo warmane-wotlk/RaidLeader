@@ -5,6 +5,9 @@ RaidLeaderData = {
 	recruitInfo = { zone = "", sub = "", gear = "5.0k+", needHealer = true, needTanker = true };
 };
 
+
+function printf(...) SELECTED_CHAT_FRAME:AddMessage('|cff0061ff[RaidLeader]: '..format(...)) end
+
 function RLF_Toggle()
   if not RaidLeader_Frame:IsVisible() then
     RaidLeader_Frame:Show()

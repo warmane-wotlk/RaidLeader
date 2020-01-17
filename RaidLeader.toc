@@ -14,6 +14,7 @@ event.lua
 Messages.lua
 
 RaidLeader.lua
+RaidRosterInfo.lua
 Popup.lua
 Buff.lua
 ButtonAction.lua

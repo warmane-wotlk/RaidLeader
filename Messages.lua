@@ -13,6 +13,8 @@ RL_PALADIN_BUFFS_KOR = {
 	RL_PALADIN_AURORA_FROST = "냉기저항";
 	RL_PALADIN_AURORA_FIRE = "화염저항";
 	RL_PALADIN_AURORA_PONY = "성전사오라";
+
+	["Paladin Buff Order : "] = "기사님들 버프 : ";
 };
 
 RL_PALADIN_BUFFS_ENG = {
@@ -28,6 +30,8 @@ RL_PALADIN_BUFFS_ENG = {
 	RL_PALADIN_AURORA_FROST = "Frost";
 	RL_PALADIN_AURORA_FIRE = "Fire";
 	RL_PALADIN_AURORA_PONY = "Pony";
+
+	["Paladin Buff Order : "] = "Paladin Buff Order : ";
 };
 
 
@@ -78,6 +82,7 @@ RL_MESSAGE_ENG = {
 
 	RL_BUTTON_SET_MT_MSG = "Mark RED X mark on Main tanker";
 	RL_BUTTON_SET_OT_MSG = "Mark Blue Square mark on Assist tanker";
+	RL_BUTTON_NOTIFY_MT_OT_MSG = "Attention!! Mark RED X mark on MT, Blue Square mark on OT";
 	RL_BUTTON_SET_HC_NM_MSG = "toggle HC and NM difficulty";
 
 	RL_BUTTON_PORTAL_MSG = "Mage, please open the Portal to Dalaran";
@@ -141,6 +146,7 @@ RL_MESSAGE_TOOLTIP_ENG = {
 
 	RL_BUTTON_SET_MT_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_SET_MT_MSG"] .. "\'";
 	RL_BUTTON_SET_OT_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_SET_OT_MSG"] .. "\'";
+	RL_BUTTON_NOTIFY_MT_OT_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_NOTIFY_MT_OT_MSG"] .. "\'";
 	RL_BUTTON_SET_HC_NM_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_SET_HC_NM_MSG"] .. "\'";
 
 	RL_BUTTON_PORTAL_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_PORTAL_MSG"] .. "\'";
@@ -200,6 +206,7 @@ RL_MESSAGE_KOR = {
 
 	RL_BUTTON_SET_MT_MSG = "맨탱에게 빨간색 X 마크했습니다.";
 	RL_BUTTON_SET_OT_MSG = "부탱에게 파란색 사각형 마크했습니다.";
+	RL_BUTTON_NOTIFY_MT_OT_MSG = "맨탱에게 빨간색 X 마크, 부탱에게 파란색 사각형 마크";
 	RL_BUTTON_SET_HC_NM_MSG = "난이도를 영웅/일반 토글한다.";
 
 	RL_BUTTON_PORTAL_MSG = "법사님, 달라란 포탈 열어주세요.";
@@ -263,6 +270,7 @@ RL_MESSAGE_TOOLTIP_KOR = {
 
 	RL_BUTTON_SET_MT_TOOLTIP = "\'" .. L["RL_BUTTON_SET_MT_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_BUTTON_SET_OT_TOOLTIP = "\'" .. L["RL_BUTTON_SET_OT_MSG"] .. "\' 를 공격대 경보한다.";
+	RL_BUTTON_NOTIFY_MT_OT_TOOLTIP = "\'" .. L["RL_BUTTON_NOTIFY_MT_OT_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_BUTTON_SET_HC_NM_TOOLTIP = "\'" .. L["RL_BUTTON_SET_HC_NM_MSG"] .. "\' 를 공격대 경보한다.";
 
 	RL_BUTTON_PORTAL_TOOLTIP = "\'" .. L["RL_BUTTON_PORTAL_MSG"] .. "\' 를 공격대 경보한다.";
