@@ -47,6 +47,8 @@ function RL_add_event_listener(event, callback, userparam)
 end
 
 function RL_remove_event_listener (event, listener)
-	registry[event][listener] = nil
-	UnregisterOrphanedEvent(event)
+	if registry[event] ~= nil then
+		registry[event][listener] = nil
+		UnregisterOrphanedEvent(event)
+	end
 end
