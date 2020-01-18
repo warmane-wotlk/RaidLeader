@@ -95,10 +95,12 @@ if L then
 	L["Error failed to load LibGroupTalents"] = "failed to load LibGroupTalents from libs folder."
 	L["Please choose the target"] = "Please choose the target"
 	L["Reset MS Change Informations"] = "Reset MS Change Informations"
+	L["Expire MS Change Time"] = "Expire MS Change Time(1min)"
 
 	L["Type my MS Change if you want"] = "Type my MS Change if you want"
 	L["My MS Change"] = "My MS Change"
 	L["Fatal - Failed to load roster info"] = "Fatal - Failed to load roster info"
 	L["Please assign tanker with /mt /ma"] = "Please assign tanker with /mt for MT /ma for OT (/clearmt, /clearma for clear)"
+	L["WOW Error! Need to relog!"] = "WOW Error! Need to relog!"
 end
 

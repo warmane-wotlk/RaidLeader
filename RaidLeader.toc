@@ -10,7 +10,8 @@ libs.xml
 
 localization.en.lua
 localization.kr.lua
-event.lua
+Timer.lua
+Event.lua
 Messages.lua
 
 RaidLeader.lua

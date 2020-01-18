@@ -89,7 +89,7 @@
 				</Texture>
 			</Layer>
 			<Layer>
-				<FontString name="RL_Title_txt" inherits="GameFontHighlight" text="RaidLeader-Sunmudang v0.3">
+				<FontString name="RL_Title_txt" inherits="GameFontHighlight" text="RaidLeader-Sunmudang v0.4">
 					<Anchors>
 						<Anchor point="TOP" relativePoint="TOP">
 							<Offset>
@@ -538,6 +538,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
+						DoReadyCheck()
 						RLF_Button_RaidWarning_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>

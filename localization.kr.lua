@@ -95,11 +95,13 @@ if L then
 	L["Error failed to load LibGroupTalents"] = "LibGroupTalents가 libs퐅더밑에 없습니다."
 	L["Please choose the target"] = "목표를 먼저 설정해주세요."
 	L["Reset MS Change Informations"] = "주특 변경정보를 초기화했습니다."
+	L["Expire MS Change Time"] = "주특 변경 시간(1분)이 끝났습니다."
 
 	L["Type my MS Change if you want"] = "변경하고자 하는 당신의 주특정보를 넣으세요."
 	L["My MS Change"] = "주특 변경"
 	L["Fatal - Failed to load roster info"] = "에러 - 공격대 정보를 읽어오는데 실패."
 	L["Please assign tanker with /mt /ma"] = "맨탱의 경우 /mt, 부탱의 경우 /ma를 이용해서 탱커를 지정해주세요. (취소는 /clearmt, /clearma)"
+	L["WOW Error! Need to relog!"] = "월드오브워크래프트 에러 - 재접해주세요."
 end
 
 

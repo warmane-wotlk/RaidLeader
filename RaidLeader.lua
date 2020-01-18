@@ -18,8 +18,13 @@ end
 
 function RL_GetGlobalChannelNumber()
     local chanList = { GetChannelList() }
+
+    if chanList == nil or #chanList == 0 then      
+      return -1
+    end
+
     for i=1, #chanList, 2 do
-        if chanList[i+1] == "global" then
+        if string.lower(chanList[i+1]) == "global" then
             return chanList[i]
         end
     end 

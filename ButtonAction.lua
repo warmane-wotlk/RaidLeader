@@ -23,6 +23,43 @@ mschange_channel_listeners = {
 
 mschange_messages = {}
 
+function RLF_ChangeButtonText(button, param)
+  local font = button:GetNormalFontObject();
+  if param == "OFF" then
+    button:SetNormalFontObject("GameFontNormal");
+  elseif font then
+    font:SetTextColor(0.25, 1, 0, 1);
+    button:SetNormalFontObject(font);
+  end
+end
+
+-- say raid warning message
+function RLF_Button_RaidWarning_OnClick(param)
+  if param then
+    local combatMsgId = param .. "_MSG"
+    local RLL = RL_LoadRaidWarningData()
+
+    if UnitInRaid("player") == nil then
+      msgChannel = "PARTY"
+    else 
+      local rank = select(2, GetRaidRosterInfo(GetNumRaidMembers()))
+
+      if rank == nil or rank ~= 0 then
+        msgChannel = "RAID_WARNING"
+      else
+        msgChannel = "RAID"
+      end
+    end
+
+    local msg = RLL[combatMsgId]
+    if msg ~= nil then
+      SendChatMessage(msg, msgChannel);
+    else
+      SendChatMessage(param, msgChannel);
+    end
+  end
+end
+
 
 -- My MS Change Popup
 function RL_Callback_Update_MyMS(...)
@@ -75,23 +112,42 @@ local function RL_event_handler(self, event, message, sender)
   end
 end
 
-function RL_Enable_MSChange_Listen()
-  RL_GetMyMSChange()
-  for channel, listener in pairs(mschange_channel_listeners) do
-    if table.getn(listener) == 0 then
-      mschange_channel_listeners[channel] = RL_add_event_listener(channel, RL_event_handler)
-    else
-    end
-  end
-end
+local timerMsChange = {}
 
 function RL_Disable_MSChange_Listen()
-  printf(L["Reset MS Change Informations"])
   for channel, listener in pairs(mschange_channel_listeners) do
     RL_remove_event_listener(channel, listener)
     wipe(mschange_channel_listeners[channel])
   end
 
+  RLF_ChangeButtonText(RL_BUTTON_MS_CHANGE, "OFF")
+
+  RL_kill_timer(timerMsChange)
+  wipe(timerMsChange)
+end
+
+local function RL_Expire_MSChange_Timer()
+  printf(L["Expire MS Change Time"])
+  RL_Disable_MSChange_Listen()
+end
+
+function RL_Enable_MSChange_Listen()
+  RL_GetMyMSChange()
+  for channel, listener in pairs(mschange_channel_listeners) do
+    if table.getn(listener) == 0 then
+      mschange_channel_listeners[channel] = RL_add_event_listener(channel, RL_event_handler)
+    end
+  end
+
+  RLF_ChangeButtonText(RL_BUTTON_MS_CHANGE, "ON")
+
+  timerMsChange = RL_set_timer(60, RL_Expire_MSChange_Timer, false)
+end
+
+local function RL_Clear_MSChange_Info()
+  RL_Disable_MSChange_Listen()
+
+  printf(L["Reset MS Change Informations"])
   wipe(mschange_messages)
 end
 
@@ -223,32 +279,7 @@ function RLF_Button_SetLootMethod_OnClick(id)
   end
 end
 
--- say raid warning message
-function RLF_Button_RaidWarning_OnClick(param)
-  if param then
-  	local combatMsgId = param .. "_MSG"
-    local RLL = RL_LoadRaidWarningData()
 
-    if UnitInRaid("player") == nil then
-      msgChannel = "PARTY"
-    else 
-      local rank = select(2, GetRaidRosterInfo(GetNumRaidMembers()))
-
-      if rank == nil or rank ~= 0 then
-        msgChannel = "RAID_WARNING"
-      else
-        msgChannel = "RAID"
-      end
-    end
-
-    local msg = RLL[combatMsgId]
-    if msg ~= nil then
-      SendChatMessage(msg, msgChannel);
-    else
-      SendChatMessage(param, msgChannel);
-    end
-  end
-end
 
 -- not use
 function RLF_Button_SetLeader_OnClick()
@@ -311,7 +342,8 @@ function RL_RaidZoneButton_OnClick(frame, arg1, arg2, checked)
 	--UIDropDownMenu_SetSelectedID(RaidLeader_Zone_DropDownMenu, frame:GetID())
   UIDROPDOWNMENU_SHOW_TIME = 1
   if RaidLeaderData.recruitInfo.zone ~= arg1 or RaidLeaderData.recruitInfo.sub ~= arg2 then    
-    RL_Disable_MSChange_Listen()
+    RL_Clear_MSChange_Info()
+    RLF_Button_AutoFlood_OnClick("RL_BUTTON_FLOOD_OFF")
   end
   RaidLeaderData.recruitInfo.zone = arg1
   RaidLeaderData.recruitInfo.sub  = arg2
@@ -378,7 +410,10 @@ local function _GetRaidFindMessage()
   end
 
   if raid_size <= 2 * curr_size then
-    reqMembers = " (" .. curr_size .. "/" .. string.sub(r.sub, 1, 2) .. ")"
+    if curr_size >= raid_size then
+      curr_size = raid_size - 1
+    end
+    reqMembers = " (" .. curr_size .. "/" .. tostring(raid_size) .. ")"
   else
     reqMembers = ""
   end
@@ -403,24 +438,35 @@ local function _GetRaidFindMessage()
   return msg
 end
 
+local bAutoFloodOn = false
+
 -- JoinChannelByName does not work
-function RLF_Button_AutoFlood_OnClick(param)
-  if param == "RL_BUTTON_FLOOD_ON" then
+function RLF_Button_AutoFlood_OnClick(id)
+  if id == "RL_BUTTON_FLOOD_ON" then
     
     local globalChannelNum = RL_GetGlobalChannelNumber()
-    if globalChannelNum == 0 then
+    if globalChannelNum == -1 then
+      printf(L["WOW Error! Need to relog!"])
+    elseif globalChannelNum == 0 then
       printf(L["Please join global channel and then try again"])
-	elseif RaidLeaderData.recruitInfo.zone == "" then
-	  printf(L["Please choose the raid instance"])
+	  elseif RaidLeaderData.recruitInfo.zone == "" then
+	    printf(L["Please choose the raid instance"])
     else
       local raidfindMsg = _GetRaidFindMessage()
-      SlashCmdList["AUTOFLOODSETCHANNEL"](globalChannelNum)
-      SlashCmdList["AUTOFLOODSETRATE"](20)
       SlashCmdList["AUTOFLOODSETMESSAGE"](raidfindMsg)
-      SlashCmdList["AUTOFLOOD"]("on")
+
+      if bAutoFloodOn == false then
+        SlashCmdList["AUTOFLOODSETCHANNEL"](globalChannelNum)
+        SlashCmdList["AUTOFLOODSETRATE"](20)      
+        SlashCmdList["AUTOFLOOD"]("on")
+        RLF_ChangeButtonText(RL_BUTTON_FLOOD_ON, "ON")
+      end      
+      bAutoFloodOn = true
     end
   else
     SlashCmdList["AUTOFLOOD"]("off")
+    RLF_ChangeButtonText(RL_BUTTON_FLOOD_ON, "OFF")
+    bAutoFloodOn = false
   end
 end
 
