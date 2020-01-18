@@ -4,6 +4,7 @@ RL_PALADIN_BUFFS_KOR = {
 	RL_PALADIN_BLESS_GBOK = "상급 왕축";
 	RL_PALADIN_BLESS_GBOS = "상급 성축";
 	RL_PALADIN_BLESS_GBOM = "상급 힘축";
+	RL_PALADIN_BLESS_GBOW = "상급 지축";
 	RL_PALADIN_BLESS_CLASS = "클래스";
 
 	RL_PALADIN_AURORA_DEVO = "기원오라";
@@ -13,6 +14,7 @@ RL_PALADIN_BUFFS_KOR = {
 	RL_PALADIN_AURORA_FROST = "냉기저항";
 	RL_PALADIN_AURORA_FIRE = "화염저항";
 	RL_PALADIN_AURORA_PONY = "성전사오라";
+	RL_PALADIN_AURORA_RESIST = "보스에 맞는 저항";
 
 	["Paladin Buff Order : "] = "기사님들 버프 : ";
 };
@@ -21,6 +23,7 @@ RL_PALADIN_BUFFS_ENG = {
 	RL_PALADIN_BLESS_GBOK = "GBOK";
 	RL_PALADIN_BLESS_GBOS = "GBOS";
 	RL_PALADIN_BLESS_GBOM = "GBOM";
+	RL_PALADIN_BLESS_GBOW = "GBOW";
 	RL_PALADIN_BLESS_CLASS = "Class";
 
 	RL_PALADIN_AURORA_DEVO = "Devo";
@@ -30,6 +33,7 @@ RL_PALADIN_BUFFS_ENG = {
 	RL_PALADIN_AURORA_FROST = "Frost";
 	RL_PALADIN_AURORA_FIRE = "Fire";
 	RL_PALADIN_AURORA_PONY = "Pony";
+	RL_PALADIN_AURORA_RESIST = "Right Resist per BOSS";
 
 	["Paladin Buff Order : "] = "Paladin Buff Order : ";
 };
