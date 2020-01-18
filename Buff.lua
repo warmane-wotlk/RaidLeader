@@ -1,5 +1,11 @@
 local L  = LibStub("AceLocale-3.0"):GetLocale("RaidLeader", true)
 
+local g_bUseDrumOfKing = false
+
+function Buff_Use_DrumOfKing(bUse)
+  g_bUseDrumOfKing = bUse
+end
+
 -- return Orders -- TANKER1, TANKER2, ... , HEALER1, HEALER2, ..., DPS1, DPS2 ...
 local function Buff_GetIdxOrder(playerInfo)
   local idxOrders = {}

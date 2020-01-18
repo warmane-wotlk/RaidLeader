@@ -8,7 +8,7 @@ if L then
 	L["RL_BUTTON_CURE_POISON"]  = "Poison"
 	L["RL_BUTTON_CURE_CURSE"]  = "Curse"
 	L["RL_BUTTON_DISPELL"] = "Magic"
-	L["RL_BUTTON_DPS_ADD"]  = "ADD"
+	L["RL_BUTTON_DPS_ADD"]  = "dps ADD"
 	L["RL_BUTTON_MOVE_UR_ASS"] = "MOVE"
 	L["RL_BUTTON_STOP_DPS"] = "NO DPS"
 	L["RL_BUTTON_WIPE"]  = "Wipe"
@@ -33,7 +33,7 @@ if L then
 	L["RL_BUTTON_PALADIN_BUFF"] = "P.Buff"
 	L["RL_BUTTON_ETC_BUFF"] = "R.Buff"
 	L["RL_BUTTON_FOOD"] = "Food"
-	L["RL_BUTTON_MS_CHANGE"] = "MS Change"
+	L["RL_BUTTON_MS_CHANGE"] = "Chg MS"
 	L["RL_BUTTON_RAID_START"] = "Start"
 	L["RL_BUTTON_ROLL_NOW"] = "Roll"
 	L["RL_BUTTON_HERO_MODE"] = "HC"
@@ -44,7 +44,7 @@ if L then
 	L["RL_BUTTON_MS_CHANGE_NOTIFY"] = "Tell MS"
 
     -- marks
-	L["RL_BUTTON_CLEAR_ICONS"] = "Clear Marks"
+	L["RL_BUTTON_CLEAR_ICONS"] = "Clr Mark"
 
 
 	-- general
@@ -63,6 +63,7 @@ if L then
 	L["RL_BUTTON_SET_HC_NM"] = "HC/NM"
 	L["RL_CHECKBUTTON_NEED_HEALER"] = "Healer"
 	L["RL_CHECKBUTTON_NEED_TANKER"] = "Tanker"
+	L["RL_BUTTON_TBD_1"] = "TBD"
 
 	-- zone name
 	L["EE10"] = "The Eye of Eternity - 10"
@@ -98,6 +99,6 @@ if L then
 	L["Type my MS Change if you want"] = "Type my MS Change if you want"
 	L["My MS Change"] = "My MS Change"
 	L["Fatal - Failed to load roster info"] = "Fatal - Failed to load roster info"
-	L["Please assign tanker with /mt /ma"] = "Please assign tanker with /mt /ma"
+	L["Please assign tanker with /mt /ma"] = "Please assign tanker with /mt for MT /ma for OT (/clearmt, /clearma for clear)"
 end
 

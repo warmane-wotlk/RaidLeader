@@ -7,7 +7,6 @@ if not LibGT then
   return 
 end
 
-local g_bUseDrumOfKing = false
 local g_raid_has_disc = false
 
 local g_playersInfo = {}

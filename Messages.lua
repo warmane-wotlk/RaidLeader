@@ -69,6 +69,7 @@ RL_MESSAGE_ENG = {
 	RL_BUTTON_HOP_MSG  = "Pally, use HOP... Hands of Protection";
 	RL_BUTTON_HOF_MSG  = "Pally, use HOF... Hands of Freedom on TANK";
 	RL_BUTTON_DPS_BOSS_MSG = "All, Nuke BOSS!!!";
+	RL_CHECKBUTTON_DRUM_OF_KING_MSG = "|cffffffff|Hitem:49634:0:0:0:0:0:0:0:80|h[Drums of the Wild]|h|r";
 
 	RL_BUTTON_CLEAR_ICONS_MSG = "";
 	RL_BUTTON_CLOSE_MSG  = "";
@@ -82,13 +83,14 @@ RL_MESSAGE_ENG = {
 
 	RL_BUTTON_SET_MT_MSG = "Mark RED X mark on Main tanker";
 	RL_BUTTON_SET_OT_MSG = "Mark Blue Square mark on Assist tanker";
-	RL_BUTTON_NOTIFY_MT_OT_MSG = "Attention!! Mark RED X mark on MT, Blue Square mark on OT";
-	RL_BUTTON_SET_HC_NM_MSG = "toggle HC and NM difficulty";
+	RL_BUTTON_NOTIFY_MT_OT_MSG = "Attention!! Mark RED X mark ({rt7}) on MT, Blue Square mark({rt6}) on OT";
+	RL_BUTTON_SET_HC_NM_MSG = "toggle HC and NM difficulty";	
 
 	RL_BUTTON_PORTAL_MSG = "Mage, please open the Portal to Dalaran";
 	RL_BUTTON_SHARE_QUEST_MSG = "I've shared Weekly Quest, if you dont get it, check whether you have other MUST DIE quest or you've done for this week.";
 	RL_BUTTON_DBM_PULL_MSG = "Everyone be ready. We are going to nuke the Boss!!! RESPECT THE TIMER!!";
 	RL_BUTTON_MS_CHANGE_NOTIFY_MSG = "Here is MS change information.";
+	RL_BUTTON_TBD_1_MSG = "TBD";
 
 	RL_CHECKBUTTON_NEED_HEALER_MSG = "Check if Healer is needed in Raid";
 	RL_CHECKBUTTON_NEED_TANKER_MSG = "Check if Tanker is needed in Raid";
@@ -153,10 +155,12 @@ RL_MESSAGE_TOOLTIP_ENG = {
 	RL_BUTTON_SHARE_QUEST_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_SHARE_QUEST_MSG"] .. "\'";
 	RL_BUTTON_DBM_PULL_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_DBM_PULL_MSG"] .. "\'";
 	RL_BUTTON_MS_CHANGE_NOTIFY_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_MS_CHANGE_NOTIFY_MSG"] .. "\'";
+	RL_CHECKBUTTON_DRUM_OF_KING_TOOLTIP = "Use - \'" .. L["RL_CHECKBUTTON_DRUM_OF_KING_MSG"] .. "\'";
+	RL_BUTTON_TBD_1_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_TBD_1_MSG"] .. "\'";
 
 	RL_CHECKBUTTON_NEED_HEALER_TOOLTIP = "Set the value of - \'" .. L["RL_CHECKBUTTON_NEED_HEALER_MSG"] .. "\'";
 	RL_CHECKBUTTON_NEED_TANKER_TOOLTIP = "Set the value of - \'" .. L["RL_CHECKBUTTON_NEED_TANKER_MSG"] .. "\'";
-	RL_CHECKBUTTON_LANGUAGE_TOOLTIP = "Set the value of - \'" .. L["RL_CHECKBUTTON_LANGUAGE_MSG"] .. "\'";
+	RL_CHECKBUTTON_LANGUAGE_TOOLTIP = "Set the value of - \'" .. L["RL_CHECKBUTTON_LANGUAGE_MSG"] .. "\'";	
 };
 
 	-- combat msg
@@ -193,6 +197,7 @@ RL_MESSAGE_KOR = {
 	RL_BUTTON_HOP_MSG = "기사님, 보손!!! 보손!!!";
 	RL_BUTTON_HOF_MSG = "기사님, 탱커에게 자손!!! 자손!!!";
 	RL_BUTTON_DPS_BOSS_MSG = "보스!!! 보스 공격해주세요.";
+	RL_CHECKBUTTON_DRUM_OF_KING_MSG = "|cffffffff|Hitem:49634:0:0:0:0:0:0:0:80|h[야생의 북]|h|r";
 
 	RL_BUTTON_CLEAR_ICONS_MSG = "";
 	RL_BUTTON_CLOSE_MSG = "";
@@ -206,13 +211,14 @@ RL_MESSAGE_KOR = {
 
 	RL_BUTTON_SET_MT_MSG = "맨탱에게 빨간색 X 마크했습니다.";
 	RL_BUTTON_SET_OT_MSG = "부탱에게 파란색 사각형 마크했습니다.";
-	RL_BUTTON_NOTIFY_MT_OT_MSG = "맨탱에게 빨간색 X 마크, 부탱에게 파란색 사각형 마크";
+	RL_BUTTON_NOTIFY_MT_OT_MSG = "맨탱에게 빨간색 X 마크({rt7}), 부탱에게 파란색 사각형 마크({rt6})";
 	RL_BUTTON_SET_HC_NM_MSG = "난이도를 영웅/일반 토글한다.";
 
 	RL_BUTTON_PORTAL_MSG = "법사님, 달라란 포탈 열어주세요.";
 	RL_BUTTON_SHARE_QUEST_MSG = "주간퀘스트 공유했습니다. 받지 못하신분은 이미하셨거나, 퀘스트 목록에 MUST DIE를 지워주세요.";
 	RL_BUTTON_DBM_PULL_MSG = "공격 시작합니다!!!!. 타이머를 준수해주세요.";
 	RL_BUTTON_MS_CHANGE_NOTIFY_MSG = "주특/부특 변경사항입니다.";
+	RL_BUTTON_TBD_1_MSG = "TBD";
 
 	RL_CHECKBUTTON_NEED_HEALER_MSG = "힐러가 레이드에 필요하면 체크해주세요.";
 	RL_CHECKBUTTON_NEED_TANKER_MSG = "탱커가 레이드에 필요하면 체크해주세요.";
@@ -257,6 +263,7 @@ RL_MESSAGE_TOOLTIP_KOR = {
 	RL_BUTTON_HOP_TOOLTIP = "\'" .. L["RL_BUTTON_HOP_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_BUTTON_HOF_TOOLTIP = "\'" .. L["RL_BUTTON_HOF_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_BUTTON_DPS_BOSS_TOOLTIP = "\'" .. L["RL_BUTTON_DPS_BOSS_MSG"] .. "\' 를 공격대 경보한다.";
+	RL_CHECKBUTTON_DRUM_OF_KING_TOOLTIP = "\'" .. L["RL_CHECKBUTTON_DRUM_OF_KING_MSG"] .. "\' 를 이용한다.";
 
 	RL_BUTTON_CLEAR_ICONS_TOOLTIP = "전투 마크를 없앤다.";
 	RL_BUTTON_CLOSE_TOOLTIP = "해당 애드온을 닫는다.";
@@ -277,7 +284,8 @@ RL_MESSAGE_TOOLTIP_KOR = {
 	RL_BUTTON_SHARE_QUEST_TOOLTIP = "\'" .. L["RL_BUTTON_SHARE_QUEST_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_BUTTON_DBM_PULL_TOOLTIP = "\'" .. L["RL_BUTTON_DBM_PULL_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_BUTTON_MS_CHANGE_NOTIFY_TOOLTIP = "\'" .. L["RL_BUTTON_MS_CHANGE_NOTIFY_MSG"] .. "\' 를 공격대 경보한다.";
-
+	RL_BUTTON_TBD_1_TOOLTIP = "\'" .. L["RL_BUTTON_TBD_1_MSG"] .. "\' 를 공격대 경보한다.";
+ 
 	RL_CHECKBUTTON_NEED_HEALER_TOOLTIP = "\'" .. L["RL_CHECKBUTTON_NEED_HEALER_MSG"] .. "\' 를 의미한다.";
 	RL_CHECKBUTTON_NEED_TANKER_TOOLTIP = "\'" .. L["RL_CHECKBUTTON_NEED_TANKER_MSG"] .. "\' 를 의미한다.";
 	RL_CHECKBUTTON_LANGUAGE_TOOLTIP = "\'" .. L["RL_CHECKBUTTON_LANGUAGE_MSG"] .. "\' 를 의미한다.";

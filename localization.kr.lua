@@ -63,6 +63,7 @@ if L then
 	L["RL_BUTTON_SET_HC_NM"] = "영웅/일반"
 	L["RL_CHECKBUTTON_NEED_HEALER"] = "Healer"
 	L["RL_CHECKBUTTON_NEED_TANKER"] = "Tanker"
+	L["RL_BUTTON_TBD_1"] = "TBD"
 
 	-- zone name
 	L["EE10"] = "영원의 눈 - 10인"
@@ -98,7 +99,7 @@ if L then
 	L["Type my MS Change if you want"] = "변경하고자 하는 당신의 주특정보를 넣으세요."
 	L["My MS Change"] = "주특 변경"
 	L["Fatal - Failed to load roster info"] = "에러 - 공격대 정보를 읽어오는데 실패."
-	L["Please assign tanker with /mt /ma"] = "/mt /ma를 이용해서 탱커를 지정해주세요."
+	L["Please assign tanker with /mt /ma"] = "맨탱의 경우 /mt, 부탱의 경우 /ma를 이용해서 탱커를 지정해주세요. (취소는 /clearmt, /clearma)"
 end
 
 
