@@ -1,6 +1,6 @@
 
 RaidLeaderData = {
-  version     = "v0.2";
+  version     = "v0.5";
 	useKorean   = false;
 	recruitInfo = { zone = "", sub = "", gear = "5.0k+", needHealer = true, needTanker = true };
 };
@@ -52,6 +52,13 @@ function RLF_OnLoad(frame)
   end
   SLASH_RAIDLEADER_GUI_POPUP1   = "/raidleader"
   SLASH_RAIDLEADER_GUI_POPUP2   = "/rld"
+
+
+  SlashCmdList["RAIDLEADER_CHILD"] = function()
+    RL_ZoneFrameToggle()
+  end
+  SLASH_RAIDLEADER_CHILD1   = "/rlc"
+  
   -- ui
   if frame:IsVisible() then
     frame:Hide()

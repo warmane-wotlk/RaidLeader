@@ -1,0 +1,161 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Frame name="RL_DialogTitled" virtual="true" hidden="true" parent="UIParent" toplevel="true" movable="true" frameStrata="DIALOG" enableMouse="true">
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32" />
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parent_Background" setAllPoints="true">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="10" y="-10" />
+							</Offset>
+						</Anchor>
+						<Anchor point="BOTTOMRIGHT">
+							<Offset>
+								<AbsDimension x="-10" y="10" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color a="0.5" r="0" g="0" b="0" />
+				</Texture>
+			</Layer>
+			<Layer>
+				<Texture name="$parentHeaderRegion" file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Size>
+						<AbsDimension x="300" y="64" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="12" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="$parent_Header" font="Fonts\ARIALN.ttf" text="Title">
+					<Size>
+						<AbsDimension x="140" y="13" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="-2" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="15" />
+					</FontHeight>
+					<Color r="1" g="1" b="1" />
+					<Shadow>
+						<offset>
+							<AbsDimension x="2" y="-2" />
+						</offset>
+						<color r="0" g="0" b="0" />
+					</Shadow>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForDrag("LeftButton");
+			</OnLoad>
+			<OnDragStart>
+				this:StartMoving();
+				this.isMoving = true;
+			</OnDragStart>
+			<OnDragStop>
+				this:StopMovingOrSizing();
+				this.isMoving = false;
+			</OnDragStop>
+		</Scripts>
+	</Frame>
+	<Frame name="RL_ZoneFrame" inherits="RL_DialogTitled">
+		<Size>
+			<AbsDimension x="250" y="160" />
+		</Size>
+		<Anchors>
+			<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" x="306" y="313">
+				<offset>
+					<AbsDimension x="5" y="5" />
+				</offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="FontString_SelectBoss" inherits="GameFontNormal" text="Select BOSS in Raid">
+					<Size x="135" y="20" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="54" y="-26" />
+					</Anchors>
+				</FontString>
+				<FontString name="FontString_ZoneBoss_Command" inherits="GameFontNormal" text="Raid Command">
+					<Size x="135" y="20" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="54" y="-75" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="RL_Zone_BOSS_DropDownMenu" inherits="UIDropDownMenuTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="10" y="-46" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_SelectRaidBoss_OnClick();
+					</OnClick>
+					<OnLoad>
+						UIDropDownMenu_Initialize(self, RLF_Button_SelectRaidBoss_Initialize, nil)
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Button name="RL_ZONE_BOSS_LEFT" inherits="UIPanelButtonTemplate" text="">
+				<Size x="32" y="32" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="158" y="-44" />
+				</Anchors>
+				<NormalTexture inherits="UIPanelButtonUpTexture" file="Interface\BUTTONS\UI-SpellbookIcon-PrevPage-Up">
+					<TexCoords left="0" right="1" top="0" bottom="1" />
+				</NormalTexture>
+				<PushedTexture inherits="UIPanelButtonDownTexture" file="Interface\BUTTONS\UI-SpellbookIcon-PrevPage-Down">
+					<TexCoords left="0" right="1" top="0" bottom="1" />
+				</PushedTexture>
+				<DisabledTexture inherits="UIPanelButtonDisabledTexture" file="Interface\BUTTONS\UI-SpellbookIcon-PrevPage-Disabled">
+					<TexCoords left="0" right="1" top="0" bottom="1" />
+				</DisabledTexture>
+			</Button>
+			<Button name="RL_ZONE_BOSS_RIGHT" inherits="UIPanelButtonTemplate" text="">
+				<Size x="32" y="32" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="184" y="-44" />
+				</Anchors>
+				<NormalTexture inherits="UIPanelButtonUpTexture" file="Interface\BUTTONS\UI-SpellbookIcon-NextPage-Up">
+					<TexCoords left="0" right="1" top="0" bottom="1" />
+				</NormalTexture>
+				<PushedTexture inherits="UIPanelButtonDownTexture" file="Interface\BUTTONS\UI-SpellbookIcon-NextPage-Down">
+					<TexCoords left="0" right="1" top="0" bottom="1" />
+				</PushedTexture>
+				<DisabledTexture inherits="UIPanelButtonDisabledTexture" file="Interface\BUTTONS\UI-SpellbookIcon-NextPage-Disabled">
+					<TexCoords left="0" right="1" top="0" bottom="1" />
+				</DisabledTexture>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				RL_Zone_OnLoad();
+			</OnLoad>
+		</Scripts>
+	</Frame>
+</Ui>
