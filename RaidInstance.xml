@@ -42,7 +42,7 @@
 						</Anchor>
 					</Anchors>
 				</Texture>
-				<FontString name="$parent_Header" font="Fonts\ARIALN.ttf" text="Title">
+				<FontString name="$parent_Header" inherits="GameFontHighlight" text="Title">
 					<Size>
 						<AbsDimension x="140" y="13" />
 					</Size>
@@ -80,6 +80,7 @@
 			</OnDragStop>
 		</Scripts>
 	</Frame>
+
 	<Frame name="RL_ZoneFrame" inherits="RL_DialogTitled">
 		<Size>
 			<AbsDimension x="250" y="160" />
@@ -114,11 +115,8 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_SelectRaidBoss_OnClick();
+						RLF_Button_SelectRaidZoneBoss_OnClick(self);
 					</OnClick>
-					<OnLoad>
-						UIDropDownMenu_Initialize(self, RLF_Button_SelectRaidBoss_Initialize, nil)
-					</OnLoad>
 				</Scripts>
 			</Frame>
 			<Button name="RL_ZONE_BOSS_LEFT" inherits="UIPanelButtonTemplate" text="">
@@ -151,10 +149,24 @@
 					<TexCoords left="0" right="1" top="0" bottom="1" />
 				</DisabledTexture>
 			</Button>
+			<Button name="$parent_Button1" inherits="UIPanelCloseButton">
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-4" y="-4"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RL_ZoneFrameToggle();
+					</OnClick>
+				</Scripts>
+			</Button>			
 		</Frames>
 		<Scripts>
 			<OnLoad>
-				RL_Zone_OnLoad();
+				RL_Zone_OnLoad(self);
 			</OnLoad>
 		</Scripts>
 	</Frame>

@@ -1,7 +1,19 @@
 -- Author      : bozlo
 -- Create Date : 1/4/2020 12:30:16 PM
 
--- raid select
+local raidZoneBossInfos = {}
+local zoneName = ""
+local buttonObj = {}
+local selectedBoss = {}
+
+
+function RL_ZoneFrameToggle()
+  if RL_ZoneFrame:IsVisible() then
+    RL_ZoneFrame:Hide()
+  else
+    RL_ZoneFrame:Show()
+  end
+end
 
 function RLF_Zone_RaidWarning(param)
   if param then
@@ -33,7 +45,7 @@ function RLF_Zone_Buttons_OnClick(self)
   RLF_Zone_RaidWarning(self:GetName())
 end
 
-function RLF_Zone_CreateButtons(id, x, y)
+local function RLF_Zone_CreateButton(id, x, y)
   local L = RL_Zone_LoadButtonText()
   local button = CreateFrame("Button", id, RL_ZoneFrame, UIPanelButtonTemplate)
   button:SetPoint("CENTER", RL_ZoneFrame, "TOPLEFT", x, y)
@@ -73,66 +85,96 @@ local numOfButtonsInRow = 3
 local ptNext = { dx = 0 + buttonSize.x, dy = 0 + buttonSize.y }
 local frameGapY = ptNext.dy
 
-local zoneName = "RL_ZONE_ICC_MARROWGAR"
-local commands = RL_ZONE_ICC_INFO[zoneName]
-local buttonObj = {}
+local function RL_Zone_UpdateTitle()
+  if zoneName == "" then
+    RL_ZoneFrame_Header:SetText("No Zone Info")
+  else
+    RL_ZoneFrame_Header:SetText(zoneName .. RaidLeaderData.recruitInfo.sub)
+  end
+end
 
-function RL_Zone_OnLoad()
+local function RL_Zone_UpdateButtons(id)
+  if raidZoneBossInfos == nil or not next(raidZoneBossInfos) then return end
+  selectedBoss = raidZoneBossInfos[id]
+
+  -- create buttons
+  local commands = selectedBoss.commands
+
   local fx = frameSize.x
   local fy = frameSize.y
 
   local x = ptStart.x
-	local y = ptStart.y
-	for i = 1, #commands do
-    local id = zoneName .. "_" .. commands[i]
-    buttonObj[id] = RLF_Zone_CreateButtons(id, x, y)
+  local y = ptStart.y
+  for i = 1, #commands do
+    local commandId = selectedBoss.id .. "_" .. commands[i]
+    buttonObj[commandId] = RLF_Zone_CreateButton(commandId, x, y)
 
-		x = x + ptNext.dx
+    x = x + ptNext.dx
 
-		if i % numOfButtonsInRow == 0 then 
-			x = ptStart.x
-			y = y - ptNext.dy
-		end    
-	end
+    if i % numOfButtonsInRow == 0 then
+      x = ptStart.x
+      y = y - ptNext.dy
+    end    
+  end
 
   fy = fy + frameGapY * math.floor((#commands - 1 ) / numOfButtonsInRow)
 
-  RL_ZoneFrame:SetSize(fx, fy)
+  RL_ZoneFrame:SetSize(fx, fy)  
 end
 
+local function RL_Zone_Initialize()
+  zoneName = RaidLeaderData.recruitInfo.zone
+  if zoneName == "" then return end
+  raidZoneBossInfos = RL_ZONE_INFOS[zoneName]
 
-function RL_ZoneFrameToggle()
-  if RL_ZoneFrame:IsVisible() then
-    RL_ZoneFrame:Hide()
-  else
-    RL_ZoneFrame:Show()
+  RL_Zone_UpdateTitle()
+
+  RL_Zone_UpdateButtons(1)
+end
+
+local function RLF_Zone_OnEvent(frame, event)
+  if event == "PLAYER_LOGIN" then
+    printf("RLF_Zone_OnEvent")
+    RL_Zone_Initialize()
+
+    UIDropDownMenu_Initialize(RL_Zone_BOSS_DropDownMenu, RLF_Button_SelectRaidBoss_Initialize, nil)
+    UIDropDownMenu_SetText(RL_Zone_BOSS_DropDownMenu, selectedBoss.name)
   end
 end
 
-local raidZoneBossInfos = {}
+function RL_Zone_OnLoad(frame)
+  SlashCmdList["RAIDLEADER_CHILD"] = function()
+    RL_ZoneFrameToggle()
+  end
+  SLASH_RAIDLEADER_CHILD1   = "/rlc"
 
-
--- frame:GetID() == arg1
-function RL_RaidZoneButton_OnClick(frame, arg1, arg2, checked)
-  -- can't hanle check mark at level 2
-  --UIDropDownMenu_SetSelectedID(RaidLeader_Zone_DropDownMenu, frame:GetID())
-
-  UIDropDownMenu_SetText(RL_Zone_BOSS_DropDownMenu, arg1)  
+  frame:SetMovable(true)
+  frame:EnableMouse(true)
+  frame:SetScript("OnMouseDown", function() frame:StartMoving() end)
+  frame:SetScript("OnMouseUp",   function() frame:StopMovingOrSizing() end)
+  frame:RegisterEvent("PLAYER_LOGIN" )         -- Fired when saved variables are loaded
+  frame:SetScript("OnEvent", RLF_Zone_OnEvent)
 end
 
-function RLF_Button_SelectRaidBoss_OnClick()
-  ToggleDropDownMenu(1, nil, RL_Zone_BOSS_DropDownMenu, self, 0, 0);
+-- Dropdown Frame
+function RL_RaidZoneBossButton_OnClick(frame, arg1, arg2, checked)
+  UIDropDownMenu_SetText(RL_Zone_BOSS_DropDownMenu, arg1)
+  RL_Zone_UpdateButtons(arg2)
+end
+
+function RLF_Button_SelectRaidZoneBoss_OnClick(frame)
+  ToggleDropDownMenu(1, nil, RL_Zone_BOSS_DropDownMenu, frame, 0, 0);
 end
 
 function RLF_Button_SelectRaidBoss_Initialize(frame, level, menuList)
---  UIDropDownMenu_SetWidth(RL_Zone_BOSS_DropDownMenu, 110)  
-
+  if raidZoneBossInfos == nil or not next(raidZoneBossInfos) then return end
+  
   local info = UIDropDownMenu_CreateInfo()
   for i = 1, #raidZoneBossInfos do
-    info.text     = raidZoneInfos[i].name
-    info.func     = RL_RaidZoneButton_OnClick
-    info.arg1     = raidZoneInfos[i].name
+    info.text     = raidZoneBossInfos[i].name
+    info.func     = RL_RaidZoneBossButton_OnClick
+    info.arg1     = raidZoneBossInfos[i].name
+    info.arg2     = i
     UIDropDownMenu_AddButton(info, 1)
   end
 end
-

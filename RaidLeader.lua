@@ -1,14 +1,5 @@
 
-RaidLeaderData = {
-  version     = "v0.5";
-	useKorean   = false;
-	recruitInfo = { zone = "", sub = "", gear = "5.0k+", needHealer = true, needTanker = true };
-};
-
-
-function printf(...) SELECTED_CHAT_FRAME:AddMessage('|cff0061ff[RaidLeader]: '..format(...)) end
-
-function RLF_Toggle()
+function RLF_Main_Toggle()
   if not RaidLeader_Frame:IsVisible() then
     RaidLeader_Frame:Show()
   else
@@ -48,17 +39,11 @@ function RLF_OnLoad(frame)
 
   -- slash commands
   SlashCmdList["RAIDLEADER_GUI_POPUP"] = function()
-    RLF_Toggle()
+    RLF_Main_Toggle()
   end
   SLASH_RAIDLEADER_GUI_POPUP1   = "/raidleader"
   SLASH_RAIDLEADER_GUI_POPUP2   = "/rld"
-
-
-  SlashCmdList["RAIDLEADER_CHILD"] = function()
-    RL_ZoneFrameToggle()
-  end
-  SLASH_RAIDLEADER_CHILD1   = "/rlc"
-  
+ 
   -- ui
   if frame:IsVisible() then
     frame:Hide()

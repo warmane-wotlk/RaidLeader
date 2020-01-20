@@ -325,4 +325,9 @@ function RL_LoadRaidWarningTooltipData()
   end
 end
 
+-- Zone infos
+RL_ZONE_INFOS = {
+	ICC = RL_ZONE_ICC_INFO;
+};
+
 

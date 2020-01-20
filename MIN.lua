@@ -26,7 +26,7 @@ end
 
 -- Put your code that you want on a minimap button click here.  arg1="LeftButton", "RightButton", etc
 function RCMD_MinimapButton_OnClick()
-	RLF_Toggle()
+	RLF_Main_Toggle()
 end
 
 function RCMD_MinimapButton_OnEnter()

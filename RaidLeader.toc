@@ -1,5 +1,5 @@
 ## Title: Raid Leader
-## Version: 0.0.1
+## Version: 0.5
 ## Author: Sunmudang
 ## Interface: 30300
 ## Notes: "Use /RLD to toggle the addon"
@@ -8,11 +8,13 @@
 
 libs.xml
 
+Core.lua
+
 localization.en.lua
 localization.kr.lua
 Timer.lua
 Event.lua
-Messages.lua
+
 Messages_ICC.lua
 Messages_TOC.lua
 Messages_RS.lua
@@ -20,6 +22,7 @@ Messages_VOC.lua
 Messages_OS.lua
 Messages_NAXX.lua
 Messages_UL.lua
+Messages.lua
 
 RaidInstance.lua
 RaidInstance.xml
