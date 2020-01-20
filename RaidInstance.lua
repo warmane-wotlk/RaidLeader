@@ -1,11 +1,13 @@
 -- Author      : bozlo
 -- Create Date : 1/4/2020 12:30:16 PM
 
+local L  = LibStub("AceLocale-3.0"):GetLocale("RaidLeader", true)
+
 local raidZoneBossInfos = {}
 local zoneName = ""
 local buttonObj = {}
 local selectedBoss = {}
-
+local selectedBossIdx = 1
 
 function RL_ZoneFrameToggle()
   if RL_ZoneFrame:IsVisible() then
@@ -41,18 +43,19 @@ function RLF_Zone_RaidWarning(param)
   end
 end
 
-function RLF_Zone_Buttons_OnClick(self)  
-  RLF_Zone_RaidWarning(self:GetName())
+function RLF_Zone_Buttons_OnClick(self)
+
+  RLF_Zone_RaidWarning(buttonObj[self:GetName()].id)
 end
 
 local function RLF_Zone_CreateButton(id, x, y)
-  local L = RL_Zone_LoadButtonText()
+  local ZL = RL_Zone_LoadButtonText()
   local button = CreateFrame("Button", id, RL_ZoneFrame, UIPanelButtonTemplate)
   button:SetPoint("CENTER", RL_ZoneFrame, "TOPLEFT", x, y)
   button:SetWidth(75)
   button:SetHeight(23)
-  
-  button:SetText(L[id])
+ 
+  button:SetText(ZL[buttonObj[id].id])
   button:SetNormalFontObject("GameFontNormal")
 
   local ntex = button:CreateTexture()
@@ -95,7 +98,17 @@ end
 
 local function RL_Zone_UpdateButtons(id)
   if raidZoneBossInfos == nil or not next(raidZoneBossInfos) then return end
+
+  if id < 1 then    id = 1 end
+  if id > #raidZoneBossInfos then id = #raidZoneBossInfos end
+
+  selectedBossIdx = id
   selectedBoss = raidZoneBossInfos[id]
+
+  -- hide all of buttons
+  for _, button in pairs(buttonObj) do
+    button.frame:Hide()
+  end
 
   -- create buttons
   local commands = selectedBoss.commands
@@ -107,7 +120,17 @@ local function RL_Zone_UpdateButtons(id)
   local y = ptStart.y
   for i = 1, #commands do
     local commandId = selectedBoss.id .. "_" .. commands[i]
-    buttonObj[commandId] = RLF_Zone_CreateButton(commandId, x, y)
+    local buttonId  = "RL_ZONE_BOSS_BUTTON_ID_" .. i
+
+    if buttonObj[buttonId] then
+      local ZL = RL_Zone_LoadButtonText()
+      buttonObj[buttonId].id = commandId
+      buttonObj[buttonId].frame:SetText(ZL[buttonObj[buttonId].id])
+      buttonObj[buttonId].frame:Show()
+    else
+      buttonObj[buttonId] = { frame = {}, id = commandId }
+      buttonObj[buttonId].frame = RLF_Zone_CreateButton(buttonId, x, y)
+    end
 
     x = x + ptNext.dx
 
@@ -134,12 +157,21 @@ end
 
 local function RLF_Zone_OnEvent(frame, event)
   if event == "PLAYER_LOGIN" then
-    printf("RLF_Zone_OnEvent")
     RL_Zone_Initialize()
 
     UIDropDownMenu_Initialize(RL_Zone_BOSS_DropDownMenu, RLF_Button_SelectRaidBoss_Initialize, nil)
     UIDropDownMenu_SetText(RL_Zone_BOSS_DropDownMenu, selectedBoss.name)
   end
+end
+
+function RLF_Button_Boss_Move_OnClick(id)
+  local newId = selectedBossIdx - 1
+  if id == "RL_ZONE_BOSS_RIGHT" then
+    newId = selectedBossIdx + 1
+  end
+
+  RL_Zone_UpdateButtons(newId)
+  UIDropDownMenu_SetText(RL_Zone_BOSS_DropDownMenu, selectedBoss.name)
 end
 
 function RL_Zone_OnLoad(frame)
@@ -168,7 +200,7 @@ end
 
 function RLF_Button_SelectRaidBoss_Initialize(frame, level, menuList)
   if raidZoneBossInfos == nil or not next(raidZoneBossInfos) then return end
-  
+
   local info = UIDropDownMenu_CreateInfo()
   for i = 1, #raidZoneBossInfos do
     info.text     = raidZoneBossInfos[i].name

@@ -133,6 +133,11 @@
 				<DisabledTexture inherits="UIPanelButtonDisabledTexture" file="Interface\BUTTONS\UI-SpellbookIcon-PrevPage-Disabled">
 					<TexCoords left="0" right="1" top="0" bottom="1" />
 				</DisabledTexture>
+				<Scripts>
+					<OnClick>
+						RLF_Button_Boss_Move_OnClick(self:GetName());
+					</OnClick>
+				</Scripts>				
 			</Button>
 			<Button name="RL_ZONE_BOSS_RIGHT" inherits="UIPanelButtonTemplate" text="">
 				<Size x="32" y="32" />
@@ -148,6 +153,11 @@
 				<DisabledTexture inherits="UIPanelButtonDisabledTexture" file="Interface\BUTTONS\UI-SpellbookIcon-NextPage-Disabled">
 					<TexCoords left="0" right="1" top="0" bottom="1" />
 				</DisabledTexture>
+				<Scripts>
+					<OnClick>
+						RLF_Button_Boss_Move_OnClick(self:GetName());
+					</OnClick>
+				</Scripts>				
 			</Button>
 			<Button name="$parent_Button1" inherits="UIPanelCloseButton">
 				<Anchors>

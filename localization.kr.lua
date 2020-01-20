@@ -102,6 +102,7 @@ if L then
 	L["Fatal - Failed to load roster info"] = "에러 - 공격대 정보를 읽어오는데 실패."
 	L["Please assign tanker with /mt /ma"] = "맨탱의 경우 /mt, 부탱의 경우 /ma를 이용해서 탱커를 지정해주세요. (취소는 /clearmt, /clearma)"
 	L["WOW Error! Need to relog!"] = "월드오브워크래프트 에러 - 재접해주세요."
+	L["ERROR - Failed to create button with "] = "ERROR - 버튼 생성 실패함 "
 end
 
 

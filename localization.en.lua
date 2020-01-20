@@ -102,5 +102,6 @@ if L then
 	L["Fatal - Failed to load roster info"] = "Fatal - Failed to load roster info"
 	L["Please assign tanker with /mt /ma"] = "Please assign tanker with /mt for MT /ma for OT (/clearmt, /clearma for clear)"
 	L["WOW Error! Need to relog!"] = "WOW Error! Need to relog!"
+	L["ERROR - Failed to create button with "] = "ERROR - Failed to create button with "
 end
 
