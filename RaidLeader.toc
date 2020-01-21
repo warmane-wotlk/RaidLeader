@@ -22,6 +22,7 @@ Messages_VOA.lua
 Messages_OS.lua
 Messages_NAXX.lua
 Messages_UL.lua
+Messages_ONYX.lua
 Messages.lua
 
 RaidInstance.lua

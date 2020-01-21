@@ -12,7 +12,7 @@ RL_ZONE_ICC_DREAMWALKER = { "READY", "STACK" };
 RL_ZONE_ICC_SINDRAGOSA = { "READY", "STACK" };
 RL_ZONE_ICC_LICHKING = { "READY", "STACK" };
 
-RL_ZONE_ICC_INFO = { 
+RL_ZONE_INFOS["ICC"] = { 
 	{ name = "Marrowgar", id = "RL_ZONE_ICC_MARROWGAR", commands = RL_ZONE_ICC_MARROWGAR };
 	{ name = "Lady", id = "RL_ZONE_ICC_LADY", commands = RL_ZONE_ICC_LADY };
 	{ name = "GunShip", id = "RL_ZONE_ICC_GUNSHIP", commands = RL_ZONE_ICC_GUNSHIP };
@@ -27,7 +27,7 @@ RL_ZONE_ICC_INFO = {
 	{ name = "Lich King", id = "RL_ZONE_ICC_LICHKING", commands = RL_ZONE_ICC_LICHKING };
 };
 
-RL_ZONE_TEXT_ENG = {
+RL_ZONE_TEXT_ENG["ICC"] = {
 	RL_ZONE_ICC_MARROWGAR_READY = "Ready";
 	RL_ZONE_ICC_MARROWGAR_STACK = "Stack";
 	RL_ZONE_ICC_LADY_READY = "Ready";
@@ -39,7 +39,7 @@ RL_ZONE_TEXT_ENG = {
 	RL_ZONE_ICC_GUNSHIP_AGGRO = "Aggro";
 };
 
-RL_ZONE_TEXT_KOR = {
+RL_ZONE_TEXT_KOR["ICC"] = {
 	RL_ZONE_ICC_MARROWGAR_READY = "Ready";
 	RL_ZONE_ICC_MARROWGAR_STACK = "Stack";
 	RL_ZONE_ICC_LADY_READY = "Ready";
@@ -52,7 +52,7 @@ RL_ZONE_TEXT_KOR = {
 };
 
 
-RL_ZONE_MSG_ENG = {
+RL_ZONE_MSG_ENG["ICC"] = {
 	RL_ZONE_ICC_MARROWGAR_READY_MSG = "Listen Up! MT/OT stay together, others stack together under boss";
 	RL_ZONE_ICC_MARROWGAR_STACK_MSG = "Stack together under boss and DPS";
 	RL_ZONE_ICC_LADY_READY_MSG = "Ready for lady";
@@ -64,7 +64,7 @@ RL_ZONE_MSG_ENG = {
 	RL_ZONE_ICC_GUNSHIP_AGGRO_MSG = "Tank at ship takes Aggro";
 };
 
-RL_ZONE_MSG_KOR = {
+RL_ZONE_MSG_KOR["ICC"] = {
 	RL_ZONE_ICC_MARROWGAR_READY_MSG = "맨탱/부탱 같이 붙어서 있으시고, 나머지는 모두 보스밑에 모여서 공격해주세요.";
 	RL_ZONE_ICC_MARROWGAR_STACK_MSG = "모두 보스밑에 모여서 공격해주세요.";
 	RL_ZONE_ICC_LADY_READY_MSG = "여교주 갑니다.";
@@ -76,8 +76,8 @@ RL_ZONE_MSG_KOR = {
 	RL_ZONE_ICC_GUNSHIP_AGGRO_MSG = "배에 있는 탱커님 어글 잡아주세요.";	
 };
 
-local L = RL_ZONE_MSG_ENG
-RL_ZONE_TOOLTIP_ENG = {
+local L = RL_ZONE_MSG_ENG["ICC"]
+RL_ZONE_TOOLTIP_ENG["ICC"] = {
 	RL_ZONE_ICC_MARROWGAR_READY_TOOLTIP = "Raid warning - \'" .. L["RL_ZONE_ICC_MARROWGAR_READY_MSG"] .. "\'";
 	RL_ZONE_ICC_MARROWGAR_STACK_TOOLTIP = "Raid warning - \'" .. L["RL_ZONE_ICC_MARROWGAR_STACK_MSG"] .. "\'";
 	RL_ZONE_ICC_LADY_READY_TOOLTIP = "Raid warning - \'" .. L["RL_ZONE_ICC_LADY_READY_MSG"] .. "\'";
@@ -89,8 +89,8 @@ RL_ZONE_TOOLTIP_ENG = {
 	RL_ZONE_ICC_GUNSHIP_AGGRO_TOOLTIP = "Raid warning - \'" .. L["RL_ZONE_ICC_GUNSHIP_AGGRO_MSG"] .. "\'";	
 };
 
-L = RL_ZONE_MSG_KOR
-RL_ZONE_TOOLTIP_KOR = {
+L = RL_ZONE_MSG_KOR["ICC"]
+RL_ZONE_TOOLTIP_KOR["ICC"] = {
 	RL_ZONE_ICC_MARROWGAR_READY_TOOLTIP = "\'" .. L["RL_ZONE_ICC_MARROWGAR_READY_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_ZONE_ICC_MARROWGAR_STACK_TOOLTIP = "\'" .. L["RL_ZONE_ICC_MARROWGAR_STACK_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_ZONE_ICC_LADY_READY_TOOLTIP = "\'" .. L["RL_ZONE_ICC_LADY_READY_MSG"] .. "\' 를 공격대 경보한다.";
@@ -102,28 +102,28 @@ RL_ZONE_TOOLTIP_KOR = {
 	RL_ZONE_ICC_GUNSHIP_AGGRO_TOOLTIP = "\'" .. L["RL_ZONE_ICC_GUNSHIP_AGGRO_MSG"] .. "\' 를 공격대 경보한다.";	
 };
 
-function RL_Zone_LoadButtonText()
+function RL_Zone_LoadButtonText(zoneName)
   if GetLocale() == "koKR" then
-    return RL_ZONE_TEXT_KOR
+    return RL_ZONE_TEXT_KOR[zoneName]
   else
-    return RL_ZONE_TEXT_ENG
+    return RL_ZONE_TEXT_ENG[zoneName]
   end
 end
 
 
-function RL_Zone_LoadRaidWarningData()
+function RL_Zone_LoadRaidWarningData(zoneName)
   if RaidLeaderData.useKorean then
-    return RL_ZONE_MSG_KOR
+    return RL_ZONE_MSG_KOR[zoneName]
   else
-    return RL_ZONE_MSG_ENG
+    return RL_ZONE_MSG_ENG[zoneName]
   end
 end
 
-function RL_Zone_LoadRaidWarningTooltipData()
+function RL_Zone_LoadRaidWarningTooltipData(zoneName)
   if RaidLeaderData.useKorean then
-    return RL_ZONE_TOOLTIP_KOR
+    return RL_ZONE_TOOLTIP_KOR[zoneName]
   else
-    return RL_ZONE_TOOLTIP_ENG
+    return RL_ZONE_TOOLTIP_ENG[zoneName]
   end
 end
 

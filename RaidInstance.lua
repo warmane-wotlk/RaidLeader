@@ -20,7 +20,7 @@ end
 function RLF_Zone_RaidWarning(param)
   if param then
     local combatMsgId = param .. "_MSG"
-    local RLL = RL_Zone_LoadRaidWarningData()
+    local RLL = RL_Zone_LoadRaidWarningData(zoneName)
 
     if UnitInRaid("player") == nil then
       msgChannel = "PARTY"
@@ -49,7 +49,7 @@ function RLF_Zone_Buttons_OnClick(self)
 end
 
 local function RLF_Zone_CreateButton(id, x, y)
-  local ZL = RL_Zone_LoadButtonText()
+  local ZL = RL_Zone_LoadButtonText(zoneName)
   local button = CreateFrame("Button", id, RL_ZoneFrame, UIPanelButtonTemplate)
   button:SetPoint("CENTER", RL_ZoneFrame, "TOPLEFT", x, y)
   button:SetWidth(75)
@@ -123,7 +123,7 @@ local function RL_Zone_UpdateButtons(id)
     local buttonId  = "RL_ZONE_BOSS_BUTTON_ID_" .. i
 
     if buttonObj[buttonId] then
-      local ZL = RL_Zone_LoadButtonText()
+      local ZL = RL_Zone_LoadButtonText(zoneName)
       buttonObj[buttonId].id = commandId
       buttonObj[buttonId].frame:SetText(ZL[buttonObj[buttonId].id])
       buttonObj[buttonId].frame:Show()
@@ -148,7 +148,7 @@ end
 local function RL_Zone_Initialize()
   zoneName = RaidLeaderData.recruitInfo.zone
   if zoneName == "" then return end
-  raidZoneBossInfos = RL_ZONE_INFOS[zoneName]
+  raidZoneBossInfos = RL_Zone_Infos(zoneName)
 
   RL_Zone_UpdateTitle()
 

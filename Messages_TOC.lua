@@ -12,7 +12,7 @@ RL_ZONE_TOC_DREAMWALKER = { "READY", "STACK" };
 RL_ZONE_TOC_SINDRAGOSA = { "READY", "STACK" };
 RL_ZONE_TOC_LICHKING = { "READY", "STACK" };
 
-RL_ZONE_TOC_INFO = { 
+RL_ZONE_INFOS["TOC"] = { 
 	{ name = "Marrowgar", id = "RL_ZONE_TOC_MARROWGAR", commands = RL_ZONE_TOC_MARROWGAR };
 	{ name = "Lady", id = "RL_ZONE_TOC_LADY", commands = RL_ZONE_TOC_LADY };
 	{ name = "GunShip", id = "RL_ZONE_TOC_GUNSHIP", commands = RL_ZONE_TOC_GUNSHIP };
@@ -27,7 +27,7 @@ RL_ZONE_TOC_INFO = {
 	{ name = "Lich King", id = "RL_ZONE_TOC_LICHKING", commands = RL_ZONE_TOC_LICHKING };
 };
 
-RL_ZONE_TEXT_ENG = {
+RL_ZONE_TEXT_ENG["TOC"] = {
 	RL_ZONE_TOC_MARROWGAR_READY = "Ready";
 	RL_ZONE_TOC_MARROWGAR_STACK = "Stack";
 	RL_ZONE_TOC_LADY_READY = "Ready";
@@ -39,7 +39,7 @@ RL_ZONE_TEXT_ENG = {
 	RL_ZONE_TOC_GUNSHIP_AGGRO = "Aggro";
 };
 
-RL_ZONE_TEXT_KOR = {
+RL_ZONE_TEXT_KOR["TOC"] = {
 	RL_ZONE_TOC_MARROWGAR_READY = "Ready";
 	RL_ZONE_TOC_MARROWGAR_STACK = "Stack";
 	RL_ZONE_TOC_LADY_READY = "Ready";
@@ -52,7 +52,7 @@ RL_ZONE_TEXT_KOR = {
 };
 
 
-RL_ZONE_MSG_ENG = {
+RL_ZONE_MSG_ENG["TOC"] = {
 	RL_ZONE_TOC_MARROWGAR_READY_MSG = "Listen Up! MT/OT stay together, others stack together under boss";
 	RL_ZONE_TOC_MARROWGAR_STACK_MSG = "Stack together under boss and DPS";
 	RL_ZONE_TOC_LADY_READY_MSG = "Ready for lady";
@@ -64,7 +64,7 @@ RL_ZONE_MSG_ENG = {
 	RL_ZONE_TOC_GUNSHIP_AGGRO_MSG = "Tank at ship takes Aggro";
 };
 
-RL_ZONE_MSG_KOR = {
+RL_ZONE_MSG_KOR["TOC"] = {
 	RL_ZONE_TOC_MARROWGAR_READY_MSG = "맨탱/부탱 같이 붙어서 있으시고, 나머지는 모두 보스밑에 모여서 공격해주세요.";
 	RL_ZONE_TOC_MARROWGAR_STACK_MSG = "모두 보스밑에 모여서 공격해주세요.";
 	RL_ZONE_TOC_LADY_READY_MSG = "여교주 갑니다.";
@@ -76,8 +76,8 @@ RL_ZONE_MSG_KOR = {
 	RL_ZONE_TOC_GUNSHIP_AGGRO_MSG = "배에 있는 탱커님 어글 잡아주세요.";	
 };
 
-local L = RL_ZONE_MSG_ENG
-RL_ZONE_TOOLTIP_ENG = {
+local L = RL_ZONE_MSG_ENG["TOC"]
+RL_ZONE_TOOLTIP_ENG["TOC"] = {
 	RL_ZONE_TOC_MARROWGAR_READY_TOOLTIP = "Raid warning - \'" .. L["RL_ZONE_TOC_MARROWGAR_READY_MSG"] .. "\'";
 	RL_ZONE_TOC_MARROWGAR_STACK_TOOLTIP = "Raid warning - \'" .. L["RL_ZONE_TOC_MARROWGAR_STACK_MSG"] .. "\'";
 	RL_ZONE_TOC_LADY_READY_TOOLTIP = "Raid warning - \'" .. L["RL_ZONE_TOC_LADY_READY_MSG"] .. "\'";
@@ -89,8 +89,8 @@ RL_ZONE_TOOLTIP_ENG = {
 	RL_ZONE_TOC_GUNSHIP_AGGRO_TOOLTIP = "Raid warning - \'" .. L["RL_ZONE_TOC_GUNSHIP_AGGRO_MSG"] .. "\'";	
 };
 
-L = RL_ZONE_MSG_KOR
-RL_ZONE_TOOLTIP_KOR = {
+L = RL_ZONE_MSG_KOR["TOC"]
+RL_ZONE_TOOLTIP_KOR["TOC"] = {
 	RL_ZONE_TOC_MARROWGAR_READY_TOOLTIP = "\'" .. L["RL_ZONE_TOC_MARROWGAR_READY_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_ZONE_TOC_MARROWGAR_STACK_TOOLTIP = "\'" .. L["RL_ZONE_TOC_MARROWGAR_STACK_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_ZONE_TOC_LADY_READY_TOOLTIP = "\'" .. L["RL_ZONE_TOC_LADY_READY_MSG"] .. "\' 를 공격대 경보한다.";
@@ -102,28 +102,5 @@ RL_ZONE_TOOLTIP_KOR = {
 	RL_ZONE_TOC_GUNSHIP_AGGRO_TOOLTIP = "\'" .. L["RL_ZONE_TOC_GUNSHIP_AGGRO_MSG"] .. "\' 를 공격대 경보한다.";	
 };
 
-function RL_Zone_LoadButtonText()
-  if GetLocale() == "koKR" then
-    return RL_ZONE_TEXT_KOR
-  else
-    return RL_ZONE_TEXT_ENG
-  end
-end
 
-
-function RL_Zone_LoadRaidWarningData()
-  if RaidLeaderData.useKorean then
-    return RL_ZONE_MSG_KOR
-  else
-    return RL_ZONE_MSG_ENG
-  end
-end
-
-function RL_Zone_LoadRaidWarningTooltipData()
-  if RaidLeaderData.useKorean then
-    return RL_ZONE_TOOLTIP_KOR
-  else
-    return RL_ZONE_TOOLTIP_ENG
-  end
-end
 
