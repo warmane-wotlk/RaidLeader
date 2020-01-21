@@ -18,7 +18,7 @@ Event.lua
 Messages_ICC.lua
 Messages_TOC.lua
 Messages_RS.lua
-Messages_VOC.lua
+Messages_VOA.lua
 Messages_OS.lua
 Messages_NAXX.lua
 Messages_UL.lua

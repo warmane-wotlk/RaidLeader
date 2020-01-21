@@ -344,10 +344,15 @@ function RL_RaidZoneButton_OnClick(frame, arg1, arg2, checked)
   if RaidLeaderData.recruitInfo.zone ~= arg1 or RaidLeaderData.recruitInfo.sub ~= arg2 then    
     RL_Clear_MSChange_Info()
     RLF_Button_AutoFlood_OnClick("RL_BUTTON_FLOOD_OFF")
+
+    RaidLeaderData.recruitInfo.zone = arg1
+    RaidLeaderData.recruitInfo.sub  = arg2
+    
+    RL_Zone_Reflesh_GUI()
   end
   RaidLeaderData.recruitInfo.zone = arg1
   RaidLeaderData.recruitInfo.sub  = arg2
-  UIDropDownMenu_SetText(RaidLeader_Zone_DropDownMenu, arg1 .. arg2)  
+  UIDropDownMenu_SetText(RaidLeader_Zone_DropDownMenu, arg1 .. arg2)
 end
 
 function RLF_Button_SelectRaid_OnClick()

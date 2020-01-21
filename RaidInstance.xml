@@ -115,7 +115,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_SelectRaidZoneBoss_OnClick(self);
+						RL_Button_SelectRaidZoneBoss_OnClick(self);
 					</OnClick>
 				</Scripts>
 			</Frame>
