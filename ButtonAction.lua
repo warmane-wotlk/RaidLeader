@@ -295,26 +295,6 @@ function RLF_Button_Invite_OnClick()
   InviteUnit("target")
 end
 
--- show tooltip
-function RLF_Button_Show_ToolTip(param)
-  if param then
-    local toolTipId = param .. "_TOOLTIP"
-    local RLL = RL_LoadRaidWarningTooltipData()
-    GameTooltip_SetDefaultAnchor( GameTooltip, UIParent )
-    GameTooltip:SetText( RLL[toolTipId] )
-    GameTooltip:Show()
-  end
-end
-
-function RLF_Button_Hide_ToolTip()
-  GameTooltip:Hide()
-end
-
--- change button text
-function RLF_Button_SetText_OnLoad(self, param)
-  self:SetText(L[param])
-end
-
 -- Northrend Raids
 local raidZoneInfos = {
   { name = "TOC",    zoneId = 543, sub = {"10nm", "10hc", "25nm", "25hc"}, resv = "<B+P+O Resv>", 

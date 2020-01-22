@@ -29,7 +29,7 @@
 					<Color a="0.5" r="0" g="0" b="0" />
 				</Texture>
 			</Layer>
-			<Layer>
+			<Layer level="BORDER">
 				<Texture name="$parentHeaderRegion" file="Interface\DialogFrame\UI-DialogBox-Header">
 					<Size>
 						<AbsDimension x="300" y="64" />
@@ -56,7 +56,6 @@
 					<FontHeight>
 						<AbsValue val="15" />
 					</FontHeight>
-					<Color r="1" g="1" b="1" />
 					<Shadow>
 						<offset>
 							<AbsDimension x="2" y="-2" />
@@ -80,30 +79,47 @@
 			</OnDragStop>
 		</Scripts>
 	</Frame>
-
 	<Frame name="RL_ZoneFrame" inherits="RL_DialogTitled">
 		<Size>
-			<AbsDimension x="250" y="160" />
+			<AbsDimension x="227" y="287" />
 		</Size>
 		<Anchors>
-			<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" x="306" y="313">
+			<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" x="298" y="215">
 				<offset>
 					<AbsDimension x="5" y="5" />
 				</offset>
 			</Anchor>
 		</Anchors>
 		<Layers>
+			<Layer level="BORDER">
+				<Texture file="Interface\MailFrame\MailPopup-Divider">
+					<Size>
+						<AbsDimension x="267" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="7" y="-164" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
 			<Layer level="OVERLAY">
 				<FontString name="FontString_SelectBoss" inherits="GameFontNormal" text="Select BOSS in Raid">
 					<Size x="135" y="20" />
 					<Anchors>
-						<Anchor point="TOPLEFT" x="54" y="-26" />
+						<Anchor point="TOPLEFT" x="45" y="-25" />
 					</Anchors>
 				</FontString>
-				<FontString name="FontString_ZoneBoss_Command" inherits="GameFontNormal" text="Raid Command">
-					<Size x="135" y="20" />
+				<FontString name="FontString_ZoneBoss_Command" inherits="GameFontNormal" text="Common Raid Command">
+					<Size x="162" y="20" />
 					<Anchors>
-						<Anchor point="TOPLEFT" x="54" y="-75" />
+						<Anchor point="TOPLEFT" x="34" y="-75" />
+					</Anchors>
+				</FontString>
+				<FontString name="FontString_ZoneBoss_Boss" inherits="GameFontNormal" text="Raid Command per Boss">
+					<Size x="183" y="20" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="23" y="-170" />
 					</Anchors>
 				</FontString>
 			</Layer>
@@ -111,7 +127,7 @@
 		<Frames>
 			<Frame name="RL_Zone_BOSS_DropDownMenu" inherits="UIDropDownMenuTemplate" id="1">
 				<Anchors>
-					<Anchor point="TOPLEFT" x="10" y="-46" />
+					<Anchor point="TOPLEFT" x="3" y="-46" />
 				</Anchors>
 				<Scripts>
 					<OnClick>
@@ -122,8 +138,13 @@
 			<Button name="RL_ZONE_BOSS_LEFT" inherits="UIPanelButtonTemplate" text="">
 				<Size x="32" y="32" />
 				<Anchors>
-					<Anchor point="TOPLEFT" x="158" y="-44" />
+					<Anchor point="TOPLEFT" x="151" y="-44" />
 				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_Boss_Move_OnClick(self:GetName());
+					</OnClick>
+				</Scripts>
 				<NormalTexture inherits="UIPanelButtonUpTexture" file="Interface\BUTTONS\UI-SpellbookIcon-PrevPage-Up">
 					<TexCoords left="0" right="1" top="0" bottom="1" />
 				</NormalTexture>
@@ -133,17 +154,17 @@
 				<DisabledTexture inherits="UIPanelButtonDisabledTexture" file="Interface\BUTTONS\UI-SpellbookIcon-PrevPage-Disabled">
 					<TexCoords left="0" right="1" top="0" bottom="1" />
 				</DisabledTexture>
-				<Scripts>
-					<OnClick>
-						RLF_Button_Boss_Move_OnClick(self:GetName());
-					</OnClick>
-				</Scripts>				
 			</Button>
 			<Button name="RL_ZONE_BOSS_RIGHT" inherits="UIPanelButtonTemplate" text="">
 				<Size x="32" y="32" />
 				<Anchors>
-					<Anchor point="TOPLEFT" x="184" y="-44" />
+					<Anchor point="TOPLEFT" x="177" y="-44" />
 				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_Boss_Move_OnClick(self:GetName());
+					</OnClick>
+				</Scripts>
 				<NormalTexture inherits="UIPanelButtonUpTexture" file="Interface\BUTTONS\UI-SpellbookIcon-NextPage-Up">
 					<TexCoords left="0" right="1" top="0" bottom="1" />
 				</NormalTexture>
@@ -153,17 +174,12 @@
 				<DisabledTexture inherits="UIPanelButtonDisabledTexture" file="Interface\BUTTONS\UI-SpellbookIcon-NextPage-Disabled">
 					<TexCoords left="0" right="1" top="0" bottom="1" />
 				</DisabledTexture>
-				<Scripts>
-					<OnClick>
-						RLF_Button_Boss_Move_OnClick(self:GetName());
-					</OnClick>
-				</Scripts>				
 			</Button>
-			<Button name="$parent_Button1" inherits="UIPanelCloseButton">
+			<Button name="RL_ZoneFrame_Button_CLOSE" inherits="UIPanelCloseButton">
 				<Anchors>
 					<Anchor point="TOPRIGHT">
 						<Offset>
-							<AbsDimension x="-4" y="-4"/>
+							<AbsDimension x="-4" y="-4" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -172,7 +188,223 @@
 						RL_ZoneFrameToggle();
 					</OnClick>
 				</Scripts>
-			</Button>			
+			</Button>
+			<Button name="RL_BUTTON_BLOODLUST" inherits="UIPanelButtonTemplate" parent="RL_ZoneFrame" text="Bloodlust">
+				<Size>
+					<AbsDimension x="68" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="14" y="-95" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_RaidWarning_OnClick(self:GetName());
+					</OnClick>
+					<OnEnter>
+						RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<Button name="RL_BUTTON_TANK_AGGRO" inherits="UIPanelButtonTemplate" parent="RL_ZoneFrame" text="Aggro">
+				<Size>
+					<AbsDimension x="68" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="80" y="-95" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_RaidWarning_OnClick(self:GetName());
+					</OnClick>
+					<OnEnter>
+						RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<Button name="RL_BUTTON_COMBAT_RESS" inherits="UIPanelButtonTemplate" parent="RL_ZoneFrame" text="CR">
+				<Size>
+					<AbsDimension x="68" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="146" y="-95" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_RaidWarning_OnClick(self:GetName());
+					</OnClick>
+					<OnEnter>
+						RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<Button name="RL_BUTTON_MD_TOT" inherits="UIPanelButtonTemplate" parent="RL_ZoneFrame" text="MD/TOT">
+				<Size>
+					<AbsDimension x="68" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="14" y="-141" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_RaidWarning_OnClick(self:GetName());
+					</OnClick>
+					<OnEnter>
+						RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<Button name="RL_BUTTON_DPS_BOSS" inherits="UIPanelButtonTemplate" parent="RL_ZoneFrame" text="DPS Boss">
+				<Size>
+					<AbsDimension x="68" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="14" y="-118" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_RaidWarning_OnClick(self:GetName());
+					</OnClick>
+					<OnEnter>
+						RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<Button name="RL_BUTTON_DPS_ADD" inherits="UIPanelButtonTemplate" parent="RL_ZoneFrame" text="DPS ADD">
+				<Size>
+					<AbsDimension x="68" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="80" y="-118" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_RaidWarning_OnClick(self:GetName());
+					</OnClick>
+					<OnEnter>
+						RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<Button name="RL_BUTTON_STOP_DPS" inherits="UIPanelButtonTemplate" parent="RL_ZoneFrame" text="STOP DPS">
+				<Size>
+					<AbsDimension x="68" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="146" y="-118" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_RaidWarning_OnClick(self:GetName());
+					</OnClick>
+					<OnEnter>
+						RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<Button name="RL_BUTTON_MOVE_UR_ASS" inherits="UIPanelButtonTemplate" parent="RL_ZoneFrame" text="Move">
+				<Size>
+					<AbsDimension x="68" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="80" y="-141" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_RaidWarning_OnClick(self:GetName());
+					</OnClick>
+					<OnEnter>
+						RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<Button name="RL_BUTTON_WIPE" inherits="UIPanelButtonTemplate" parent="RL_ZoneFrame" text="WIPE">
+				<Size>
+					<AbsDimension x="68" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="146" y="-141" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_RaidWarning_OnClick(self:GetName());
+					</OnClick>
+					<OnEnter>
+						RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						RLF_Button_SetText_OnLoad(self, self:GetName())
+					</OnLoad>
+				</Scripts>
+			</Button>
 		</Frames>
 		<Scripts>
 			<OnLoad>

@@ -1,3 +1,4 @@
+local L  = LibStub("AceLocale-3.0"):GetLocale("RaidLeader", true)
 
 RL_ZONE_UL_MARROWGAR = { "READY", "STACK" };
 RL_ZONE_UL_LADY = { "READY", "SPIRIT", "DARNAVAN"};
@@ -13,18 +14,18 @@ RL_ZONE_UL_SINDRAGOSA = { "READY", "STACK" };
 RL_ZONE_UL_LICHKING = { "READY", "STACK" };
 
 RL_ZONE_INFOS["UL"] = { 
-	{ name = "Marrowgar", id = "RL_ZONE_UL_MARROWGAR", commands = RL_ZONE_UL_MARROWGAR };
-	{ name = "Lady", id = "RL_ZONE_UL_LADY", commands = RL_ZONE_UL_LADY };
-	{ name = "GunShip", id = "RL_ZONE_UL_GUNSHIP", commands = RL_ZONE_UL_GUNSHIP };
-	{ name = "DeathBringer", id = "RL_ZONE_UL_DEATHBRINGER", commands = RL_ZONE_UL_DEATHBRINGER };
-	{ name = "Festergut", id = "RL_ZONE_UL_FESTERGUT", commands = RL_ZONE_UL_FESTERGUT };
-	{ name = "Rotface", id = "RL_ZONE_UL_ROTFACE", commands = RL_ZONE_UL_ROTFACE };
-	{ name = "Professor", id = "RL_ZONE_UL_PROFESSOR", commands = RL_ZONE_UL_PROFESSOR };
-	{ name = "Council", id = "RL_ZONE_UL_COUNCIL", commands = RL_ZONE_UL_COUNCIL };
-	{ name = "BloodQueen", id = "RL_ZONE_UL_BLOODQUEEN", commands = RL_ZONE_UL_BLOODQUEEN };
-	{ name = "Dreamwalker", id = "RL_ZONE_UL_DREAMWALKER", commands = RL_ZONE_UL_DREAMWALKER };
-	{ name = "Sindragosa", id = "RL_ZONE_UL_SINDRAGOSA", commands = RL_ZONE_UL_SINDRAGOSA };
-	{ name = "Lich King", id = "RL_ZONE_UL_LICHKING", commands = RL_ZONE_UL_LICHKING };
+	{ name = L["Marrowgar"], id = "RL_ZONE_ICC_MARROWGAR", commands = RL_ZONE_ICC_MARROWGAR };
+	{ name = L["Lady"], id = "RL_ZONE_ICC_LADY", commands = RL_ZONE_ICC_LADY };
+	{ name = L["GunShip"], id = "RL_ZONE_ICC_GUNSHIP", commands = RL_ZONE_ICC_GUNSHIP };
+	{ name = L["DeathBringer"], id = "RL_ZONE_ICC_DEATHBRINGER", commands = RL_ZONE_ICC_DEATHBRINGER };
+	{ name = L["Festergut"], id = "RL_ZONE_ICC_FESTERGUT", commands = RL_ZONE_ICC_FESTERGUT };
+	{ name = L["Rotface"], id = "RL_ZONE_ICC_ROTFACE", commands = RL_ZONE_ICC_ROTFACE };
+	{ name = L["Professor"], id = "RL_ZONE_ICC_PROFESSOR", commands = RL_ZONE_ICC_PROFESSOR };
+	{ name = L["Council"], id = "RL_ZONE_ICC_COUNCIL", commands = RL_ZONE_ICC_COUNCIL };
+	{ name = L["BloodQueen"], id = "RL_ZONE_ICC_BLOODQUEEN", commands = RL_ZONE_ICC_BLOODQUEEN };
+	{ name = L["Dreamwalker"], id = "RL_ZONE_ICC_DREAMWALKER", commands = RL_ZONE_ICC_DREAMWALKER };
+	{ name = L["Sindragosa"], id = "RL_ZONE_ICC_SINDRAGOSA", commands = RL_ZONE_ICC_SINDRAGOSA };
+	{ name = L["Lich King"], id = "RL_ZONE_ICC_LICHKING", commands = RL_ZONE_ICC_LICHKING };
 };
 
 RL_ZONE_TEXT_ENG["UL"] = {

@@ -63,7 +63,7 @@ if L then
 	L["RL_BUTTON_SET_HC_NM"] = "HC/NM"
 	L["RL_CHECKBUTTON_NEED_HEALER"] = "Healer"
 	L["RL_CHECKBUTTON_NEED_TANKER"] = "Tanker"
-	L["RL_BUTTON_TBD_1"] = "TBD"
+	L["RL_BUTTON_CALL_BOSS_FRAME"] = "BOSS"
 
 	-- zone name
 	L["EE10"] = "The Eye of Eternity - 10"
@@ -103,5 +103,20 @@ if L then
 	L["Please assign tanker with /mt /ma"] = "Please assign tanker with /mt for MT /ma for OT (/clearmt, /clearma for clear)"
 	L["WOW Error! Need to relog!"] = "WOW Error! Need to relog!"
 	L["ERROR - Failed to create button with "] = "ERROR - Failed to create button with "
+	L["Drums of the Wild"] = "Use Drums"
+
+	-- boss
+	L["Marrowgar"] = "Marrowgar"
+	L["Lady"] = "Lady"
+	L["GunShip"] = "GunShip"
+	L["DeathBringer"] = "DeathBringer"
+	L["Festergut"] = "Festergut"
+	L["Rotface"] = "Rotface" 
+	L["Professor"] = "Professor"
+	L["Council"] = "Council"
+	L["BloodQueen"] = "BloodQueen" 
+	L["Dreamwalker"] = "Dreamwalker"
+	L["Sindragosa"] = "Sindragosa"
+	L["Lich King"] = "Lich King"	
 end
 

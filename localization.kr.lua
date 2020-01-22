@@ -63,7 +63,7 @@ if L then
 	L["RL_BUTTON_SET_HC_NM"] = "영웅/일반"
 	L["RL_CHECKBUTTON_NEED_HEALER"] = "Healer"
 	L["RL_CHECKBUTTON_NEED_TANKER"] = "Tanker"
-	L["RL_BUTTON_TBD_1"] = "TBD"
+	L["RL_BUTTON_CALL_BOSS_FRAME"] = "보스프레임"
 
 	-- zone name
 	L["EE10"] = "영원의 눈 - 10인"
@@ -103,6 +103,22 @@ if L then
 	L["Please assign tanker with /mt /ma"] = "맨탱의 경우 /mt, 부탱의 경우 /ma를 이용해서 탱커를 지정해주세요. (취소는 /clearmt, /clearma)"
 	L["WOW Error! Need to relog!"] = "월드오브워크래프트 에러 - 재접해주세요."
 	L["ERROR - Failed to create button with "] = "ERROR - 버튼 생성 실패함 "
+	L["Drums of the Wild"] = "\'야생의 북\' 사용"
+
+
+	-- boss
+	L["Marrowgar"] = "매로우"
+	L["Lady"] = "여교주"
+	L["GunShip"] = "건쉽"
+	L["DeathBringer"] = "사울팽"
+	L["Festergut"] = "구린속"
+	L["Rotface"] = "썩얼" 
+	L["Professor"] = "교수"
+	L["Council"] = "피의 의회"
+	L["BloodQueen"] = "라나텔" 
+	L["Dreamwalker"] = "드림워커"
+	L["Sindragosa"] = "신드라고사"
+	L["Lich King"] = "리치 왕"
 end
 
 

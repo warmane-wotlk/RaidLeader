@@ -1,3 +1,4 @@
+local L  = LibStub("AceLocale-3.0"):GetLocale("RaidLeader", true)
 
 function RLF_Main_Toggle()
   if not RaidLeader_Frame:IsVisible() then
@@ -10,7 +11,7 @@ end
 function RL_GetGlobalChannelNumber()
     local chanList = { GetChannelList() }
 
-    if chanList == nil or #chanList == 0 then      
+    if chanList == nil then      
       return -1
     end
 
@@ -36,6 +37,7 @@ end
 
 function RLF_OnLoad(frame)
   print("RaidLeader Loaded - /rld to bring it up")
+  RL_TEXT_DRUM_OF_KING:SetText(L["Drums of the Wild"])
 
   -- slash commands
   SlashCmdList["RAIDLEADER_GUI_POPUP"] = function()

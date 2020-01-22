@@ -8,12 +8,13 @@
 
 libs.xml
 
-Core.lua
-
 localization.en.lua
 localization.kr.lua
+
 Timer.lua
 Event.lua
+
+Core.lua
 
 Messages_ICC.lua
 Messages_TOC.lua

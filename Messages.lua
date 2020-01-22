@@ -94,7 +94,7 @@ RL_MESSAGE_ENG = {
 	RL_BUTTON_SHARE_QUEST_MSG = "I've shared Weekly Quest, if you dont get it, check whether you have other MUST DIE quest or you've done for this week.";
 	RL_BUTTON_DBM_PULL_MSG = "Everyone be ready. We are going to nuke the Boss!!! RESPECT THE TIMER!!";
 	RL_BUTTON_MS_CHANGE_NOTIFY_MSG = "Here is MS change information.";
-	RL_BUTTON_TBD_1_MSG = "TBD";
+	RL_BUTTON_CALL_BOSS_FRAME_MSG = "Bring Zone Boss Commands";
 
 	RL_CHECKBUTTON_NEED_HEALER_MSG = "Check if Healer is needed in Raid";
 	RL_CHECKBUTTON_NEED_TANKER_MSG = "Check if Tanker is needed in Raid";
@@ -160,7 +160,7 @@ RL_MESSAGE_TOOLTIP_ENG = {
 	RL_BUTTON_DBM_PULL_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_DBM_PULL_MSG"] .. "\'";
 	RL_BUTTON_MS_CHANGE_NOTIFY_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_MS_CHANGE_NOTIFY_MSG"] .. "\'";
 	RL_CHECKBUTTON_DRUM_OF_KING_TOOLTIP = "Use - \'" .. L["RL_CHECKBUTTON_DRUM_OF_KING_MSG"] .. "\'";
-	RL_BUTTON_TBD_1_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_TBD_1_MSG"] .. "\'";
+	RL_BUTTON_CALL_BOSS_FRAME_TOOLTIP = L["RL_BUTTON_CALL_BOSS_FRAME_MSG"];
 
 	RL_CHECKBUTTON_NEED_HEALER_TOOLTIP = "Set the value of - \'" .. L["RL_CHECKBUTTON_NEED_HEALER_MSG"] .. "\'";
 	RL_CHECKBUTTON_NEED_TANKER_TOOLTIP = "Set the value of - \'" .. L["RL_CHECKBUTTON_NEED_TANKER_MSG"] .. "\'";
@@ -222,7 +222,7 @@ RL_MESSAGE_KOR = {
 	RL_BUTTON_SHARE_QUEST_MSG = "주간퀘스트 공유했습니다. 받지 못하신분은 이미하셨거나, 퀘스트 목록에 MUST DIE를 지워주세요.";
 	RL_BUTTON_DBM_PULL_MSG = "공격 시작합니다!!!!. 타이머를 준수해주세요.";
 	RL_BUTTON_MS_CHANGE_NOTIFY_MSG = "주특/부특 변경사항입니다.";
-	RL_BUTTON_TBD_1_MSG = "TBD";
+	RL_BUTTON_CALL_BOSS_FRAME_MSG = "보스에 맡는 명령셋 창을 엽니다.";
 
 	RL_CHECKBUTTON_NEED_HEALER_MSG = "힐러가 레이드에 필요하면 체크해주세요.";
 	RL_CHECKBUTTON_NEED_TANKER_MSG = "탱커가 레이드에 필요하면 체크해주세요.";
@@ -288,7 +288,7 @@ RL_MESSAGE_TOOLTIP_KOR = {
 	RL_BUTTON_SHARE_QUEST_TOOLTIP = "\'" .. L["RL_BUTTON_SHARE_QUEST_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_BUTTON_DBM_PULL_TOOLTIP = "\'" .. L["RL_BUTTON_DBM_PULL_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_BUTTON_MS_CHANGE_NOTIFY_TOOLTIP = "\'" .. L["RL_BUTTON_MS_CHANGE_NOTIFY_MSG"] .. "\' 를 공격대 경보한다.";
-	RL_BUTTON_TBD_1_TOOLTIP = "\'" .. L["RL_BUTTON_TBD_1_MSG"] .. "\' 를 공격대 경보한다.";
+	RL_BUTTON_CALL_BOSS_FRAME_TOOLTIP = L["RL_BUTTON_CALL_BOSS_FRAME_MSG"];
  
 	RL_CHECKBUTTON_NEED_HEALER_TOOLTIP = "\'" .. L["RL_CHECKBUTTON_NEED_HEALER_MSG"] .. "\' 를 의미한다.";
 	RL_CHECKBUTTON_NEED_TANKER_TOOLTIP = "\'" .. L["RL_CHECKBUTTON_NEED_TANKER_MSG"] .. "\' 를 의미한다.";

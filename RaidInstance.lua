@@ -9,6 +9,13 @@ local buttonObj = {}
 local selectedBoss = {}
 local selectedBossIdx = 1
 
+local frameSize = { x = 227, y = 238 }
+local buttonSize = { x = 68, y = 23 }
+local ptStart = { x = 48, y = -205 }
+local numOfButtonsInRow = 3
+local ptNext = { dx = buttonSize.x - 2, dy = 0 + buttonSize.y }
+local frameGapY = ptNext.dy
+
 function RL_ZoneFrameToggle()
   if RL_ZoneFrame:IsVisible() then
     RL_ZoneFrame:Hide()
@@ -52,8 +59,8 @@ local function RLF_Zone_CreateButton(id, x, y)
   local ZL = RL_Zone_LoadButtonText(zoneName)
   local button = CreateFrame("Button", id, RL_ZoneFrame, UIPanelButtonTemplate)
   button:SetPoint("CENTER", RL_ZoneFrame, "TOPLEFT", x, y)
-  button:SetWidth(75)
-  button:SetHeight(23)
+  button:SetWidth(buttonSize.x)
+  button:SetHeight(buttonSize.y)
  
   button:SetText(ZL[buttonObj[id].id])
   button:SetNormalFontObject("GameFontNormal")
@@ -80,13 +87,6 @@ local function RLF_Zone_CreateButton(id, x, y)
 
   return button
 end
-
-local frameSize = { x = 250, y = 138 }
-local buttonSize = { x = 75, y = 23 }
-local ptStart = { x = 50, y = -107 }
-local numOfButtonsInRow = 3
-local ptNext = { dx = 0 + buttonSize.x, dy = 0 + buttonSize.y }
-local frameGapY = ptNext.dy
 
 local function RL_Zone_UpdateTitle()
   if zoneName == "" then
