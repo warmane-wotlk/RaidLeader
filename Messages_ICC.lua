@@ -102,28 +102,5 @@ RL_ZONE_TOOLTIP_KOR["ICC"] = {
 	RL_ZONE_ICC_GUNSHIP_AGGRO_TOOLTIP = "\'" .. L["RL_ZONE_ICC_GUNSHIP_AGGRO_MSG"] .. "\' 를 공격대 경보한다.";	
 };
 
-function RL_Zone_LoadButtonText(zoneName)
-  if GetLocale() == "koKR" then
-    return RL_ZONE_TEXT_KOR[zoneName]
-  else
-    return RL_ZONE_TEXT_ENG[zoneName]
-  end
-end
 
-
-function RL_Zone_LoadRaidWarningData(zoneName)
-  if RaidLeaderData.useKorean then
-    return RL_ZONE_MSG_KOR[zoneName]
-  else
-    return RL_ZONE_MSG_ENG[zoneName]
-  end
-end
-
-function RL_Zone_LoadRaidWarningTooltipData(zoneName)
-  if RaidLeaderData.useKorean then
-    return RL_ZONE_TOOLTIP_KOR[zoneName]
-  else
-    return RL_ZONE_TOOLTIP_ENG[zoneName]
-  end
-end
 
