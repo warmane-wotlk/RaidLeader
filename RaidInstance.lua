@@ -41,11 +41,25 @@ function RLF_Zone_RaidWarning(param)
       end
     end
 
-    local msg = RLL[combatMsgId]    
-    if msg ~= nil then
-      SendChatMessage(msg, msgChannel);
-    else
-      SendChatMessage(param, msgChannel);
+    local msg = RLL[combatMsgId]
+    if msg == nil then
+      msg = param
+    end
+
+    -- split msg if it found "\n".
+    -- english only 255 bytes(char), unicode support only 125 char.
+    local s = 1
+
+    while true do
+      local m, _ = string.find(msg, "\n", s)
+      
+      if m == nil then
+        SendChatMessage(string.sub(msg,s), msgChannel)
+        break
+      else
+        SendChatMessage(string.sub(msg,s,m-1), msgChannel)
+      end
+      s   = m + 1
     end
   end
 end

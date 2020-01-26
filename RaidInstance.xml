@@ -29,7 +29,7 @@
 					<Color a="0.5" r="0" g="0" b="0" />
 				</Texture>
 			</Layer>
-			<Layer level="BORDER">
+			<Layer level="OVERLAY">
 				<Texture name="$parentHeaderRegion" file="Interface\DialogFrame\UI-DialogBox-Header">
 					<Size>
 						<AbsDimension x="300" y="64" />
@@ -127,7 +127,7 @@
 		<Frames>
 			<Frame name="RL_Zone_BOSS_DropDownMenu" inherits="UIDropDownMenuTemplate" id="1">
 				<Anchors>
-					<Anchor point="TOPLEFT" x="3" y="-46" />
+					<Anchor point="TOPLEFT" x="4" y="-46" />
 				</Anchors>
 				<Scripts>
 					<OnClick>
@@ -136,9 +136,9 @@
 				</Scripts>
 			</Frame>
 			<Button name="RL_ZONE_BOSS_LEFT" inherits="UIPanelButtonTemplate" text="">
-				<Size x="32" y="32" />
+				<Size x="30" y="30" />
 				<Anchors>
-					<Anchor point="TOPLEFT" x="151" y="-44" />
+					<Anchor point="TOPLEFT" x="157" y="-44" />
 				</Anchors>
 				<Scripts>
 					<OnClick>
@@ -156,9 +156,9 @@
 				</DisabledTexture>
 			</Button>
 			<Button name="RL_ZONE_BOSS_RIGHT" inherits="UIPanelButtonTemplate" text="">
-				<Size x="32" y="32" />
+				<Size x="30" y="30" />
 				<Anchors>
-					<Anchor point="TOPLEFT" x="177" y="-44" />
+					<Anchor point="TOPLEFT" x="181" y="-44" />
 				</Anchors>
 				<Scripts>
 					<OnClick>

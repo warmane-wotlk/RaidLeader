@@ -119,6 +119,61 @@ if L then
 	L["Dreamwalker"] = "드림워커"
 	L["Sindragosa"] = "신드라고사"
 	L["Lich King"] = "리치 왕"
+
+	L["ALL"] = "모두"
+	L["BOSS"] = "보스"
+
+	-- Naxxramas
+	L["Anub\'Rekhan"] = "아눕레칸"
+	L["Grand Widow Faerlina"] = "귀부인 팰리나"
+	L["Maexxna"] = "맥스나"
+	L["Noth the Plaguebringer"] = "역병술사 노스"
+	L["Heigan the Unclean"] = "부정의 헤이건"
+	L["Loatheb"] = "로데브"
+	L["Instructor Razuvious"] = "훈련교관 라주비어스"
+	L["Gothik the Harvester"] = "영혼 착취자 고딕"
+	L["The Four Horsemen"] = "4인의 기사단"
+	L["Patchwerk"] = "패치워크"
+	L["Grobbulus"] = "그라불루스"
+	L["Gluth"] = "글루스"
+	L["Thaddius"] = "타디우스"
+	L["Sapphiron"] = "사피론"
+	L["Kel\'Thuzad"] = "켈투자드"	
+
+	-- VOA
+	L["Ice Watcher"] = "탈라본, 얼음의 감시자"
+	L["Flame Watcher"] = "코란론, 화염의 감시자"
+	L["Storm Watcher"] = "에말론, 폭풍의 감시자"
+	L["Stone Watcher"] = "아카본, 바위의 감시자"
+
+	-- Ulduar
+	L["Flame Leviathan"] = "거대 화염전차"
+	L["Ignis the Furnace Master"] = "용광로 군주 이그니스"
+	L["Razorscale"] = "칼날 비늘"
+	L["XT-002 Deconstructor"] = "XT-002 해체자"
+	L["Assembly of Iron"] = "무쇠 평의회"
+	L["Kologarn"] = "콜로간"
+	L["Auriaya"] = "아우리아야"
+	L["Freya"] = "프레이야"
+	L["Hodir"] = "호디르"
+	L["Mimiron"] = "미미론"
+	L["Thorim"] = "토림"
+	L["General Vezax"] = "장군 베작스"
+	L["Yogg-Saron"] = "요그사론"
+	L["Algalon the Observer"] = "알갈론"	
+
+	-- RS
+	L["General Zarithrian"] = "자라스리안"
+	L["Baltharus the Warborn"] = "발타루스"
+	L["Saviana Ragefire"] = "사비아나"
+	L["Halion"] = "할리온"
+
+	-- TOC
+	L["Northrend Beasts"] = "노스렌드의 야수"
+	L["Lord Jaraxxus"] = "군주 자락서스"
+	L["Champions"] = "진영대표용사"
+	L["Twin Val\'kyr"] = "발키르 쌍둥이"
+	L["Anub\'arak"] = "아눕아락"
 end
 
 

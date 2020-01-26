@@ -117,6 +117,61 @@ if L then
 	L["BloodQueen"] = "BloodQueen" 
 	L["Dreamwalker"] = "Dreamwalker"
 	L["Sindragosa"] = "Sindragosa"
-	L["Lich King"] = "Lich King"	
+	L["Lich King"] = "Lich King"
+
+	L["ALL"] = "All"
+	L["BOSS"] = "Boss"
+
+	-- Naxxramas
+	L["Anub\'Rekhan"] = "Anub\'Rekhan"
+	L["Grand Widow Faerlina"] = "Faerlina"
+	L["Maexxna"] = "Maexxna"
+	L["Noth the Plaguebringer"] = "Noth"
+	L["Heigan the Unclean"] = "Heigan"
+	L["Loatheb"] = "Loatheb"
+	L["Instructor Razuvious"] = "Instructor Razuvious"
+	L["Gothik the Harvester"] = "Gothik the Harvester"
+	L["The Four Horsemen"] = "The Four Horsemen"
+	L["Patchwerk"] = "Patchwerk"
+	L["Grobbulus"] = "Grobbulus"
+	L["Gluth"] = "Gluth"
+	L["Thaddius"] = "Thaddius"
+	L["Sapphiron"] = "Sapphiron"
+	L["Kel\'Thuzad"] = "Kel\'Thuzad"
+
+	-- VOA
+	L["Ice Watcher"] = "Toravon, Ice"
+	L["Flame Watcher"] = "Koralon, Fire"
+	L["Storm Watcher"] = "Emalon, Storm"
+	L["Stone Watcher"] = "Archavon, Stone"
+
+	-- Ulduar
+	L["Flame Leviathan"] = "Flame Leviathan"
+	L["Ignis the Furnace Master"] = "Ignis"
+	L["Razorscale"] = "Razorscale"
+	L["XT-002 Deconstructor"] = "XT-002"
+	L["Assembly of Iron"] = "Assembly of Iron"
+	L["Kologarn"] = "Kologarn"
+	L["Auriaya"] = "Auriaya"
+	L["Freya"] = "Freya"
+	L["Hodir"] = "Hodir"
+	L["Mimiron"] = "Mimiron"
+	L["Thorim"] = "Thorim"
+	L["General Vezax"] = "General Vezax"
+	L["Yogg-Saron"] = "Yogg-Saron"
+	L["Algalon the Observer"] = "Algalon"
+
+	-- RS
+	L["General Zarithrian"] = "Zarithrian"
+	L["Baltharus the Warborn"] = "Baltharus"
+	L["Saviana Ragefire"] = "Saviana Ragefire"
+	L["Halion"] = "Halion"
+
+	-- TOC
+	L["Northrend Beasts"] = "Northrend Beasts"
+	L["Lord Jaraxxus"] = "Lord Jaraxxus"
+	L["Champions"] = "Champions"
+	L["Twin Val\'kyr"] = "Twin Val\'kyr"
+	L["Anub\'arak"] = "Anub\'arak"
 end
 

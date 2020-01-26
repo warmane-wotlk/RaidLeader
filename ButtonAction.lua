@@ -310,9 +310,9 @@ local raidZoneInfos = {
   { name = "OS",     zoneId = 531, sub = {"10", "25", "10 weekly", "25 weekly"}, resv = "<Satchel Resv>" ,
     weekly = "|cffffff00|Hquest:24579:80|h[Sartharion Must Die!]|h|r", 
     achieve = "|cffffff00|Hachievement:2054:0700000000194F14:1:01:02:20:4294967295:0:0:0|h[황혼 지대 (25인)]|h|r"},
-  { name = "Onyxia", zoneId = 0,   sub = {"10", "25"}, resv = "", weekly = "", 
+  { name = "ONYXIA", zoneId = 0,   sub = {"10", "25"}, resv = "", weekly = "", 
     achieve = "|cffffff00|Hachievement:4397:07000000003E75A3:1:01:05:20:4294967295:0:0:0|h[오닉시아의 둥지 (25인)]|h|r"},
-  { name = "Ulduar", zoneId = 529, sub = {"10", "25"}, resv = "", weekly = "", 
+  { name = "ULDUAR", zoneId = 529, sub = {"10", "25"}, resv = "", weekly = "", 
     achieve = "|cffffff00|Hachievement:2895:07000000003E75A3:1:01:05:20:4294967295:0:0:0|h[울두아르의 비밀 (25인)]|h|r"},
 };
 
