@@ -141,14 +141,14 @@ if L then
 	L["Kel\'Thuzad"] = "켈투자드"	
 
 	-- VOA
-	L["Ice Watcher"] = "탈라본, 얼음의 감시자"
-	L["Flame Watcher"] = "코란론, 화염의 감시자"
-	L["Storm Watcher"] = "에말론, 폭풍의 감시자"
-	L["Stone Watcher"] = "아카본, 바위의 감시자"
+	L["Ice Watcher"] = "얼음의 탈라본"
+	L["Flame Watcher"] = "화염의 코란론"
+	L["Storm Watcher"] = "폭풍의 에말론"
+	L["Stone Watcher"] = "바위의 아카본"
 
 	-- Ulduar
 	L["Flame Leviathan"] = "거대 화염전차"
-	L["Ignis the Furnace Master"] = "용광로 군주 이그니스"
+	L["Ignis the Furnace Master"] = "이그니스"
 	L["Razorscale"] = "칼날 비늘"
 	L["XT-002 Deconstructor"] = "XT-002 해체자"
 	L["Assembly of Iron"] = "무쇠 평의회"

@@ -3,8 +3,8 @@ local L  = LibStub("AceLocale-3.0"):GetLocale("RaidLeader", true)
 RL_ZONE_TOC_NORTHREND = { "READY", "FLAME", "AGGRO", "HEAD", "POISON", "MOVE", "ENRAGE" };
 RL_ZONE_TOC_JARAXXUS = { "READY", "CUT_SPEEL", "FLAME", "OVERHEAL", "ADD"};
 RL_ZONE_TOC_CHAMPIONS = { "READY", "DISPELL", "DPS"};
-RL_ZONE_TOC_TWIN = { "READY"};
-RL_ZONE_TOC_ANUBARAK = { "READY"};
+RL_ZONE_TOC_TWIN = { "READY", "LIGHT", "DARK"};
+RL_ZONE_TOC_ANUBARAK = { "READY", "ICE", "INTERRUPT", "ADD", "STOP_HEAL", "DPS"};
 
 RL_ZONE_INFOS["TOC"] = { 
 	{ name = L["Northrend Beasts"], id = "RL_ZONE_TOC_NORTHREND", commands = RL_ZONE_TOC_NORTHREND };
@@ -32,6 +32,17 @@ RL_ZONE_TEXT_ENG["TOC"] = {
 	RL_ZONE_TOC_CHAMPIONS_READY = "Ready";
 	RL_ZONE_TOC_CHAMPIONS_DISPELL = "Dispell";
 	RL_ZONE_TOC_CHAMPIONS_DPS = "DSP Mark";
+
+	RL_ZONE_TOC_TWIN_READY = "Ready";
+	RL_ZONE_TOC_TWIN_LIGHT = "Light";
+	RL_ZONE_TOC_TWIN_DARK  = "Dark";
+
+	RL_ZONE_TOC_ANUBARAK_READY = "Ready";
+	RL_ZONE_TOC_ANUBARAK_ICE = "Ice";
+	RL_ZONE_TOC_ANUBARAK_INTERRUPT = "Cut Spell";
+	RL_ZONE_TOC_ANUBARAK_ADD = "Aggro ADD";
+	RL_ZONE_TOC_ANUBARAK_STOP_HEAL = "Stop Heal";
+	RL_ZONE_TOC_ANUBARAK_DPS = "DPS";
 };
 
 RL_ZONE_TEXT_KOR["TOC"] = {
@@ -52,6 +63,17 @@ RL_ZONE_TEXT_KOR["TOC"] = {
 	RL_ZONE_TOC_CHAMPIONS_READY = "전투준비";
 	RL_ZONE_TOC_CHAMPIONS_DISPELL = "해제/차단";
 	RL_ZONE_TOC_CHAMPIONS_DPS = "해골 공격";
+
+	RL_ZONE_TOC_TWIN_READY = "전투준비";
+	RL_ZONE_TOC_TWIN_LIGHT = "빛 속성";
+	RL_ZONE_TOC_TWIN_DARK  = "어둠 속성";
+
+	RL_ZONE_TOC_ANUBARAK_READY = "전투준비";
+	RL_ZONE_TOC_ANUBARAK_ICE = "동토처리";
+	RL_ZONE_TOC_ANUBARAK_INTERRUPT = "스킬차단";
+	RL_ZONE_TOC_ANUBARAK_ADD = "쫄 어글";
+	RL_ZONE_TOC_ANUBARAK_STOP_HEAL = "힐 조심";
+	RL_ZONE_TOC_ANUBARAK_DPS = "극딜";
 };
 
 
@@ -73,6 +95,17 @@ RL_ZONE_MSG_ENG["TOC"] = {
 	RL_ZONE_TOC_CHAMPIONS_READY_MSG = "Nuke Skel Mark({rt8}) first and do your best to survive with your best skill";
 	RL_ZONE_TOC_CHAMPIONS_DISPELL_MSG = "Priest use Massive Dispell and others interrupt the skill";
 	RL_ZONE_TOC_CHAMPIONS_DPS_MSG = "Nuke Skel Mark({rt8}) first";
+
+	RL_ZONE_TOC_TWIN_READY_MSG = "OT takes Light and All takes Dark. We will dps Lightbane near Light Portal.";
+	RL_ZONE_TOC_TWIN_LIGHT_MSG = "Change to Light";
+	RL_ZONE_TOC_TWIN_DARK_MSG  = "Change to Dark";
+
+	RL_ZONE_TOC_ANUBARAK_READY_MSG = "Be on the ICE, Hunter/DK drop the ICE ball and don\'t heal over 50% of health";
+	RL_ZONE_TOC_ANUBARAK_ICE_MSG = "Hunter/DK, drop the ICE ball";
+	RL_ZONE_TOC_ANUBARAK_INTERRUPT_MSG = "Interrupt Nerubian Dark Strike skill";
+	RL_ZONE_TOC_ANUBARAK_ADD_MSG = "OT, takes Nerubian Spider and Nuke them quickly";
+	RL_ZONE_TOC_ANUBARAK_STOP_HEAL_MSG = "Don\'t heal over 50% of health, but keep heal Tanker over 50%";
+	RL_ZONE_TOC_ANUBARAK_DPS_MSG = "Need your best DPS!!!";
 };
 
 RL_ZONE_MSG_KOR["TOC"] = {
@@ -93,6 +126,17 @@ RL_ZONE_MSG_KOR["TOC"] = {
 	RL_ZONE_TOC_CHAMPIONS_READY_MSG = "해골 마크({rt8}) 부터 공격해주시고, 각자 생존기를 모두 사용하시고, 최대한 살아남도록 해주세요.";
 	RL_ZONE_TOC_CHAMPIONS_DISPELL_MSG = "사제님 대규모 무효화 사용하시고, 각자 메즈 스킬 알아서 사용해주세요.";
 	RL_ZONE_TOC_CHAMPIONS_DPS_MSG = "해골 마크({rt8}) 점사해주세요.";
+
+	RL_ZONE_TOC_TWIN_READY_MSG = "부탱님 빛 속성선택해주시고, 나머지는 모두 어둠 속성 선택해 주시고, 빛 속성 포탈 근처에서 피욜라 라이트베인을 공격하시면 됩니다.";
+	RL_ZONE_TOC_TWIN_LIGHT_MSG = "빛 속성으로 변경해주세요. (탱커 제외)";
+	RL_ZONE_TOC_TWIN_DARK_MSG  = "어둠 속성으로 변경해주세요. (탱커 제외)";
+
+	RL_ZONE_TOC_ANUBARAK_READY_MSG = "항상 얼음 바닥위에 있어주세요. 헌터/죽기님 아이스 잘 떨어뜨려주시고요. 3페이즈때 힐러님들 50%이상 힐하지 마세요.";
+	RL_ZONE_TOC_ANUBARAK_ICE_MSG = "헌터/죽기님 아이스 볼 잘 떨어뜨려주시고요.";
+	RL_ZONE_TOC_ANUBARAK_INTERRUPT_MSG = "네루비안의 어둠의 일격 차단해주세요.";
+	RL_ZONE_TOC_ANUBARAK_ADD_MSG = "부탱님, 네루비안 쫄 보스 근처로 데려와주시고, 극딜해주세요.";
+	RL_ZONE_TOC_ANUBARAK_STOP_HEAL_MSG = "힐러님들 체력의 50%이상 치유하지 마세요. 탱커는 계속 치유해주세요.";
+	RL_ZONE_TOC_ANUBARAK_DPS_MSG = "극딜이 필요합니다.!!!";
 };
 
 local L = RL_ZONE_MSG_ENG["TOC"]
@@ -114,6 +158,17 @@ RL_ZONE_TOOLTIP_ENG["TOC"] = {
 	RL_ZONE_TOC_CHAMPIONS_READY_TOOLTIP = "Raid warning - \'" .. L["RL_ZONE_TOC_CHAMPIONS_READY_MSG"] .. "\'";
 	RL_ZONE_TOC_CHAMPIONS_DISPELL_TOOLTIP = "Raid warning - \'" .. L["RL_ZONE_TOC_CHAMPIONS_DISPELL_MSG"] .. "\'";
 	RL_ZONE_TOC_CHAMPIONS_DPS_TOOLTIP = "Raid warning - \'" .. L["RL_ZONE_TOC_CHAMPIONS_DPS_MSG"] .. "\'";
+
+	RL_ZONE_TOC_TWIN_READY_TOOLTIP = "Raid warning - \'" .. L["RL_ZONE_TOC_TWIN_READY_MSG"] .. "\'";
+	RL_ZONE_TOC_TWIN_LIGHT_TOOLTIP = "Raid warning - \'" .. L["RL_ZONE_TOC_TWIN_LIGHT_MSG"] .. "\'";
+	RL_ZONE_TOC_TWIN_DARK_TOOLTIP = "Raid warning - \'" .. L["RL_ZONE_TOC_TWIN_DARK_MSG"] .. "\'";
+
+	RL_ZONE_TOC_ANUBARAK_READY_TOOLTIP = "Raid warning - \'" .. L["RL_ZONE_TOC_ANUBARAK_READY_MSG"] .. "\'";
+	RL_ZONE_TOC_ANUBARAK_ICE_TOOLTIP = "Raid warning - \'" .. L["RL_ZONE_TOC_ANUBARAK_ICE_MSG"] .. "\'";
+	RL_ZONE_TOC_ANUBARAK_INTERRUPT_TOOLTIP = "Raid warning - \'" .. L["RL_ZONE_TOC_ANUBARAK_INTERRUPT_MSG"] .. "\'";
+	RL_ZONE_TOC_ANUBARAK_ADD_TOOLTIP = "Raid warning - \'" .. L["RL_ZONE_TOC_ANUBARAK_ADD_MSG"] .. "\'";
+	RL_ZONE_TOC_ANUBARAK_STOP_HEAL_TOOLTIP = "Raid warning - \'" .. L["RL_ZONE_TOC_ANUBARAK_STOP_HEAL_MSG"] .. "\'";
+	RL_ZONE_TOC_ANUBARAK_DPS_TOOLTIP = "Raid warning - \'" .. L["RL_ZONE_TOC_ANUBARAK_DPS_MSG"] .. "\'";
 };
 
 L = RL_ZONE_MSG_KOR["TOC"]
@@ -136,6 +191,17 @@ RL_ZONE_TOOLTIP_KOR["TOC"] = {
 	RL_ZONE_TOC_CHAMPIONS_READY_TOOLTIP = "\'" .. L["RL_ZONE_TOC_CHAMPIONS_READY_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_ZONE_TOC_CHAMPIONS_DISPELL_TOOLTIP = "\'" .. L["RL_ZONE_TOC_CHAMPIONS_DISPELL_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_ZONE_TOC_CHAMPIONS_DPS_TOOLTIP = "\'" .. L["RL_ZONE_TOC_CHAMPIONS_DPS_MSG"] .. "\' 를 공격대 경보한다.";
+
+	RL_ZONE_TOC_TWIN_READY_TOOLTIP = "\'" .. L["RL_ZONE_TOC_TWIN_READY_MSG"] .. "\' 를 공격대 경보한다.";
+	RL_ZONE_TOC_TWIN_LIGHT_TOOLTIP = "\'" .. L["RL_ZONE_TOC_TWIN_LIGHT_MSG"] .. "\' 를 공격대 경보한다.";
+	RL_ZONE_TOC_TWIN_DARK_TOOLTIP = "\'" .. L["RL_ZONE_TOC_TWIN_DARK_MSG"] .. "\' 를 공격대 경보한다.";
+
+	RL_ZONE_TOC_ANUBARAK_READY_TOOLTIP = "\'" .. L["RL_ZONE_TOC_ANUBARAK_READY_MSG"] .. "\' 를 공격대 경보한다.";
+	RL_ZONE_TOC_ANUBARAK_ICE_TOOLTIP = "\'" .. L["RL_ZONE_TOC_ANUBARAK_ICE_MSG"] .. "\' 를 공격대 경보한다.";
+	RL_ZONE_TOC_ANUBARAK_INTERRUPT_TOOLTIP = "\'" .. L["RL_ZONE_TOC_ANUBARAK_INTERRUPT_MSG"] .. "\' 를 공격대 경보한다.";
+	RL_ZONE_TOC_ANUBARAK_ADD_TOOLTIP = "\'" .. L["RL_ZONE_TOC_ANUBARAK_ADD_MSG"] .. "\' 를 공격대 경보한다.";
+	RL_ZONE_TOC_ANUBARAK_STOP_HEAL_TOOLTIP = "\'" .. L["RL_ZONE_TOC_ANUBARAK_STOP_HEAL_MSG"] .. "\' 를 공격대 경보한다.";
+	RL_ZONE_TOC_ANUBARAK_DPS_TOOLTIP = "\'" .. L["RL_ZONE_TOC_ANUBARAK_DPS_MSG"] .. "\' 를 공격대 경보한다.";
 };
 
 

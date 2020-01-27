@@ -69,6 +69,22 @@ function RLF_Zone_Buttons_OnClick(self)
   RLF_Zone_RaidWarning(buttonObj[self:GetName()].id)
 end
 
+-- show tooltip for zone frame
+function RLF_Zone_Buttons_Show_ToolTip(self)
+  local param = buttonObj[self:GetName()].id
+  if param then
+    local toolTipId = param .. "_TOOLTIP"
+    local RLL = RL_Zone_LoadRaidWarningTooltipData(zoneName)
+    GameTooltip_SetDefaultAnchor( GameTooltip, UIParent )
+    GameTooltip:SetText( RLL[toolTipId] )
+    GameTooltip:Show()
+  end
+end
+
+function RLF_Zone_Buttons_Hide_ToolTip()
+  GameTooltip:Hide()
+end
+
 local function RLF_Zone_CreateButton(id, x, y)
   local ZL = RL_Zone_LoadButtonText(zoneName)
   local button = CreateFrame("Button", id, RL_ZoneFrame, UIPanelButtonTemplate)
@@ -98,6 +114,8 @@ local function RLF_Zone_CreateButton(id, x, y)
   button:SetPushedTexture(ptex)
   
   button:SetScript("OnClick", RLF_Zone_Buttons_OnClick)
+  button:SetScript("OnEnter", RLF_Zone_Buttons_Show_ToolTip)
+  button:SetScript("OnLeave", RLF_Zone_Buttons_Hide_ToolTip)
 
   return button
 end
