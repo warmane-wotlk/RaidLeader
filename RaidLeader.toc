@@ -1,5 +1,5 @@
 ## Title: Raid Leader
-## Version: 0.6
+## Version: 0.7
 ## Author: Sunmudang
 ## Interface: 30300
 ## Notes: "Use /RLD to toggle the addon"

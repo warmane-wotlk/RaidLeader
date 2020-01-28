@@ -89,6 +89,7 @@ RL_MESSAGE_ENG = {
 	RL_BUTTON_SET_OT_MSG = "Mark Blue Square mark on Assist tanker";
 	RL_BUTTON_NOTIFY_MT_OT_MSG = "Attention!! Mark RED X mark ({rt7}) on MT, Blue Square mark({rt6}) on OT";
 	RL_BUTTON_SET_HC_NM_MSG = "toggle HC and NM difficulty";	
+	RL_BUTTON_RAID_OVER_MSG  = "Raid is Over. Thank you everyone for the raiding.";
 
 	RL_BUTTON_PORTAL_MSG = "Mage, please open the Portal to Dalaran";
 	RL_BUTTON_SHARE_QUEST_MSG = "I've shared Weekly Quest, if you dont get it, check whether you have other MUST DIE quest or you've done for this week.";
@@ -154,6 +155,7 @@ RL_MESSAGE_TOOLTIP_ENG = {
 	RL_BUTTON_SET_OT_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_SET_OT_MSG"] .. "\'";
 	RL_BUTTON_NOTIFY_MT_OT_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_NOTIFY_MT_OT_MSG"] .. "\'";
 	RL_BUTTON_SET_HC_NM_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_SET_HC_NM_MSG"] .. "\'";
+	RL_BUTTON_RAID_OVER_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_RAID_OVER_MSG"] .. "\'";
 
 	RL_BUTTON_PORTAL_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_PORTAL_MSG"] .. "\'";
 	RL_BUTTON_SHARE_QUEST_TOOLTIP = "Raid warning - \'" .. L["RL_BUTTON_SHARE_QUEST_MSG"] .. "\'";
@@ -164,7 +166,7 @@ RL_MESSAGE_TOOLTIP_ENG = {
 
 	RL_CHECKBUTTON_NEED_HEALER_TOOLTIP = "Set the value of - \'" .. L["RL_CHECKBUTTON_NEED_HEALER_MSG"] .. "\'";
 	RL_CHECKBUTTON_NEED_TANKER_TOOLTIP = "Set the value of - \'" .. L["RL_CHECKBUTTON_NEED_TANKER_MSG"] .. "\'";
-	RL_CHECKBUTTON_LANGUAGE_TOOLTIP = "Set the value of - \'" .. L["RL_CHECKBUTTON_LANGUAGE_MSG"] .. "\'";	
+	RL_CHECKBUTTON_LANGUAGE_TOOLTIP = "Set the value of - \'" .. L["RL_CHECKBUTTON_LANGUAGE_MSG"] .. "\'";
 };
 
 	-- combat msg
@@ -194,9 +196,9 @@ RL_MESSAGE_KOR = {
 	RL_BUTTON_MD_TOT_MSG = "낭꾼님/도적님, 눈속/속거 보스탱에게 주세요.";
 	RL_BUTTON_CYCLONE_MSG = "드루님, 정배 대상자에게 사이클론!!!";
 	RL_BUTTON_TYPOON_MSG = "조드님, 애드에게 태풍!! 태풍!!";
-	RL_BUTTON_DARNAVAN_MSG = "지정된 암사님/법사님, 왼쪽에 나오는 데반드라 정배 또는 양변해주세요.";
+	RL_BUTTON_DARNAVAN_MSG = "지정된 암사님/법사님, 왼쪽에 나오는 다르나반 정배 또는 양변해주세요.";
 	RL_BUTTON_SHACKLE_MSG = "사제님/기사님 중 한 분 해골 마크에게 속박/참회 해주세요.";
-	RL_BUTTON_FROST_TRAP_MSG = "냥꾼님, 애드 나오기 5초전에 얼덫을 계단에 설치해주세요.";
+	RL_BUTTON_FROST_TRAP_MSG = "냥꾼님, 애드 나오기 5초전에 냉덫을 계단에 설치해주세요.";
 	RL_BUTTON_TANK_AGGRO_MSG = "탱커님, 어글 잡아주세요. 어글 빨리.... 낭꾼/도적님 눈속/속거 도움주세요.";
 	RL_BUTTON_HOP_MSG = "기사님, 보손!!! 보손!!!";
 	RL_BUTTON_HOF_MSG = "기사님, 탱커에게 자손!!! 자손!!!";
@@ -217,6 +219,7 @@ RL_MESSAGE_KOR = {
 	RL_BUTTON_SET_OT_MSG = "부탱에게 파란색 사각형 마크했습니다.";
 	RL_BUTTON_NOTIFY_MT_OT_MSG = "맨탱에게 빨간색 X 마크({rt7}), 부탱에게 파란색 사각형 마크({rt6})";
 	RL_BUTTON_SET_HC_NM_MSG = "난이도를 영웅/일반 토글한다.";
+	RL_BUTTON_RAID_OVER_MSG  = "레이드 종료합니다. 다들 수고가 많으셨습니다.";
 
 	RL_BUTTON_PORTAL_MSG = "법사님, 달라란 포탈 열어주세요.";
 	RL_BUTTON_SHARE_QUEST_MSG = "주간퀘스트 공유했습니다. 받지 못하신분은 이미하셨거나, 퀘스트 목록에 MUST DIE를 지워주세요.";
@@ -283,6 +286,7 @@ RL_MESSAGE_TOOLTIP_KOR = {
 	RL_BUTTON_SET_OT_TOOLTIP = "\'" .. L["RL_BUTTON_SET_OT_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_BUTTON_NOTIFY_MT_OT_TOOLTIP = "\'" .. L["RL_BUTTON_NOTIFY_MT_OT_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_BUTTON_SET_HC_NM_TOOLTIP = "\'" .. L["RL_BUTTON_SET_HC_NM_MSG"] .. "\' 를 공격대 경보한다.";
+	RL_BUTTON_RAID_OVER_TOOLTIP = "\'" .. L["RL_BUTTON_RAID_OVER_MSG"] .. "\' 를 공격대 경보한다.";
 
 	RL_BUTTON_PORTAL_TOOLTIP = "\'" .. L["RL_BUTTON_PORTAL_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_BUTTON_SHARE_QUEST_TOOLTIP = "\'" .. L["RL_BUTTON_SHARE_QUEST_MSG"] .. "\' 를 공격대 경보한다.";
@@ -324,4 +328,3 @@ function RL_LoadRaidWarningTooltipData()
     return RL_MESSAGE_TOOLTIP_ENG
   end
 end
-

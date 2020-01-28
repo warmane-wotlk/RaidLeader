@@ -1,7 +1,7 @@
 local L  = LibStub("AceLocale-3.0"):GetLocale("RaidLeader", true)
 
 RL_ZONE_ICC_MARROWGAR = { "READY", "STACK", "FLAME" };
-RL_ZONE_ICC_LADY = { "READY", "SPIRIT", "CYCLONE", "DARNAVAN", "MD_TOT"};
+RL_ZONE_ICC_LADY = { "READY", "SPIRIT", "INTERRUPT", "CYCLONE", "DARNAVAN", "MD_TOT"};
 RL_ZONE_ICC_GUNSHIP = { "READY", "NO_PET", "AGGRO", "JUMP", "WAIT", "RETURN" };
 RL_ZONE_ICC_DEATHBRINGER = { "READY", "AGGRO", "ICETRAP", "HEAL", "HOP", "ADD"};
 RL_ZONE_ICC_FESTERGUT = { "READY", "SPREAD", "SPORE", "GREEN", "AGGRO", "NO_SPORE"};
@@ -35,6 +35,7 @@ RL_ZONE_TEXT_ENG["ICC"] = {
 
 	RL_ZONE_ICC_LADY_READY = "Ready";
 	RL_ZONE_ICC_LADY_SPIRIT = "Spirit";
+	RL_ZONE_ICC_LADY_INTERRUPT = "Cut Spell";
 	RL_ZONE_ICC_LADY_CYCLONE = "Cyclone";
 	RL_ZONE_ICC_LADY_DARNAVAN = "Darnavan";
 	RL_ZONE_ICC_LADY_MD_TOT = "MD/TOT";
@@ -54,11 +55,11 @@ RL_ZONE_TEXT_ENG["ICC"] = {
 	RL_ZONE_ICC_DEATHBRINGER_ADD = "ADD";
 
 	RL_ZONE_ICC_FESTERGUT_READY = "Ready";
-	RL_ZONE_ICC_FESTERGUT_SPREAD = "Spre";
-	RL_ZONE_ICC_FESTERGUT_SPORE = "";
-	RL_ZONE_ICC_FESTERGUT_GREEN = "";
+	RL_ZONE_ICC_FESTERGUT_SPREAD = "Spread";
+	RL_ZONE_ICC_FESTERGUT_SPORE = "Spore";
+	RL_ZONE_ICC_FESTERGUT_GREEN = "Flood";
 	RL_ZONE_ICC_FESTERGUT_AGGRO = "Aggro";
-	RL_ZONE_ICC_FESTERGUT_NO_SPORE = "";
+	RL_ZONE_ICC_FESTERGUT_NO_SPORE = "NO Spore";
 
 	RL_ZONE_ICC_ROTFACE_READY = "Ready";
 	RL_ZONE_ICC_ROTFACE_SPREAD = "Spread";
@@ -113,7 +114,8 @@ RL_ZONE_TEXT_KOR["ICC"] = {
 	RL_ZONE_ICC_MARROWGAR_FLAME = "바닥주의";
 
 	RL_ZONE_ICC_LADY_READY = "전투준비";
-	RL_ZONE_ICC_LADY_SPIRIT = "새우";
+	RL_ZONE_ICC_LADY_SPIRIT = "불타는 영혼";
+	RL_ZONE_ICC_LADY_INTERRUPT = "차단";
 	RL_ZONE_ICC_LADY_CYCLONE = "회오리";
 	RL_ZONE_ICC_LADY_DARNAVAN = "다르나반";
 	RL_ZONE_ICC_LADY_MD_TOT = "눈속/속거";
@@ -193,7 +195,8 @@ RL_ZONE_MSG_ENG["ICC"] = {
 	RL_ZONE_ICC_MARROWGAR_FLAME_MSG = "Don\'t stand on the flame";
 
 	RL_ZONE_ICC_LADY_READY_MSG = "Ready for lady";
-	RL_ZONE_ICC_LADY_SPIRIT_MSG = "Evade Spirit";
+	RL_ZONE_ICC_LADY_SPIRIT_MSG = "Evade Vengeful Spirits. Move!! Move!!";
+	RL_ZONE_ICC_LADY_INTERRUPT_MSG = "Interrupt the Frostbolt spell";
 	RL_ZONE_ICC_LADY_CYCLONE_MSG = "Druid, use Cyclone on the Mind Controlled Raider";
 	RL_ZONE_ICC_LADY_DARNAVAN_MSG = "Mage/Priest - take Darnavan and, dont dps Darnavan";
 	RL_ZONE_ICC_LADY_MD_TOT_MSG = "Hunter/Rogue, use MD/TOT on OT";
@@ -272,7 +275,8 @@ RL_ZONE_MSG_KOR["ICC"] = {
 	RL_ZONE_ICC_MARROWGAR_FLAME_MSG = "화염 바닥에 있지마세요";
 
 	RL_ZONE_ICC_LADY_READY_MSG = "맨탱은 오른쪽, 부탱은 왼쪽 몹을 데리고 중앙 계단밑으로 와서, 광역 한번만 해주시고, 정배자 바로 회오리해주세요.";
-	RL_ZONE_ICC_LADY_SPIRIT_MSG = "새우!! 새우!!! 피해주세요.";
+	RL_ZONE_ICC_LADY_SPIRIT_MSG = "불타는 영혼 피해주세요.";
+	RL_ZONE_ICC_LADY_INTERRUPT_MSG = "차단조는 보스의 얼음화살을 차단해주세요.";
 	RL_ZONE_ICC_LADY_CYCLONE_MSG = "드루님, 정배 대상자에게 회오리해주세요. 정배 대상자 공격하지 마세요.";
 	RL_ZONE_ICC_LADY_DARNAVAN_MSG = "법사님/사제님 - 다르나반 양변/정배해주세요. 다르나반 공격하지 마세요.";
 	RL_ZONE_ICC_LADY_MD_TOT_MSG = "낭꾼/도적님, 부탱에게 눈속/속거해주세요.";
@@ -353,6 +357,7 @@ RL_ZONE_TOOLTIP_ENG["ICC"] = {
 
 	RL_ZONE_ICC_LADY_READY_TOOLTIP = "Raid warning - \'" .. BL["RL_ZONE_ICC_LADY_READY_MSG"] .. "\'";
 	RL_ZONE_ICC_LADY_SPIRIT_TOOLTIP = "Raid warning - \'" .. BL["RL_ZONE_ICC_LADY_SPIRIT_MSG"] .. "\'";
+	RL_ZONE_ICC_LADY_INTERRUPT_TOOLTIP = "Raid warning - \'" .. BL["RL_ZONE_ICC_LADY_INTERRUPT_MSG"] .. "\'";
 	RL_ZONE_ICC_LADY_CYCLONE_TOOLTIP = "Raid warning - \'" .. BL["RL_ZONE_ICC_LADY_CYCLONE_MSG"] .. "\'";
 	RL_ZONE_ICC_LADY_DARNAVAN_TOOLTIP = "Raid warning - \'" .. BL["RL_ZONE_ICC_LADY_DARNAVAN_MSG"] .. "\'";
 	RL_ZONE_ICC_LADY_MD_TOT_TOOLTIP = "Raid warning - \'" .. BL["RL_ZONE_ICC_LADY_MD_TOT_MSG"] .. "\'";
@@ -433,6 +438,7 @@ RL_ZONE_TOOLTIP_KOR["ICC"] = {
 
 	RL_ZONE_ICC_LADY_READY_TOOLTIP = "\'" .. BL["RL_ZONE_ICC_LADY_READY_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_ZONE_ICC_LADY_SPIRIT_TOOLTIP = "\'" .. BL["RL_ZONE_ICC_LADY_SPIRIT_MSG"] .. "\' 를 공격대 경보한다.";
+	RL_ZONE_ICC_LADY_INTERRUPT_TOOLTIP = "\'" .. BL["RL_ZONE_ICC_LADY_INTERRUPT_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_ZONE_ICC_LADY_CYCLONE_TOOLTIP = "\'" .. BL["RL_ZONE_ICC_LADY_CYCLONE_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_ZONE_ICC_LADY_DARNAVAN_TOOLTIP = "\'" .. BL["RL_ZONE_ICC_LADY_DARNAVAN_MSG"] .. "\' 를 공격대 경보한다.";
 	RL_ZONE_ICC_LADY_MD_TOT_TOOLTIP = "\'" .. BL["RL_ZONE_ICC_LADY_MD_TOT_MSG"] .. "\' 를 공격대 경보한다."; 

@@ -15,6 +15,7 @@ if L then
 	L["RL_BUTTON_MD_TOT"]  = "눈속/속거"
 	L["RL_BUTTON_TANK_AGGRO"]  = "어글"
 	L["RL_BUTTON_DPS_BOSS"] = "딜! 보스"
+	L["RL_BUTTON_RAID_OVER"] = "레이드 종료"
 
 	-- boss
 	L["RL_BUTTON_HOP"]  = "보손"

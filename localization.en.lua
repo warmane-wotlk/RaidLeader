@@ -15,6 +15,7 @@ if L then
 	L["RL_BUTTON_MD_TOT"]  = "MD/TOT"
 	L["RL_BUTTON_TANK_AGGRO"]  = "Aggro"
 	L["RL_BUTTON_DPS_BOSS"] = "dps Boss"
+	L["RL_BUTTON_RAID_OVER"] = "RO"
 
 	-- boss
 	L["RL_BUTTON_HOP"]  = "HOP"

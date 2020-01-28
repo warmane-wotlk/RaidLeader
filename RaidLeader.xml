@@ -77,7 +77,7 @@
 						</Anchor>
 					</Anchors>
 				</Texture>				
-				<FontString name="RL_Title_txt" inherits="GameFontHighlight" text="RaidLeader-Sunmudang v0.6">
+				<FontString name="RL_Title_txt" inherits="GameFontHighlight" text="RaidLeader-Sunmudang v0.7">
 					<Anchors>
 						<Anchor point="TOP" relativePoint="TOP">
 							<Offset>
@@ -730,7 +730,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="91" y="-286" />
+						<Offset x="91" y="-287" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -826,7 +826,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="91" y="-310" />
+						<Offset x="91" y="-311" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -850,7 +850,7 @@
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset x="25" y="-310" />
+						<Offset x="25" y="-311" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
