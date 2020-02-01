@@ -24,6 +24,20 @@ function RL_ZoneFrameToggle()
   end
 end
 
+function RLF_Zone_GetTombOrders()
+  local difficulty = RLU_GetDifficulty()
+  local msg = ""
+        
+  if difficulty == "normal10" or difficulty == "heroic10" then
+    msg = "Player1({rt8}) ---- Player2({rt7})"
+  elseif difficulty == "normal25" then
+    msg = "Player1({rt8}),Player2({rt7}) -- Player3({rt6}) -- Player4({rt5}),Player5({rt4})"
+  elseif difficulty == "heroic25" then
+    msg = "Player1({rt8}),Player2({rt7}) -- Player3({rt6}),Player4({rt5}) -- Player5({rt4}),Player6({rt3})"
+  end
+  return msg
+end
+
 function RLF_Zone_RaidWarning(param)
   if param then
     local combatMsgId = param .. "_MSG"
@@ -61,12 +75,34 @@ function RLF_Zone_RaidWarning(param)
       end
       s   = m + 1
     end
+
+    -- say tomb order based on the instance difficulty.
+    if param == "RL_ZONE_ICC_SINDRAGOSA_READY" or param == "RL_ZONE_ICC_SINDRAGOSA_BEACON" then
+      msg = RLF_Zone_GetTombOrders()
+      SendChatMessage(msg, msgChannel)
+    end
   end
 end
 
 function RLF_Zone_Buttons_OnClick(self)
+  local buttonId = buttonObj[self:GetName()].id
+  RLF_Zone_RaidWarning(buttonId)
 
-  RLF_Zone_RaidWarning(buttonObj[self:GetName()].id)
+  if select(2, string.find(buttonId, "READY")) then
+    printf(L["Update Raid Roaster Info"])
+    RRI_InitializeRaidRosterInfo()
+    RRI_GetRaidRosterInfo()
+  end
+
+  if buttonId == "RL_ZONE_ICC_FESTERGUT_READY" then
+    SetRaidTarget(RRI_GetTankerInfo("MT").name, 8)
+    SetRaidTarget(RRI_Get2NonPallyHealersForFestergut()[1], 1)
+
+    local difficulty = RLU_GetDifficulty()
+    if difficulty == "normal25" or difficulty == "heroic25" then
+      SetRaidTarget(RRI_Get2NonPallyHealersForFestergut()[2], 2)
+    end
+  end
 end
 
 -- show tooltip for zone frame

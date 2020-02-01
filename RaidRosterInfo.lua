@@ -11,6 +11,7 @@ local g_raid_has_disc = false
 
 local g_playersInfo = {}
 local g_assigedTanks = {}
+local g_healersInfo = {}
 
 local g_paladinInfo = {}
 local g_druidInfo   = {}
@@ -48,20 +49,29 @@ function RRI_InitializeRaidRosterInfo()
 
   wipe(g_playersInfo)
   wipe(g_assigedTanks)
+  wipe(g_healersInfo)
   for i = 1, raid_size do
     local unitId = prefix_unitId .. i
+    local guid   = UnitGUID(unitId)
     local name, _, subgroup, _, _, className, _, _, _, tanker, _ = GetRaidRosterInfo(i)
-    if tanker == nil then tanker = "" end
-    if tanker == "MAINTANK" or tanker == "MAINASSIST" then
-      g_assigedTanks[tanker] = { name = name, className = className, guid = UnitGUID(unitId)}
+
+    if name then
+      if tanker == nil then tanker = "" end
+      if tanker == "MAINTANK" or tanker == "MAINASSIST" then
+        g_assigedTanks[tanker] = { name = name, className = className, guid = guid}
+      end
+
+      local role = LibGT:GetUnitRole(unitId)
+      if role == nil then role = "tbd" end
+      local data = { unitId = unitId, guid = guid, subgroup = subgroup, className = className, tanker = tanker, role = role }
+
+      -- print("unitId: " .. unitId .. ", name:" .. data.name .. " , subgroup: " .. data.subgroup .. ", role:" .. data.role .. ", className: " .. data.className .. ", tanker: " .. data.tanker )
+      g_playersInfo[name] = data
+
+      if role == "healer" then
+        table.insert(g_healersInfo, { name = name, className = className })
+      end
     end
-
-    local role = LibGT:GetUnitRole(unitId)
-    if role == nil then role = "tbd" end
-    local data = { name = name, subgroup = subgroup, className = className, tanker = tanker, role = role }
-
-    -- print("unitId: " .. unitId .. ", name:" .. data.name .. " , subgroup: " .. data.subgroup .. ", role:" .. data.role .. ", className: " .. data.className .. ", tanker: " .. data.tanker )
-    g_playersInfo[unitId] = data
   end
 end
 
@@ -87,13 +97,13 @@ function RRI_GetRaidRosterInfo()
   local raid_size = isRaid and GetNumRaidMembers() or GetNumPartyMembers() + 1
   local prefix_unitId = isRaid and "raid" or "party"
 
-  for i = 1, raid_size do
-    local unitId     = prefix_unitId .. i
-    local name       = g_playersInfo[unitId].name
-    local subgroup   = g_playersInfo[unitId].subgroup
-    local className  = g_playersInfo[unitId].className
-    local tanker     = g_playersInfo[unitId].tanker
-    local talentRole = g_playersInfo[unitId].role
+  for name, player in pairs(g_playersInfo) do    
+    local unitId     = player.unitId
+    local name       = name
+    local subgroup   = player.subgroup
+    local className  = player.className
+    local tanker     = player.tanker
+    local talentRole = player.role
     local role       = tanker == "" and "DPS" or tanker
 
     if name then
@@ -129,6 +139,29 @@ function RRI_GetDruidInfo()
   return g_druidInfo
 end
 
+function RRI_GetHealersInfo()
+  return g_healersInfo;
+end
+
+function RRI_Get2NonPallyHealersForFestergut()
+  local healers = {}
+  local pallyHealer = ""
+  local n = 1
+  for _,v in pairs(g_healersInfo) do
+    if v.className == "PALADIN" then
+      pallyHealer = v.name
+    else
+      healers[n] = v.name
+      n = n + 1
+    end
+  end
+  if n == 2 then
+    healers[2] = pallyHealer
+  end
+
+  return healers
+end
+
 function RRI_GetTankerInfo(param)
   if param == "MT" then 
     return g_assigedTanks["MAINTANK"]
@@ -139,4 +172,7 @@ function RRI_GetTankerInfo(param)
   end
 end
 
-
+function RRI_GetRaidSubgroup(name)
+  name = name or UnitName("player")
+  return (g_playersInfo[name] and g_playersInfo[name].subgroup) or 0  
+end

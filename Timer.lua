@@ -28,6 +28,7 @@ end
 -- How often to check timers. Lower values are more CPU intensive.
 local granularity = 1
 
+-- rv is the return of callback
 local totalElapsed = 0
 local function OnUpdate(self, elapsed)
 	totalElapsed = totalElapsed + elapsed

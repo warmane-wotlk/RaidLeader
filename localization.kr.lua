@@ -97,6 +97,8 @@ if L then
 	L["Please choose the target"] = "목표를 먼저 설정해주세요."
 	L["Reset MS Change Informations"] = "주특 변경정보를 초기화했습니다."
 	L["Expire MS Change Time"] = "주특 변경 시간(1분)이 끝났습니다."
+	L["Error! Unknown # of beacon: "] = "에러! 냉기 봉화의 수가 이상합니다. "
+	L["Update Raid Roaster Info"] = "레이드 정보를 업데이트 했습니다."
 
 	L["Type my MS Change if you want"] = "변경하고자 하는 당신의 주특정보를 넣으세요."
 	L["My MS Change"] = "주특 변경"
@@ -105,7 +107,8 @@ if L then
 	L["WOW Error! Need to relog!"] = "월드오브워크래프트 에러 - 재접해주세요."
 	L["ERROR - Failed to create button with "] = "ERROR - 버튼 생성 실패함 "
 	L["Drums of the Wild"] = "\'야생의 북\' 사용"
-
+	L["Use Korean"] = "한글 공대말"
+	L["Use SDBM"] = "자체 DBM 사용"
 
 	-- boss
 	L["Marrowgar"] = "매로우"

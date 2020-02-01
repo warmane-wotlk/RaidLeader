@@ -1,10 +1,21 @@
 local L  = LibStub("AceLocale-3.0"):GetLocale("RaidLeader", true)
 
 RaidLeaderData = {
-	version     = "v0.5";
+	version     = "v0.7";
 	useKorean   = false;
+  useSDBM     = false;
 	recruitInfo = { zone = "", sub = "", gear = "5.0k+", needHealer = true, needTanker = true };
 };
+
+-- Utility --------------
+function RLU_GetDifficulty()
+  local _, instanceType, difficulty, _, _, playerDifficulty, isDynamicInstance = GetInstanceInfo()
+  if difficulty == 1 then -- 10 men
+    return playerDifficulty == 0 and "normal10" or playerDifficulty == 1 and "heroic10" or "unknown"
+  elseif difficulty == 2 then -- 25 men
+    return playerDifficulty == 0 and "normal25" or playerDifficulty == 1 and "heroic25" or "unknown"
+  end
+end 
 
 -- Zone Frame variable
 RL_ZONE_INFOS = {}

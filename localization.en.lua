@@ -97,6 +97,7 @@ if L then
 	L["Please choose the target"] = "Please choose the target"
 	L["Reset MS Change Informations"] = "Reset MS Change Informations"
 	L["Expire MS Change Time"] = "Expire MS Change Time(1min)"
+	L["Error! Unknown # of beacon: "] = "Error! Unknown # of beacon: "
 
 	L["Type my MS Change if you want"] = "Type my MS Change if you want"
 	L["My MS Change"] = "My MS Change"
@@ -105,6 +106,9 @@ if L then
 	L["WOW Error! Need to relog!"] = "WOW Error! Need to relog!"
 	L["ERROR - Failed to create button with "] = "ERROR - Failed to create button with "
 	L["Drums of the Wild"] = "Use Drums"
+	L["Use Korean"] = "Use Korean"
+	L["Use SDBM"] = "Use Simple DBM"
+	L["Update Raid Roaster Info"] = "Update Raid Roaster Info"
 
 	-- boss
 	L["Marrowgar"] = "Marrowgar"

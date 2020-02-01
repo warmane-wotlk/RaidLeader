@@ -205,7 +205,7 @@ RL_ZONE_MSG_ENG["ICC"] = {
 	RL_ZONE_ICC_GUNSHIP_NO_PET_MSG = "Dismiss any PET.";
 	RL_ZONE_ICC_GUNSHIP_RETURN_MSG = "All be BACK to the ship.";
 	RL_ZONE_ICC_GUNSHIP_JUMP_MSG = "Everyone Jump from left side and Jump tanker does from right side.";
-	RL_ZONE_ICC_GUNSHIP_WAIT_MSG = "Don\'t jump yet, Wait\nDon\'t jump yet, Wait\nDon\'t jump yet, Wait";
+	RL_ZONE_ICC_GUNSHIP_WAIT_MSG = "Don\'t jump yet, Wait\nDon\'t jump yet, Wait. Don\'t jump yet, Wait";
 	RL_ZONE_ICC_GUNSHIP_AGGRO_MSG = "Tank at ship takes Aggro";
 
 	RL_ZONE_ICC_DEATHBRINGER_READY_MSG = "Tanker please take aggro turn on time, Hunter use icetrap, Druid use Typoon and DPS ADD first quickly";
@@ -231,8 +231,8 @@ RL_ZONE_MSG_ENG["ICC"] = {
 	RL_ZONE_ICC_PROFESSOR_READY_MSG = "Remember this, Together on Green Ooze, Run away from Red Ooze.";
 	RL_ZONE_ICC_PROFESSOR_DRIBBLE_MSG = "The Boss tanker bring the Professor near the Abom.";
 	RL_ZONE_ICC_PROFESSOR_MOVE_MSG = "Watch out Malleable Goo / Choking gas bomb";
-	RL_ZONE_ICC_PROFESSOR_GREEN_MSG = "STOP DPS\nSTOP DPS\nAbom makes it slow. Be ready to rush the Green Ooze. Watch out your health.";
-	RL_ZONE_ICC_PROFESSOR_RED_MSG = "STOP DPS\nSTOP DPS\nAbom makes it slow. All come to the alchemy table. The RED Ooze's target must be away from it and roam around the Professor.";
+	RL_ZONE_ICC_PROFESSOR_GREEN_MSG = "STOP DPS!! STOP DPS\nAbom makes it slow. Be ready to rush the Green Ooze. Watch out your health.";
+	RL_ZONE_ICC_PROFESSOR_RED_MSG = "STOP DPS!! STOP DPS\nAbom makes it slow. All come to the alchemy table. The RED Ooze's target must be away from it and roam around the Professor.";
 	RL_ZONE_ICC_PROFESSOR_HOP_MSG = "Oh my god, Pally, use HOP (Hand of Protection";
 	RL_ZONE_ICC_PROFESSOR_AGGRO_MSG = "Hunter, use Distracting Shot and use Feign Death";
 
@@ -247,16 +247,16 @@ RL_ZONE_MSG_ENG["ICC"] = {
 	RL_ZONE_ICC_BLOODQUEEN_BITE_MSG = "Whoever has Essence of the Blood Queen prepare to bite other player. Be near him and bite him, use 1 key.";
 	RL_ZONE_ICC_BLOODQUEEN_DISPELL_MSG = "Prepare Incite Terror. Come to the center from the any flame. Priest use holy excorcism on yourself and do mass dispell.";
 
-	RL_ZONE_ICC_DREAMWALKER_READY_MSG = "This is attack order.\nSuppressor >> Blazing Skeleton >> Blistering Zombie >> Abomination\nQuickly kill the Suppressor and use AOE when Abomination is killed.";
+	RL_ZONE_ICC_DREAMWALKER_READY_MSG = "This is attack order. Suppressor >> Blazing Skeleton >> Blistering Zombie >> Abomination\nQuickly kill the Suppressor and use AOE when Abomination is killed.";
 	RL_ZONE_ICC_DREAMWALKER_SUPPRESSOR_MSG = "Suppressor is coming after Abomination. Quickly kill Suppressor.";
 	RL_ZONE_ICC_DREAMWALKER_ABOM_AOE_MSG = "Abomination will be exploded, come to there and use AOE on Rot Worms.";
 	RL_ZONE_ICC_DREAMWALKER_PORTAL_MSG = "The Valithria healers should move close to these orbs and enter the portals as soon as they appear.\nCrusader Aura/Auro mastery works inside the dream, increasing movement speed.";
 
-	RL_ZONE_ICC_SINDRAGOSA_READY_MSG = "The assigned Ice Tomb players must stand like ( 1,2 -- 3 -- 4,5 for 25),(1 - 2 for 10).";
-	RL_ZONE_ICC_SINDRAGOSA_BEACON_MSG = "The assigned Ice Tomb players must stand like ( 1,2 -- 3 -- 4,5 for 25),(1 - 2 for 10).";
+	RL_ZONE_ICC_SINDRAGOSA_READY_MSG = "The assigned Ice Tomb players in Group Orders must stand like below.";
+	RL_ZONE_ICC_SINDRAGOSA_BEACON_MSG = "The assigned Ice Tomb players must stand like below.";
 	RL_ZONE_ICC_SINDRAGOSA_HIDE_MSG = "Move behind Tomb to evade Icy Grip.";
 	RL_ZONE_ICC_SINDRAGOSA_HOF_MSG = "Pally use the HOF(Hands of Freedom to the Sindragosa Tanker.";
-	RL_ZONE_ICC_SINDRAGOSA_NO_DPS_MSG = "STOP DPS!!!\nSTOP DPS!!!\nSTOP DPS!!!";
+	RL_ZONE_ICC_SINDRAGOSA_NO_DPS_MSG = "STOP DPS!!!\nSTOP DPS!!! STOP DPS!!!";
 	RL_ZONE_ICC_SINDRAGOSA_DEBUFF_MSG = "Check out your debuff (Permeating Chill/Unchained Magic), No more than 5 stack after 1 Phase.";
 	RL_ZONE_ICC_SINDRAGOSA_SINGLE_TOMB_MSG = "The assigned Ice Tomb player run away from players. Fast run, run.";
 
@@ -265,7 +265,7 @@ RL_ZONE_MSG_ENG["ICC"] = {
 	RL_ZONE_ICC_LICHKING_ENRAGE_MSG = "Hunter, use Tranquilizing Shot on ADD";
 	RL_ZONE_ICC_LICHKING_ICE_SPHERE_MSG = "Hunter/Warlock/Unholy DK pull your pet from Ice Sphere";
 	RL_ZONE_ICC_LICHKING_BACK_LICH_MSG = "All except tanker stand behind Lich King";
-	RL_ZONE_ICC_LICHKING_DEFILE_MSG = "Defile!!!\nDefile!!\nSpread out a little but not near to center.";
+	RL_ZONE_ICC_LICHKING_DEFILE_MSG = "Defile!!! Defile!!\nSpread out a little but not near to center.";
 	RL_ZONE_ICC_LICHKING_SOAKING_MSG = "Prepare to do a soaking the Spirits";
 };
 
@@ -284,8 +284,8 @@ RL_ZONE_MSG_KOR["ICC"] = {
 	RL_ZONE_ICC_GUNSHIP_READY_MSG = "천케릭분들은 캐논에 타시고, 1-1-2 눌러주시고, 점프 탱커가 점프하면 탱커의 왼쪽으로 해서 점프하세요. 비행선에 나오는 쫄은 부탱에게 맡겨주시고, 되도록 공격하지 마세요.";
 	RL_ZONE_ICC_GUNSHIP_NO_PET_MSG = "낭꾼/죽기/흑마님, 팻 해제해주세요.";
 	RL_ZONE_ICC_GUNSHIP_RETURN_MSG = "본선으로 다시 복귀하세요. 점프탱커는 마지막 사람이 점프한 후 복귀해주세요.";
-	RL_ZONE_ICC_GUNSHIP_JUMP_MSG = "모두 배의 왼쪽 난간에서 점프하세요. 점프 탱커는 오른쪽 난간에서 해주세요.\n점프하세요.\n점프하세요.";
-	RL_ZONE_ICC_GUNSHIP_WAIT_MSG = "아직 점프하지 마세요!!!\n아직 점프하지 마세요!!!\n아직 점프하지 마세요!!!";
+	RL_ZONE_ICC_GUNSHIP_JUMP_MSG = "모두 배의 왼쪽 난간에서 점프하세요. 점프 탱커는 오른쪽 난간에서 해주세요.\n점프하세요. 점프하세요.";
+	RL_ZONE_ICC_GUNSHIP_WAIT_MSG = "아직 점프하지 마세요!!!\n아직 점프하지 마세요!!! 아직 점프하지 마세요!!!";
 	RL_ZONE_ICC_GUNSHIP_AGGRO_MSG = "배에 있는 탱커님 어글 잡아주세요.";	
 
 	RL_ZONE_ICC_DEATHBRINGER_READY_MSG = "탱님들 어글 교환 칼같이해주시고, 기사님 스턴 나눠서해주시고, 쫄 바로바로 처리해주세요. 낭꾼님은 얼덫을 계단에 설치하는 것 잊지마세요.";
@@ -311,8 +311,8 @@ RL_ZONE_MSG_KOR["ICC"] = {
 	RL_ZONE_ICC_PROFESSOR_READY_MSG = "기억하세요. \'녹쪽은 뭉치고, 빨쫄은 도망갑니다.\' 딜금지 요청시 바로 딜 금지해주세요. 어봄에게 작은 성축/힘축주세요. 그리고, 바닥 잘 피하세요.";
 	RL_ZONE_ICC_PROFESSOR_DRIBBLE_MSG = "보스탱님 보스를 녹색 바닥 근처로 이동시켜서 어봄이 보스 공격하도록 해주세요.";
 	RL_ZONE_ICC_PROFESSOR_MOVE_MSG = "가스/탱탱볼/바닥 피해주세요.";
-	RL_ZONE_ICC_PROFESSOR_GREEN_MSG = "딜금지!!\n딜금지!!\n어봄님은 슬로우/슬로우하세요. 다른분들은 녹쫄로 달려가서 공격할 준비하세요. 너무 빨리가시지도 말고, 달리기 전 자신의 체력확인하세요.";
-	RL_ZONE_ICC_PROFESSOR_RED_MSG = "딜금지!!\n딜금지!!\n어봄님은 슬로우/슬로우하세요. 모두 빨쫄에서 연금대 근처로 뭉치세요. 그리고, 빨쫄 대상자는 보스 주변으로 원을 그리면서 도망가세요.";
+	RL_ZONE_ICC_PROFESSOR_GREEN_MSG = "딜금지!! 딜금지!!\n어봄님은 슬로우/슬로우하세요. 다른분들은 녹쫄로 달려가서 공격할 준비하세요. 너무 빨리가시지도 말고, 달리기 전 자신의 체력확인하세요.";
+	RL_ZONE_ICC_PROFESSOR_RED_MSG = "딜금지!! 딜금지!!\n어봄님은 슬로우/슬로우하세요. 모두 빨쫄에서 연금대 근처로 뭉치세요. 그리고, 빨쫄 대상자는 보스 주변으로 원을 그리면서 도망가세요.";
 	RL_ZONE_ICC_PROFESSOR_HOP_MSG = "이런 이런... 빨쫄 대상자에게 보손/보손 사용하세요.";
 	RL_ZONE_ICC_PROFESSOR_AGGRO_MSG = "헌터님 견제사격 샷하시고, 죽척해주세요.";
 
@@ -336,7 +336,7 @@ RL_ZONE_MSG_KOR["ICC"] = {
 	RL_ZONE_ICC_SINDRAGOSA_BEACON_MSG = "봉화대상자는 (25인의 경우 1,2 -- 3 -- 4,5),(10인의 경우 1 - 2) 순으로 뭉쳐주세요. 1,2는 서로 겹쳐서 서주세요.";
 	RL_ZONE_ICC_SINDRAGOSA_HIDE_MSG = "무덤 뒤로 숨어서 한파를 피해갑니다.";
 	RL_ZONE_ICC_SINDRAGOSA_HOF_MSG = "기사님, 슬로우 걸린 보스탱에게 자유의 손길 주세요.";
-	RL_ZONE_ICC_SINDRAGOSA_NO_DPS_MSG = "딜 금지!!!\n딜 금지!!!\n딜 금지!!!";
+	RL_ZONE_ICC_SINDRAGOSA_NO_DPS_MSG = "딜 금지!!!\n딜 금지!!! 딜 금지!!!";
 	RL_ZONE_ICC_SINDRAGOSA_DEBUFF_MSG = "자신의 디버프(사무치는 한기/해방된 마법) 확인하세요. 5스택 이상이 되면 위험합니다.";
 	RL_ZONE_ICC_SINDRAGOSA_SINGLE_TOMB_MSG = "봉화 대상자는 바로 레이드 무리에서 벗어나서 나가세요. 지구를 떠나거라~~";
 

@@ -53,15 +53,15 @@ RL_MESSAGE_ENG = {
 	RL_BUTTON_STOP_DPS_MSG = "STOP DPS!! STOP DPS!! STOP DPS!!";
 	RL_BUTTON_SUMMON_MSG = "Lock, Please Summon Stone";
 	RL_BUTTON_PALADIN_BUFF_MSG = "";
-	RL_BUTTON_ETC_BUFF_MSG = "Priest/Druid/Mage, Please buff, Rogue, check your poison, Hunter check your aspect, Warrior use Shout";
+	RL_BUTTON_ETC_BUFF_MSG = "Priest/Druid/Mage, Please buff, Rogue, check your poison,\nHunter check your aspect, Warrior use Shout";
 	RL_BUTTON_FOOD_MSG = "Mage - Drink, Lock - Candy, Anyone has a FISH!!";
 	RL_BUTTON_MS_CHANGE_MSG = "Wisp or Raid Chat for your MS Change. For example, please type \'ms healer\' if you want to change to healer.";
-	RL_BUTTON_RAID_START_MSG = "Listen!! Roll items about 30 mins before expired or at RO. Respect the DBM timer. AFK lose item";
+	RL_BUTTON_RAID_START_MSG = "Listen!! Roll items about 30 mins before expired or at RO. \nRespect the DBM timer. AFK lose item";
 	RL_BUTTON_ROLL_NOW_MSG = "Roll item now.";
 	RL_BUTTON_HERO_MODE_MSG = "Can anyone change it to HC?";
 	RL_BUTTON_SOULSTONE_MSG = "Lock, please put soul stone on Tanker or Healer";
 	RL_BUTTON_PONY_OFF_MSG = "Hunter/Pally turn off the PACK Aspect/PONY auroa";
-	RL_BUTTON_WIPE_MSG  = "Quickly Wipe. Healers don't heal. Quickly move back. Pally use bubble if you can.";
+	RL_BUTTON_WIPE_MSG  = "Quickly Wipe. Healers don't heal. Quickly move back. \nPally use bubble if you can.";
 	RL_BUTTON_DISARM_TRAP_MSG  = "Rogue, Disarm all of trap!!!";
 	RL_BUTTON_MD_TOT_MSG  = "Hunter/Rogue, use MD/TOT on tanker";
 	RL_BUTTON_CYCLONE_MSG  = "Druid, use Cyclone on mind controlled one.";
@@ -91,18 +91,38 @@ RL_MESSAGE_ENG = {
 	RL_BUTTON_SET_HC_NM_MSG = "toggle HC and NM difficulty";	
 	RL_BUTTON_RAID_OVER_MSG  = "Raid is Over. Thank you everyone for the raiding.";
 
-	RL_BUTTON_PORTAL_MSG = "Mage, please open the Portal to Dalaran";
-	RL_BUTTON_SHARE_QUEST_MSG = "I've shared Weekly Quest, if you dont get it, check whether you have other MUST DIE quest or you've done for this week.";
-	RL_BUTTON_DBM_PULL_MSG = "Everyone be ready. We are going to nuke the Boss!!! RESPECT THE TIMER!!";
+	RL_BUTTON_PORTAL_MSG = "Mage, please open the Portal to Dalaran, and don\'t leave raid until raiders use the portal";
+	RL_BUTTON_SHARE_QUEST_MSG = "I've shared Weekly Quest, if you don\'t get it, \ncheck whether you have other MUST DIE quest or you've done for this week.";
+	RL_BUTTON_DBM_PULL_MSG = "Everyone be ready. We are going to nuke the Boss!!!\nRESPECT THE TIMER!!";
 	RL_BUTTON_MS_CHANGE_NOTIFY_MSG = "Here is MS change information.";
 	RL_BUTTON_CALL_BOSS_FRAME_MSG = "Bring Zone Boss Commands";
 
 	RL_CHECKBUTTON_NEED_HEALER_MSG = "Check if Healer is needed in Raid";
 	RL_CHECKBUTTON_NEED_TANKER_MSG = "Check if Tanker is needed in Raid";
 	RL_CHECKBUTTON_LANGUAGE_MSG = "Check if Korean is used";
+	RL_CHECKBUTTON_USE_SDBM_MSG = "Check if use Simple DBM";
 
 	-- print
 	["NO MS Change"] = "NO MS Change";
+
+	-- Simple DBM, NO tooltip required.
+	["stack together in orders"] = "MOVE QUICKLY & STACK TOGETHER IN ORDERS";
+	wispBeacon = "You got beacon, please move quickly to build tomb";
+	warningBeaconAlone = "%s({rt%d}) move out from the raider, usually left or right side.";
+	wispRedOoze = "You got with RED OOZE, run away from her.";
+	warningRedOoze = "RED OOZE will chase %s({rt%d}), run away from her.";
+	warningGreenOoze = "Everyone dps Green Ooze and stack to %s({rt%d})";
+	warningMutatedInfection = "%s({rt%d}) must go to OT(Ooze Tanker) and merge your Ooze with his.";
+	wispMutatedInfection = "You must go to OT(Ooze Tanker) and merge your Ooze with his.";
+	dbmPull = "Pull in %d sec, don\'t move yet";
+	dbmPullDone = "Tanker, Pull Now. Others follow after Tanker dps.";
+	wispGasSpore = "You got the Gas Spore, move to the player({rt%d}) in the %s position.";
+	warningGasSpore = "Gas Spore!!! Everyone move to the one having Mark.";
+
+	"left" = "LEFT";
+	"tanker" = "TANKER";
+	"right" = "RIGHT";
+	"door" = "Front of DOOR";
 };
 
 local L = RL_MESSAGE_ENG
@@ -167,6 +187,7 @@ RL_MESSAGE_TOOLTIP_ENG = {
 	RL_CHECKBUTTON_NEED_HEALER_TOOLTIP = "Set the value of - \'" .. L["RL_CHECKBUTTON_NEED_HEALER_MSG"] .. "\'";
 	RL_CHECKBUTTON_NEED_TANKER_TOOLTIP = "Set the value of - \'" .. L["RL_CHECKBUTTON_NEED_TANKER_MSG"] .. "\'";
 	RL_CHECKBUTTON_LANGUAGE_TOOLTIP = "Set the value of - \'" .. L["RL_CHECKBUTTON_LANGUAGE_MSG"] .. "\'";
+	RL_CHECKBUTTON_USE_SDBM_TOOLTIP = "Set the value of - \'" .. L["RL_CHECKBUTTON_USE_SDBM_MSG"] .. "\'";
 };
 
 	-- combat msg
@@ -183,10 +204,10 @@ RL_MESSAGE_KOR = {
 	RL_BUTTON_STOP_DPS_MSG = "딜 금지!!!! 공격 중지!!! - 힐님은 탱힐하세요.";
 	RL_BUTTON_SUMMON_MSG = "흑마님, 소환문 부탁합니다.";
 	RL_BUTTON_PALADIN_BUFF_MSG = "";
-	RL_BUTTON_ETC_BUFF_MSG = "사제님/드루님/법사님, 버프해주세요. 도적님 독바르시고, 낭꾼님 독사상 확인하시고, 전사님 외침해주세요.";
+	RL_BUTTON_ETC_BUFF_MSG = "사제님/드루님/법사님, 버프해주세요. \n도적님 독바르시고, 낭꾼님 독사상 확인하시고, 전사님 외침해주세요.";
 	RL_BUTTON_FOOD_MSG = "법사님 - 물빵, 흑마님 - 사탕, 생선통구이 부탁드립니다.";
-	RL_BUTTON_MS_CHANGE_MSG = "주특 변경하실 분 귓말/공대말로 주세요. \'ms healer\' 또는 \'주특 탱커\' 형태로 주시면 고맙겠습니다.";
-	RL_BUTTON_RAID_START_MSG = "레이드 시작합니다. 다들 영약 및 버프 확인해주시고, dbm 타이머에 맞춰서 공격해주세요.";
+	RL_BUTTON_MS_CHANGE_MSG = "주특 변경하실 분 귓말/공대말로 주세요.\n\'ms healer\' 또는 \'주특 탱커\' 형태로 주시면 고맙겠습니다.";
+	RL_BUTTON_RAID_START_MSG = "레이드 시작합니다. 다들 영약 및 버프 확인해주시고,\ndbm 타이머에 맞춰서 공격해주세요.";
 	RL_BUTTON_ROLL_NOW_MSG = "아이템 분배시작합니다.";
 	RL_BUTTON_HERO_MODE_MSG = "영웅모드로 변경가능하신 분??";
 	RL_BUTTON_SOULSTONE_MSG = "흑마님, 영석을 탱/힐 중 한분에게 주세요.";
@@ -199,7 +220,7 @@ RL_MESSAGE_KOR = {
 	RL_BUTTON_DARNAVAN_MSG = "지정된 암사님/법사님, 왼쪽에 나오는 다르나반 정배 또는 양변해주세요.";
 	RL_BUTTON_SHACKLE_MSG = "사제님/기사님 중 한 분 해골 마크에게 속박/참회 해주세요.";
 	RL_BUTTON_FROST_TRAP_MSG = "냥꾼님, 애드 나오기 5초전에 냉덫을 계단에 설치해주세요.";
-	RL_BUTTON_TANK_AGGRO_MSG = "탱커님, 어글 잡아주세요. 어글 빨리.... 낭꾼/도적님 눈속/속거 도움주세요.";
+	RL_BUTTON_TANK_AGGRO_MSG = "탱커님, 어글 잡아주세요.\n낭꾼/도적님 눈속/속거 도움주세요.";
 	RL_BUTTON_HOP_MSG = "기사님, 보손!!! 보손!!!";
 	RL_BUTTON_HOF_MSG = "기사님, 탱커에게 자손!!! 자손!!!";
 	RL_BUTTON_DPS_BOSS_MSG = "보스!!! 보스 공격해주세요.";
@@ -221,8 +242,8 @@ RL_MESSAGE_KOR = {
 	RL_BUTTON_SET_HC_NM_MSG = "난이도를 영웅/일반 토글한다.";
 	RL_BUTTON_RAID_OVER_MSG  = "레이드 종료합니다. 다들 수고가 많으셨습니다.";
 
-	RL_BUTTON_PORTAL_MSG = "법사님, 달라란 포탈 열어주세요.";
-	RL_BUTTON_SHARE_QUEST_MSG = "주간퀘스트 공유했습니다. 받지 못하신분은 이미하셨거나, 퀘스트 목록에 MUST DIE를 지워주세요.";
+	RL_BUTTON_PORTAL_MSG = "법사님, 달라란 포탈 열어주세요.\n모든 사람이 포탈 이용하기 전에 공대(파티) 탈퇴하지 마세요.";
+	RL_BUTTON_SHARE_QUEST_MSG = "주간퀘스트 공유했습니다.\n받지 못하신분은 이미하셨거나, 퀘스트 목록에 MUST DIE를 지워주세요.";
 	RL_BUTTON_DBM_PULL_MSG = "공격 시작합니다!!!!. 타이머를 준수해주세요.";
 	RL_BUTTON_MS_CHANGE_NOTIFY_MSG = "주특/부특 변경사항입니다.";
 	RL_BUTTON_CALL_BOSS_FRAME_MSG = "보스에 맡는 명령셋 창을 엽니다.";
@@ -230,9 +251,29 @@ RL_MESSAGE_KOR = {
 	RL_CHECKBUTTON_NEED_HEALER_MSG = "힐러가 레이드에 필요하면 체크해주세요.";
 	RL_CHECKBUTTON_NEED_TANKER_MSG = "탱커가 레이드에 필요하면 체크해주세요.";
 	RL_CHECKBUTTON_LANGUAGE_MSG = "한글로 공대 명령을 사용할 경우 체크해주세요.";
+	RL_CHECKBUTTON_USE_SDBM_MSG = "자체 내장 간편한 DBM을 사용할 격우 체크해주세요.";
 
 	-- print
 	["NO MS Change"] = "주특 변경한 사람이 없습니다.";
+
+	-- Simple DBM, NO tooltip required.
+	["stack together in orders"] = "냉기 봉화 대상자는 빠르게 움직여주세요.";
+	wispBeacon = "냉기 봉화 대상자입니다. 빠르게 움직여주세요.";
+	warningBeaconAlone = "%s({rt%d}), 레이드 무리에서 벗어나서(왼쪽 또는 오른쪽) 멀리 나가서 혼자 있으세요.";
+	wispRedOoze = "빨쫄이 붙었습니다. 보스 주변으로 해서 도망가세요.";
+	warningRedOoze = "%s님({rt%d} 빨쫄이 붙었습니다. 보스 주변으로 해서 도망가세요.";
+	warningGreenOoze = "%s({rt%d})님에게 가면서 녹쪽 공격하세요.";
+	warningMutatedInfection = "%s({rt%d})님 녹색 슬라임 담당 탱커에게 가서 녹쫄 합치세요.";
+	wispMutatedInfection = "녹쫄이 붙었습니다. 녹색 슬라임 담당 탱커에게 가서 녹쫄 합치세요.";
+	dbmPull = "%d 초 뒤 풀링 합니다. 움직이지 마세요.";
+	dbmPullDone = "탱커 풀링하세요. 탱커 움직이는 걸 보고 공격하세요.";
+	wispGasSpore = "가스포자를 가졌습니다. {rt%d}마크를 가진 플레이어의 %s 위치로 빨리 가세요.";
+	warningGasSpore = "가스포자!! 마크를 가진 플레이어에게 빨리 가세요.";
+
+	"left" = "왼쪽";
+	"tanker" = "탱커";
+	"right" = "오른쪽";
+	"door" = "문앞";
 };
 
 L = RL_MESSAGE_KOR
@@ -297,13 +338,9 @@ RL_MESSAGE_TOOLTIP_KOR = {
 	RL_CHECKBUTTON_NEED_HEALER_TOOLTIP = "\'" .. L["RL_CHECKBUTTON_NEED_HEALER_MSG"] .. "\' 를 의미한다.";
 	RL_CHECKBUTTON_NEED_TANKER_TOOLTIP = "\'" .. L["RL_CHECKBUTTON_NEED_TANKER_MSG"] .. "\' 를 의미한다.";
 	RL_CHECKBUTTON_LANGUAGE_TOOLTIP = "\'" .. L["RL_CHECKBUTTON_LANGUAGE_MSG"] .. "\' 를 의미한다.";
+	RL_CHECKBUTTON_USE_SDBM_TOOLTIP = "\'" .. L["RL_CHECKBUTTON_USE_SDBM_MSG"] .. "\' 를 의미한다.";
 };
 
-
-function RL_SetLanguageKorean(isKorean)
-  -- choose raid warning language
-  RaidLeaderData.useKorean = isKorean
-end
 
 function RL_LoadPaladinBuffData()
   if RaidLeaderData.useKorean then

@@ -26,13 +26,14 @@ Messages_NAXX.lua
 Messages_UL.lua
 Messages_ONYX.lua
 
+RaidRosterInfo.lua
+
 RaidInstance.lua
 RaidInstance.xml
 
-#SimpleDBM.lua
-
-RaidRosterInfo.lua
+SimpleDBM.lua
 RaidLeader.lua
+
 Popup.lua
 Buff.lua
 ButtonAction.lua

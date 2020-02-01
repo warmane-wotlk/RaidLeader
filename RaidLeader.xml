@@ -92,15 +92,15 @@
 						<color r="0" g="0" b="0" />
 					</Shadow>
 				</FontString>
-				<FontString name="RL_RaidSetup_txt" inherits="GameFontHighlight" text="Raid Setup">
+				<FontString name="RL_BuildRaid_txt" inherits="GameFontHighlight" text="Build Raid">
 					<Anchors>
 						<Anchor point="TOP" relativePoint="TOP">
 							<Offset>
-								<AbsDimension x="13" y="-79" />
+								<AbsDimension x="-48" y="-79" />
 							</Offset>
 						</Anchor>
 					</Anchors>
-				</FontString>
+				</FontString>			
 				<FontString name="RL_RaidCommon_txt" inherits="GameFontHighlight" text="Raid Common">
 					<Anchors>
 						<Anchor point="TOP" relativePoint="TOP">
@@ -122,6 +122,12 @@
 					<Size x="53" y="20" />
 					<Anchors>
 						<Anchor point="TOPLEFT" x="115" y="-98" />
+					</Anchors>
+				</FontString>
+				<FontString name="RL_TEXT_USE_SDBM" inherits="GameFontNormal" text="Use Simple DBM" JUSTIFYH="LEFT">
+					<Size x="120" y="20" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="198" y="-79" />
 					</Anchors>
 				</FontString>
 				<FontString name="RL_TEXT_USE_KOREAN" inherits="GameFontNormal" text="Use Korean" JUSTIFYH="LEFT">
@@ -892,6 +898,23 @@
 					</OnLoad>
 				</Scripts>
 			</Button>
+			<CheckButton name="RL_CHECKBUTTON_USE_SDBM" inherits="UICheckButtonTemplate">
+				<Size x="26" y="27" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="173" y="-76" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RL_SetUseSDBM(self:GetChecked());
+					</OnClick>
+					<OnEnter>
+						RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						RLF_Button_Hide_ToolTip();
+					</OnLeave>
+				</Scripts>
+			</CheckButton>			
 			<CheckButton name="RL_CHECKBUTTON_LANGUAGE" inherits="UICheckButtonTemplate">
 				<Size x="26" y="27" />
 				<Anchors>

@@ -16,12 +16,14 @@ local mschange_message_patterns = {
   '주특변경'..sep,
 };
 
-mschange_channel_listeners = {
+local mschange_channel_listeners = {
   ['CHAT_MSG_RAID'] = {},
   ['CHAT_MSG_WHISPER'] = {},
 };
 
-mschange_messages = {}
+local mschange_messages = {}
+local timerMsChange = {}
+local timerPull = {}
 
 function RLF_ChangeButtonText(button, param)
   local font = button:GetNormalFontObject();
@@ -33,29 +35,46 @@ function RLF_ChangeButtonText(button, param)
   end
 end
 
+function RLF_RaidWarning(msg)
+  if UnitInRaid("player") == nil then
+    msgChannel = "PARTY"
+  else 
+    local rank = select(2, GetRaidRosterInfo(GetNumRaidMembers()))
+
+    if rank == nil or rank ~= 0 then
+      msgChannel = "RAID_WARNING"
+    else
+      msgChannel = "RAID"
+    end
+  end
+
+  -- split msg if it found "\n".
+  -- english only 255 bytes(char), unicode support only 125 char.
+  local s = 1
+
+  while true do
+    local m, _ = string.find(msg, "\n", s)
+    
+    if m == nil then
+      SendChatMessage(string.sub(msg,s), msgChannel)
+      break
+    else
+      SendChatMessage(string.sub(msg,s,m-1), msgChannel)
+    end
+    s   = m + 1
+  end  
+end
+
 -- say raid warning message
 function RLF_Button_RaidWarning_OnClick(param)
   if param then
     local combatMsgId = param .. "_MSG"
     local RLL = RL_LoadRaidWarningData()
-
-    if UnitInRaid("player") == nil then
-      msgChannel = "PARTY"
-    else 
-      local rank = select(2, GetRaidRosterInfo(GetNumRaidMembers()))
-
-      if rank == nil or rank ~= 0 then
-        msgChannel = "RAID_WARNING"
-      else
-        msgChannel = "RAID"
-      end
-    end
-
     local msg = RLL[combatMsgId]
-    if msg ~= nil then
-      SendChatMessage(msg, msgChannel);
+    if msg then
+      RLF_RaidWarning(msg);
     else
-      SendChatMessage(param, msgChannel);
+      RLF_RaidWarning(param);
     end
   end
 end
@@ -112,7 +131,14 @@ local function RL_event_handler(self, event, message, sender)
   end
 end
 
-local timerMsChange = {}
+function RL_SetUseSDBM(useSDBM)
+  RaidLeaderData.useSDBM = useSDBM
+  SDBM_UseDBM(useSDBM)
+end
+
+function RL_SetLanguageKorean(isKorean)
+  RaidLeaderData.useKorean = isKorean
+end
 
 function RL_Disable_MSChange_Listen()
   for channel, listener in pairs(mschange_channel_listeners) do
@@ -129,6 +155,7 @@ end
 local function RL_Expire_MSChange_Timer()
   printf(L["Expire MS Change Time"])
   RL_Disable_MSChange_Listen()
+  return true
 end
 
 function RL_Enable_MSChange_Listen()
@@ -250,7 +277,6 @@ function RLF_Button_SetMT_OT_OnClick(id)
 
   RLF_Button_RaidWarning_OnClick(id)
 
-  local RLL = RL_LoadRaidWarningData()
   local playerName = UnitName("player")
   if id == "RL_BUTTON_SET_MT" then
     SetRaidTarget("target", 7);
@@ -490,8 +516,31 @@ function RLF_Button_AutoFlood_option_OnClick(id, checked)
 	end
 end
 
+local dbmPulltime = 10
+local function RL_Expire_DBM_Pull_Timer()
+  local RLL = RL_LoadRaidWarningData()
+  dbmPulltime = dbmPulltime - 1
+
+  if dbmPulltime == 7 or dbmPulltime == 5 or dbmPulltime == 3 or dbmPulltime == 2 or dbmPulltime == 1 then
+    RLF_RaidWarning(RLL.dbmPull:format(dbmPulltime))
+  end
+
+  if dbmPulltime == 0 then
+    RLF_RaidWarning(RLL.dbmPullDone)
+    RL_kill_timer(timerPull)
+    wipe(timerPull)
+    dbmPulltime = 10
+    return true
+  end
+  return false
+end
+
 function RLF_Button_DBM_Pull_OnClick(id)
-  SlashCmdList["DEADLYBOSSMODS"]("pull 10")
+  if RaidLeaderData.useSDBM then
+    timerPull = RL_set_timer(1, RL_Expire_DBM_Pull_Timer, true)
+  else
+    SlashCmdList["DEADLYBOSSMODS"]("pull 10")
+  end
   RLF_Button_RaidWarning_OnClick(id)
 end
 
@@ -502,6 +551,7 @@ function RLF_Button_Paladin_Buff_OnClick(id)
   end
 
   -- Get raid info
+  RRI_InitializeRaidRosterInfo()
   RRI_GetRaidRosterInfo()
   local buffMsg = Buff_Get_Paladin_Orders()
   RLF_Button_RaidWarning_OnClick(buffMsg)
