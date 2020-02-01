@@ -29,8 +29,10 @@ Messages_ONYX.lua
 RaidInstance.lua
 RaidInstance.xml
 
-RaidLeader.lua
+#SimpleDBM.lua
+
 RaidRosterInfo.lua
+RaidLeader.lua
 Popup.lua
 Buff.lua
 ButtonAction.lua

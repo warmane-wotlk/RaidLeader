@@ -32,6 +32,8 @@ function RLF_OnEvent(frame, event)
     RL_CHECKBUTTON_LANGUAGE:SetChecked(RaidLeaderData.useKorean)
     RL_CHECKBUTTON_NEED_HEALER:SetChecked(r.needHealer)
     RL_CHECKBUTTON_NEED_TANKER:SetChecked(r.needTanker)
+  elseif event == "RAID_ROSTER_UPDATE" then
+    RRI_InitializeRaidRosterInfo()
   end
 end
 
@@ -56,6 +58,7 @@ function RLF_OnLoad(frame)
   frame:SetScript("OnMouseDown", function() frame:StartMoving() end)
   frame:SetScript("OnMouseUp",   function() frame:StopMovingOrSizing() end)
   frame:RegisterEvent("ADDON_LOADED" )         -- Fired when saved variables are loaded
+  frame:RegisterEvent("RAID_ROSTER_UPDATE")
   frame:SetScript("OnEvent", RLF_OnEvent)
 end
 
