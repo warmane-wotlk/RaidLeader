@@ -119,10 +119,10 @@ RL_MESSAGE_ENG = {
 	wispGasSpore = "You got the Gas Spore, move to the player({rt%d}) in the %s position.";
 	warningGasSpore = "Gas Spore!!! Everyone move to the one having Mark.";
 
-	"left" = "LEFT";
-	"tanker" = "TANKER";
-	"right" = "RIGHT";
-	"door" = "Front of DOOR";
+	left = "LEFT";
+	tanker = "TANKER";
+	right = "RIGHT";
+	door = "Front of DOOR";
 };
 
 local L = RL_MESSAGE_ENG
@@ -268,12 +268,12 @@ RL_MESSAGE_KOR = {
 	dbmPull = "%d 초 뒤 풀링 합니다. 움직이지 마세요.";
 	dbmPullDone = "탱커 풀링하세요. 탱커 움직이는 걸 보고 공격하세요.";
 	wispGasSpore = "가스포자를 가졌습니다. {rt%d}마크를 가진 플레이어의 %s 위치로 빨리 가세요.";
-	warningGasSpore = "가스포자!! 마크를 가진 플레이어에게 빨리 가세요.";
+	warningGasSpore = "가스포자!! 다음의 마크를 가진 플레이어에게 빨리 가세요.";
 
-	"left" = "왼쪽";
-	"tanker" = "탱커";
-	"right" = "오른쪽";
-	"door" = "문앞";
+	left = "왼쪽";
+	tanker = "탱커";
+	right = "오른쪽";
+	door = "문앞";
 };
 
 L = RL_MESSAGE_KOR

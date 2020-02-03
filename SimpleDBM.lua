@@ -99,8 +99,8 @@ function SDBM_WarnGasSporeTargets()
 	local pos = 0
 	local icon = { 1, 8, 2}
 	
-	local difficulty = RLU_GetDifficulty()
-	if (difficulty == "normal10" or difficulty == "heroic10") then
+	local difficulty = select(2, RLU_GetCurrentInstanceInfo())
+	if (difficulty == "10nm" or difficulty == "10hc") then
 		pos = 3
 	end
 
@@ -136,8 +136,8 @@ local function SDBM_SPELL_AURA_APPLIED(spellID, destName)
 		beaconTargets[#beaconTargets + 1] = destName
 		SendChatMessage(ML.wispBeacon, "WHISPER", GetDefaultLanguage("player"), destName)
 		if phase == 1 then
-			local difficulty = RLU_GetDifficulty()
-			if (difficulty == "normal25" and #beaconTargets >= 5) or (difficulty == "heroic25" and #beaconTargets >= 6) or ((difficulty == "normal10" or difficulty == "heroic10") and #beaconTargets >= 2) then
+			local difficulty = select(2, RLU_GetCurrentInstanceInfo())
+			if (difficulty == "25nm" and #beaconTargets >= 5) or (difficulty == "25hc" and #beaconTargets >= 6) or ((difficulty == "10nm" or difficulty == "10hc") and #beaconTargets >= 2) then
 				SDBM_WarnBeaconTargets()
 			end
 		elseif phase == 2 then--Phase 2 there is only one icon/beacon, don't use sorting method if we don't have to.
@@ -157,8 +157,8 @@ local function SDBM_SPELL_AURA_APPLIED(spellID, destName)
 		SDBM_SendChatMessage(ML.warningMutatedInfection:format(destName, 8))
 	elseif spellID == 69279 then --gas spore
 		gasSporeTargets[#gasSporeTargets + 1] = destName
-		local difficulty = RLU_GetDifficulty()
-		if ( (difficulty == "normal25" or difficulty == "heroic25") and #gasSporeTargets >= 3) or ((difficulty == "normal10" or difficulty == "heroic10") and #beaconTargets >= 2) then
+		local difficulty = select(2, RLU_GetCurrentInstanceInfo())
+		if ( (difficulty == "25nm" or difficulty == "25hc") and #gasSporeTargets >= 3) or ((difficulty == "10nm" or difficulty == "10hc") and #beaconTargets >= 2) then
 			SDBM_WarnGasSporeTargets()
 		end
 	end

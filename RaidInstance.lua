@@ -25,14 +25,14 @@ function RL_ZoneFrameToggle()
 end
 
 function RLF_Zone_GetTombOrders()
-  local difficulty = RLU_GetDifficulty()
+  local difficulty = select(2, RLU_GetCurrentInstanceInfo())
   local msg = ""
         
-  if difficulty == "normal10" or difficulty == "heroic10" then
+  if difficulty == "10nm" or difficulty == "10hc" then
     msg = "Player1({rt8}) ---- Player2({rt7})"
-  elseif difficulty == "normal25" then
+  elseif difficulty == "25nm" then
     msg = "Player1({rt8}),Player2({rt7}) -- Player3({rt6}) -- Player4({rt5}),Player5({rt4})"
-  elseif difficulty == "heroic25" then
+  elseif difficulty == "25hc" then
     msg = "Player1({rt8}),Player2({rt7}) -- Player3({rt6}),Player4({rt5}) -- Player5({rt4}),Player6({rt3})"
   end
   return msg
@@ -95,11 +95,15 @@ function RLF_Zone_Buttons_OnClick(self)
   end
 
   if buttonId == "RL_ZONE_ICC_FESTERGUT_READY" then
-    SetRaidTarget(RRI_GetTankerInfo("MT").name, 8)
-    SetRaidTarget(RRI_Get2NonPallyHealersForFestergut()[1], 1)
+    if RRI_GetTankerInfo("MT") then
+      SetRaidTarget(RRI_GetTankerInfo("MT").name, 8)
+    end
+    if RRI_Get2NonPallyHealersForFestergut()[1] then
+      SetRaidTarget(RRI_Get2NonPallyHealersForFestergut()[1], 1)
+    end
 
-    local difficulty = RLU_GetDifficulty()
-    if difficulty == "normal25" or difficulty == "heroic25" then
+    local difficulty = select(2, RLU_GetCurrentInstanceInfo())
+    if (difficulty == "25nm" or difficulty == "25hc" ) and RRI_Get2NonPallyHealersForFestergut()[2] then
       SetRaidTarget(RRI_Get2NonPallyHealersForFestergut()[2], 2)
     end
   end

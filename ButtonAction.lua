@@ -303,6 +303,20 @@ function RLF_Button_SetLootMethod_OnClick(id)
   end
 end
 
+-- show tooltip
+function RLF_Button_Show_ToolTip(param)
+  if param then
+    local toolTipId = param .. "_TOOLTIP"
+    local RLL = RL_LoadRaidWarningTooltipData()
+    GameTooltip_SetDefaultAnchor( GameTooltip, UIParent )
+    GameTooltip:SetText( RLL[toolTipId] )
+    GameTooltip:Show()
+  end
+end
+
+function RLF_Button_Hide_ToolTip()
+  GameTooltip:Hide()
+end
 
 
 -- not use
@@ -318,27 +332,6 @@ end
 function RLF_Button_Invite_OnClick()
   InviteUnit("target")
 end
-
--- Northrend Raids
-local raidZoneInfos = {
-  { name = "TOC",    zoneId = 543, sub = {"10nm", "10hc", "25nm", "25hc"}, resv = "<B+P+O Resv>", 
-    weekly = "", achieve = "|cffffff00|Hachievement:3812:0700000000194F14:1:01:01:20:4294967295:0:0:0|h[십자군 사령관의 부름 (25인)]|h|r"},
-  { name = "ICC",    zoneId = 604, sub = {"10nm", "10nm/hc", "10hc", "25nm", "25nm/hc", "25hc"}, resv = "<B+P Resv>",
-    weekly = "", achieve = "|cffffff00|Hachievement:4637:0700000000194F14:1:01:04:20:4294967295:0:0:0|h[영웅: 리치 왕의 몰락 (25인)]|h|r"},
-  { name = "RS",     zoneId = 609, sub = {"10nm", "10hc", "25nm", "25hc"}, resv = "Nothing Resv",
-    weekly = "", achieve = "|cffffff00|Hachievement:4816:0700000000194F14:1:12:30:19:4294967295:0:0:0|h[영웅: 황혼의 파괴자 (25인)]|h|r"},
-  { name = "VOA",    zoneId = 532, sub = {"10", "25"}, resv = "", weekly = "", achieve = ""},
-  { name = "NAXX",   zoneId = 535, sub = {"10", "25", "10 weekly", "25 weekly"}, resv = "",
-    weekly = "|cffffff00|Hquest:24580:80|h[Anub'Rekhan Must Die!]|h|r", 
-    achieve = "|cffffff00|Hachievement:577:07000000003E75A3:1:12:31:19:4294967295:0:0:0|h[낙스라마스의 몰락 (25인)]|h|r"},
-  { name = "OS",     zoneId = 531, sub = {"10", "25", "10 weekly", "25 weekly"}, resv = "<Satchel Resv>" ,
-    weekly = "|cffffff00|Hquest:24579:80|h[Sartharion Must Die!]|h|r", 
-    achieve = "|cffffff00|Hachievement:2054:0700000000194F14:1:01:02:20:4294967295:0:0:0|h[황혼 지대 (25인)]|h|r"},
-  { name = "ONYXIA", zoneId = 0,   sub = {"10", "25"}, resv = "", weekly = "", 
-    achieve = "|cffffff00|Hachievement:4397:07000000003E75A3:1:01:05:20:4294967295:0:0:0|h[오닉시아의 둥지 (25인)]|h|r"},
-  { name = "ULDUAR", zoneId = 529, sub = {"10", "25"}, resv = "", weekly = "", 
-    achieve = "|cffffff00|Hachievement:2895:07000000003E75A3:1:01:05:20:4294967295:0:0:0|h[울두아르의 비밀 (25인)]|h|r"},
-};
 
 -- frame:GetID() == arg1
 function RL_RaidZoneButton_OnClick(frame, arg1, arg2, checked)
@@ -366,7 +359,7 @@ end
 
 function RLF_Button_SelectRaid_Initialize(frame, level, menuList)
   UIDropDownMenu_SetWidth(RaidLeader_Zone_DropDownMenu, 110)  
-
+  local raidZoneInfos = RLU_GetZoneInfos()
   if level == 1 then
     local info = UIDropDownMenu_CreateInfo()
     for i = 1, #raidZoneInfos do
@@ -401,6 +394,7 @@ function RLF_Button_SelectRaid_Initialize(frame, level, menuList)
 end
 
 local function _GetRaidFindMessage()
+  local raidZoneInfos = RLU_GetZoneInfos()
   local r = RaidLeaderData.recruitInfo
   local isRaid  = UnitInRaid("player")
   local curr_size = isRaid and GetNumRaidMembers() or GetNumPartyMembers() + 1

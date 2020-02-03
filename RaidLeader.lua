@@ -24,6 +24,7 @@ function RL_GetGlobalChannelNumber()
 end
 
 function RLF_OnEvent(frame, event)
+  printf(event .. ", " .. GetCurrentMapAreaID())
   if event == "ADDON_LOADED" then
     local r = RaidLeaderData.recruitInfo
     UIDropDownMenu_SetText(RaidLeader_Gear_DropDownMenu, r.gear)
@@ -35,9 +36,24 @@ function RLF_OnEvent(frame, event)
     RL_CHECKBUTTON_NEED_TANKER:SetChecked(r.needTanker)
 
     SDBM_UseDBM(RaidLeaderData.useSDBM)
+
+    RaidLeaderData.instance = { inside = false, zone = "unknown", sub = "unknown" }
   elseif event == "RAID_ROSTER_UPDATE" then
     RRI_InitializeRaidRosterInfo()
     RRI_GetRaidRosterInfo()
+  elseif event == "WORLD_MAP_UPDATE" then    
+    if RLU_CheckInstances(GetCurrentMapAreaID()) then
+      RLU_UpdateInstanceInfo()
+      local zone, sub = RLU_GetCurrentInstanceInfo()
+      local r = RaidLeaderData.recruitInfo
+      r.zone = zone
+      r.sub  = sub
+
+      printf("Got it " .. zone .. sub)
+      UIDropDownMenu_SetText(RaidLeader_Zone_DropDownMenu, r.zone .. r.sub)
+    else
+      printf("not in instance")
+    end
   end
 end
 
@@ -65,6 +81,7 @@ function RLF_OnLoad(frame)
   frame:SetScript("OnMouseUp",   function() frame:StopMovingOrSizing() end)
   frame:RegisterEvent("ADDON_LOADED" )         -- Fired when saved variables are loaded
   frame:RegisterEvent("RAID_ROSTER_UPDATE")
+  frame:RegisterEvent("WORLD_MAP_UPDATE")
   frame:SetScript("OnEvent", RLF_OnEvent)
 end
 

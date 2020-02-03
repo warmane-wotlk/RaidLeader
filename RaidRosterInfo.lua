@@ -9,14 +9,15 @@ end
 
 local g_raid_has_disc = false
 
-local g_playersInfo = {}
+local g_playersInfo  = {}
 local g_assigedTanks = {}
-local g_healersInfo = {}
+local g_foundTanks   = {}
+local g_healersInfo  = {}
 
-local g_paladinInfo = {}
-local g_druidInfo   = {}
-local g_priestInfo  = {}
-local g_warriorInfo = {}
+local g_paladinInfo  = {}
+local g_druidInfo    = {}
+local g_priestInfo   = {}
+local g_warriorInfo  = {}
 
 
 local function RRI_UpdateRoleType(unitId, name, role, playerInfo)
@@ -50,6 +51,7 @@ function RRI_InitializeRaidRosterInfo()
   wipe(g_playersInfo)
   wipe(g_assigedTanks)
   wipe(g_healersInfo)
+  wipe(g_foundTanks)
   for i = 1, raid_size do
     local unitId = prefix_unitId .. i
     local guid   = UnitGUID(unitId)
@@ -69,7 +71,9 @@ function RRI_InitializeRaidRosterInfo()
       g_playersInfo[name] = data
 
       if role == "healer" then
-        table.insert(g_healersInfo, { name = name, className = className })
+        table.insert(g_healersInfo, { name = name, className = className, guid = guid})
+      elseif role == "tank" then
+        table.insert(g_foundTanks, { name = name, className = className, guid = guid})
       end
     end
   end
@@ -164,9 +168,9 @@ end
 
 function RRI_GetTankerInfo(param)
   if param == "MT" then 
-    return g_assigedTanks["MAINTANK"]
+    return g_assigedTanks["MAINTANK"] and g_assigedTanks["MAINTANK"] or g_foundTanks[1]
   elseif param == "OT" then
-    return g_assigedTanks["MAINASSIST"]
+    return g_assigedTanks["MAINASSIST"] and g_assigedTanks["MAINASSIST"] or g_foundTanks[2]
   else
     return nil
   end
