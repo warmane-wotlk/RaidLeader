@@ -102,8 +102,8 @@ if L then
 
 	L["Type your MS Change if you want"] = "변경하고자 하는 당신의 주특정보를 넣으세요."
 	L["My MS Change"] = "주특 변경"
-	L["Append Flood Msg"] = "공대 광고 메세지 추가"
-	L["Type your flood msg if you want"] = "마지막에 추가하고 싶은 공대 광고 메세지를 넣으세요."
+	L["Change Flood Msg"] = "공대 광고 메세지 변경"
+	L["Type your flood msg if you want"] = "변경하고 싶은 공대 광고 메세지를 입력하세요."
 	L["Fatal - Failed to load roster info"] = "에러 - 공격대 정보를 읽어오는데 실패."
 	L["Please assign tanker with /mt /ma"] = "맨탱의 경우 /mt, 부탱의 경우 /ma를 이용해서 탱커를 지정해주세요. (취소는 /clearmt, /clearma)"
 	L["WOW Error! Need to relog!"] = "월드오브워크래프트 에러 - 재접해주세요."
