@@ -334,7 +334,7 @@ function RLF_Button_Invite_OnClick()
 end
 
 -- frame:GetID() == arg1
-function RL_RaidZoneButton_OnClick(frame, arg1, arg2, checked)
+function RL_RaidZoneButton_OnClick(frame, arg1, arg2, arg3)
   -- can't hanle check mark at level 2
 	--UIDropDownMenu_SetSelectedID(RaidLeader_Zone_DropDownMenu, frame:GetID())
   UIDROPDOWNMENU_SHOW_TIME = 1
@@ -342,14 +342,14 @@ function RL_RaidZoneButton_OnClick(frame, arg1, arg2, checked)
     RL_Clear_MSChange_Info()
     RLF_Button_AutoFlood_OnClick("RL_BUTTON_FLOOD_OFF")
 
-    RaidLeaderData.recruitInfo.zone = arg1
-    RaidLeaderData.recruitInfo.sub  = arg2
+    RaidLeaderData.recruitInfo.zone   = arg1
+    RaidLeaderData.recruitInfo.sub    = arg2
+    RaidLeaderData.recruitInfo.zoneId = arg3
     
+    UIDropDownMenu_SetText(RaidLeader_Zone_DropDownMenu, arg1 .. arg2)
+
     RL_Zone_Reflesh_GUI()
   end
-  RaidLeaderData.recruitInfo.zone = arg1
-  RaidLeaderData.recruitInfo.sub  = arg2
-  UIDropDownMenu_SetText(RaidLeader_Zone_DropDownMenu, arg1 .. arg2)
 end
 
 function RLF_Button_SelectRaid_OnClick()
@@ -388,6 +388,7 @@ function RLF_Button_SelectRaid_Initialize(frame, level, menuList)
       info.func     = RL_RaidZoneButton_OnClick
       info.arg1     = UIDROPDOWNMENU_MENU_VALUE
       info.arg2     = sub
+      info.arg3     = raidZoneInfos.zoneId
       UIDropDownMenu_AddButton(info, 2)
     end
   end
@@ -403,13 +404,13 @@ local function _GetRaidFindMessage()
   local reqRoles = ""
 
   if r.needHealer and r.needTanker then
-	reqRoles = "ALL"
+	  reqRoles = "ALL"
   elseif r.needHealer then
-	reqRoles = "HEAL/DPS"
+	  reqRoles = "HEAL/DPS"
   elseif r.needTanker then
-	reqRoles = "TANK/DPS"
+	  reqRoles = "TANK/DPS"
   else
-	reqRoles = "DPS"
+	  reqRoles = "DPS"
   end
 
   if raid_size <= 2 * curr_size then

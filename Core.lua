@@ -5,7 +5,7 @@ RaidLeaderData = {
 	useKorean   = false;
   useSDBM     = false;  
   instance    = { inside  = false, zone = "", sub = "" };
-	recruitInfo = { zone = "", sub = "", gear = "5.0k+", needHealer = true, needTanker = true };
+	recruitInfo = { zone = "", sub = "", zoneId = 0, gear = "5.0k+", needHealer = true, needTanker = true };
 };
 
 
@@ -25,7 +25,7 @@ local raidZoneInfos = {
   { name = "OS",     zoneId = 532, sub = {"10", "25", "10 weekly", "25 weekly"}, resv = "<Satchel Resv>" ,
     weekly = "|cffffff00|Hquest:24579:80|h[Sartharion Must Die!]|h|r", 
     achieve = "|cffffff00|Hachievement:2054:0700000000194F14:1:01:02:20:4294967295:0:0:0|h[황혼 지대 (25인)]|h|r"},
-  { name = "ONYXIA", zoneId = 999,   sub = {"10", "25"}, resv = "", weekly = "", 
+  { name = "ONYXIA", zoneId = 14,   sub = {"10", "25"}, resv = "", weekly = "", 
     achieve = "|cffffff00|Hachievement:4397:07000000003E75A3:1:01:05:20:4294967295:0:0:0|h[오닉시아의 둥지 (25인)]|h|r"},
   { name = "ULDUAR", zoneId = 530, sub = {"10", "25"}, resv = "", weekly = "", 
     achieve = "|cffffff00|Hachievement:2895:07000000003E75A3:1:01:05:20:4294967295:0:0:0|h[울두아르의 비밀 (25인)]|h|r"},
@@ -33,6 +33,14 @@ local raidZoneInfos = {
 
 function RLU_GetZoneInfos()
   return raidZoneInfos
+end
+
+function RLU_IsInstance()
+  return RaidLeaderData.instance.inside
+end
+
+function RLU_SetIsInstance(yes)
+  RaidLeaderData.instance.inside = yes
 end
 
 function RLU_GetCurrentInstanceInfo()
@@ -86,6 +94,7 @@ function RLU_UpdateInstanceInfo()
       end
     end
   end  
+  --printf(tostring(RaidLeaderData.instance.zone).. RaidLeaderData.instance.sub)
 end 
 
 -- Zone Frame variable

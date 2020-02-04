@@ -23,8 +23,9 @@ function RL_GetGlobalChannelNumber()
     return 0
 end
 
+local previousInstanceId = 0
 function RLF_OnEvent(frame, event)
-  printf(event .. ", " .. GetCurrentMapAreaID())
+  -- printf(event .. ", " .. GetCurrentMapAreaID())
   if event == "ADDON_LOADED" then
     local r = RaidLeaderData.recruitInfo
     UIDropDownMenu_SetText(RaidLeader_Gear_DropDownMenu, r.gear)
@@ -37,22 +38,27 @@ function RLF_OnEvent(frame, event)
 
     SDBM_UseDBM(RaidLeaderData.useSDBM)
 
-    RaidLeaderData.instance = { inside = false, zone = "unknown", sub = "unknown" }
+    RaidLeaderData.instance = { inside = false, zone = "", sub = "" }
   elseif event == "RAID_ROSTER_UPDATE" then
     RRI_InitializeRaidRosterInfo()
     RRI_GetRaidRosterInfo()
-  elseif event == "WORLD_MAP_UPDATE" then    
-    if RLU_CheckInstances(GetCurrentMapAreaID()) then
-      RLU_UpdateInstanceInfo()
-      local zone, sub = RLU_GetCurrentInstanceInfo()
-      local r = RaidLeaderData.recruitInfo
-      r.zone = zone
-      r.sub  = sub
+  elseif event == "WORLD_MAP_UPDATE" then
+    local instancdId = GetCurrentMapAreaID()
+    local r = RaidLeaderData.recruitInfo
 
-      printf("Got it " .. zone .. sub)
-      UIDropDownMenu_SetText(RaidLeader_Zone_DropDownMenu, r.zone .. r.sub)
+    if RLU_CheckInstances(instancdId) then
+      if ((previousInstanceId ~= instancdId) or (previousInstanceId == instancdId and r.zoneId ~= instancdId )) then
+        previousInstanceId = instancdId
+        RLU_UpdateInstanceInfo()
+        local zone, sub = RLU_GetCurrentInstanceInfo()
+        r.zone = zone
+        r.sub  = sub
+        
+        UIDropDownMenu_SetText(RaidLeader_Zone_DropDownMenu, r.zone .. r.sub)
+        RL_Zone_Reflesh_GUI()
+      end
     else
-      printf("not in instance")
+        RLU_SetIsInstance(false)
     end
   end
 end

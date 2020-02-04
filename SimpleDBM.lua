@@ -196,17 +196,20 @@ local function SDBM_COMBAT_LOG_EVENT_UNFILTERED(timestamp, eventType, sourceGUID
 end
 
 function SDBM_UseDBM(use)
-	if use then
+	if use then		
 		f:RegisterEvent("UNIT_HEALTH")
 		f:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+		f:RegisterEvent("PLAYER_REGEN_DISABLED")
+		f:RegisterEvent("PLAYER_REGEN_ENABLED")
 	else
 		f:UnregisterEvent("UNIT_HEALTH")
 		f:UnregisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+		f:UnregisterEvent("PLAYER_REGEN_DISABLED")
+		f:UnregisterEvent("PLAYER_REGEN_ENABLED")		
 	end
 end
 
 function SDBM_OnCombatStart()
-	printf("SDBM_OnCombatStart")
 	if not inCombat then
 		phase = 1
 		inCombat = true
@@ -216,13 +219,12 @@ function SDBM_OnCombatStart()
 end
 
 function SDBM_OnCombatEnd()
-	printf("SDBM_OnCombatEnd")
 	inCombat = false
 end
 
-f:RegisterEvent("PLAYER_REGEN_DISABLED")
-f:RegisterEvent("PLAYER_REGEN_ENABLED")
 f:SetScript("OnEvent", function(self, event, ...)
+	if not RLU_IsInstance() then return end
+
 	if event == "UNIT_HEALTH" then
 		local unit = select(1, ...)
 		SDBM_UNIT_HEALTH(unit)
@@ -231,7 +233,6 @@ f:SetScript("OnEvent", function(self, event, ...)
 	elseif event == "PLAYER_REGEN_DISABLED" then
 		SDBM_OnCombatStart()
 	elseif event == "PLAYER_REGEN_ENABLED" then
-		printf("UnitAffectingCombat - " .. tostring(UnitAffectingCombat("player")))
 		SDBM_OnCombatEnd()
 	end
 end)
