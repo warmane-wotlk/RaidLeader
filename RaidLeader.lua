@@ -1,5 +1,7 @@
 local L  = LibStub("AceLocale-3.0"):GetLocale("RaidLeader", true)
 
+local previousInstanceId = 0
+
 function RLF_Main_Toggle()
   if not RaidLeader_Frame:IsVisible() then
     RaidLeader_Frame:Show()
@@ -23,10 +25,9 @@ function RL_GetGlobalChannelNumber()
     return 0
 end
 
-local previousInstanceId = 0
-function RLF_OnEvent(frame, event)
-  -- printf(event .. ", " .. GetCurrentMapAreaID())
-  if event == "ADDON_LOADED" then
+function RLF_OnEvent(frame, event, arg1)
+  -- printf(event .. ", " .. GetCurrentMapAreaID() .. ", arg1: " .. tostring(arg1))
+  if event == "ADDON_LOADED" and arg1 == "RaidLeader" then
     local r = RaidLeaderData.recruitInfo
     UIDropDownMenu_SetText(RaidLeader_Gear_DropDownMenu, r.gear)
     UIDropDownMenu_SetText(RaidLeader_Zone_DropDownMenu, r.zone .. r.sub)
@@ -38,7 +39,17 @@ function RLF_OnEvent(frame, event)
 
     SDBM_UseDBM(RaidLeaderData.useSDBM)
 
-    RaidLeaderData.instance = { inside = false, zone = "", sub = "" }
+    RaidLeaderData.instance.inside = false
+    RaidLeaderData.version = GetAddOnMetadata("RaidLeader", "version")
+
+    frame:UnregisterEvent("ADDON_LOADED")
+    frame.ADDON_LOADED = nil
+  elseif event == "PLAYER_ENTERING_WORLD" then
+    frame:RegisterEvent("RAID_ROSTER_UPDATE")
+    frame:RegisterEvent("WORLD_MAP_UPDATE")
+
+    frame:UnregisterEvent("PLAYER_ENTERING_WORLD")
+    frame.PLAYER_ENTERING_WORLD = nil
   elseif event == "RAID_ROSTER_UPDATE" then
     RRI_InitializeRaidRosterInfo()
     RRI_GetRaidRosterInfo()
@@ -64,7 +75,7 @@ function RLF_OnEvent(frame, event)
 end
 
 function RLF_OnLoad(frame)
-  print("RaidLeader Loaded - /rld to bring it up")
+  print("|cffFF7D0ARaidLeader|r by |cff0070DESunmudang|r Loaded - /rld to bring it up")
   RL_TEXT_DRUM_OF_KING:SetText(L["Drums of the Wild"])
   RL_TEXT_USE_KOREAN:SetText(L["Use Korean"])
   RL_TEXT_USE_SDBM:SetText(L["Use SDBM"])
@@ -85,9 +96,8 @@ function RLF_OnLoad(frame)
   frame:EnableMouse(true)
   frame:SetScript("OnMouseDown", function() frame:StartMoving() end)
   frame:SetScript("OnMouseUp",   function() frame:StopMovingOrSizing() end)
-  frame:RegisterEvent("ADDON_LOADED" )         -- Fired when saved variables are loaded
-  frame:RegisterEvent("RAID_ROSTER_UPDATE")
-  frame:RegisterEvent("WORLD_MAP_UPDATE")
+  frame:RegisterEvent("ADDON_LOADED")         -- Fired when saved variables are loaded
+  frame:RegisterEvent("PLAYER_ENTERING_WORLD")
   frame:SetScript("OnEvent", RLF_OnEvent)
 end
 

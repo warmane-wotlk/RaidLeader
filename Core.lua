@@ -1,7 +1,7 @@
 local L  = LibStub("AceLocale-3.0"):GetLocale("RaidLeader", true)
 
 RaidLeaderData = {
-	version     = "v0.7";
+	version     = "";
 	useKorean   = false;
   useSDBM     = false;  
   instance    = { inside  = false, zone = "", sub = "" };
