@@ -35,6 +35,15 @@ function RLU_GetZoneInfos()
   return raidZoneInfos
 end
 
+function RLU_GetZoneId(zoneName)
+  for _,v in pairs(raidZoneInfos) do
+    if v.name == zoneName then
+      return v.zoneId
+    end
+  end
+  return 0
+end
+
 function RLU_IsInstance()
   return RaidLeaderData.instance.inside
 end

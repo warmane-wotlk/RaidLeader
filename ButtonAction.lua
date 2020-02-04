@@ -335,7 +335,7 @@ function RLF_Button_Invite_OnClick()
 end
 
 
-function RL_RaidZoneButton_OnClick(frame, arg1, arg2, arg3)
+function RL_RaidZoneButton_OnClick(frame, arg1, arg2)
   -- can't hanle check mark at level 2
 	--UIDropDownMenu_SetSelectedID(RaidLeader_Zone_DropDownMenu, frame:GetID())
   UIDROPDOWNMENU_SHOW_TIME = 1
@@ -345,8 +345,8 @@ function RL_RaidZoneButton_OnClick(frame, arg1, arg2, arg3)
 
     RaidLeaderData.recruitInfo.zone   = arg1
     RaidLeaderData.recruitInfo.sub    = arg2
-    RaidLeaderData.recruitInfo.zoneId = arg3
-    
+    RaidLeaderData.recruitInfo.zoneId = RLU_GetZoneId(arg1)
+  
     UIDropDownMenu_SetText(RaidLeader_Zone_DropDownMenu, arg1 .. arg2)
 
     RL_Zone_Reflesh_GUI()
@@ -389,10 +389,10 @@ function RLF_Button_SelectRaid_Initialize(frame, level, menuList)
       info.func     = RL_RaidZoneButton_OnClick
       info.arg1     = UIDROPDOWNMENU_MENU_VALUE
       info.arg2     = sub
-      info.arg3     = raidZoneInfos.zoneId
       UIDropDownMenu_AddButton(info, 2)
     end
   end
+  
 end
 
 local function _GetRaidFindMessage()

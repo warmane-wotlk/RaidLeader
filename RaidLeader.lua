@@ -58,13 +58,14 @@ function RLF_OnEvent(frame, event, arg1)
     local r = RaidLeaderData.recruitInfo
 
     if RLU_CheckInstances(instancdId) then
-      if ((previousInstanceId ~= instancdId) or (previousInstanceId == instancdId and r.zoneId ~= instancdId )) then
+      if (previousInstanceId ~= instancdId) or (previousInstanceId == instancdId and r.zoneId ~= instancdId ) then
         previousInstanceId = instancdId
         RLU_UpdateInstanceInfo()
         local zone, sub = RLU_GetCurrentInstanceInfo()
         r.zone = zone
         r.sub  = sub
-        
+        r.zoneId = RLU_GetZoneId(r.zone)
+
         UIDropDownMenu_SetText(RaidLeader_Zone_DropDownMenu, r.zone .. r.sub)
         RL_Zone_Reflesh_GUI()
       end
