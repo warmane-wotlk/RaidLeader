@@ -1,8 +1,8 @@
 
-function RLF_OpenInputBox(title,text,func,arg1)
+function RLF_OpenInputBox(title,text,inputboxtext,func,arg1)
   RLF_InputBox_titlet:SetText(title)
   RLF_InputBox_text:SetText(text)
-  RLF_InputBox_Data:SetText("")
+  RLF_InputBox_Data:SetText(inputboxtext)
   RLF_InputBox_Data:SetFocus()
   RLF_InputBox:SetHeight(RLF_InputBox_text:GetStringHeight()+100)
   RLF_InputBox:Show()

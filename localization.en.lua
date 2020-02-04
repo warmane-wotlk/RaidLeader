@@ -99,8 +99,10 @@ if L then
 	L["Expire MS Change Time"] = "Expire MS Change Time(1min)"
 	L["Error! Unknown # of beacon: "] = "Error! Unknown # of beacon: "
 
-	L["Type my MS Change if you want"] = "Type my MS Change if you want"
+	L["Type your MS Change if you want"] = "Type your MS Change if you want"
 	L["My MS Change"] = "My MS Change"
+	L["Append Flood Msg"] = "Append Flood Msg"
+	L["Type your flood msg if you want"] = "Type your flood msg if you want to append"
 	L["Fatal - Failed to load roster info"] = "Fatal - Failed to load roster info"
 	L["Please assign tanker with /mt /ma"] = "Please assign tanker with /mt for MT /ma for OT (/clearmt, /clearma for clear)"
 	L["WOW Error! Need to relog!"] = "WOW Error! Need to relog!"

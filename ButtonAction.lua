@@ -22,6 +22,7 @@ local mschange_channel_listeners = {
 };
 
 local mschange_messages = {}
+local appdixFlood_messages = ""
 local timerMsChange = {}
 local timerPull = {}
 
@@ -89,7 +90,7 @@ function RL_Callback_Update_MyMS(...)
 end
 
 function RL_GetMyMSChange()
-  RLF_OpenInputBox(L["My MS Change"], L["Type my MS Change if you want"], RL_Callback_Update_MyMS)
+  RLF_OpenInputBox(L["My MS Change"], L["Type your MS Change if you want"], "", RL_Callback_Update_MyMS)
 end
 
 -----------------------------------
@@ -333,7 +334,7 @@ function RLF_Button_Invite_OnClick()
   InviteUnit("target")
 end
 
--- frame:GetID() == arg1
+
 function RL_RaidZoneButton_OnClick(frame, arg1, arg2, arg3)
   -- can't hanle check mark at level 2
 	--UIDropDownMenu_SetSelectedID(RaidLeader_Zone_DropDownMenu, frame:GetID())
@@ -444,10 +445,27 @@ end
 
 local bAutoFloodOn = false
 
+-- My MS Change Popup
+function RL_Callback_Update_MyFloodMsg(...)
+  local data = ...
+  if data ~= nil then
+    appdixFlood_messages = data
+
+    local raidfindMsg = _GetRaidFindMessage()
+    SlashCmdList["AUTOFLOODSETMESSAGE"](raidfindMsg .. " " .. appdixFlood_messages)    
+  end
+end
+
+function RL_GetMyFloodMsg()
+  RLF_OpenInputBox(L["Append Flood Msg"], L["Type your flood msg if you want"], appdixFlood_messages, RL_Callback_Update_MyFloodMsg)
+end
+
+
 -- JoinChannelByName does not work
 function RLF_Button_AutoFlood_OnClick(id)
   if id == "RL_BUTTON_FLOOD_ON" then
-    
+    RL_GetMyFloodMsg()
+
     local globalChannelNum = RL_GetGlobalChannelNumber()
     if globalChannelNum == -1 then
       printf(L["WOW Error! Need to relog!"])
@@ -457,7 +475,7 @@ function RLF_Button_AutoFlood_OnClick(id)
 	    printf(L["Please choose the raid instance"])
     else
       local raidfindMsg = _GetRaidFindMessage()
-      SlashCmdList["AUTOFLOODSETMESSAGE"](raidfindMsg)
+      SlashCmdList["AUTOFLOODSETMESSAGE"](raidfindMsg .. appdixFlood_messages)
 
       if bAutoFloodOn == false then
         SlashCmdList["AUTOFLOODSETCHANNEL"](globalChannelNum)
@@ -471,6 +489,7 @@ function RLF_Button_AutoFlood_OnClick(id)
     SlashCmdList["AUTOFLOOD"]("off")
     RLF_ChangeButtonText(RL_BUTTON_FLOOD_ON, "OFF")
     bAutoFloodOn = false
+    appdixFlood_messages = ""
   end
 end
 
