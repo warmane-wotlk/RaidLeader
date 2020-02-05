@@ -12,22 +12,22 @@ RaidLeaderData = {
 
 -- Northrend Raids
 local raidZoneInfos = {
-  { name = "TOC",    zoneId = 544, sub = {"10nm", "10hc", "25nm", "25hc"}, resv = "<B+P+O Resv>", 
+  { name = "TOC",    zoneId = 544, sub = {"10nm", "10hc", "25nm", "25hc"}, requiredTank = 2, resv = "<B+P+O Resv>", 
     weekly = "", achieve = "|cffffff00|Hachievement:3812:0700000000194F14:1:01:01:20:4294967295:0:0:0|h[십자군 사령관의 부름 (25인)]|h|r"},
-  { name = "ICC",    zoneId = 605, sub = {"10nm", "10nm/hc", "10hc", "25nm", "25nm/hc", "25hc"}, resv = "<B+P Resv>",
+  { name = "ICC",    zoneId = 605, sub = {"10nm", "10nm/hc", "10hc", "25nm", "25nm/hc", "25hc"}, requiredTank = 2, resv = "<B+P Resv>",
     weekly = "", achieve = "|cffffff00|Hachievement:4637:0700000000194F14:1:01:04:20:4294967295:0:0:0|h[영웅: 리치 왕의 몰락 (25인)]|h|r"},
-  { name = "RS",     zoneId = 610, sub = {"10nm", "10hc", "25nm", "25hc"}, resv = "Nothing Resv",
+  { name = "RS",     zoneId = 610, sub = {"10nm", "10hc", "25nm", "25hc"}, requiredTank = 2, resv = "Nothing Resv",
     weekly = "", achieve = "|cffffff00|Hachievement:4816:0700000000194F14:1:12:30:19:4294967295:0:0:0|h[영웅: 황혼의 파괴자 (25인)]|h|r"},
-  { name = "VOA",    zoneId = 533, sub = {"10", "25"}, resv = "", weekly = "", achieve = ""},
-  { name = "NAXX",   zoneId = 536, sub = {"10", "25", "10 weekly", "25 weekly"}, resv = "",
+  { name = "VOA",    zoneId = 533, sub = {"10", "25"}, requiredTank = 2, resv = "", weekly = "", achieve = ""},
+  { name = "NAXX",   zoneId = 536, sub = {"10", "25", "10 weekly", "25 weekly"}, requiredTank = 1, resv = "",
     weekly = "|cffffff00|Hquest:24580:80|h[Anub'Rekhan Must Die!]|h|r", 
     achieve = "|cffffff00|Hachievement:577:07000000003E75A3:1:12:31:19:4294967295:0:0:0|h[낙스라마스의 몰락 (25인)]|h|r"},
-  { name = "OS",     zoneId = 532, sub = {"10", "25", "10 weekly", "25 weekly"}, resv = "<Satchel Resv>" ,
+  { name = "OS",     zoneId = 532, sub = {"10", "25", "10 weekly", "25 weekly"}, requiredTank = 1, resv = "<Satchel Resv>" ,
     weekly = "|cffffff00|Hquest:24579:80|h[Sartharion Must Die!]|h|r", 
     achieve = "|cffffff00|Hachievement:2054:0700000000194F14:1:01:02:20:4294967295:0:0:0|h[황혼 지대 (25인)]|h|r"},
-  { name = "ONYXIA", zoneId = 14,   sub = {"10", "25"}, resv = "", weekly = "", 
+  { name = "ONYXIA", zoneId = 14,   sub = {"10", "25"}, requiredTank = 2, resv = "", weekly = "", 
     achieve = "|cffffff00|Hachievement:4397:07000000003E75A3:1:01:05:20:4294967295:0:0:0|h[오닉시아의 둥지 (25인)]|h|r"},
-  { name = "ULDUAR", zoneId = 530, sub = {"10", "25"}, resv = "", weekly = "", 
+  { name = "ULDUAR", zoneId = 530, sub = {"10", "25"}, requiredTank = 2, resv = "", weekly = "", 
     achieve = "|cffffff00|Hachievement:2895:07000000003E75A3:1:01:05:20:4294967295:0:0:0|h[울두아르의 비밀 (25인)]|h|r"},
 };
 
@@ -42,6 +42,15 @@ function RLU_GetZoneId(zoneName)
     end
   end
   return 0
+end
+
+function RLU_GetRequiredTanks()
+  for _,v in pairs(raidZoneInfos) do
+    if v.name == RaidLeaderData.recruitInfo.zone then
+      return v.requiredTank
+    end
+  end
+  return 1
 end
 
 function RLU_IsInstance()

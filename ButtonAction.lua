@@ -253,7 +253,7 @@ end
 
 
 function RLF_Button_Notify_MT_OT_OnClick(id)
-  if RRI_AreTankersInRaid() == false then
+  if RRI_AreTankersInRaid() < RLU_GetRequiredTanks() then
     printf(L["Please assign tanker with /mt /ma"])
     return
   end
@@ -557,7 +557,7 @@ function RLF_Button_DBM_Pull_OnClick(id)
 end
 
 function RLF_Button_Paladin_Buff_OnClick(id)
-  if RRI_AreTankersInRaid() == false then
+  if RRI_AreTankersInRaid() < RLU_GetRequiredTanks() then
     printf(L["Please assign tanker with /mt /ma"])
     return
   end

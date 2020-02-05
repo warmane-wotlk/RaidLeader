@@ -132,7 +132,14 @@ function RRI_GetRaidRosterInfo()
 end
 
 function RRI_AreTankersInRaid()
-  return g_assigedTanks["MAINTANK"] ~= nil and g_assigedTanks["MAINASSIST"] ~= nil
+  local tankers = 0
+  local mt = g_assigedTanks["MAINTANK"] and g_assigedTanks["MAINTANK"] or g_foundTanks[1]
+  local ot = g_assigedTanks["MAINASSIST"] and g_assigedTanks["MAINASSIST"] or g_foundTanks[2]
+
+  if mt then tankers = tankers + 1 end
+  if ot then tankers = tankers + 1 end
+
+  return tankers
 end
 
 function RRI_GetPaladinInfo()
