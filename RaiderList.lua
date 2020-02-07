@@ -153,7 +153,7 @@ local function RL_DeadListFrame_BuildButtons(self)
       buttonDeadListObj[buttonId].obj = deadRaidersList[i]
       buttonDeadListObj[buttonId].frame:SetText(deadRaidersList[i].name)
       buttonDeadListObj[buttonId].frame:Show()
-      buttonDeadListObj[buttonId].textobj:SetText(deadRaidersList[i].role)
+      buttonDeadListObj[buttonId].textobj:SetText(L[deadRaidersList[i].role])
       buttonDeadListObj[buttonId].textobj:Show()
     else
       buttonDeadListObj[buttonId] = { frame = {}, textobj = {}, obj = deadRaidersList[i] }
