@@ -7,6 +7,7 @@ if not LibGT then
   return 
 end
 
+local testMode       = false
 local g_raid_has_disc = false
 
 local g_playersInfo  = {}
@@ -18,16 +19,18 @@ local g_paladinInfo  = {}
 local g_druidInfo    = {}
 local g_priestInfo   = {}
 local g_warriorInfo  = {}
+local g_bloodlustInfo = { ready = true, timestamp = 0 }
+local g_deadRaiderInfo = { totalNum=0, numTanker=0, numHealer=0, numDps=0, data={} }
 
 
 local function RRI_UpdateRoleType(unitId, name, role, playerInfo)
   local roleType = "DPS"
   local roleTypeIdx = ""
-  if role == "MAINTANK" or role == "MAINASSIST" then
+  if role == "MAINTANK" or role == "MAINASSIST" or role == "tank" or role == "TANKER" then
     roleType = "TANKER"
     playerInfo.numTanker = playerInfo.numTanker + 1
     roleTypeIdx = roleType .. playerInfo.numTanker
-  elseif role == "HEALER" then
+  elseif role == "HEALER" or role == "healer" then
     roleType = "HEALER"
     playerInfo.numHealer = playerInfo.numHealer + 1
     roleTypeIdx = roleType .. playerInfo.numHealer
@@ -38,7 +41,6 @@ local function RRI_UpdateRoleType(unitId, name, role, playerInfo)
   end
 
   playerInfo.totalNum = playerInfo.totalNum + 1
-  
   playerInfo.data[roleTypeIdx] = { name = name, id = unitId, role = roleType}
 end
 
@@ -108,7 +110,7 @@ function RRI_GetRaidRosterInfo()
     local className  = player.className
     local tanker     = player.tanker
     local talentRole = player.role
-    local role       = tanker == "" and "DPS" or tanker
+    local role       = ( tanker == nil or tanker == "" ) and "DPS" or tanker
 
     if name then
       if className == "PALADIN" then
@@ -186,4 +188,163 @@ end
 function RRI_GetRaidSubgroup(name)
   name = name or UnitName("player")
   return (g_playersInfo[name] and g_playersInfo[name].subgroup) or 0  
+end
+
+-- return Orders -- TANKER1, TANKER2, ... , HEALER1, HEALER2, ..., DPS1, DPS2 ...
+function RRI_GetIdxOrder(playerInfo)
+  local idxOrders = {}
+  local idx = 1
+
+  for i = 1, playerInfo.numTanker do
+    idxOrders[idx] = "TANKER" .. i
+    idx = idx + 1
+  end
+
+  for i = 1, playerInfo.numHealer do
+    idxOrders[idx] = "HEALER" .. i
+    idx = idx + 1
+  end
+
+  for i = 1, playerInfo.numDps do
+    idxOrders[idx] = "DPS" .. i
+    idx = idx + 1
+  end
+
+  return idxOrders
+end
+
+function RRI_GetDeadRaiderInfo()
+  return g_deadRaiderInfo
+end
+
+-- test code
+function RRI_test_UpdateDeadRaider()
+  local healers = 0
+  local tankers = 0
+  local total   = 0
+  for i,v in pairs(g_deadRaiderInfo.data) do
+    if v.role == "HEALER" then healers = healers + 1
+    elseif v.role == "TANKER" then tankers = tankers + 1
+    end 
+    total = total + 1
+  end
+  g_deadRaiderInfo.totalNum = total
+  g_deadRaiderInfo.numHealer = healers
+  g_deadRaiderInfo.numTanker = tankers
+  g_deadRaiderInfo.numDps = total - healers - tankers
+
+  return g_deadRaiderInfo
+end
+
+
+function RRI_UpdateAllDeadRaiderInfo()
+  if testMode then return RRI_test_UpdateDeadRaider() end
+
+  wipe(g_deadRaiderInfo)
+  g_deadRaiderInfo = { totalNum=0, numTanker=0, numHealer=0, numDps=0, data={} }
+  for n,v in pairs(g_playersInfo) do
+    if UnitIsDeadOrGhost(n) then
+      local role = v.tanker and v.tanker or v.role
+      RRI_UpdateRoleType(v.unitId, n, role, g_deadRaiderInfo)
+    end
+  end
+  return g_deadRaiderInfo
+end
+
+function RRI_AddDeadRaiderInfo(name)
+  for _,v in pairs(g_deadRaiderInfo.data) do
+    if name == v.name then return nil end
+  end
+
+  for n,v in pairs(g_playersInfo) do
+    if n == name then
+      local role = v.tanker and v.tanker or v.role
+      RRI_UpdateRoleType(v.unitId, n, role, g_deadRaiderInfo)
+      return role
+    end
+  end
+
+  return nil
+end
+
+function RRI_SetDruidCRCooldown(name, timestamp)
+  for _, v in pairs(g_druidInfo.data) do
+    if v.name == name then
+      v.CR = { ready = false, timestamp = timestamp, called = false, destName = "" }
+    end
+  end
+end
+
+function RRI_GetNextCRAvailableDruid(destName)
+  if g_druidInfo.data == nil or not next(g_druidInfo.data) then return nil end
+
+  for _, v in pairs(g_druidInfo.data) do
+    if v.CR == nil or ( v.CR.ready and 
+      ( not v.CR.called or ( v.CR.called and v.CR.destName == destName )) ) then
+      if UnitIsDeadOrGhost(v.name) == nil and UnitIsConnected(v.name) then
+        v.CR = { ready = true, timestamp = 0, called = true, destName = destName }
+        return v.name
+      end
+    end
+  end
+  return nil
+end
+
+function RRI_UpdateDruidCRCooldown(timestamp)
+  if g_druidInfo.data == nil or not next(g_druidInfo.data) then return nil end
+
+  local COOLDOWN_10_MINS = 600
+  for _, v in pairs(g_druidInfo.data) do
+    if v.CR and v.CR.ready == false and (timestamp - v.CR.timestamp) > COOLDOWN_10_MINS then
+      v.CR.ready = true
+      v.CR.timestamp = 0
+    end
+  end  
+end
+
+function RRI_SetBloodlustUsed(timestamp)
+  g_bloodlustInfo = { ready = false, timestamp = timestamp }
+end
+
+function RRI_UpdateBloodlustTime(timestamp)
+  local COOLDOWN_5_MINS = 300
+  if g_bloodlustInfo.ready == false and (timestamp - g_bloodlustInfo.timestamp) > COOLDOWN_5_MINS then
+    g_bloodlustInfo.ready = true
+    g_bloodlustInfo.timestamp = 0
+  end
+end
+
+function RRI_IsBloodlustReady()
+  local COOLDOWN_5_MINS = 300
+  local readyTime = math.floor(COOLDOWN_5_MINS - time() + g_bloodlustInfo.timestamp)
+  return g_bloodlustInfo.ready, readyTime
+end
+
+-------------------------------------- TEST MODE ----------------------------------------------------
+-- test combat ress
+-- do /script RRI_test_build_roaster() 
+-- do /script RL_DeadListFrame_AddDeadRaider("TestName3"), /script RL_DeadListFrame_AddDeadRaider("TestName1"), ...
+-- do /script RL_DeadListFrame_Info_ShowDeadRaidersList()      for who dead
+-----------------------------------------------------------------------------------------------------
+function RRI_test_Off_mode()
+  testMode = false
+end
+
+function RRI_test_build_roaster()
+  local className = { "PALADIN", "HUNTER", "MAGE", "PRIEST", "DRUID"}
+
+  testMode = true
+
+  for i = 1, 25 do
+    local tanker = nil
+    local role = "DPS"
+    local name = "TestName"..i
+
+    if i == 3 or i == 7 then tanker = "TANKER"; role = "TANKER" end
+    if (i-1)%5+1 == 5 then role = "HEALER" end
+
+    g_playersInfo[name]= { unitId = "raid"..i, guid = "guid"..i, subgroup = (i-1)%5+1, className = className[(i-1)%5+1], tanker = tanker, role = role }
+
+    printf("[FD] " .. name .. ", " .. role .. ", " .. tostring((i-1)%5+1) .. ", " .. className[(i-1)%5+1] .. ", " .. tostring(tanker) .. ", " .. role)
+  end
 end

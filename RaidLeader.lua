@@ -1,6 +1,7 @@
 local L  = LibStub("AceLocale-3.0"):GetLocale("RaidLeader", true)
 
 local previousInstanceId = 0
+local timerCooldown = {}
 
 function RLF_Main_Toggle()
   if not RaidLeader_Frame:IsVisible() then
@@ -25,9 +26,29 @@ function RL_GetGlobalChannelNumber()
     return 0
 end
 
-function RLF_OnEvent(frame, event, arg1)
+local function RL_Expire_Cooldown_Timer()
+  local timestamp = time()
+  RRI_UpdateDruidCRCooldown(timestamp)
+  RRI_UpdateBloodlustTime(timestamp)
+  return false
+end
+
+
+local function RLF_COMBAT_LOG_EVENT_UNFILTERED(timestamp, eventType, sourceGUID, sourceName, sourceFlags, destGUID, destName, destFlags, ...)
+  local spellID, spellName, spellSchool, auraType = ...
+
+  if eventType == "SPELL_RESURRECT" and spellID == 48477 then
+    RRI_SetDruidCRCooldown(sourceName, timestamp)
+  elseif eventType == "SPELL_AURA_APPLIED" and spellID == 2825 then
+    RRI_SetBloodlustUsed(timestamp)
+  elseif eventType == "UNIT_DIED" then
+    RL_DeadListFrame_AddDeadRaider(destName)
+  end
+end
+
+local function RLF_OnEvent(frame, event, ...)
   -- printf(event .. ", " .. GetCurrentMapAreaID() .. ", arg1: " .. tostring(arg1))
-  if event == "ADDON_LOADED" and arg1 == "RaidLeader" then
+  if event == "ADDON_LOADED" and ... == "RaidLeader" then
     local r = RaidLeaderData.recruitInfo
     UIDropDownMenu_SetText(RaidLeader_Gear_DropDownMenu, r.gear)
     UIDropDownMenu_SetText(RaidLeader_Zone_DropDownMenu, r.zone .. r.sub)
@@ -39,6 +60,9 @@ function RLF_OnEvent(frame, event, arg1)
 
     SDBM_UseDBM(RaidLeaderData.useSDBM)
 
+    if RaidLeaderData.instance == nil then
+      RaidLeaderData.instance = { inside  = false, zone = "", sub = "" }
+    end
     RaidLeaderData.instance.inside = false
     RaidLeaderData.version = GetAddOnMetadata("RaidLeader", "version")
 
@@ -47,6 +71,8 @@ function RLF_OnEvent(frame, event, arg1)
   elseif event == "PLAYER_ENTERING_WORLD" then
     frame:RegisterEvent("RAID_ROSTER_UPDATE")
     frame:RegisterEvent("WORLD_MAP_UPDATE")
+
+    timerCooldown = RL_set_timer(1, RL_Expire_Cooldown_Timer, true)
 
     frame:UnregisterEvent("PLAYER_ENTERING_WORLD")
     frame.PLAYER_ENTERING_WORLD = nil
@@ -72,6 +98,8 @@ function RLF_OnEvent(frame, event, arg1)
     else
         RLU_SetIsInstance(false)
     end
+  elseif event == "COMBAT_LOG_EVENT_UNFILTERED" then
+    RLF_COMBAT_LOG_EVENT_UNFILTERED(...)
   end
 end
 
@@ -80,6 +108,7 @@ function RLF_OnLoad(frame)
   RL_TEXT_DRUM_OF_KING:SetText(L["Drums of the Wild"])
   RL_TEXT_USE_KOREAN:SetText(L["Use Korean"])
   RL_TEXT_USE_SDBM:SetText(L["Use SDBM"])
+  RL_Title_txt:SetText("RaidLeader-Sunmudang v" .. GetAddOnMetadata("RaidLeader", "version"))
 
   -- slash commands
   SlashCmdList["RAIDLEADER_GUI_POPUP"] = function()
@@ -99,6 +128,7 @@ function RLF_OnLoad(frame)
   frame:SetScript("OnMouseUp",   function() frame:StopMovingOrSizing() end)
   frame:RegisterEvent("ADDON_LOADED")         -- Fired when saved variables are loaded
   frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+  frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
   frame:SetScript("OnEvent", RLF_OnEvent)
 end
 

@@ -80,6 +80,15 @@ function RLF_Button_RaidWarning_OnClick(param)
   end
 end
 
+function RLF_Button_Bloodlust_OnClick(param)
+  local ready, readyTime = RRI_IsBloodlustReady()
+
+  if ready then
+    RLF_Button_RaidWarning_OnClick(param)
+  else
+    printf(L.infoBloodlustReady:format(readyTime))
+  end
+end
 
 -- My MS Change Popup
 function RL_Callback_Update_MyMS(...)

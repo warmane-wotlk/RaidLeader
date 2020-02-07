@@ -1,5 +1,5 @@
 ## Title: RaidLeader
-## Version: 0.7.3
+## Version: 0.8
 ## Author: Sunmudang
 ## Interface: 30300
 ## Notes: "Use /RLD to toggle the addon"
@@ -28,8 +28,11 @@ Messages_ONYX.lua
 
 RaidRosterInfo.lua
 
+RaiderList.lua
+
 RaidInstance.lua
 RaidInstance.xml
+RaiderList.xml
 
 SimpleDBM.lua
 RaidLeader.lua

@@ -111,6 +111,12 @@ if L then
 	L["Drums of the Wild"] = "\'야생의 북\' 사용"
 	L["Use Korean"] = "한글 공대말"
 	L["Use SDBM"] = "자체 DBM 사용"
+	L["Combat Resurrect"] = "전부 대상자 선택"
+	L["Put Soul Stone"] = "영석 대상자 선택"
+	L["infoBloodlustReady"] = "피의 욕망이 %d 초 후에 사용가능합니다."
+	L["TANKER"] = "탱커"
+	L["HEALER"] = "힐러"
+	L["DPS"] = "딜러"
 
 	-- boss
 	L["Marrowgar"] = "매로우"

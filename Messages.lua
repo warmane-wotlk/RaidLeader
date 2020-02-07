@@ -118,6 +118,8 @@ RL_MESSAGE_ENG = {
 	dbmPullDone = "Tanker, Pull Now. Others follow after Tanker dps.";
 	wispGasSpore = "You got the Gas Spore, move to the player({rt%d}) in the %s position.";
 	warningGasSpore = "Gas Spore!!! Everyone move to the one having Mark.";
+	druidCombatResurrect = "%s do a COMBAT RESURRECT to %s";
+	NodruidCombatResurrect = "No druid can do a combat resurrect.";
 
 	left = "LEFT";
 	tanker = "TANKER";
@@ -269,6 +271,8 @@ RL_MESSAGE_KOR = {
 	dbmPullDone = "탱커 풀링하세요. 탱커 움직이는 걸 보고 공격하세요.";
 	wispGasSpore = "가스포자를 가졌습니다. {rt%d}마크를 가진 플레이어의 %s 위치로 빨리 가세요.";
 	warningGasSpore = "가스포자!! 다음의 마크를 가진 플레이어에게 빨리 가세요.";
+	druidCombatResurrect = "%s님, 전투 부활 %s님에게 해주세요.";
+	NodruidCombatResurrect = "전투 부활을 할 수 있는 드루이드가 없습니다.";
 
 	left = "왼쪽";
 	tanker = "탱커";

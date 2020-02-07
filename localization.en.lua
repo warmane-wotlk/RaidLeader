@@ -98,6 +98,7 @@ if L then
 	L["Reset MS Change Informations"] = "Reset MS Change Informations"
 	L["Expire MS Change Time"] = "Expire MS Change Time(1min)"
 	L["Error! Unknown # of beacon: "] = "Error! Unknown # of beacon: "
+	L["Update Raid Roaster Info"] = "Update Raid Roaster Info"
 
 	L["Type your MS Change if you want"] = "Type your MS Change if you want"
 	L["My MS Change"] = "My MS Change"
@@ -110,7 +111,12 @@ if L then
 	L["Drums of the Wild"] = "Use Drums"
 	L["Use Korean"] = "Use Korean"
 	L["Use SDBM"] = "Use Simple DBM"
-	L["Update Raid Roaster Info"] = "Update Raid Roaster Info"
+	L["Combat Resurrect"] = "Choose Raider"
+	L["Put Soul Stone"] = "Put Soul Stone"
+	L["infoBloodlustReady"] = "Bloodlust will be ready after %d sec."
+	L["TANKER"] = "Tanker"
+	L["HEALER"] = "Healer"
+	L["DPS"] = "DPS"
 
 	-- boss
 	L["Marrowgar"] = "Marrowgar"

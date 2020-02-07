@@ -77,7 +77,7 @@
 						</Anchor>
 					</Anchors>
 				</Texture>				
-				<FontString name="RL_Title_txt" inherits="GameFontHighlight" text="RaidLeader-Sunmudang v0.7">
+				<FontString name="RL_Title_txt" inherits="GameFontHighlight" text="RaidLeader-Sunmudang ver.">
 					<Anchors>
 						<Anchor point="TOP" relativePoint="TOP">
 							<Offset>
