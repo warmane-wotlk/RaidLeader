@@ -4,7 +4,7 @@ local buttonDeadListObj = {}
 
 local frameSize = { x = 185, y = 70 }
 local buttonSize = { x = 110, y = 23 }
-local ptStart = { x = 115, y = -22 }
+local ptStart = { x = 118, y = -45 }
 
 local ptNext = { dx = buttonSize.x - 2, dy = 0 + buttonSize.y }
 local frameGapY = ptNext.dy
@@ -37,11 +37,14 @@ local function RL_RaiderList_CreateButton(frame, buttonObj, id, x, y, callback_O
   ptex:SetTexCoord(0, 0.625, 0, 0.6875)
   ptex:SetAllPoints()
   button:SetPushedTexture(ptex)
-  
-  local roleText = frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-  roleText:SetPoint("CENTER", frame, "TOPLEFT", x-71, y+2)
-  roleText:SetText(L[buttonObj[id].obj.role])
 
+  local roleText = frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+  roleText:SetPoint("CENTER", frame, "TOPLEFT", x-81, y+2)
+  if buttonObj[id].obj.role and buttonObj[id].obj.role ~= "" then 
+    roleText:SetText(L[buttonObj[id].obj.role])
+  else
+    roleText:SetText(L["tbd"])
+  end
   button:SetScript("OnClick", callback_OnClick)
 
   return button, roleText
@@ -75,7 +78,7 @@ local function RL_DeadListFrame_AddButtons(self)
   local i = #deadRaidersList
   local buttonId  = "RL_RAIDER_DEADLIST_BUTTON_ID_" .. i
 
-  y = y - ptNext.dy * i
+  y = y - ptNext.dy * (i-1)
 
   if buttonDeadListObj[buttonId] then
      buttonDeadListObj[buttonId].obj = deadRaidersList[i]
@@ -89,17 +92,6 @@ local function RL_DeadListFrame_AddButtons(self)
   fy = fy + frameGapY * (#deadRaidersList - 1 )
 
   RL_DeadListFrame:SetSize(fx, fy)  
-end
-
-function RL_DeadListFrame_AddDeadRaider(name)
-	if #deadRaidersList > 10 then return end
-
-	local role = RRI_AddDeadRaiderInfo(name)
-
-	if role then
-		table.insert(deadRaidersList, { name = name, role = role } )
-		RL_DeadListFrame_AddButtons(RL_DeadListFrame)
-	end
 end
 
 local function RL_DeadListFrame_GetAllDeadRaiders()
@@ -126,7 +118,8 @@ function RL_DeadListFrame_Buttons_OnClick(self)
   local druid = RRI_GetNextCRAvailableDruid(name)
 
   if druid then
-  	RL_RaiderList_RaidWarning(RL.druidCombatResurrect:format(druid, name))
+    local msg = RL.druidCombatResurrect:format(druid, name)
+  	RL_RaiderList_RaidWarning(msg)
   else
   	RL_RaiderList_RaidWarning(RL.NodruidCombatResurrect)
   end
@@ -134,8 +127,8 @@ end
 
 local function RL_DeadListFrame_BuildButtons(self)
   for _, button in pairs(buttonDeadListObj) do
-    button.frame:Hide()
-    button.textobj:Hide()
+    if button.frame then button.frame:Hide() end
+    if button.textobj then button.textobj:Hide() end
   end
 
   if not next(deadRaidersList) then return end
@@ -171,6 +164,22 @@ end
 local function RL_SoulStoneFrame_BuildButtons(self)
 end
 
+function RL_DeadListFrame_AddDeadRaider(name)
+  if #deadRaidersList >= 10 then
+    RL_DeadListFrame_GetAllDeadRaiders()
+    RL_DeadListFrame_BuildButtons(RL_DeadListFrame)
+    RL_DeadListFrame:Show()
+    return
+  end
+
+  local role = RRI_AddDeadRaiderInfo(name)
+
+  if role then
+    table.insert(deadRaidersList, { name = name, role = role } )
+    RL_DeadListFrame_AddButtons(RL_DeadListFrame)
+  end
+end
+
 function RL_DeadListFrame_Toggle()
   if RL_DeadListFrame:IsVisible() then
     RL_DeadListFrame:Hide()
@@ -191,7 +200,10 @@ function RL_SoulStoneFrame_Toggle()
   end
 end
 
-function RL_DeadListFrame_OnEvent(frame, event, ...)
+function RL_DeadListFrame_Refresh()
+  RL_DeadListFrame_GetAllDeadRaiders()
+  RL_DeadListFrame_BuildButtons(RL_DeadListFrame)
+  RL_DeadListFrame:Show()
 end
 
 function RL_DeadListFrame_OnLoad(self)
@@ -201,7 +213,6 @@ function RL_DeadListFrame_OnLoad(self)
 	self:EnableMouse(true)
 	self:SetScript("OnMouseDown", function() self:StartMoving() end)
 	self:SetScript("OnMouseUp",   function() self:StopMovingOrSizing() end)
-	self:SetScript("OnEvent", RL_DeadListFrame_OnEvent)
 end
 
 
