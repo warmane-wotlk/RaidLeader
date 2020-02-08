@@ -117,6 +117,7 @@ if L then
 	L["TANKER"] = "탱커"
 	L["HEALER"] = "힐러"
 	L["DPS"] = "딜러"
+	L["tbd"] = "직업모름"
 
 	-- boss
 	L["Marrowgar"] = "매로우"

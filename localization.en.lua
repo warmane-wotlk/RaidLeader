@@ -117,6 +117,7 @@ if L then
 	L["TANKER"] = "Tanker"
 	L["HEALER"] = "Healer"
 	L["DPS"] = "DPS"
+	L["tbd"] = "Unknow"
 
 	-- boss
 	L["Marrowgar"] = "Marrowgar"
