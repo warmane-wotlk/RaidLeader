@@ -89,9 +89,7 @@ function RLF_Zone_Buttons_OnClick(self)
   RLF_Zone_RaidWarning(buttonId)
 
   if select(2, string.find(buttonId, "READY")) then
-    RL_INFO(L["Update Raid Roaster Info"])
-    RRI_InitializeRaidRosterInfo()
-    RRI_GetRaidRosterInfo()
+    RRI_UpdateRaidRosterInfo(false)
     RL_DeadListFrame_Refresh()
   end
 

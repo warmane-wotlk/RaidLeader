@@ -22,7 +22,7 @@ local g_warriorInfo  = {}
 local g_bloodlustInfo = { ready = true, timestamp = 0 }
 local g_deadRaiderInfo = { totalNum=0, numTanker=0, numHealer=0, numDps=0, data={} }
 local g_resurrectInfo = {}
-
+local bRaidRosterInitialize = false
 
 local function RRI_UpdateRoleType(unitId, name, role, className, playerInfo)
   local roleType = "DPS"
@@ -45,7 +45,10 @@ local function RRI_UpdateRoleType(unitId, name, role, className, playerInfo)
   playerInfo.data[roleTypeIdx] = { name = name, id = unitId, role = roleType, class = className}
 end
 
-function RRI_InitializeRaidRosterInfo()
+local function RRI_InitializeRaidRosterInfo()
+  RL_INFO(L["Update Raid Roaster Info"])
+  bRaidRosterInitialize = true
+
   local isRaid  = UnitInRaid("player")
 
   local raid_size = isRaid and GetNumRaidMembers() or GetNumPartyMembers() + 1
@@ -68,10 +71,11 @@ function RRI_InitializeRaidRosterInfo()
 
       local role = LibGT:GetUnitRole(unitId)
       if role == nil then role = "tbd" end
+
       if role == "caster" or role == "melee" then role = "DPS" end
       local data = { unitId = unitId, guid = guid, subgroup = subgroup, className = className, tanker = tanker, role = role }
 
-      --print("unitId: " .. unitId .. ", name:" .. tostring(name) .. " , subgroup: " .. subgroup .. ", role:" .. tostring(role) .. ", className: " .. className .. ", tanker: " .. tostring(tanker) )
+      --RL_INFO("unitId: " .. unitId .. ", name:" .. tostring(name) .. " , subgroup: " .. subgroup .. ", role:" .. tostring(role) .. ", className: " .. className .. ", tanker: " .. tostring(tanker) )
       g_playersInfo[name] = data
 
       if role == "healer" then
@@ -83,7 +87,7 @@ function RRI_InitializeRaidRosterInfo()
   end
 end
 
-function RRI_GetRaidRosterInfo()
+local function RRI_GetRaidRosterInfo()
   if next(g_playersInfo) == nil then
     RL_INFO(L["Fatal - Failed to load roster info"])
     return
@@ -132,6 +136,13 @@ function RRI_GetRaidRosterInfo()
 
       --print("unitId: " .. unitId .. ", name:" .. name .. ", role:" .. role .. ", class: " .. className)
     end
+  end
+end
+
+function RRI_UpdateRaidRosterInfo(bForce)
+  if bForce or not bRaidRosterInitialize then
+    RRI_InitializeRaidRosterInfo()
+    RRI_GetRaidRosterInfo()
   end
 end
 
@@ -371,5 +382,11 @@ function RRI_test_build_dead()
   for i=1, 10 do
     local name = "TestName" .. i
     RL_DeadListFrame_AddDeadRaider(name)
+  end
+end
+
+function RRI_test_show_playerinfo()
+  for n,v in pairs(g_playersInfo) do
+    RL_INFO("RosterInfo: " .. tostring(n) .. " [" .. v.subgroup .. "/" ..v.className .."]" .. " ,role:" .. tostring(v.role) .. ", tank: " .. tostring(v.tanker) )
   end
 end

@@ -75,12 +75,13 @@ local function RLF_OnEvent(frame, event, ...)
 
     timerCooldown = RL_set_timer(1, RL_Expire_Cooldown_Timer, true)
 
+    RRI_UpdateRaidRosterInfo(true)
+
     frame:UnregisterEvent("PLAYER_ENTERING_WORLD")
     frame.PLAYER_ENTERING_WORLD = nil
   elseif event == "RAID_ROSTER_UPDATE" then
     if UnitInRaid("player") then
-       RRI_InitializeRaidRosterInfo()
-       RRI_GetRaidRosterInfo()
+       RRI_UpdateRaidRosterInfo(true)
     end
   elseif event == "WORLD_MAP_UPDATE" then
     local instancdId = GetCurrentMapAreaID()

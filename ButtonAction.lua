@@ -573,8 +573,7 @@ function RLF_Button_Paladin_Buff_OnClick(id)
   end
 
   -- Get raid info
-  RRI_InitializeRaidRosterInfo()
-  RRI_GetRaidRosterInfo()
+  RRI_UpdateRaidRosterInfo(false)
   local buffMsg = Buff_Get_Paladin_Orders()
   RLF_Button_RaidWarning_OnClick(buffMsg)
 end
