@@ -21,6 +21,7 @@ local g_priestInfo   = {}
 local g_warriorInfo  = {}
 local g_bloodlustInfo = { ready = true, timestamp = 0 }
 local g_deadRaiderInfo = { totalNum=0, numTanker=0, numHealer=0, numDps=0, data={} }
+local g_resurrectInfo = {}
 
 
 local function RRI_UpdateRoleType(unitId, name, role, playerInfo)
@@ -83,7 +84,7 @@ end
 
 function RRI_GetRaidRosterInfo()
   if next(g_playersInfo) == nil then
-    printf(L["Fatal - Failed to load roster info"])
+    RL_INFO(L["Fatal - Failed to load roster info"])
     return
   end
 
@@ -267,22 +268,28 @@ function RRI_AddDeadRaiderInfo(name)
   return nil
 end
 
+function RRI_ResetResurrectInfo()
+  wipe(g_resurrectInfo)
+end
+
 function RRI_SetDruidCRCooldown(name, timestamp)
   for _, v in pairs(g_druidInfo.data) do
     if v.name == name then
-      v.CR = { ready = false, timestamp = timestamp, called = false, destName = "" }
+      g_resurrectInfo[name] = { name = name, ready = false, timestamp = timestamp, called = false, destName = "" }
+      break
     end
   end
 end
 
 function RRI_GetNextCRAvailableDruid(destName)
-  if g_druidInfo.data == nil or not next(g_druidInfo.data) then return nil end
+  if g_druidInfo.data ~= nil and not next(g_druidInfo.data) then return nil end
 
   for _, v in pairs(g_druidInfo.data) do
-    if v.CR == nil or ( v.CR.ready and 
-      ( not v.CR.called or ( v.CR.called and v.CR.destName == destName )) ) then
+    local CR = g_resurrectInfo[v.name]
+    if CR == nil or ( CR.ready and 
+      ( not CR.called or ( CR.called and CR.destName == destName )) ) then
       if UnitIsDeadOrGhost(v.name) == nil and UnitIsConnected(v.name) then
-        v.CR = { ready = true, timestamp = 0, called = true, destName = destName }
+        g_resurrectInfo[v.name] = { name = name, ready = true, timestamp = 0, called = true, destName = destName }
         return v.name
       end
     end
@@ -291,13 +298,13 @@ function RRI_GetNextCRAvailableDruid(destName)
 end
 
 function RRI_UpdateDruidCRCooldown(timestamp)
-  if g_druidInfo.data == nil or not next(g_druidInfo.data) then return nil end
+  if not next(g_resurrectInfo) then return nil end
 
   local COOLDOWN_10_MINS = 600
-  for _, v in pairs(g_druidInfo.data) do
-    if v.CR and v.CR.ready == false and (timestamp - v.CR.timestamp) > COOLDOWN_10_MINS then
-      v.CR.ready = true
-      v.CR.timestamp = 0
+  for _, CR in pairs(g_resurrectInfo) do
+    if CR and CR.ready == false and (timestamp - CR.timestamp) > COOLDOWN_10_MINS then
+      CR.ready = true
+      CR.timestamp = 0
     end
   end  
 end
@@ -325,6 +332,7 @@ end
 -- do /script RRI_test_build_roaster() 
 -- do /script RL_DeadListFrame_AddDeadRaider("TestName3"), /script RL_DeadListFrame_AddDeadRaider("TestName1"), ...
 -- do /script RL_DeadListFrame_Info_ShowDeadRaidersList()      for who dead
+-- do /script RRI_test_show_deadlist()
 -----------------------------------------------------------------------------------------------------
 function RRI_test_Off_mode()
   testMode = false
@@ -345,6 +353,14 @@ function RRI_test_build_roaster()
 
     g_playersInfo[name]= { unitId = "raid"..i, guid = "guid"..i, subgroup = (i-1)%5+1, className = className[(i-1)%5+1], tanker = tanker, role = role }
 
-    printf("[FD] " .. name .. ", " .. role .. ", " .. tostring((i-1)%5+1) .. ", " .. className[(i-1)%5+1] .. ", " .. tostring(tanker) .. ", " .. role)
+    RL_INFO("[FD] " .. name .. ", " .. role .. ", " .. tostring((i-1)%5+1) .. ", " .. className[(i-1)%5+1] .. ", " .. tostring(tanker) .. ", " .. role)
+  end
+end
+
+function RRI_test_show_deadlist()
+  RL_INFO("total/tank/healer/dps - " .. g_deadRaiderInfo.totalNum .. "/".. g_deadRaiderInfo.numTanker .. "/".. g_deadRaiderInfo.numHealer .. "/" .. g_deadRaiderInfo.numDps)
+
+  for t,v in pairs(g_deadRaiderInfo.data) do
+    RL_INFO("name: " .. v.name .. ", role: " .. v.role )
   end
 end

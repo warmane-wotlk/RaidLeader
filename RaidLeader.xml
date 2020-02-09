@@ -96,7 +96,7 @@
 					<Anchors>
 						<Anchor point="TOP" relativePoint="TOP">
 							<Offset>
-								<AbsDimension x="-48" y="-79" />
+								<AbsDimension x="-88" y="-79" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -112,18 +112,24 @@
 				</FontString>
 			</Layer>
 			<Layer level="OVERLAY">
-				<FontString name="RL_TEXT_NEED_HEALER" inherits="GameFontNormal" text="Healer">
-					<Size x="51" y="20" />
-					<Anchors>
-						<Anchor point="TOPLEFT" x="115" y="-117" />
-					</Anchors>
-				</FontString>
 				<FontString name="RL_TEXT_NEED_TANKER" inherits="GameFontNormal" text="Tanker">
 					<Size x="53" y="20" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="115" y="-79" />
+					</Anchors>
+				</FontString>
+				<FontString name="RL_TEXT_NEED_HEALER" inherits="GameFontNormal" text="Healer">
+					<Size x="51" y="20" />
 					<Anchors>
 						<Anchor point="TOPLEFT" x="115" y="-98" />
 					</Anchors>
 				</FontString>
+				<FontString name="RL_TEXT_NEED_DPS" inherits="GameFontNormal" text="Dps">
+					<Size x="53" y="20" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="115" y="-117" />
+					</Anchors>
+				</FontString>				
 				<FontString name="RL_TEXT_USE_SDBM" inherits="GameFontNormal" text="Use Simple DBM" JUSTIFYH="LEFT">
 					<Size x="120" y="20" />
 					<Anchors>
@@ -980,10 +986,30 @@
 					</OnLoad>
 				</Scripts>
 			</Button>
+			<CheckButton name="RL_CHECKBUTTON_NEED_TANKER" inherits="UICheckButtonTemplate">
+				<Size x="26" y="27" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="95" y="-76" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RLF_Button_AutoFlood_option_OnClick(self:GetName(), self:GetChecked());
+					</OnClick>
+					<OnEnter>
+						RLF_Button_Show_ToolTip(self:GetName());
+					</OnEnter>
+					<OnLeave>
+						RLF_Button_Hide_ToolTip();
+					</OnLeave>
+					<OnLoad>
+						self:SetChecked(RaidLeaderData.recruitInfo.needTanker);
+					</OnLoad>
+				</Scripts>
+			</CheckButton>
 			<CheckButton name="RL_CHECKBUTTON_NEED_HEALER" inherits="UICheckButtonTemplate">
 				<Size x="26" y="27" />
 				<Anchors>
-					<Anchor point="TOPLEFT" x="95" y="-114" />
+					<Anchor point="TOPLEFT" x="95" y="-95" />
 				</Anchors>
 				<Scripts>
 					<OnClick>
@@ -1000,10 +1026,10 @@
 					</OnLoad>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="RL_CHECKBUTTON_NEED_TANKER" inherits="UICheckButtonTemplate">
+			<CheckButton name="RL_CHECKBUTTON_NEED_DPS" inherits="UICheckButtonTemplate">
 				<Size x="26" y="27" />
 				<Anchors>
-					<Anchor point="TOPLEFT" x="95" y="-95" />
+					<Anchor point="TOPLEFT" x="95" y="-114" />
 				</Anchors>
 				<Scripts>
 					<OnClick>
@@ -1016,7 +1042,7 @@
 						RLF_Button_Hide_ToolTip();
 					</OnLeave>
 					<OnLoad>
-						self:SetChecked(RaidLeaderData.recruitInfo.needTanker);
+						self:SetChecked(RaidLeaderData.recruitInfo.needDps);
 					</OnLoad>
 				</Scripts>
 			</CheckButton>

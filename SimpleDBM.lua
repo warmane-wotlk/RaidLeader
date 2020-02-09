@@ -82,7 +82,7 @@ local function SDBM_WarnBeaconTargets()
 			end
 	    	msg = string.sub(msg, 1, -1*string.len(separate)-1)
 		else
-			printf(L["Error! Unknown # of beacon: "] .. tostring(#beaconTargets))
+			RL_INFO(L["Error! Unknown # of beacon: "] .. tostring(#beaconTargets))
 			table.wipe(beaconTargets)
 			return
 		end
@@ -187,7 +187,7 @@ end
 local function SDBM_COMBAT_LOG_EVENT_UNFILTERED(timestamp, eventType, sourceGUID, sourceName, sourceFlags, destGUID, destName, destFlags, ...)
 	local spellID, spellName, spellSchool, auraType = ...
 
-	-- printf("[eventType:" .. eventType .. "] - spellID: " .. spellID .. ", to: " .. ( destName and destName or "none") )
+	-- RL_INFO("[eventType:" .. eventType .. "] - spellID: " .. spellID .. ", to: " .. ( destName and destName or "none") )
 	if eventType == "SPELL_AURA_APPLIED" then
 		SDBM_SPELL_AURA_APPLIED(spellID, destName)	
 	elseif eventType == "SPELL_AURA_REMOVED" then

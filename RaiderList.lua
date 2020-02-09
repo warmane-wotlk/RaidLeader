@@ -228,6 +228,6 @@ end
 
 function RL_DeadListFrame_Info_ShowDeadRaidersList()
 	for i,v in pairs(deadRaidersList) do
-		printf(i .. "-" .. v.name .. ", " .. v.role)
+		RL_INFO(i .. "-" .. v.name .. ", " .. v.role)
 	end
 end

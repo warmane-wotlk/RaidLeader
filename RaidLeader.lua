@@ -47,7 +47,7 @@ local function RLF_COMBAT_LOG_EVENT_UNFILTERED(timestamp, eventType, sourceGUID,
 end
 
 local function RLF_OnEvent(frame, event, ...)
-  -- printf(event .. ", " .. GetCurrentMapAreaID() .. ", arg1: " .. tostring(arg1))
+  -- RL_INFO(event .. ", " .. GetCurrentMapAreaID() .. ", arg1: " .. tostring(arg1))
   if event == "ADDON_LOADED" and ... == "RaidLeader" then
     local r = RaidLeaderData.recruitInfo
     UIDropDownMenu_SetText(RaidLeader_Gear_DropDownMenu, r.gear)
@@ -57,6 +57,7 @@ local function RLF_OnEvent(frame, event, ...)
     RL_CHECKBUTTON_USE_SDBM:SetChecked(RaidLeaderData.useSDBM)
     RL_CHECKBUTTON_NEED_HEALER:SetChecked(r.needHealer)
     RL_CHECKBUTTON_NEED_TANKER:SetChecked(r.needTanker)
+    RL_CHECKBUTTON_NEED_DPS:SetChecked(r.needDps)
 
     SDBM_UseDBM(RaidLeaderData.useSDBM)
 
@@ -77,8 +78,10 @@ local function RLF_OnEvent(frame, event, ...)
     frame:UnregisterEvent("PLAYER_ENTERING_WORLD")
     frame.PLAYER_ENTERING_WORLD = nil
   elseif event == "RAID_ROSTER_UPDATE" then
-    RRI_InitializeRaidRosterInfo()
-    RRI_GetRaidRosterInfo()
+    if UnitInRaid("player") then
+       RRI_InitializeRaidRosterInfo()
+       RRI_GetRaidRosterInfo()
+    end
   elseif event == "WORLD_MAP_UPDATE" then
     local instancdId = GetCurrentMapAreaID()
     local r = RaidLeaderData.recruitInfo
@@ -92,8 +95,12 @@ local function RLF_OnEvent(frame, event, ...)
         r.sub  = sub
         r.zoneId = RLU_GetZoneId(r.zone)
 
+        RL_INFO(L.enterInstance:format(L[zone], sub))
+
         UIDropDownMenu_SetText(RaidLeader_Zone_DropDownMenu, r.zone .. r.sub)
         RL_Zone_Reflesh_GUI()
+
+        RRI_ResetResurrectInfo()
       end
     else
         RLU_SetIsInstance(false)

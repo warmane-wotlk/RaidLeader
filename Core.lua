@@ -5,7 +5,7 @@ RaidLeaderData = {
 	useKorean   = false;
   useSDBM     = false;  
   instance    = { inside  = false, zone = "", sub = "" };
-	recruitInfo = { zone = "", sub = "", zoneId = 0, gear = "5.0k+", needHealer = true, needTanker = true };
+	recruitInfo = { zone = "", sub = "", zoneId = 0, gear = "5.0k+", needHealer = true, needTanker = true, needDps = true };
 };
 
 
@@ -112,7 +112,7 @@ function RLU_UpdateInstanceInfo()
       end
     end
   end  
-  --printf(tostring(RaidLeaderData.instance.zone).. RaidLeaderData.instance.sub)
+  --RL_INFO(tostring(RaidLeaderData.instance.zone).. RaidLeaderData.instance.sub)
 end 
 
 -- Zone Frame variable
@@ -160,4 +160,4 @@ function RLF_Button_SetText_OnLoad(self, param)
 end
 
 -- utility
-function printf(...) SELECTED_CHAT_FRAME:AddMessage('|cff0061ff[RaidLeader]: '..format(...)) end
+function RL_INFO(...) SELECTED_CHAT_FRAME:AddMessage('|cff0061ff[RL]: '..format(...)) end

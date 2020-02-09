@@ -89,9 +89,10 @@ function RLF_Zone_Buttons_OnClick(self)
   RLF_Zone_RaidWarning(buttonId)
 
   if select(2, string.find(buttonId, "READY")) then
-    printf(L["Update Raid Roaster Info"])
+    RL_INFO(L["Update Raid Roaster Info"])
     RRI_InitializeRaidRosterInfo()
     RRI_GetRaidRosterInfo()
+    RL_DeadListFrame_Refresh()
   end
 
   if buttonId == "RL_ZONE_ICC_FESTERGUT_READY" then

@@ -64,25 +64,18 @@ if L then
 	L["RL_BUTTON_SET_HC_NM"] = "영웅/일반"
 	L["RL_CHECKBUTTON_NEED_HEALER"] = "Healer"
 	L["RL_CHECKBUTTON_NEED_TANKER"] = "Tanker"
+	L["RL_CHECKBUTTON_NEED_TANKER"] = "Dps"
 	L["RL_BUTTON_CALL_BOSS_FRAME"] = "보스프레임"
 
 	-- zone name
-	L["EE10"] = "영원의 눈 - 10인"
-	L["UL10"] = "울두아르 - 10"
-	L["OS10"] = "흑요석 - 10"
-	L["VOA10"] = "아카본 - 10n"
-	L["NAXX10"] = "낙스마스 - 10"
-	L["TOC10"] = "십자군 - 10"
-	L["ICC10"] = "얼음왕관 - 10"
-	L["RS10"] = "루비성소 - 10"
-	L["EE25"] = "영원의 눈 - 25"
-	L["UL25"] = "울두아르 - 25"
-	L["OS25"] = "흑요석 - 25"
-	L["VOA25"] = "아카본 - 25"
-	L["NAXX25"] = "낙스마스 - 25"
-	L["TOC25"] = "십자군 - 25"
-	L["ICC25"] = "얼음왕관 - 25"
-	L["RS25"] = "루비성소 - 25"
+	L["EE"] = "영원의 눈"
+	L["UL"] = "울두아르"
+	L["OS"] = "흑요석"
+	L["VOA"] = "아카본"
+	L["NAXX"] = "낙스마스"
+	L["TOC"] = "십자군"
+	L["ICC"] = "얼음왕관 "
+	L["RS"] = "루비성소"
 
 	-- print
 	L["Choose instance first"] = "레이드 지역명을 선택해주세요."
@@ -118,6 +111,7 @@ if L then
 	L["HEALER"] = "힐러"
 	L["DPS"] = "딜러"
 	L["tbd"] = "직업모름"
+	L["enterInstance"] = "%s %s 인스턴스에 들어왔습니다."
 
 	-- boss
 	L["Marrowgar"] = "매로우"

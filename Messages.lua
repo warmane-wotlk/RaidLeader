@@ -99,6 +99,7 @@ RL_MESSAGE_ENG = {
 
 	RL_CHECKBUTTON_NEED_HEALER_MSG = "Check if Healer is needed in Raid";
 	RL_CHECKBUTTON_NEED_TANKER_MSG = "Check if Tanker is needed in Raid";
+	RL_CHECKBUTTON_NEED_DPS_MSG = "Check if Dps is needed in Raid";
 	RL_CHECKBUTTON_LANGUAGE_MSG = "Check if Korean is used";
 	RL_CHECKBUTTON_USE_SDBM_MSG = "Check if use Simple DBM";
 
@@ -188,6 +189,7 @@ RL_MESSAGE_TOOLTIP_ENG = {
 
 	RL_CHECKBUTTON_NEED_HEALER_TOOLTIP = "Set the value of - \'" .. L["RL_CHECKBUTTON_NEED_HEALER_MSG"] .. "\'";
 	RL_CHECKBUTTON_NEED_TANKER_TOOLTIP = "Set the value of - \'" .. L["RL_CHECKBUTTON_NEED_TANKER_MSG"] .. "\'";
+	RL_CHECKBUTTON_NEED_DPS_TOOLTIP = "Set the value of - \'" .. L["RL_CHECKBUTTON_NEED_DPS_MSG"] .. "\'";
 	RL_CHECKBUTTON_LANGUAGE_TOOLTIP = "Set the value of - \'" .. L["RL_CHECKBUTTON_LANGUAGE_MSG"] .. "\'";
 	RL_CHECKBUTTON_USE_SDBM_TOOLTIP = "Set the value of - \'" .. L["RL_CHECKBUTTON_USE_SDBM_MSG"] .. "\'";
 };
@@ -252,6 +254,7 @@ RL_MESSAGE_KOR = {
 
 	RL_CHECKBUTTON_NEED_HEALER_MSG = "힐러가 레이드에 필요하면 체크해주세요.";
 	RL_CHECKBUTTON_NEED_TANKER_MSG = "탱커가 레이드에 필요하면 체크해주세요.";
+	RL_CHECKBUTTON_NEED_DPS_MSG = "딜러가 레이드에 필요하면 체크해주세요.";
 	RL_CHECKBUTTON_LANGUAGE_MSG = "한글로 공대 명령을 사용할 경우 체크해주세요.";
 	RL_CHECKBUTTON_USE_SDBM_MSG = "자체 내장 간편한 DBM을 사용할 격우 체크해주세요.";
 
@@ -341,6 +344,7 @@ RL_MESSAGE_TOOLTIP_KOR = {
  
 	RL_CHECKBUTTON_NEED_HEALER_TOOLTIP = "\'" .. L["RL_CHECKBUTTON_NEED_HEALER_MSG"] .. "\' 를 의미한다.";
 	RL_CHECKBUTTON_NEED_TANKER_TOOLTIP = "\'" .. L["RL_CHECKBUTTON_NEED_TANKER_MSG"] .. "\' 를 의미한다.";
+	RL_CHECKBUTTON_NEED_DPS_TOOLTIP = "\'" .. L["RL_CHECKBUTTON_NEED_DPS_MSG"] .. "\' 를 의미한다.";
 	RL_CHECKBUTTON_LANGUAGE_TOOLTIP = "\'" .. L["RL_CHECKBUTTON_LANGUAGE_MSG"] .. "\' 를 의미한다.";
 	RL_CHECKBUTTON_USE_SDBM_TOOLTIP = "\'" .. L["RL_CHECKBUTTON_USE_SDBM_MSG"] .. "\' 를 의미한다.";
 };

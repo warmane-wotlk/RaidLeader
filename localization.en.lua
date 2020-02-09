@@ -64,25 +64,18 @@ if L then
 	L["RL_BUTTON_SET_HC_NM"] = "HC/NM"
 	L["RL_CHECKBUTTON_NEED_HEALER"] = "Healer"
 	L["RL_CHECKBUTTON_NEED_TANKER"] = "Tanker"
+	L["RL_CHECKBUTTON_NEED_DPS"] = "Dps"	
 	L["RL_BUTTON_CALL_BOSS_FRAME"] = "BOSS"
 
 	-- zone name
-	L["EE10"] = "The Eye of Eternity - 10"
-	L["UL10"] = "Ulduar - 10"
-	L["OS10"] = "The Obsidian Sanctum - 10"
-	L["VOA10"] = "Vault of Archavo - 10"
-	L["NAXX10"] = "Naxxramas - 10"
-	L["TOC10"] = "Trial of the Crusader - 10"
-	L["ICC10"] = "Icecrown Citadel - 10"
-	L["RS10"] = "The Ruby Sanctum - 10"
-	L["EE25"] = "The Eye of Eternity - 25"
-	L["UL25"] = "Ulduar - 25"
-	L["OS25"] = "The Obsidian Sanctum - 25"
-	L["VOA25"] = "Vault of Archavon - 25"
-	L["NAXX25"] = "Naxxramas - 25"
-	L["TOC25"] = "Trial of the Crusader - 25"
-	L["ICC25"] = "Icecrown Citadel - 25"
-	L["RS25"] = "The Ruby Sanctum - 25"
+	L["EE"] = "The Eye of Eternity"
+	L["UL"] = "Ulduar"
+	L["OS"] = "The Obsidian Sanctum"
+	L["VOA"] = "Vault of Archavo"
+	L["NAXX"] = "Naxxramas"
+	L["TOC"] = "Trial of the Crusader"
+	L["ICC"] = "Icecrown Citadel"
+	L["RS"] = "The Ruby Sanctum"
 
 	-- print
 	L["Choose instance first"] = "Choose instance first"
@@ -118,6 +111,7 @@ if L then
 	L["HEALER"] = "Healer"
 	L["DPS"] = "DPS"
 	L["tbd"] = "Unknow"
+	L["enterInstance"] = "Entering %s %s instance"
 
 	-- boss
 	L["Marrowgar"] = "Marrowgar"

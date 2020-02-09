@@ -86,7 +86,7 @@ function RLF_Button_Bloodlust_OnClick(param)
   if ready then
     RLF_Button_RaidWarning_OnClick(param)
   else
-    printf(L.infoBloodlustReady:format(readyTime))
+    RL_INFO(L.infoBloodlustReady:format(readyTime))
   end
 end
 
@@ -163,7 +163,7 @@ function RL_Disable_MSChange_Listen()
 end
 
 local function RL_Expire_MSChange_Timer()
-  printf(L["Expire MS Change Time"])
+  RL_INFO(L["Expire MS Change Time"])
   RL_Disable_MSChange_Listen()
   return true
 end
@@ -184,7 +184,7 @@ end
 local function RL_Clear_MSChange_Info()
   RL_Disable_MSChange_Listen()
 
-  printf(L["Reset MS Change Informations"])
+  RL_INFO(L["Reset MS Change Informations"])
   wipe(mschange_messages)
 end
 
@@ -224,7 +224,7 @@ function RLF_Button_SetHC_NM_OnClick(id)
   local r = RaidLeaderData.recruitInfo
 
   if r.zone == "" then
-    printf(L["Choose instance first"])
+    RL_INFO(L["Choose instance first"])
     return
   end
 
@@ -241,7 +241,7 @@ function RLF_Button_SetHC_NM_OnClick(id)
       SetRaidDifficulty(enDiff.nm25)
     end
   else
-    printf(L["Not In Instance, so just toggle"])
+    RL_INFO(L["Not In Instance, so just toggle"])
     local raid_size= tonumber(string.sub(r.sub, 1, 2))
     if raid_size == 10 then
       if toggle_hc_nm == 1 then 
@@ -263,7 +263,7 @@ end
 
 function RLF_Button_Notify_MT_OT_OnClick(id)
   if RRI_AreTankersInRaid() < RLU_GetRequiredTanks() then
-    printf(L["Please assign tanker with /mt /ma"])
+    RL_INFO(L["Please assign tanker with /mt /ma"])
     return
   end
   
@@ -281,7 +281,7 @@ end
 
 function RLF_Button_SetMT_OT_OnClick(id)
   if UnitInRaid("target") == nil then
-    printf(L["Please choose the target"])
+    RL_INFO(L["Please choose the target"])
     return
   end
 
@@ -291,11 +291,11 @@ function RLF_Button_SetMT_OT_OnClick(id)
   if id == "RL_BUTTON_SET_MT" then
     SetRaidTarget("target", 7);
     SendChatMessage(L["Please type /mt to assign MT"], "WHISPER", GetDefaultLanguage("player"), playerName)
-    printf(L["Please type /mt to assign MT"])
+    RL_INFO(L["Please type /mt to assign MT"])
   elseif id == "RL_BUTTON_SET_OT" then
     SetRaidTarget("target", 6);
     SendChatMessage(L["Please type /ma to assign OT"], "WHISPER", GetDefaultLanguage("player"), playerName)
-    printf(L["Please type /ma to assign OT"])
+    RL_INFO(L["Please type /ma to assign OT"])
   end
 end
 
@@ -333,7 +333,7 @@ end
 function RLF_Button_SetLeader_OnClick()
   if UnitInRaid("target") == nil then
     local RLL = RL_LoadRaidWarningData()
-    printf(RLL["RL_BUTTON_SET_LEADER_MSG"]);
+    RL_INFO(RLL["RL_BUTTON_SET_LEADER_MSG"]);
   else
     PromoteToLeader("target");
   end
@@ -413,14 +413,13 @@ local function _GetRaidFindMessage()
   local reqMembers = ""
   local reqRoles = ""
 
-  if r.needHealer and r.needTanker then
-	  reqRoles = "ALL"
-  elseif r.needHealer then
-	  reqRoles = "HEAL/DPS"
-  elseif r.needTanker then
-	  reqRoles = "TANK/DPS"
-  else
-	  reqRoles = "DPS"
+  if r.needHealer and r.needTanker and r.needDps then   reqRoles = "ALL"
+  elseif r.needHealer and r.needDps then                reqRoles = "HEAL/DPS"
+  elseif r.needTanker and r.needDps then                reqRoles = "TANK/DPS"
+  elseif r.needTanker and r.needHealer then             reqRoles = "TANK/HEAL"
+  elseif r.needTanker then                              reqRoles = "TANK"
+  elseif r.needHealer then                              reqRoles = "HEAL"
+  elseif r.needDps then                                 reqRoles = "DPS"    
   end
 
   if raid_size <= 2 * curr_size then
@@ -484,11 +483,11 @@ function RLF_Button_AutoFlood_OnClick(id)
   if id == "RL_BUTTON_FLOOD_ON" then
     local globalChannelNum = RL_GetGlobalChannelNumber()
     if globalChannelNum == -1 then
-      printf(L["WOW Error! Need to relog!"])
+      RL_INFO(L["WOW Error! Need to relog!"])
     elseif globalChannelNum == 0 then
-      printf(L["Please join global channel and then try again"])
+      RL_INFO(L["Please join global channel and then try again"])
 	  elseif RaidLeaderData.recruitInfo.zone == "" then
-	    printf(L["Please choose the raid instance"])
+	    RL_INFO(L["Please choose the raid instance"])
     else
       RL_GetMyFloodMsg()      
     end
@@ -534,6 +533,8 @@ function RLF_Button_AutoFlood_option_OnClick(id, checked)
 		RaidLeaderData.recruitInfo.needHealer = (checked ~= nil)
 	elseif id == "RL_CHECKBUTTON_NEED_TANKER" then
 		RaidLeaderData.recruitInfo.needTanker = (checked ~= nil)
+  elseif id == "RL_CHECKBUTTON_NEED_DPS" then
+    RaidLeaderData.recruitInfo.needDps = (checked ~= nil)
 	end
 end
 
@@ -567,7 +568,7 @@ end
 
 function RLF_Button_Paladin_Buff_OnClick(id)
   if RRI_AreTankersInRaid() < RLU_GetRequiredTanks() then
-    printf(L["Please assign tanker with /mt /ma"])
+    RL_INFO(L["Please assign tanker with /mt /ma"])
     return
   end
 
