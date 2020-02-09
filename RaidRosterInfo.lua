@@ -68,9 +68,10 @@ function RRI_InitializeRaidRosterInfo()
 
       local role = LibGT:GetUnitRole(unitId)
       if role == nil then role = "tbd" end
+      if role == "caster" or role == "melee" then role = "DPS" end
       local data = { unitId = unitId, guid = guid, subgroup = subgroup, className = className, tanker = tanker, role = role }
 
-      -- print("unitId: " .. unitId .. ", name:" .. data.name .. " , subgroup: " .. data.subgroup .. ", role:" .. data.role .. ", className: " .. data.className .. ", tanker: " .. data.tanker )
+      --print("unitId: " .. unitId .. ", name:" .. tostring(name) .. " , subgroup: " .. subgroup .. ", role:" .. tostring(role) .. ", className: " .. className .. ", tanker: " .. tostring(tanker) )
       g_playersInfo[name] = data
 
       if role == "healer" then
@@ -258,8 +259,9 @@ function RRI_AddDeadRaiderInfo(name)
   end
 
   for n,v in pairs(g_playersInfo) do
+    --print("name: " .. n ..", tanker:" .. tostring(v.tanker) .. ", role: " .. tostring(v.role))
     if n == name then
-      local role = v.tanker and v.tanker or v.role
+      local role = (v.tanker ~= nil and v.tanker ~= "") and v.tanker or v.role
       RRI_UpdateRoleType(v.unitId, n, role, v.className, g_deadRaiderInfo)
       return role, v.className
     end

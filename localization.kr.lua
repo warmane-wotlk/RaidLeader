@@ -108,9 +108,11 @@ if L then
 	L["Put Soul Stone"] = "영석 대상자 선택"
 	L["infoBloodlustReady"] = "피의 욕망이 %d 초 후에 사용가능합니다."
 	L["TANKER"] = "탱커"
+	L["tank"] = "탱커"
 	L["HEALER"] = "힐러"
+	L["healer"] = "힐러"
 	L["DPS"] = "딜러"
-	L["tbd"] = "직업모름"
+	L["tbd"] = "직업"
 	L["enterInstance"] = "%s %s 인스턴스에 들어왔습니다."
 
 	-- boss

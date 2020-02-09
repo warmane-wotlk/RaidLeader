@@ -166,8 +166,9 @@ end
 
 local function RL_DeadListFrame_BuildButtons(self)
   for _, button in pairs(buttonDeadListObj) do
-    if button.frame then button.frame:Hide() end
-    if button.textobj then button.textobj:Hide() end
+    if next(button.frame) then button.frame:Hide() end
+    if next(button.textobj) then button.textobj:Hide() end
+    if next(button.icon) then button.icon:Hide() end
   end
 
   if not next(deadRaidersList) then return end
