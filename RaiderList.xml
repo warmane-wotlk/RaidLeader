@@ -69,7 +69,7 @@
 	</Frame>
 	<Frame name="RL_DeadListFrame" inherits="RL_DialogRaiderList" parent="RL_ZoneFrame">
 		<Size>
-			<AbsDimension x="185" y="70" />
+			<AbsDimension x="195" y="70" />
 		</Size>
 		<Anchors>
 			<Anchor point="TOPLEFT" relativePoint="TOPRIGHT">

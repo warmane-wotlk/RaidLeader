@@ -1,15 +1,31 @@
 local L  = LibStub("AceLocale-3.0"):GetLocale("RaidLeader", true)
 
 local buttonDeadListObj = {}
+local itemPosition = GetLocale() == "koKR" and 17 or 0
 
-local frameSize = { x = 185, y = 70 }
-local buttonSize = { x = 110, y = 23 }
-local ptStart = { x = 118, y = -45 }
+local frameSize = { x = 195-itemPosition, y = 70 }
+local buttonSize = { x = 100, y = 23 }
+local ptStart = { x = 132 - itemPosition, y = -45 }
 
 local ptNext = { dx = buttonSize.x - 2, dy = 0 + buttonSize.y }
 local frameGapY = ptNext.dy
 
 local deadRaidersList = {}
+
+local classTypeIconCoord = {
+  WARRIOR     = {l=0.00, r=0.25, t=0.00, b=0.25},
+  MAGE        = {l=0.25, r=0.50, t=0.00, b=0.25},
+  ROGUE       = {l=0.50, r=0.75, t=0.00, b=0.25},
+  DRUID       = {l=0.75, r=1.00, t=0.00, b=0.25},
+
+  HUNTER      = {l=0.00, r=0.25, t=0.25, b=0.50},
+  SHAMAN      = {l=0.25, r=0.50, t=0.25, b=0.50},
+  PRIEST      = {l=0.50, r=0.75, t=0.25, b=0.50},
+  WARLOCK     = {l=0.75, r=1.00, t=0.25, b=0.50},
+
+  PALADIN     = {l=0.00, r=0.25, t=0.50, b=0.75},
+  DEATHKNIGHT = {l=0.25, r=0.50, t=0.50, b=0.75},
+}
 
 local function RL_RaiderList_CreateButton(frame, buttonObj, id, x, y, callback_OnClick)
   local button = CreateFrame("Button", id, frame, UIPanelButtonTemplate)
@@ -38,8 +54,9 @@ local function RL_RaiderList_CreateButton(frame, buttonObj, id, x, y, callback_O
   ptex:SetAllPoints()
   button:SetPushedTexture(ptex)
 
+  -- text
   local roleText = frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-  roleText:SetPoint("CENTER", frame, "TOPLEFT", x-81, y+2)
+  roleText:SetPoint("LEFT", frame, "TOPLEFT", 15, y+2)
   if buttonObj[id].obj.role and buttonObj[id].obj.role ~= "" then 
     roleText:SetText(L[buttonObj[id].obj.role])
   else
@@ -47,7 +64,20 @@ local function RL_RaiderList_CreateButton(frame, buttonObj, id, x, y, callback_O
   end
   button:SetScript("OnClick", callback_OnClick)
 
-  return button, roleText
+  -- Texture
+  local classIcon = frame:CreateTexture("CLASS_ICON", "OVERLAY")
+  classIcon:SetWidth(20)
+  classIcon:SetHeight(20)
+  local coord = classTypeIconCoord[buttonObj[id].obj.class]
+  if coord then
+    classIcon:SetTexCoord(coord.l, coord.r, coord.t, coord.b)
+  else
+    classIcon:SetTexCoord(0.50, 0.75, 0.5, 0.75)
+  end
+  classIcon:SetPoint("CENTER", frame, "TOPLEFT", 70-itemPosition, y+2)
+  classIcon:SetTexture("Interface\\GLUES\\CHARACTERCREATE\\UI-CHARACTERCREATE-CLASSES")
+
+  return button, roleText, classIcon
 end
 
 local function RL_RaiderList_RaidWarning(msg)
@@ -84,9 +114,18 @@ local function RL_DeadListFrame_AddButtons(self)
      buttonDeadListObj[buttonId].obj = deadRaidersList[i]
      buttonDeadListObj[buttonId].frame:SetText(deadRaidersList[i].name)
      buttonDeadListObj[buttonId].frame:Show()
+     buttonDeadListObj[buttonId].textobj:SetText(L[deadRaidersList[i].role])
+     buttonDeadListObj[buttonId].textobj:Show()
+
+     local coord = classTypeIconCoord[buttonDeadListObj[buttonId].obj.class]
+     if coord then
+       buttonDeadListObj[buttonId].icon:SetTexCoord(coord.l, coord.r, coord.t, coord.b)
+     else
+       buttonDeadListObj[buttonId].icon:SetTexCoord(0.50, 0.75, 0.5, 0.75)
+     end
   else
-     buttonDeadListObj[buttonId] = { frame = {}, textobj = {}, obj = deadRaidersList[i] }
-     buttonDeadListObj[buttonId].frame, buttonDeadListObj[buttonId].textobj = RL_RaiderList_CreateButton(self, buttonDeadListObj, buttonId, x, y, RL_DeadListFrame_Buttons_OnClick)
+     buttonDeadListObj[buttonId] = { frame = {}, textobj = {}, icon = {}, obj = deadRaidersList[i] }
+     buttonDeadListObj[buttonId].frame, buttonDeadListObj[buttonId].textobj, buttonDeadListObj[buttonId].icon = RL_RaiderList_CreateButton(self, buttonDeadListObj, buttonId, x, y, RL_DeadListFrame_Buttons_OnClick)
   end  
 
   fy = fy + frameGapY * (#deadRaidersList - 1 )
@@ -104,7 +143,7 @@ local function RL_DeadListFrame_GetAllDeadRaiders()
 	local total = deadRaiderInfo.totalNum > 10 and 10 or deadRaiderInfo.totalNum
 
 	for i = 1, total do
-		deadRaidersList[i] = { name = deadRaiderInfo.data[orders[i]].name, role = deadRaiderInfo.data[orders[i]].role }
+		deadRaidersList[i] = { name = deadRaiderInfo.data[orders[i]].name, role = deadRaiderInfo.data[orders[i]].role, class = deadRaiderInfo.data[orders[i]].class}
 	end
 end
 
@@ -148,9 +187,16 @@ local function RL_DeadListFrame_BuildButtons(self)
       buttonDeadListObj[buttonId].frame:Show()
       buttonDeadListObj[buttonId].textobj:SetText(L[deadRaidersList[i].role])
       buttonDeadListObj[buttonId].textobj:Show()
+
+      local coord = classTypeIconCoord[buttonDeadListObj[buttonId].obj.class]
+      if coord then
+         buttonDeadListObj[buttonId].icon:SetTexCoord(coord.l, coord.r, coord.t, coord.b)
+      else
+         buttonDeadListObj[buttonId].icon:SetTexCoord(0.50, 0.75, 0.5, 0.75)
+      end      
     else
-      buttonDeadListObj[buttonId] = { frame = {}, textobj = {}, obj = deadRaidersList[i] }
-      buttonDeadListObj[buttonId].frame, buttonDeadListObj[buttonId].textobj = RL_RaiderList_CreateButton(self, buttonDeadListObj, buttonId, x, y, RL_DeadListFrame_Buttons_OnClick)
+      buttonDeadListObj[buttonId] = { frame = {}, textobj = {}, icon = {}, obj = deadRaidersList[i] }
+      buttonDeadListObj[buttonId].frame, buttonDeadListObj[buttonId].textobj, buttonDeadListObj[buttonId].icon = RL_RaiderList_CreateButton(self, buttonDeadListObj, buttonId, x, y, RL_DeadListFrame_Buttons_OnClick)
     end
 
     y = y - ptNext.dy
@@ -172,10 +218,10 @@ function RL_DeadListFrame_AddDeadRaider(name)
     return
   end
 
-  local role = RRI_AddDeadRaiderInfo(name)
+  local role, className = RRI_AddDeadRaiderInfo(name)
 
-  if role then
-    table.insert(deadRaidersList, { name = name, role = role } )
+  if role and className then
+    table.insert(deadRaidersList, { name = name, role = role, class = className} )
     RL_DeadListFrame_AddButtons(RL_DeadListFrame)
   end
 end
@@ -228,6 +274,6 @@ end
 
 function RL_DeadListFrame_Info_ShowDeadRaidersList()
 	for i,v in pairs(deadRaidersList) do
-		RL_INFO(i .. "-" .. v.name .. ", " .. v.role)
+		RL_INFO(i .. "-" .. v.name .. ", " .. v.role .. ", " .. v.class)
 	end
 end

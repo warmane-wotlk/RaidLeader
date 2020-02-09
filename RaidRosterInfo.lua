@@ -24,7 +24,7 @@ local g_deadRaiderInfo = { totalNum=0, numTanker=0, numHealer=0, numDps=0, data=
 local g_resurrectInfo = {}
 
 
-local function RRI_UpdateRoleType(unitId, name, role, playerInfo)
+local function RRI_UpdateRoleType(unitId, name, role, className, playerInfo)
   local roleType = "DPS"
   local roleTypeIdx = ""
   if role == "MAINTANK" or role == "MAINASSIST" or role == "tank" or role == "TANKER" then
@@ -42,7 +42,7 @@ local function RRI_UpdateRoleType(unitId, name, role, playerInfo)
   end
 
   playerInfo.totalNum = playerInfo.totalNum + 1
-  playerInfo.data[roleTypeIdx] = { name = name, id = unitId, role = roleType}
+  playerInfo.data[roleTypeIdx] = { name = name, id = unitId, role = roleType, class = className}
 end
 
 function RRI_InitializeRaidRosterInfo()
@@ -116,17 +116,17 @@ function RRI_GetRaidRosterInfo()
     if name then
       if className == "PALADIN" then
         if subgroup == 5 or ( talentRole == "healer" ) then role = "HEALER" end
-        RRI_UpdateRoleType(unitId, name, role, g_paladinInfo)
+        RRI_UpdateRoleType(unitId, name, role, className, g_paladinInfo)
       elseif className == "DRUID" then
         if subgroup == 5 or ( talentRole == "healer" ) then role = "HEALER" end
-        RRI_UpdateRoleType(unitId, name, role, g_druidInfo)
+        RRI_UpdateRoleType(unitId, name, role, className, g_druidInfo)
       elseif className == "PRIEST" then
         if subgroup == 5 or ( talentRole == "healer" ) then role = "HEALER" end
         local talent = select(3, LibGT:GetTalentTabInfo(unitId, 1))
         if talent and talent >= 51 and role == "HEALER" then  g_raid_has_disc = true end
-        RRI_UpdateRoleType(unitId, name, role, g_priestInfo)
+        RRI_UpdateRoleType(unitId, name, role, className, g_priestInfo)
       elseif className == "WARRIOR" then
-        RRI_UpdateRoleType(unitId, name, role, g_warriorInfo)
+        RRI_UpdateRoleType(unitId, name, role, className, g_warriorInfo)
       end
 
       --print("unitId: " .. unitId .. ", name:" .. name .. ", role:" .. role .. ", class: " .. className)
@@ -246,7 +246,7 @@ function RRI_UpdateAllDeadRaiderInfo()
   for n,v in pairs(g_playersInfo) do
     if UnitIsDeadOrGhost(n) then
       local role = v.tanker and v.tanker or v.role
-      RRI_UpdateRoleType(v.unitId, n, role, g_deadRaiderInfo)
+      RRI_UpdateRoleType(v.unitId, n, role, v.className, g_deadRaiderInfo)
     end
   end
   return g_deadRaiderInfo
@@ -254,18 +254,18 @@ end
 
 function RRI_AddDeadRaiderInfo(name)
   for _,v in pairs(g_deadRaiderInfo.data) do
-    if name == v.name then return nil end
+    if name == v.name then return nil, nil end
   end
 
   for n,v in pairs(g_playersInfo) do
     if n == name then
       local role = v.tanker and v.tanker or v.role
-      RRI_UpdateRoleType(v.unitId, n, role, g_deadRaiderInfo)
-      return role
+      RRI_UpdateRoleType(v.unitId, n, role, v.className, g_deadRaiderInfo)
+      return role, v.className
     end
   end
 
-  return nil
+  return nil, nil
 end
 
 function RRI_ResetResurrectInfo()
@@ -282,7 +282,7 @@ function RRI_SetDruidCRCooldown(name, timestamp)
 end
 
 function RRI_GetNextCRAvailableDruid(destName)
-  if g_druidInfo.data ~= nil and not next(g_druidInfo.data) then return nil end
+  if g_druidInfo.data == nil or not next(g_druidInfo.data) then return nil end
 
   for _, v in pairs(g_druidInfo.data) do
     local CR = g_resurrectInfo[v.name]
@@ -329,17 +329,17 @@ end
 
 -------------------------------------- TEST MODE ----------------------------------------------------
 -- test combat ress
--- do /script RRI_test_build_roaster() 
+-- do /script RRI_test_build_roaster();RRI_test_build_dead()
 -- do /script RL_DeadListFrame_AddDeadRaider("TestName3"), /script RL_DeadListFrame_AddDeadRaider("TestName1"), ...
 -- do /script RL_DeadListFrame_Info_ShowDeadRaidersList()      for who dead
--- do /script RRI_test_show_deadlist()
+-- do /script RRI_test_show_deadlist() or /script RRI_test_build_dead()
 -----------------------------------------------------------------------------------------------------
 function RRI_test_Off_mode()
   testMode = false
 end
 
 function RRI_test_build_roaster()
-  local className = { "PALADIN", "HUNTER", "MAGE", "PRIEST", "DRUID"}
+  local className = { "PALADIN", "HUNTER", "MAGE", "DRUID", "PRIEST", "WARRIOR", "DEATHKNIGHT", "ROGUE", "WARLOCK", "SHAMAN"}
 
   testMode = true
 
@@ -348,12 +348,12 @@ function RRI_test_build_roaster()
     local role = "DPS"
     local name = "TestName"..i
 
-    if i == 3 or i == 7 then tanker = "TANKER"; role = "TANKER" end
+    if i == 6 or i == 7 then tanker = "TANKER"; role = "TANKER" end
     if (i-1)%5+1 == 5 then role = "HEALER" end
 
-    g_playersInfo[name]= { unitId = "raid"..i, guid = "guid"..i, subgroup = (i-1)%5+1, className = className[(i-1)%5+1], tanker = tanker, role = role }
+    g_playersInfo[name]= { unitId = "raid"..i, guid = "guid"..i, subgroup = (i-1)%5+1, className = className[(i-1)%#className+1], tanker = tanker, role = role }
 
-    RL_INFO("[FD] " .. name .. ", " .. role .. ", " .. tostring((i-1)%5+1) .. ", " .. className[(i-1)%5+1] .. ", " .. tostring(tanker) .. ", " .. role)
+    RL_INFO("[FD] " .. name .. ", " .. role .. ", " .. tostring((i-1)%5+1) .. ", " .. className[(i-1)%#className+1] .. ", " .. tostring(tanker) .. ", " .. role)
   end
 end
 
@@ -362,5 +362,12 @@ function RRI_test_show_deadlist()
 
   for t,v in pairs(g_deadRaiderInfo.data) do
     RL_INFO("name: " .. v.name .. ", role: " .. v.role )
+  end
+end
+
+function RRI_test_build_dead()
+  for i=1, 10 do
+    local name = "TestName" .. i
+    RL_DeadListFrame_AddDeadRaider(name)
   end
 end
