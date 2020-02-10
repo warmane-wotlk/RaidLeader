@@ -19,10 +19,32 @@ local g_paladinInfo  = {}
 local g_druidInfo    = {}
 local g_priestInfo   = {}
 local g_warriorInfo  = {}
-local g_bloodlustInfo = { ready = true, timestamp = 0 }
+local g_warlockInfo  = {}
+
+
 local g_deadRaiderInfo = { totalNum=0, numTanker=0, numHealer=0, numDps=0, data={} }
-local g_resurrectInfo = {}
+
+local g_bloodlustInfo  = { ready = true, timestamp = 0 }
+local g_soulstoneInfo  = {}
+local g_resurrectInfo  = {}
 local bRaidRosterInitialize = false
+
+function RRI_SaveVariablesData()
+  RL_INFO("Data is saved.")
+  RaidLeaderData.cooldown.bloodlust = g_bloodlustInfo
+  RaidLeaderData.cooldown.soulstone = g_soulstoneInfo
+  RaidLeaderData.cooldown.resurrect = g_resurrectInfo
+end
+
+function RRI_LoadSavedVariablesData()
+  RL_INFO("Data is back.")
+  if RaidLeaderData.cooldown == nil then
+    RaidLeaderData.cooldown = { resurrect = {}, soulstone = {}, bloodlust = { ready = true, timestamp = 0 } }
+  end
+  g_bloodlustInfo = RaidLeaderData.cooldown.bloodlust
+  g_soulstoneInfo = RaidLeaderData.cooldown.soulstone
+  g_resurrectInfo = RaidLeaderData.cooldown.resurrect
+end
 
 local function RRI_UpdateRoleType(unitId, name, role, className, playerInfo)
   local roleType = "DPS"
@@ -42,7 +64,7 @@ local function RRI_UpdateRoleType(unitId, name, role, className, playerInfo)
   end
 
   playerInfo.totalNum = playerInfo.totalNum + 1
-  playerInfo.data[roleTypeIdx] = { name = name, id = unitId, role = roleType, class = className}
+  playerInfo.data[roleTypeIdx] = { name = name, id = unitId, role = roleType, className = className}
 end
 
 local function RRI_InitializeRaidRosterInfo()
@@ -97,17 +119,15 @@ local function RRI_GetRaidRosterInfo()
   wipe(g_druidInfo)
   wipe(g_priestInfo)
   wipe(g_warriorInfo)
+  wipe(g_warlockInfo)
+
   g_raid_has_disc = false
 
   g_paladinInfo = { totalNum=0, numTanker=0, numHealer=0, numDps=0, data={} }
   g_druidInfo   = { totalNum=0, numTanker=0, numHealer=0, numDps=0, data={} }
   g_priestInfo  = { totalNum=0, numTanker=0, numHealer=0, numDps=0, data={} }
-  g_warriorInfo = { totalNum=0, numTanker=0, numHealer=0, numDps=0, data={} }  
-
-  local isRaid  = UnitInRaid("player")
-
-  local raid_size = isRaid and GetNumRaidMembers() or GetNumPartyMembers() + 1
-  local prefix_unitId = isRaid and "raid" or "party"
+  g_warriorInfo = { totalNum=0, numTanker=0, numHealer=0, numDps=0, data={} }
+  g_warlockInfo = { totalNum=0, numTanker=0, numHealer=0, numDps=0, data={} }
 
   for name, player in pairs(g_playersInfo) do    
     local unitId     = player.unitId
@@ -132,6 +152,8 @@ local function RRI_GetRaidRosterInfo()
         RRI_UpdateRoleType(unitId, name, role, className, g_priestInfo)
       elseif className == "WARRIOR" then
         RRI_UpdateRoleType(unitId, name, role, className, g_warriorInfo)
+      elseif className == "WARLOCK" then
+        RRI_UpdateRoleType(unitId, name, role, className, g_warlockInfo)
       end
 
       --print("unitId: " .. unitId .. ", name:" .. name .. ", role:" .. role .. ", class: " .. className)
@@ -166,8 +188,21 @@ function RRI_GetDruidInfo()
 end
 
 function RRI_GetHealersInfo()
-  return g_healersInfo;
+  return g_healersInfo
 end
+
+function RRI_GetFoundTankInfo()
+  return g_foundTanks
+end
+
+function RRI_GetAssignedTankInfo()
+  return g_assigedTanks
+end
+
+function RRI_GetRaidPlayerInfo()
+  return g_playersInfo
+end
+
 
 function RRI_Get2NonPallyHealersForFestergut()
   local healers = {}
@@ -281,10 +316,14 @@ function RRI_AddDeadRaiderInfo(name)
   return nil, nil
 end
 
-function RRI_ResetResurrectInfo()
+function RRI_ResetCombatBasedInfo()
   wipe(g_resurrectInfo)
+  wipe(g_soulstoneInfo)
+  g_bloodlustInfo.ready = true
+  g_bloodlustInfo.timestamp = 0
 end
 
+------- combat ress
 function RRI_SetDruidCRCooldown(name, timestamp)
   for _, v in pairs(g_druidInfo.data) do
     if v.name == name then
@@ -300,9 +339,9 @@ function RRI_GetNextCRAvailableDruid(destName)
   for _, v in pairs(g_druidInfo.data) do
     local CR = g_resurrectInfo[v.name]
     if CR == nil or ( CR.ready and 
-      ( not CR.called or ( CR.called and CR.destName == destName )) ) then
+      ( not CR.called or ( CR.called and (CR.destName == nil or CR.destName == "" or CR.destName == destName))) ) then
       if UnitIsDeadOrGhost(v.name) == nil and UnitIsConnected(v.name) then
-        g_resurrectInfo[v.name] = { name = name, ready = true, timestamp = 0, called = true, destName = destName }
+        g_resurrectInfo[v.name] = { name = v.name, ready = true, timestamp = 0, called = true, destName = destName }
         return v.name
       end
     end
@@ -322,6 +361,46 @@ function RRI_UpdateDruidCRCooldown(timestamp)
   end  
 end
 
+------- soul stone
+function RRI_SetWarlockSSCooldown(name, timestamp)
+  for _, v in pairs(g_warlockInfo.data) do
+    if v.name == name then
+      g_soulstoneInfo[name] = { name = name, ready = false, timestamp = timestamp, called = false, destName = "" }
+      break
+    end
+  end
+end
+
+function RRI_GetNextAvailableSSWarlock(destName)
+  if g_warlockInfo.data == nil or not next(g_warlockInfo.data) then return nil end
+
+  for _, v in pairs(g_warlockInfo.data) do
+    local SS = g_soulstoneInfo[v.name]
+    if SS == nil or ( SS.ready and
+      ( not SS.called or ( SS.called and (SS.destName == nil or SS.destName == "" or SS.destName == destName))) ) then
+      if UnitIsDeadOrGhost(v.name) == nil and UnitIsConnected(v.name) then
+        g_soulstoneInfo[v.name] = { name = v.name, ready = true, timestamp = 0, called = true, destName = destName }
+        return v.name
+      end
+    end
+  end
+  return nil
+end
+
+function RRI_UpdateWarlockSSCooldown(timestamp)
+  if not next(g_soulstoneInfo) then return nil end
+
+  local COOLDOWN_15_MINS = 900
+  for _, SS in pairs(g_soulstoneInfo) do
+    if SS and SS.ready == false and (timestamp - SS.timestamp) > COOLDOWN_15_MINS then
+      SS.ready = true
+      SS.timestamp = 0
+    end
+  end
+end
+
+
+------- bloodlust
 function RRI_SetBloodlustUsed(timestamp)
   g_bloodlustInfo = { ready = false, timestamp = timestamp }
 end
@@ -374,7 +453,7 @@ function RRI_test_show_deadlist()
   RL_INFO("total/tank/healer/dps - " .. g_deadRaiderInfo.totalNum .. "/".. g_deadRaiderInfo.numTanker .. "/".. g_deadRaiderInfo.numHealer .. "/" .. g_deadRaiderInfo.numDps)
 
   for t,v in pairs(g_deadRaiderInfo.data) do
-    RL_INFO("name: " .. v.name .. ", role: " .. v.role )
+    RL_INFO("name: " .. v.name .. ", role: " .. v.role .. ", class: " .. v.className)
   end
 end
 
@@ -388,5 +467,17 @@ end
 function RRI_test_show_playerinfo()
   for n,v in pairs(g_playersInfo) do
     RL_INFO("RosterInfo: " .. tostring(n) .. " [" .. v.subgroup .. "/" ..v.className .."]" .. " ,role:" .. tostring(v.role) .. ", tank: " .. tostring(v.tanker) )
+  end
+end
+
+function RRI_test_show_resurrect_info()
+  for n,v in pairs(g_resurrectInfo) do
+    RL_INFO(n .. ", ready: " .. tostring(v.ready) .. ", timestamp: " .. tostring(v.timestamp) .. ", called: " .. tostring(v.called) .. ", destName: " .. tostring(v.destName))
+  end
+end
+
+function RRI_test_show_soulstone_info()
+  for n,v in pairs(g_soulstoneInfo) do
+    RL_INFO(n .. ", ready: " .. tostring(v.ready) .. ", timestamp: " .. tostring(v.timestamp) .. ", called: " .. tostring(v.called) .. ", destName: " .. tostring(v.destName))
   end
 end

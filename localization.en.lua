@@ -114,6 +114,8 @@ if L then
 	L["DPS"] = "DPS"
 	L["tbd"] = "Unknow"
 	L["enterInstance"] = "Entering %s %s instance"
+	L["NoWarlockToDoSS"] = "No Warlock can do Soul Stone."
+	L["NodruidCombatResurrect"] = "No druid can do a combat resurrect."
 
 	-- boss
 	L["Marrowgar"] = "Marrowgar"
@@ -131,6 +133,7 @@ if L then
 
 	L["ALL"] = "All"
 	L["BOSS"] = "Boss"
+	L["RESET"] = "RESET"
 
 	-- Naxxramas
 	L["Anub\'Rekhan"] = "Anub\'Rekhan"

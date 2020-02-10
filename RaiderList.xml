@@ -32,12 +32,12 @@
 			<Layer level="OVERLAY">
 				<FontString name="$parent_Header" inherits="GameFontHighlight" text="Title">
 					<Size>
-						<AbsDimension x="140" y="13" />
+						<AbsDimension x="145" y="13" />
 					</Size>
 					<Anchors>
 						<Anchor point="TOP">
 							<Offset>
-								<AbsDimension x="0" y="-14" />
+								<AbsDimension x="10" y="-14" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -84,7 +84,7 @@
 			</OnLoad>
 		</Scripts>
 		<Frames>
-			<Button name="RL_DeadListFrame_Button_CLOSE" inherits="UIPanelCloseButton">
+			<Button name="RL_DeadListFrame_Button_CLOSE" inherits="UIPanelCloseButton" parent="RL_DeadListFrame">
 				<Anchors>
 					<Anchor point="TOPRIGHT">
 						<Offset>
@@ -98,6 +98,23 @@
 					</OnClick>
 				</Scripts>
 			</Button>
+			<Button name="RL_DeadListFrame_Button_RESET" inherits="UIPanelButtonTemplate" parent="RL_DeadListFrame" text="RESET">
+				<Size>
+					<AbsDimension x="46" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="11" y="-10" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RL_DeadListFrame_Refresh();
+					</OnClick>
+				</Scripts>
+			</Button>
 		</Frames>
 	</Frame>
 	<Frame name="RL_SoulStoneFrame" inherits="RL_DialogRaiderList">
@@ -105,9 +122,9 @@
 			<AbsDimension x="227" y="287" />
 		</Size>
 		<Anchors>
-			<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" x="298" y="215">
+			<Anchor point="CENTER" relativePoint="CENTER">
 				<offset>
-					<AbsDimension x="5" y="5" />
+					<AbsDimension x="300" y="0" />
 				</offset>
 			</Anchor>
 		</Anchors>

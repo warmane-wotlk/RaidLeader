@@ -6,6 +6,7 @@ RaidLeaderData = {
   useSDBM     = false;  
   instance    = { inside  = false, zone = "", sub = "" };
 	recruitInfo = { zone = "", sub = "", zoneId = 0, gear = "5.0k+", needHealer = true, needTanker = true, needDps = true };
+  cooldown    = { resurrect = {}, soulstone = {}, bloodlust = { ready = true, timestamp = 0 } }
 };
 
 

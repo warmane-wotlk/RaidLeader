@@ -114,6 +114,8 @@ if L then
 	L["DPS"] = "딜러"
 	L["tbd"] = "직업"
 	L["enterInstance"] = "%s %s 인스턴스에 들어왔습니다."
+	L["NoWarlockToDoSS"] = "영석을 사용할 흑마법사가 없습니다."
+	L["NodruidCombatResurrect"] = "전투 부활을 할 수 있는 드루이드가 없습니다."
 
 	-- boss
 	L["Marrowgar"] = "매로우"
@@ -131,6 +133,7 @@ if L then
 
 	L["ALL"] = "모두"
 	L["BOSS"] = "보스"
+	L["RESET"] = "갱신"
 
 	-- Naxxramas
 	L["Anub\'Rekhan"] = "아눕레칸"

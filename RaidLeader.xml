@@ -771,7 +771,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						RLF_Button_RaidWarning_OnClick(self:GetName());
+						RLF_Button_SoulStone_OnClick(self:GetName());
 					</OnClick>
 					<OnEnter>
 						RLF_Button_Show_ToolTip(self:GetName());

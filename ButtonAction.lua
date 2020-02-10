@@ -573,7 +573,12 @@ function RLF_Button_Paladin_Buff_OnClick(id)
   end
 
   -- Get raid info
-  RRI_UpdateRaidRosterInfo(false)
+  RRI_UpdateRaidRosterInfo(true)
   local buffMsg = Buff_Get_Paladin_Orders()
   RLF_Button_RaidWarning_OnClick(buffMsg)
 end
+
+function RLF_Button_SoulStone_OnClick()
+  RL_SoulStoneFrame_Toggle()
+end
+

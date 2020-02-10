@@ -120,7 +120,7 @@ RL_MESSAGE_ENG = {
 	wispGasSpore = "You got the Gas Spore, move to the player({rt%d}) in the %s position.";
 	warningGasSpore = "Gas Spore!!! Everyone move to the one having Mark.";
 	druidCombatResurrect = "%s do a COMBAT RESURRECT to %s";
-	NodruidCombatResurrect = "No druid can do a combat resurrect.";
+	infoSoulstone = "%s put the Soul Stone to %s";
 
 	left = "LEFT";
 	tanker = "TANKER";
@@ -275,7 +275,7 @@ RL_MESSAGE_KOR = {
 	wispGasSpore = "가스포자를 가졌습니다. {rt%d}마크를 가진 플레이어의 %s 위치로 빨리 가세요.";
 	warningGasSpore = "가스포자!! 다음의 마크를 가진 플레이어에게 빨리 가세요.";
 	druidCombatResurrect = "%s님, 전투 부활 %s님에게 해주세요.";
-	NodruidCombatResurrect = "전투 부활을 할 수 있는 드루이드가 없습니다.";
+	infoSoulstone = "%s님, %s님에게 영석걸어주세요.";
 
 	left = "왼쪽";
 	tanker = "탱커";

@@ -30,6 +30,7 @@ local function RL_Expire_Cooldown_Timer()
   local timestamp = time()
   RRI_UpdateDruidCRCooldown(timestamp)
   RRI_UpdateBloodlustTime(timestamp)
+  RRI_UpdateWarlockSSCooldown(timestamp)
   return false
 end
 
@@ -39,8 +40,12 @@ local function RLF_COMBAT_LOG_EVENT_UNFILTERED(timestamp, eventType, sourceGUID,
 
   if eventType == "SPELL_RESURRECT" and spellID == 48477 then
     RRI_SetDruidCRCooldown(sourceName, timestamp)
-  elseif eventType == "SPELL_AURA_APPLIED" and spellID == 2825 then
-    RRI_SetBloodlustUsed(timestamp)
+  elseif eventType == "SPELL_AURA_APPLIED" then
+      if spellID == 2825 then
+          RRI_SetBloodlustUsed(timestamp)
+      elseif spellID == 47883 then
+          RRI_SetWarlockSSCooldown(sourceName, timestamp)
+      end
   elseif eventType == "UNIT_DIED" then
     RL_DeadListFrame_AddDeadRaider(destName)
   end
@@ -67,6 +72,8 @@ local function RLF_OnEvent(frame, event, ...)
     RaidLeaderData.instance.inside = false
     RaidLeaderData.version = GetAddOnMetadata("RaidLeader", "version")
 
+    RRI_LoadSavedVariablesData()
+
     frame:UnregisterEvent("ADDON_LOADED")
     frame.ADDON_LOADED = nil
   elseif event == "PLAYER_ENTERING_WORLD" then
@@ -75,11 +82,16 @@ local function RLF_OnEvent(frame, event, ...)
 
     timerCooldown = RL_set_timer(1, RL_Expire_Cooldown_Timer, true)
 
-    RRI_UpdateRaidRosterInfo(true)
+    if UnitInRaid("player") then
+      RRI_UpdateRaidRosterInfo(true)
+    end
 
     frame:UnregisterEvent("PLAYER_ENTERING_WORLD")
     frame.PLAYER_ENTERING_WORLD = nil
+  elseif event == "PLAYER_LOGOUT" then
+    RRI_SaveVariablesData()
   elseif event == "RAID_ROSTER_UPDATE" then
+    --RL_INFO("RAID_ROSTER_UPDATE")
     if UnitInRaid("player") then
        RRI_UpdateRaidRosterInfo(true)
     end
@@ -101,7 +113,7 @@ local function RLF_OnEvent(frame, event, ...)
         UIDropDownMenu_SetText(RaidLeader_Zone_DropDownMenu, r.zone .. r.sub)
         RL_Zone_Reflesh_GUI()
 
-        RRI_ResetResurrectInfo()
+        RRI_ResetCombatBasedInfo()
       end
     else
         RLU_SetIsInstance(false)
@@ -137,6 +149,7 @@ function RLF_OnLoad(frame)
   frame:RegisterEvent("ADDON_LOADED")         -- Fired when saved variables are loaded
   frame:RegisterEvent("PLAYER_ENTERING_WORLD")
   frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+  frame:RegisterEvent("PLAYER_LOGOUT")
   frame:SetScript("OnEvent", RLF_OnEvent)
 end
 
