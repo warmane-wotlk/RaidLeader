@@ -108,6 +108,8 @@ if L then
 	L["Put Soul Stone"] = "영석 대상자 선택"
 	L["infoBloodlustReady"] = "피의 욕망이 %d 초 후에 사용가능합니다."
 	L["TANKER"] = "탱커"
+	L["MAINTANK"] = "탱커"
+	L["MAINASSIST"] = "탱커"
 	L["tank"] = "탱커"
 	L["HEALER"] = "힐러"
 	L["healer"] = "힐러"

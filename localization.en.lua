@@ -108,6 +108,8 @@ if L then
 	L["Put Soul Stone"] = "Put Soul Stone"
 	L["infoBloodlustReady"] = "Bloodlust will be ready after %d sec."
 	L["TANKER"] = "Tanker"
+	L["MAINTANK"] = "Tanker"
+	L["MAINASSIST"] = "Tanker"
 	L["tank"] = "Tanker"
 	L["HEALER"] = "Healer"
     L["healer"] = "Healer"
