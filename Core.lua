@@ -54,8 +54,9 @@ function RLU_GetRequiredTanks()
   return 1
 end
 
+-- aidLeaderData.instance.inside info is not accurate.
 function RLU_IsInstance()
-  return RaidLeaderData.instance.inside
+  return select(2, IsInInstance()) == "raid"
 end
 
 function RLU_SetIsInstance(yes)

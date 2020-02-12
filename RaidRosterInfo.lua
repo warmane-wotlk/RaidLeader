@@ -465,8 +465,10 @@ function RRI_test_build_dead()
 end
 
 function RRI_test_show_playerinfo()
+  local i = 1
   for n,v in pairs(g_playersInfo) do
-    RL_INFO("RosterInfo: " .. tostring(n) .. " [" .. v.subgroup .. "/" ..v.className .."]" .. " ,role:" .. tostring(v.role) .. ", tank: " .. tostring(v.tanker) )
+    RL_INFO("RosterInfo[" .. i .. "]".. tostring(n) .. " [" .. v.subgroup .. "/" ..v.className .."]" .. " ,role:" .. tostring(v.role) .. ", tank: " .. tostring(v.tanker) )
+    i = i + 1
   end
 end
 

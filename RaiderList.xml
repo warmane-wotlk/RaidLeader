@@ -119,7 +119,7 @@
 	</Frame>
 	<Frame name="RL_SoulStoneFrame" inherits="RL_DialogRaiderList">
 		<Size>
-			<AbsDimension x="227" y="287" />
+			<AbsDimension x="195" y="70" />
 		</Size>
 		<Anchors>
 			<Anchor point="CENTER" relativePoint="CENTER">

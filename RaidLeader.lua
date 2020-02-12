@@ -77,7 +77,8 @@ local function RLF_OnEvent(frame, event, ...)
     frame:UnregisterEvent("ADDON_LOADED")
     frame.ADDON_LOADED = nil
   elseif event == "PLAYER_ENTERING_WORLD" then
-    frame:RegisterEvent("RAID_ROSTER_UPDATE")
+    frame:RegisterEvent("PARTY_MEMBERS_CHANGED")
+    frame:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
     frame:RegisterEvent("WORLD_MAP_UPDATE")
 
     timerCooldown = RL_set_timer(1, RL_Expire_Cooldown_Timer, true)
@@ -90,8 +91,8 @@ local function RLF_OnEvent(frame, event, ...)
     frame.PLAYER_ENTERING_WORLD = nil
   elseif event == "PLAYER_LOGOUT" then
     RRI_SaveVariablesData()
-  elseif event == "RAID_ROSTER_UPDATE" then
-    --RL_INFO("RAID_ROSTER_UPDATE")
+  elseif event == "ACTIVE_TALENT_GROUP_CHANGED" or event == "PARTY_MEMBERS_CHANGED" then
+    --RL_INFO(event)
     if UnitInRaid("player") then
        RRI_UpdateRaidRosterInfo(true)
     end
@@ -104,6 +105,8 @@ local function RLF_OnEvent(frame, event, ...)
         previousInstanceId = instancdId
         RLU_UpdateInstanceInfo()
         local zone, sub = RLU_GetCurrentInstanceInfo()
+
+        if zone == nil or zone == "unknown" then return end
         r.zone = zone
         r.sub  = sub
         r.zoneId = RLU_GetZoneId(r.zone)
