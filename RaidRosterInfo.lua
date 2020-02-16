@@ -325,6 +325,8 @@ end
 
 ------- combat ress
 function RRI_SetDruidCRCooldown(name, timestamp)
+  if g_druidInfo.data == nil or not next(g_druidInfo.data) then return end
+
   for _, v in pairs(g_druidInfo.data) do
     if v.name == name then
       g_resurrectInfo[name] = { name = name, ready = false, timestamp = timestamp, called = false, destName = "" }
@@ -350,7 +352,7 @@ function RRI_GetNextCRAvailableDruid(destName)
 end
 
 function RRI_UpdateDruidCRCooldown(timestamp)
-  if not next(g_resurrectInfo) then return nil end
+  if not next(g_resurrectInfo) then return end
 
   local COOLDOWN_10_MINS = 600
   for _, CR in pairs(g_resurrectInfo) do
@@ -363,6 +365,8 @@ end
 
 ------- soul stone
 function RRI_SetWarlockSSCooldown(name, timestamp)
+  if g_warlockInfo.data == nil or not next(g_warlockInfo.data) then return end
+
   for _, v in pairs(g_warlockInfo.data) do
     if v.name == name then
       g_soulstoneInfo[name] = { name = name, ready = false, timestamp = timestamp, called = false, destName = "" }
@@ -388,7 +392,7 @@ function RRI_GetNextAvailableSSWarlock(destName)
 end
 
 function RRI_UpdateWarlockSSCooldown(timestamp)
-  if not next(g_soulstoneInfo) then return nil end
+  if not next(g_soulstoneInfo) then return end
 
   local COOLDOWN_15_MINS = 900
   for _, SS in pairs(g_soulstoneInfo) do
