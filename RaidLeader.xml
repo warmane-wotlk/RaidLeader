@@ -2,7 +2,7 @@
 	<FontFamily />
 	<Frame name="RaidLeader_Frame" parent="UIParent" toplevel="true" movable="true" frameStrata="HIGH" id="1" enableMouse="true">
 		<Size>
-			<AbsDimension x="290" y="475" />
+			<AbsDimension x="290" y="350" />
 		</Size>
 		<Anchors>
 			<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-532" y="173">
@@ -73,7 +73,7 @@
 					</Size>
 					<Anchors>
 						<Anchor point="BOTTOM">
-							<Offset x="50" y="239" />
+							<Offset x="50" y="114" />
 						</Anchor>
 					</Anchors>
 				</Texture>				
