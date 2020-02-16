@@ -222,10 +222,10 @@ RL_ZONE_MSG_ENG["ICC"] = {
 	RL_ZONE_ICC_FESTERGUT_AGGRO_MSG = "The second tank must taunt at 8 stacks. Use Hand of Salvation on the second tanker";
 	RL_ZONE_ICC_FESTERGUT_NO_SPORE_MSG = "Ignore gas spore. Just DPS.";
 
-	RL_ZONE_ICC_ROTFACE_READY_MSG = "원딜/힐러님들 산개해서 공격/힐하시고, 녹쪽 대상자는 바로 부탱에게 가서 녹쫄 합쳐주세요.";
+	RL_ZONE_ICC_ROTFACE_READY_MSG = "RDPS/Healers attack or heal with max distance.\nMutated Infected player moves to OT to merge it.";
 	RL_ZONE_ICC_ROTFACE_SPREAD_MSG = "RDPS/Healers attack or heal with max distance.";
 	RL_ZONE_ICC_ROTFACE_OOZE_MSG = "Mutated Infected player moves to OT to merge it.";
-	RL_ZONE_ICC_ROTFACE_ACID_MSG = "Don\'t stand on the ooze flood";
+	RL_ZONE_ICC_ROTFACE_ACID_MSG = "Don\'t stand on the acid flood";
 	RL_ZONE_ICC_ROTFACE_RUN_MSG = "The Big Ooze explode soon, please move to the wall.";
 
 	RL_ZONE_ICC_PROFESSOR_READY_MSG = "Remember this, Together on Green Ooze, Run away from Red Ooze.";
