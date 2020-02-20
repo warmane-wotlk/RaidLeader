@@ -6,9 +6,68 @@ RaidLeaderData = {
   useSDBM     = false;  
   instance    = { inside  = false, zone = "", sub = "" };
 	recruitInfo = { zone = "", sub = "", zoneId = 0, gear = "5.0k+", needHealer = true, needTanker = true, needDps = true };
-  cooldown    = { resurrect = {}, soulstone = {}, bloodlust = { ready = true, timestamp = 0 } }
+  cooldown    = { resurrect = {}, soulstone = {}, bloodlust = { ready = true, timestamp = 0 } };
+  msChangeInfo= {}
 };
 
+function RLU_InitializeData()
+  -- always disable
+  RaidLeaderData.useSDBM = false
+
+  if RaidLeaderData.instance == nil then
+    RaidLeaderData.instance = { inside  = false, zone = "", sub = "" }
+  end
+  RaidLeaderData.instance.inside = false
+  RaidLeaderData.version = GetAddOnMetadata("RaidLeader", "version")
+
+  if RaidLeaderData.msChangeInfo == nil then
+    RaidLeaderData.msChangeInfo = {}
+  end
+
+  if RaidLeaderData.recruitInfo == nil then
+    RaidLeaderData.recruitInfo = { zone = "", sub = "", zoneId = 0, gear = "5.0k+", needHealer = true, needTanker = true, needDps = true }
+  end
+
+  if RaidLeaderData.cooldown == nil then
+    RaidLeaderData.cooldown = { resurrect = {}, soulstone = {}, bloodlust = { ready = true, timestamp = 0 } }
+  end  
+end
+
+function RLU_tableMerge(t1, t2)
+    for k,v in pairs(t2) do
+        if type(v) == "table" then
+            if type(t1[k] or false) == "table" then
+                RLU_tableMerge(t1[k] or {}, t2[k] or {})
+            else
+                t1[k] = v
+            end
+        else
+            t1[k] = v
+        end
+    end
+    return t1
+end
+
+
+function RLU_SaveMsChangeInfo(data)
+  local raidName = RaidLeaderData.instance.zone .. RaidLeaderData.instance.sub
+  RaidLeaderData.msChangeInfo[raidName] = {timestamp=time(), data=data}
+end
+
+function RLU_LoadMsChangeInfo()
+  local raidName = RaidLeaderData.instance.zone .. RaidLeaderData.instance.sub
+
+  if RaidLeaderData.msChangeInfo[raidName] then 
+    local msChangeInfo = RaidLeaderData.msChangeInfo[raidName]
+    local TIME_12HOURS = 60*60*12
+
+    if time() - msChangeInfo.timestamp <= TIME_12HOURS then
+      return msChangeInfo.data
+    end
+  end
+  
+  return {}
+end
 
 
 -- Northrend Raids
@@ -161,5 +220,14 @@ function RLF_Button_SetText_OnLoad(self, param)
   self:SetText(L[param])
 end
 
+function RLU_DumpTable(tableVariable)
+  for t, v in pairs(tableVariable) do
+    if type(v) == "table" then
+      RLU_DumpTable(v)
+    else
+      RL_INFO(t .. "->" .. v)
+    end
+  end
+end
 -- utility
 function RL_INFO(...) SELECTED_CHAT_FRAME:AddMessage('|cff0061ff[RL]: '..format(...)) end

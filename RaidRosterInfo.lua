@@ -30,17 +30,12 @@ local g_resurrectInfo  = {}
 local bRaidRosterInitialize = false
 
 function RRI_SaveVariablesData()
-  RL_INFO("Data is saved.")
   RaidLeaderData.cooldown.bloodlust = g_bloodlustInfo
   RaidLeaderData.cooldown.soulstone = g_soulstoneInfo
   RaidLeaderData.cooldown.resurrect = g_resurrectInfo
 end
 
 function RRI_LoadSavedVariablesData()
-  RL_INFO("Data is back.")
-  if RaidLeaderData.cooldown == nil then
-    RaidLeaderData.cooldown = { resurrect = {}, soulstone = {}, bloodlust = { ready = true, timestamp = 0 } }
-  end
   g_bloodlustInfo = RaidLeaderData.cooldown.bloodlust
   g_soulstoneInfo = RaidLeaderData.cooldown.soulstone
   g_resurrectInfo = RaidLeaderData.cooldown.resurrect

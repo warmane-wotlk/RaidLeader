@@ -2,6 +2,7 @@ local L  = LibStub("AceLocale-3.0"):GetLocale("RaidLeader", true)
 
 local previousInstanceId = 0
 local timerCooldown = {}
+local lastRaidMembers = 0
 
 function RLF_Main_Toggle()
   if not RaidLeader_Frame:IsVisible() then
@@ -54,6 +55,8 @@ end
 local function RLF_OnEvent(frame, event, ...)
   -- RL_INFO(event .. ", " .. GetCurrentMapAreaID() .. ", arg1: " .. tostring(arg1))
   if event == "ADDON_LOADED" and ... == "RaidLeader" then
+    RLU_InitializeData()
+
     local r = RaidLeaderData.recruitInfo
     UIDropDownMenu_SetText(RaidLeader_Gear_DropDownMenu, r.gear)
     UIDropDownMenu_SetText(RaidLeader_Zone_DropDownMenu, r.zone .. r.sub)
@@ -64,13 +67,8 @@ local function RLF_OnEvent(frame, event, ...)
     RL_CHECKBUTTON_NEED_TANKER:SetChecked(r.needTanker)
     RL_CHECKBUTTON_NEED_DPS:SetChecked(r.needDps)
 
+    RaidLeaderData.useSDBM = false
     SDBM_UseDBM(RaidLeaderData.useSDBM)
-
-    if RaidLeaderData.instance == nil then
-      RaidLeaderData.instance = { inside  = false, zone = "", sub = "" }
-    end
-    RaidLeaderData.instance.inside = false
-    RaidLeaderData.version = GetAddOnMetadata("RaidLeader", "version")
 
     RRI_LoadSavedVariablesData()
 
@@ -87,15 +85,27 @@ local function RLF_OnEvent(frame, event, ...)
       RRI_UpdateRaidRosterInfo(true)
     end
 
+    -- change language to common language
+    ChatFrame1EditBox.language=GetDefaultLanguage("player")
+
     frame:UnregisterEvent("PLAYER_ENTERING_WORLD")
     frame.PLAYER_ENTERING_WORLD = nil
   elseif event == "PLAYER_LOGOUT" then
     RRI_SaveVariablesData()
-  elseif event == "ACTIVE_TALENT_GROUP_CHANGED" or event == "PARTY_MEMBERS_CHANGED" then
+  elseif event == "ACTIVE_TALENT_GROUP_CHANGED" then
     --RL_INFO(event)
     if UnitInRaid("player") then
        RRI_UpdateRaidRosterInfo(true)
     end
+  elseif event == "PARTY_MEMBERS_CHANGED" then
+    --RL_INFO(event)
+    local isRaid  = UnitInRaid("player")
+    local curr_size = isRaid and GetNumRaidMembers() or GetNumPartyMembers() + 1
+
+    if isRaid and lastRaidMembers ~= curr_size then
+       RRI_UpdateRaidRosterInfo(true)
+       lastRaidMembers = curr_size
+    end    
   elseif event == "WORLD_MAP_UPDATE" then
     local instancdId = GetCurrentMapAreaID()
     local r = RaidLeaderData.recruitInfo
@@ -106,7 +116,7 @@ local function RLF_OnEvent(frame, event, ...)
         RLU_UpdateInstanceInfo()
         local zone, sub = RLU_GetCurrentInstanceInfo()
 
-        if zone == nil or zone == "unknown" then return end
+        if zone == nil or zone == "unknown" or zone == "" then return end
         r.zone = zone
         r.sub  = sub
         r.zoneId = RLU_GetZoneId(r.zone)

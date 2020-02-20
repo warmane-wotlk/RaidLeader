@@ -193,7 +193,10 @@ end
 --
 function RLF_Button_MS_Change_Notify_OnClick(id)
   local msg = ""
-  for name, ms in pairs(mschange_messages) do
+  local savedMsChangeInfo = RLU_LoadMsChangeInfo()
+  local mergedInfo = RLU_tableMerge(savedMsChangeInfo,mschange_messages)
+
+  for name, ms in pairs(mergedInfo) do
     msg = msg .. name .. "(" .. ms .. ")" .. "//"
   end
 
@@ -204,7 +207,11 @@ function RLF_Button_MS_Change_Notify_OnClick(id)
   else
     RLF_Button_RaidWarning_OnClick(id)
     RLF_Button_RaidWarning_OnClick(string.sub(msg,1,-3))
+
+    RLU_SaveMsChangeInfo(mergedInfo)
   end
+
+  wipe(mschange_messages)
 end
 
 function RLF_Button_Close_OnClick()
