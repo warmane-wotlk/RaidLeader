@@ -269,6 +269,9 @@ end
 
 
 function RLF_Button_Notify_MT_OT_OnClick(id)
+  -- Get raid info
+  RRI_UpdateRaidRosterInfo(true)
+  
   if RRI_AreTankersInRaid() < RLU_GetRequiredTanks() then
     RL_INFO(L["Please assign tanker with /mt /ma"])
     return
@@ -574,13 +577,14 @@ function RLF_Button_DBM_Pull_OnClick(id)
 end
 
 function RLF_Button_Paladin_Buff_OnClick(id)
+  -- Get raid info
+  RRI_UpdateRaidRosterInfo(true)
+
   if RRI_AreTankersInRaid() < RLU_GetRequiredTanks() then
     RL_INFO(L["Please assign tanker with /mt /ma"])
     return
   end
 
-  -- Get raid info
-  RRI_UpdateRaidRosterInfo(true)
   local buffMsg = Buff_Get_Paladin_Orders()
   RLF_Button_RaidWarning_OnClick(buffMsg)
 end
