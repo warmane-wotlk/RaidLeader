@@ -194,14 +194,14 @@ RL_ZONE_MSG_ENG["ICC"] = {
 	RL_ZONE_ICC_MARROWGAR_STACK_MSG = "Stack together under boss and DPS";
 	RL_ZONE_ICC_MARROWGAR_FLAME_MSG = "Don\'t stand on the flame";
 
-	RL_ZONE_ICC_LADY_READY_MSG = "Ready for lady";
+	RL_ZONE_ICC_LADY_READY_MSG = "MT takes ADD from the left side, OT takes ADD from the right side. And bring center near stair and AOE there.";
 	RL_ZONE_ICC_LADY_SPIRIT_MSG = "Evade Vengeful Spirits. Move!! Move!!";
 	RL_ZONE_ICC_LADY_INTERRUPT_MSG = "Interrupt the Frostbolt spell";
 	RL_ZONE_ICC_LADY_CYCLONE_MSG = "Druid, use Cyclone on the Mind Controlled Raider";
 	RL_ZONE_ICC_LADY_DARNAVAN_MSG = "Mage/Priest - take Darnavan and, dont dps Darnavan";
 	RL_ZONE_ICC_LADY_MD_TOT_MSG = "Hunter/Rogue, use MD/TOT on OT";
 
-	RL_ZONE_ICC_GUNSHIP_READY_MSG = "Ready at gunship";
+	RL_ZONE_ICC_GUNSHIP_READY_MSG = "Healers hard heal on Jump Tanker. NO dps on any ADD on ship, Let OT and Saulfang take them.";
 	RL_ZONE_ICC_GUNSHIP_NO_PET_MSG = "Dismiss any PET.";
 	RL_ZONE_ICC_GUNSHIP_RETURN_MSG = "All be BACK to the ship.";
 	RL_ZONE_ICC_GUNSHIP_JUMP_MSG = "Everyone Jump from left side and Jump tanker does from right side.";
@@ -228,17 +228,17 @@ RL_ZONE_MSG_ENG["ICC"] = {
 	RL_ZONE_ICC_ROTFACE_ACID_MSG = "Don\'t stand on the acid flood";
 	RL_ZONE_ICC_ROTFACE_RUN_MSG = "The Big Ooze explode soon, please move to the wall.";
 
-	RL_ZONE_ICC_PROFESSOR_READY_MSG = "Remember this, Together on Green Ooze, Run away from Red Ooze.";
+	RL_ZONE_ICC_PROFESSOR_READY_MSG = "Remember this, Together on Green Ooze, Run away from Red Ooze. And should STOP dps and I said STOP.";
 	RL_ZONE_ICC_PROFESSOR_DRIBBLE_MSG = "The Boss tanker bring the Professor near the Abom.";
 	RL_ZONE_ICC_PROFESSOR_MOVE_MSG = "Watch out Malleable Goo / Choking gas bomb";
-	RL_ZONE_ICC_PROFESSOR_GREEN_MSG = "STOP DPS!! STOP DPS\nAbom makes it slow. Be ready to rush the Green Ooze. Watch out your health.";
-	RL_ZONE_ICC_PROFESSOR_RED_MSG = "STOP DPS!! STOP DPS\nAbom makes it slow. All come to the alchemy table. The RED Ooze's target must be away from it and roam around the Professor.";
-	RL_ZONE_ICC_PROFESSOR_HOP_MSG = "Oh my god, Pally, use HOP (Hand of Protection";
+	RL_ZONE_ICC_PROFESSOR_GREEN_MSG = "GREEN OOZE. STOP DPS!! STOP DPS\nAbom makes it slow.";
+	RL_ZONE_ICC_PROFESSOR_RED_MSG = "STOP DPS!! STOP DPS\nAbom makes it slow. All come to the alchemy table. The RED Ooze's target run away near Professor.";
+	RL_ZONE_ICC_PROFESSOR_HOP_MSG = "Oh my god, Pally, use HOP (Hand of Protection)";
 	RL_ZONE_ICC_PROFESSOR_AGGRO_MSG = "Hunter, use Distracting Shot and use Feign Death";
 
-	RL_ZONE_ICC_COUNCIL_READY_MSG = "Use MD/TOT on Taldaram/Valanar tanker. Don\'t let Kinetic Bomb exploded";
-	RL_ZONE_ICC_COUNCIL_KINETIC_MSG = "Take care of Kinetic Bomb. Use your pet and Focus on them. Don\'t let them on the ground or explode.";
-	RL_ZONE_ICC_COUNCIL_RUN_MSG = "RUN!!!\nRun away from the center.. Don\'t go to the center!!!";
+	RL_ZONE_ICC_COUNCIL_READY_MSG = "Use MD/TOT on Taldaram/Valanar tanker. Don\'t run away to the center where Healers are.";
+	RL_ZONE_ICC_COUNCIL_KINETIC_MSG = "Hunters, Take care of Kinetic Bomb. Use your pet and Focus on them. Don\'t let them on the ground or explode.";
+	RL_ZONE_ICC_COUNCIL_RUN_MSG = "RUN!!!\nRun away to the wall. Don\'t go to the center!!!";
 	RL_ZONE_ICC_COUNCIL_NO_AOE_MSG = "Don\'t use AOE when you attack Keleseth. (Especially, Shadowmourne or Living Bomb) ";
 
 	RL_ZONE_ICC_BLOODQUEEN_READY_MSG = "All linked player with Pact of the Darkfallen must be within 5 yards of each other. Whoever has Swarming Shadows must run along the wall. And don\'t fail on bite.";
@@ -317,7 +317,7 @@ RL_ZONE_MSG_KOR["ICC"] = {
 	RL_ZONE_ICC_PROFESSOR_AGGRO_MSG = "헌터님 견제사격 샷하시고, 죽척해주세요.";
 
 	RL_ZONE_ICC_COUNCIL_READY_MSG = "켈레 보스에는 절대 광역사용하지 마세요. (어둠한 케릭, 살폭 법사 조심하세요.). 구슬처리 담당자는 구슬 잘 쳐리해주세요. 시작시 탱커님에게 눈속/속거 주고 시작하세요.";
-	RL_ZONE_ICC_COUNCIL_KINETIC_MSG = "구슬 처리해주세요. 팻도 활용하여 하나 붙혀주세요.";
+	RL_ZONE_ICC_COUNCIL_KINETIC_MSG = "낭꾼님, 구슬 처리해주세요. 팻도 활용하여 하나 붙혀주세요.";
 	RL_ZONE_ICC_COUNCIL_RUN_MSG = "절대 힐러들이 모여 있는 중앙으로 오지 마세고, 강단 쪽으로 도망가세요.";
 	RL_ZONE_ICC_COUNCIL_NO_AOE_MSG = "켈레 보스에는 절대 광역사용하지 마세요. (어둠한 케릭, 살폭 법사 조심하세요.)";
 
