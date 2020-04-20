@@ -499,8 +499,20 @@ function RLF_Button_AutoFlood_OnClick(id)
 	  elseif RaidLeaderData.recruitInfo.zone == "" then
 	    RL_INFO(L["Please choose the raid instance"])
     else
-      RL_GetMyFloodMsg()      
+      RL_GetMyFloodMsg()
     end
+
+    if (UnitIsPartyLeader("player") and (not (UnitInRaid("player")))) then
+      ConvertToRaid();
+    end
+
+--[[ // don't change automatically
+    if string.find(RaidLeaderData.recruitInfo.sub, '10') then
+      SetRaidDifficulty(1);
+    else
+      SetRaidDifficulty(2);
+    end
+--]]
   else
     SlashCmdList["AUTOFLOOD"]("off")
     RLF_ChangeButtonText(RL_BUTTON_FLOOD_ON, "OFF")
