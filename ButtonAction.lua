@@ -474,7 +474,7 @@ function RL_Callback_Update_MyFloodMsg(...)
     if bAutoFloodOn == false then
       local globalChannelNum = RL_GetGlobalChannelNumber()
       SlashCmdList["AUTOFLOODSETCHANNEL"](globalChannelNum)
-      SlashCmdList["AUTOFLOODSETRATE"](20)      
+      SlashCmdList["AUTOFLOODSETRATE"](50)      
       SlashCmdList["AUTOFLOOD"]("on")
       RLF_ChangeButtonText(RL_BUTTON_FLOOD_ON, "ON")
     end      

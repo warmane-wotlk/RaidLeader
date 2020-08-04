@@ -127,9 +127,11 @@ function RLU_GetCurrentInstanceInfo()
 end
 
 function RLU_CheckInstances(mapId)
-  for _, v in ipairs(raidZoneInfos) do
-    if v.zoneId == mapId then
-      return true
+  if IsInInstance() then
+    for _, v in ipairs(raidZoneInfos) do
+      if v.zoneId == mapId then
+        return true
+      end
     end
   end
   return false
