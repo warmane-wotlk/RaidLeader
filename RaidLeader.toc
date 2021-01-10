@@ -1,5 +1,5 @@
 ## Title: RaidLeader
-## Version: 0.8.6
+## Version: 0.8.8
 ## Author: Sunmudang
 ## Interface: 30300
 ## Notes: "Use /RLD to toggle the addon"

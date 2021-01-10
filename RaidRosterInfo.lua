@@ -63,7 +63,7 @@ local function RRI_UpdateRoleType(unitId, name, role, className, playerInfo)
 end
 
 local function RRI_InitializeRaidRosterInfo()
-  RL_INFO(L["Update Raid Roaster Info"])
+--  RL_INFO(L["Update Raid Roaster Info"])
   bRaidRosterInitialize = true
 
   local isRaid  = UnitInRaid("player")
